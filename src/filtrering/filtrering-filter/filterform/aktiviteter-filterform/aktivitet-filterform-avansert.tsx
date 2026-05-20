@@ -1,5 +1,5 @@
 import {ReactNode} from 'react';
-import {BodyShort, Button, HStack, Label, Radio, RadioGroup} from '@navikt/ds-react';
+import {BodyShort, Button, Label, Radio, RadioGroup, VStack, HStack} from '@navikt/ds-react';
 import {NullstillKnapp} from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Dictionary} from '../../../../utils/types/types';
 import {Filtervalg, FiltervalgModell} from '../../../../typer/filtervalg-modell';
@@ -39,45 +39,45 @@ export function AktivitetFilterformAvansert({
     return (
         <form className="aktivitetfilterform-avansert" data-testid="aktivitet-filterform">
             <div className="aktivitetfilterform-avansert__valg">
-                <div className="aktivitetvalg__header">
-                    <Label className="aktivitetvalg__header--first" size="small">
-                        Ja
-                    </Label>
+                <div className="aktivitetvalg-header">
+                    <Label size="small">Ja</Label>
                     <Label size="small">Nei</Label>
                 </div>
-                {Object.entries(valg).map(([kode, verdi]) => [
-                    <div key={kode} className="aktivitetvalg">
-                        <BodyShort size="small">{verdi as string}</BodyShort>
+                {Object.entries(valg).map(([kode, verdi]) => (
+                    <div key={kode} className="aktivitetvalg-rad">
+                        <BodyShort size="small" className="aktivitetvalg-rad__aktivitet">
+                            {verdi as string}
+                        </BodyShort>
                         <RadioGroup
-                            className="aktivitetvalg__radio-group"
+                            className="aktivitetvalg-rad__radio-group"
                             legend=""
                             hideLegend
                             onChange={(verdi: string) => handleChange(kode, verdi)}
                             value={valgteAvanserteAktiviteter[kode]}
                         >
-                            <HStack gap="space-0 space-4" wrap={false}>
+                            <HStack className="aktivitetvalg-rad__radio-container" align="center">
                                 <Radio
+                                    id={`aktivitet-${kode}-ja`}
                                     data-testid={`aktivitet-filterform-${kode}-ja`}
                                     name={kode}
                                     size="small"
                                     value="JA"
                                 >
-                                    {/* Radio har (per 18.08.22) ikke støtte for å skjule label - gjør derfor dette manuelt */}
                                     <span className="aksel-sr-only">Ja, {verdi}</span>
                                 </Radio>
                                 <Radio
+                                    id={`aktivitet-${kode}-nei`}
                                     data-testid={`aktivitet-filterform-${kode}-nei`}
                                     name={kode}
                                     size="small"
                                     value="NEI"
                                 >
-                                    {/* Radio har (per 18.08.22) ikke støtte for å skjule label - gjør derfor dette manuelt */}
                                     <span className="aksel-sr-only">Nei, {verdi}</span>
                                 </Radio>
                             </HStack>
                         </RadioGroup>
                     </div>
-                ])}
+                ))}
             </div>
             <div className="aktivitet-filterform__knappegruppe">
                 <Button

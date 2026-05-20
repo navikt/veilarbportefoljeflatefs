@@ -5,33 +5,32 @@
     margin: 0 0.5rem 0.5rem;
 }
 .veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg {
-    padding: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 0.5rem;
     margin-bottom: 0.5rem;
 }
-.veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg .aktivitetvalg__header {
+.veilarbportefoljeflatefs .aktivitetvalg-header {
+    grid-column: 2 / 2;
     display: grid;
-    grid-template-columns: 78% auto auto;
-    grid-gap: 0rem;
+    grid-template-columns: 1fr auto auto;
+    gap: 0.5rem;
+    padding: 0.5rem 0 0 0.2rem;
 }
-.veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg .aktivitetvalg__header--first {
-    grid-column: 2;
+.veilarbportefoljeflatefs .aktivitetvalg-rad {
+    display: contents;
 }
-.veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg .aktivitetvalg {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0.375rem 0;
+.veilarbportefoljeflatefs .aktivitetvalg-rad__aktivitet {
+    grid-column: 1;
+    padding-left: 0.5rem;
 }
-.veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg .aktivitetvalg .navds-body-short {
-    max-width: 12.5rem;
+.veilarbportefoljeflatefs .aktivitetvalg-rad__radio-group {
+    display: contents;
 }
-.veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg .aktivitetvalg .aktivitetvalg__radio-group {
-    flex-shrink: 0;
-    padding: 0 0.5rem 0 0;
-}
-.veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg .aktivitetvalg .skjemaelement__label {
-    margin-bottom: 1rem;
+.veilarbportefoljeflatefs .aktivitetvalg-rad__radio-container {
+    grid-column: 1 / 2;
+    justify-content: center;
+    gap: var(--a-spacing-2);
 }
 .veilarbportefoljeflatefs .aktivitet-filterform__knappegruppe {
     display: flex;
