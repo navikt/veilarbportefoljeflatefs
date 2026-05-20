@@ -26,6 +26,8 @@ export enum Sorteringsfelt {
 
     AAP_KEVLIN_VEDTAK_TOM_DATO = 'aap_kelvin_vedtak_tom_dato',
     AAP_KELVIN_RETTIGHET = 'aap_kelvin_rettighetstype',
+    UNGDOMSPROGRAM_MAKSDATO = 'ungdomsprogram_maksdato',
+    UNGDOMSPROGRAM_RETTIGHET = 'ungdomsprogram_rettighet',
 
     TILTAKSPENGER_VEDTAKSDATO_TOM = 'tiltakspenger_vedtaksdato_tom',
     TILTAKSPENGER_RETTIGHET = 'tiltakspenger_rettighet',

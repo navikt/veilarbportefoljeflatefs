@@ -6,7 +6,8 @@ import {
     DagpengerFilter,
     DagpengerFilterArena,
     TiltakspengerFilter,
-    TiltakspengerFilterArena
+    TiltakspengerFilterArena,
+    UngdomsprogramytelseFilter
 } from '../filtrering/filter-konstanter';
 
 /* Vi bruker nøklane i FiltervalgModell til å knyte saman
@@ -56,6 +57,7 @@ export enum Filtervalg {
     ytelseAapKelvin = 'ytelseAapKelvin',
     ytelseTiltakspengerArena = 'ytelseTiltakspengerArena',
     ytelseTiltakspenger = 'ytelseTiltakspenger',
+    ytelseUngdomsprogram = 'ytelseUngdomsprogram',
     ytelseDagpengerArena = 'ytelseDagpengerArena',
     ytelseDagpenger = 'ytelseDagpenger'
 }
@@ -112,6 +114,7 @@ export interface FiltervalgModell {
     [Filtervalg.ytelseAapKelvin]: AAPFilterKelvin[];
     [Filtervalg.ytelseTiltakspengerArena]: TiltakspengerFilterArena[];
     [Filtervalg.ytelseTiltakspenger]: TiltakspengerFilter[];
+    [Filtervalg.ytelseUngdomsprogram]: UngdomsprogramytelseFilter[];
     [Filtervalg.ytelseDagpengerArena]: DagpengerFilterArena[];
     [Filtervalg.ytelseDagpenger]: DagpengerFilter[];
 }

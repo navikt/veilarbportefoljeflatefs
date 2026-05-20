@@ -11,6 +11,7 @@ import {
     TILTAKSHENDELSER,
     TiltakspengerFilter,
     TiltakspengerFilterArena,
+    UngdomsprogramytelseFilter,
     UDELT_SAMTALEREFERAT,
     UNDER_VURDERING,
     UTGATTE_VARSEL,
@@ -102,6 +103,9 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtertPaAapIKelvin = filtervalg.ytelseAapKelvin.includes(AAPFilterKelvin.HAR_AAP_I_KELVIN);
     const filtrertPaTiltakspenger = filtervalg.ytelseTiltakspenger.includes(TiltakspengerFilter.HAR_TILTAKSPENGER);
+    const filtrertPaUngdomsprogramytelse = filtervalg.ytelseUngdomsprogram.includes(
+        UngdomsprogramytelseFilter.HAR_UNGDOMSPROGRAMYTELSE
+    );
 
     /* Hjelpeverdiar for AAP-filter Arena */
     const ordinarAapArena = filtrertPaOrdinarAapFilterArena(filtervalg);
@@ -199,6 +203,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP, filtrertPaAAPMedRettighetsperiode))
         .concat(addHvis(Kolonne.AAP_KELVIN_TOM_VEDTAKSDATO, filtertPaAapIKelvin))
         .concat(addHvis(Kolonne.AAP_KELVIN_RETTIGHET, filtertPaAapIKelvin))
+        .concat(addHvis(Kolonne.UNGDOMSPROGRAM_MAKSDATO, filtrertPaUngdomsprogramytelse))
+        .concat(addHvis(Kolonne.UNGDOMSPROGRAM_RETTIGHET, filtrertPaUngdomsprogramytelse))
         .concat(addHvis(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP, filtrertPaBeggeAapArenaOgAapKelvin))
         .concat(addHvis(Kolonne.TILTAKSPENGER_VEDTAKSDATO_TOM, filtrertPaTiltakspenger))
         .concat(addHvis(Kolonne.TILTAKSPENGER_RETTIGHET, filtrertPaTiltakspenger))

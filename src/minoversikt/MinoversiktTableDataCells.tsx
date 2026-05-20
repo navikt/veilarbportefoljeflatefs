@@ -44,6 +44,8 @@ import {HuskelappFristData} from '../components/tabell/dataCells/min-oversikt/Hu
 import {HuskelappSistEndretData} from '../components/tabell/dataCells/min-oversikt/HuskelappSistEndretData';
 import {AapKelvinVedtakTilOgMedDatoData} from '../components/tabell/dataCells/AapKelvinVedtakTilOgMedDatoData';
 import {AapKelvinRettighetData} from '../components/tabell/dataCells/AapKelvinRettighetData';
+import {UngdomsprogramMaksdatoData} from '../components/tabell/dataCells/UngdomsprogramMaksdatoData';
+import {UngdomsprogramRettighetData} from '../components/tabell/dataCells/UngdomsprogramRettighetData';
 import {TildeltTidspunktData} from '../components/tabell/dataCells/TildeltTidspunktData';
 import {AapArenaYtelsestypeData} from '../components/tabell/dataCells/AapArenaYtelsestypeData';
 import {AapArenaVurderingsfristData} from '../components/tabell/dataCells/AapArenaVurderingsfristData';
@@ -153,6 +155,8 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
 
             <AapKelvinVedtakTilOgMedDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
             <AapKelvinRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <UngdomsprogramMaksdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <UngdomsprogramRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <TiltakspengerVedtakTilOgMedDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
             <TiltakspengerRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />

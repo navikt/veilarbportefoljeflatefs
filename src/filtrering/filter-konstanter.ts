@@ -364,6 +364,14 @@ export const tiltakspengerFilter = {
     [TiltakspengerFilter.HAR_TILTAKSPENGER]: {label: 'Tiltakspenger (TPSAK)'}
 };
 
+export enum UngdomsprogramytelseFilter {
+    HAR_UNGDOMSPROGRAMYTELSE = 'HAR_UNGDOMSPROGRAMYTELSE'
+}
+
+export const ungdomsprogramytelseFilter = {
+    [UngdomsprogramytelseFilter.HAR_UNGDOMSPROGRAMYTELSE]: {label: 'Ungdomsprogramytelse (UNG-SAK)'}
+};
+
 export enum DagpengerFilterArena {
     HAR_DAGPENGER_ORDINAR_ARENA = 'HAR_DAGPENGER_ORDINAER',
     HAR_DAGPENGER_MED_PERMITTERING_ARENA = 'HAR_DAGPENGER_MED_PERMITTERING',
@@ -449,6 +457,7 @@ export const filterKonstanter = {
     ytelseAapKelvin: aapIKelvinFilter,
     ytelseTiltakspengerArena: tiltakspengerFilterArena,
     ytelseTiltakspenger: tiltakspengerFilter,
+    ytelseUngdomsprogram: ungdomsprogramytelseFilter,
     ytelseDagpengerArena: dagpengerArenaFilter,
     ytelseDagpenger: dagpengerFilter
 };

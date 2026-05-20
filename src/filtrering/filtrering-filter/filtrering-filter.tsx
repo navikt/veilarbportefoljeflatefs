@@ -22,6 +22,7 @@ import {
     stillingFraNavFilter,
     tiltakspengerFilter,
     tiltakspengerFilterArena,
+    ungdomsprogramytelseFilter,
     utdanning,
     utdanningBestatt,
     utdanningGodkjent
@@ -428,6 +429,22 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                 {
                                     form: Filtervalg.ytelseTiltakspengerArena,
                                     checkboxValg: tiltakspengerFilterArena
+                                }
+                            ]}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="Ungdomsprogramytelse"
+                    id="ytelser-ungdomsprogram"
+                    render={() => (
+                        <CheckboxFilterform
+                            filterformOgValgListe={[
+                                {
+                                    form: Filtervalg.ytelseUngdomsprogram,
+                                    checkboxValg: ungdomsprogramytelseFilter
                                 }
                             ]}
                             filtervalg={filtervalg}

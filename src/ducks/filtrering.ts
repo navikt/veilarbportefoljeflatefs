@@ -62,6 +62,7 @@ export const initialState: FiltervalgModell = {
     ytelseAapKelvin: [],
     ytelseTiltakspengerArena: [],
     ytelseTiltakspenger: [],
+    ytelseUngdomsprogram: [],
     ytelseDagpengerArena: [],
     ytelseDagpenger: []
 };
