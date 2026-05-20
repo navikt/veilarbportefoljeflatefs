@@ -28,18 +28,7 @@
     max-width: 12.5rem;
 }
 .veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg .aktivitetvalg .aktivitetvalg__radio-group {
-    margin-left: auto;
-}
-.veilarbportefoljeflatefs
-    .aktivitetfilterform-avansert__valg
-    .aktivitetvalg
-    .aktivitetvalg__radio-group
-    .aksel-radio-buttons {
-    display: grid;
-    grid-template-columns: auto auto;
-    column-gap: 0.5rem;
-    justify-content: end;
-    align-items: end;
+    flex-shrink: 0;
 }
 .veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg .aktivitetvalg .skjemaelement__label {
     margin-bottom: 1rem;
