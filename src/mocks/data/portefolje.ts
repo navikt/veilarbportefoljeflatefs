@@ -263,6 +263,7 @@ const lagAapKelvinData = (): AapKelvinData | null => {
 
     return {
         vedtaksdatoTilOgMed: randomDate({past: true, withoutTimestamp: true}),
+        maksdato: randomDate({past: false, withoutTimestamp: true}),
         rettighetstype: tilfeldigRettighetstype()
     };
 };
