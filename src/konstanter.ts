@@ -14,13 +14,11 @@ export const LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG =
     'veilarbportefoljeflatefs.la-veileder-vise-flere-enn-tre-kolonner-samtidig';
 export const VIS_FARGEKATEGORIER_I_ENHETENS_OVERSIKT =
     'veilarbportefoljeflatefs.vis_fargekategorier_i_enhetens_oversikt';
-export const VIS_AAP_MAKSDATO = 'veilarbportefoljeflatefs.vis_aap_maksdato';
 
 //HUSK Å LEGG TIL FEATURE-TOGGLE HER OGSÅ!!!!!!!!!
 export const PORTEFOLJE_FEATURES = [
     DARKMODE,
     VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
     LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG,
-    VIS_FARGEKATEGORIER_I_ENHETENS_OVERSIKT,
-    VIS_AAP_MAKSDATO
+    VIS_FARGEKATEGORIER_I_ENHETENS_OVERSIKT
 ];

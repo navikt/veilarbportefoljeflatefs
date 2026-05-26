@@ -59,8 +59,6 @@ import {DagpengerRettighetData} from '../components/tabell/dataCells/DagpengerRe
 import {DagpengerStansDatoData} from '../components/tabell/dataCells/DagpengerStansDatoData';
 import {DagpengerResterendeDagerData} from '../components/tabell/dataCells/DagpengerResterendeDagerData';
 import {AapKelvinMaksdatoData} from '../components/tabell/dataCells/AapKelvinMaksdatoData';
-import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VIS_AAP_MAKSDATO} from '../konstanter';
 
 interface Props {
     className?: string;
@@ -71,8 +69,6 @@ interface Props {
 }
 
 export function EnhetTableDataCells({className, bruker, enhetId, filtervalg, valgteKolonner}: Props) {
-    const harFeature = useFeatureSelector();
-    const visAapMaksdato = harFeature(VIS_AAP_MAKSDATO);
     return (
         <div className={className}>
             <NavnData bruker={bruker} enhetId={enhetId} />
@@ -150,7 +146,7 @@ export function EnhetTableDataCells({className, bruker, enhetId, filtervalg, val
             <UtdanningOgSituasjonSistEndretData bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <AapKelvinVedtakTilOgMedDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
-            {visAapMaksdato && <AapKelvinMaksdatoData bruker={bruker} valgteKolonner={valgteKolonner} />}
+            <AapKelvinMaksdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
             <AapKelvinRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <TiltakspengerVedtakTilOgMedDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
