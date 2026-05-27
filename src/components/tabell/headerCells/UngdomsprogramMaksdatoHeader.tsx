@@ -15,8 +15,8 @@ export const UngdomsprogramMaksdatoHeader = ({
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.UNGDOMSPROGRAM_MAKSDATO}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Ungdomsprogramytelse slutt"
-        title="Sluttdato ungdomsprogramytelse"
+        tekst="Ungdomsprogram-ytelse slutt"
+        title="Sluttdato ungdomsprogram-ytelse"
         className="col col-xs-2 ungdomsprogram-maksdato-header"
     />
 );
