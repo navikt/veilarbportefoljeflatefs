@@ -43,6 +43,7 @@ import {VeilederNavidentHeader} from '../components/tabell/headerCells/enhetens-
 import {VeilederNavnHeader} from '../components/tabell/headerCells/enhetens-oversikt/VeilederNavnHeader';
 import {AapKelvinVedtakTilOgMedDatoHeaderHeader} from '../components/tabell/headerCells/AapKelvinVedtakTilOgMedDatoHeaderHeader';
 import {AapKelvinRettighetHeader} from '../components/tabell/headerCells/AapKelvinRettighetHeader';
+import {UngdomsprogramStartdatoHeader} from '../components/tabell/headerCells/UngdomsprogramStartdatoHeader';
 import {UngdomsprogramMaksdatoHeader} from '../components/tabell/headerCells/UngdomsprogramMaksdatoHeader';
 import {UngdomsprogramRettighetHeader} from '../components/tabell/headerCells/UngdomsprogramRettighetHeader';
 import {TildeltTidspunktHeader} from '../components/tabell/headerCells/TildeltTidspunktHeader';
@@ -169,6 +170,7 @@ export function EnhetTableHeader() {
                 <DagpengerRettighetHeader {...sorteringTilHeaderCell} />
                 <DagpengerStansDatoHeader {...sorteringTilHeaderCell} />
 
+                <UngdomsprogramStartdatoHeader {...sorteringTilHeaderCell} />
                 <UngdomsprogramMaksdatoHeader {...sorteringTilHeaderCell} />
                 <UngdomsprogramRettighetHeader {...sorteringTilHeaderCell} />
             </div>

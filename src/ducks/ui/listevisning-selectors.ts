@@ -203,6 +203,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP, filtrertPaAAPMedRettighetsperiode))
         .concat(addHvis(Kolonne.AAP_KELVIN_TOM_VEDTAKSDATO, filtertPaAapIKelvin))
         .concat(addHvis(Kolonne.AAP_KELVIN_RETTIGHET, filtertPaAapIKelvin))
+        .concat(addHvis(Kolonne.UNGDOMSPROGRAM_STARTDATO, filtrertPaUngdomsprogramytelse))
         .concat(addHvis(Kolonne.UNGDOMSPROGRAM_MAKSDATO, filtrertPaUngdomsprogramytelse))
         .concat(addHvis(Kolonne.UNGDOMSPROGRAM_RETTIGHET, filtrertPaUngdomsprogramytelse))
         .concat(addHvis(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP, filtrertPaBeggeAapArenaOgAapKelvin))

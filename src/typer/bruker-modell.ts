@@ -222,6 +222,7 @@ export interface DagpengerData {
 }
 
 export interface UngdomsprogramData {
+    startdato?: string | null;
     maksdato: string | null;
     rettighet: string | null;
 }

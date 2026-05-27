@@ -72,6 +72,7 @@ export enum Kolonne {
     DAGPENGER_STANS = 'dagpenger_stans',
     DAGPENGER_ANTALL_RESTERENDE_DAGER = 'dagpenger_antall_resterende_dager',
     DAGPENGER_RETTIGHETSTYPE = 'dagpenger_rettighetstype',
+    UNGDOMSPROGRAM_STARTDATO = 'ungdomsprogram_startdato',
     UNGDOMSPROGRAM_MAKSDATO = 'ungdomsprogram_maksdato',
     UNGDOMSPROGRAM_RETTIGHET = 'ungdomsprogram_rettighet'
 }
