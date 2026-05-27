@@ -207,6 +207,7 @@ export interface Tolkebehov {
 export interface AapKelvinData {
     vedtaksdatoTilOgMed: string | null;
     rettighetstype: string | null;
+    maksdato: string | null;
 }
 
 export interface TiltakspengerData {

@@ -64,6 +64,7 @@ import './minoversikt.css';
 import {DagpengerRettighetHeader} from '../components/tabell/headerCells/DagpengerRettighetHeader';
 import {DagpengerStansDatoHeader} from '../components/tabell/headerCells/DagpengerStansDatoHeader';
 import {DagpengerResterendeDagerHeader} from '../components/tabell/headerCells/DagpengerResterendeDagerHeader';
+import {AapKelvinVedtakMaksdatoHeader} from '../components/tabell/headerCells/AapKelvinVedtakMaksdatoHeader';
 
 export function MinoversiktTableHeader() {
     const {filtervalg, sorteringsrekkefolge, listevisning, sorteringsfelt} = usePortefoljeSelector(
@@ -165,6 +166,7 @@ export function MinoversiktTableHeader() {
                 <HuskelappSistEndretHeader {...sorteringTilHeaderCell} />
 
                 <AapKelvinVedtakTilOgMedDatoHeaderHeader {...sorteringTilHeaderCell} />
+                <AapKelvinVedtakMaksdatoHeader {...sorteringTilHeaderCell} />
                 <AapKelvinRettighetHeader {...sorteringTilHeaderCell} />
 
                 <TiltakspengerVedtakTilOgMedDatoHeader {...sorteringTilHeaderCell} />

@@ -61,6 +61,7 @@ import './minoversikt.css';
 import {DagpengerRettighetData} from '../components/tabell/dataCells/DagpengerRettighetData';
 import {DagpengerStansDatoData} from '../components/tabell/dataCells/DagpengerStansDatoData';
 import {DagpengerResterendeDagerData} from '../components/tabell/dataCells/DagpengerResterendeDagerData';
+import {AapKelvinMaksdatoData} from '../components/tabell/dataCells/AapKelvinMaksdatoData';
 
 interface Props {
     bruker: BrukerModell;
@@ -152,6 +153,7 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
             <HuskelappSistEndretData bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <AapKelvinVedtakTilOgMedDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <AapKelvinMaksdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
             <AapKelvinRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <TiltakspengerVedtakTilOgMedDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
