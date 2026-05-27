@@ -15,8 +15,8 @@ export const UngdomsprogramRettighetHeader = ({
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.UNGDOMSPROGRAM_RETTIGHET}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Rettighet ungdomsprogramytelse (UNG-SAK)"
-        title="Rettighet er type periode, ordinær eller unntak"
+        tekst="Periode"
+        title="Perioden kan være ordinær eller forlenget."
         className="col col-xs-2 ungdomsprogram-rettighet-header"
     />
 );
