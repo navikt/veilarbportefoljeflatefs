@@ -64,6 +64,7 @@ import './brukerliste.css';
 import {DagpengerRettighetHeader} from '../components/tabell/headerCells/DagpengerRettighetHeader';
 import {DagpengerResterendeDagerHeader} from '../components/tabell/headerCells/DagpengerResterendeDagerHeader';
 import {DagpengerStansDatoHeader} from '../components/tabell/headerCells/DagpengerStansDatoHeader';
+import {AapKelvinVedtakMaksdatoHeader} from '../components/tabell/headerCells/AapKelvinVedtakMaksdatoHeader';
 
 export function EnhetTableHeader() {
     const {filtervalg, sorteringsrekkefolge, sorteringsfelt, listevisning} = usePortefoljeSelector(
@@ -161,6 +162,7 @@ export function EnhetTableHeader() {
                 <UtdanningOgSituasjonSistEndretHeader {...sorteringTilHeaderCell} />
 
                 <AapKelvinVedtakTilOgMedDatoHeaderHeader {...sorteringTilHeaderCell} />
+                <AapKelvinVedtakMaksdatoHeader {...sorteringTilHeaderCell} />
                 <AapKelvinRettighetHeader {...sorteringTilHeaderCell} />
 
                 <TiltakspengerVedtakTilOgMedDatoHeader {...sorteringTilHeaderCell} />
