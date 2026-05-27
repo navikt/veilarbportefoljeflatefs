@@ -425,7 +425,7 @@ function lagBruker(): BrukerModell {
     };
 }
 
-function lagBrukerMedUngdomsprogramytelse(rettighet: 'Ordinær' | 'Unntak', maksdato: string): BrukerModell {
+function lagBrukerMedUngdomsprogramytelse(rettighet: 'Ordinær' | 'Forlenget', maksdato: string): BrukerModell {
     const bruker = lagBruker();
 
     return {
@@ -741,14 +741,14 @@ const lagFargekategori = () => {
 export const brukere = [
     ...new Array(2).fill(0).map(() => lagBruker()),
     lagBrukerMedUngdomsprogramytelse('Ordinær', '2027-03-15'),
-    lagBrukerMedUngdomsprogramytelse('Unntak', '2027-09-30'),
+    lagBrukerMedUngdomsprogramytelse('Forlenget', '2027-09-30'),
     lagBrukerMedUngdomsprogramytelse('Ordinær', '2027-04-10'),
-    lagBrukerMedUngdomsprogramytelse('Unntak', '2027-10-12'),
+    lagBrukerMedUngdomsprogramytelse('Forlenget', '2027-10-12'),
     lagBrukerMedUngdomsprogramytelse('Ordinær', '2028-01-05'),
-    lagBrukerMedUngdomsprogramytelse('Unntak', '2028-02-20'),
+    lagBrukerMedUngdomsprogramytelse('Forlenget', '2028-02-20'),
     lagBrukerMedUngdomsprogramytelse('Ordinær', '2028-05-14'),
-    lagBrukerMedUngdomsprogramytelse('Unntak', '2028-06-30'),
+    lagBrukerMedUngdomsprogramytelse('Forlenget', '2028-06-30'),
     lagBrukerMedUngdomsprogramytelse('Ordinær', '2028-08-22'),
-    lagBrukerMedUngdomsprogramytelse('Unntak', '2028-11-11'),
+    lagBrukerMedUngdomsprogramytelse('Forlenget', '2028-11-11'),
     ...new Array(111).fill(0).map(() => lagBruker())
 ];
