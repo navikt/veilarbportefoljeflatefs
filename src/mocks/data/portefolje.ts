@@ -426,7 +426,11 @@ function lagBruker(): BrukerModell {
     };
 }
 
-function lagBrukerMedUngdomsprogramytelse(rettighet: 'Ordinær' | 'Forlenget', maksdato: string): BrukerModell {
+function lagBrukerMedUngdomsprogramytelse(
+    rettighet: 'Ordinær' | 'Forlenget',
+    startdato: string,
+    maksdato: string
+): BrukerModell {
     const bruker = lagBruker();
 
     return {
@@ -434,6 +438,7 @@ function lagBrukerMedUngdomsprogramytelse(rettighet: 'Ordinær' | 'Forlenget', m
         ytelser: {
             ...bruker.ytelser,
             ungdomsprogram: {
+                startdato,
                 maksdato,
                 rettighet
             }
@@ -741,15 +746,15 @@ const lagFargekategori = () => {
 
 export const brukere = [
     ...new Array(2).fill(0).map(() => lagBruker()),
-    lagBrukerMedUngdomsprogramytelse('Ordinær', '2027-03-15'),
-    lagBrukerMedUngdomsprogramytelse('Forlenget', '2027-09-30'),
-    lagBrukerMedUngdomsprogramytelse('Ordinær', '2027-04-10'),
-    lagBrukerMedUngdomsprogramytelse('Forlenget', '2027-10-12'),
-    lagBrukerMedUngdomsprogramytelse('Ordinær', '2028-01-05'),
-    lagBrukerMedUngdomsprogramytelse('Forlenget', '2028-02-20'),
-    lagBrukerMedUngdomsprogramytelse('Ordinær', '2028-05-14'),
-    lagBrukerMedUngdomsprogramytelse('Forlenget', '2028-06-30'),
-    lagBrukerMedUngdomsprogramytelse('Ordinær', '2028-08-22'),
-    lagBrukerMedUngdomsprogramytelse('Forlenget', '2028-11-11'),
+    lagBrukerMedUngdomsprogramytelse('Ordinær', '2026-09-01', '2027-03-15'),
+    lagBrukerMedUngdomsprogramytelse('Forlenget', '2027-03-16', '2027-09-30'),
+    lagBrukerMedUngdomsprogramytelse('Ordinær', '2026-10-01', '2027-04-10'),
+    lagBrukerMedUngdomsprogramytelse('Forlenget', '2027-04-11', '2027-10-12'),
+    lagBrukerMedUngdomsprogramytelse('Ordinær', '2027-06-15', '2028-01-05'),
+    lagBrukerMedUngdomsprogramytelse('Forlenget', '2027-08-20', '2028-02-20'),
+    lagBrukerMedUngdomsprogramytelse('Ordinær', '2027-11-01', '2028-05-14'),
+    lagBrukerMedUngdomsprogramytelse('Forlenget', '2027-12-10', '2028-06-30'),
+    lagBrukerMedUngdomsprogramytelse('Ordinær', '2028-01-20', '2028-08-22'),
+    lagBrukerMedUngdomsprogramytelse('Forlenget', '2028-03-01', '2028-11-11'),
     ...new Array(111).fill(0).map(() => lagBruker())
 ];
