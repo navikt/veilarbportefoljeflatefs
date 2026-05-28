@@ -20,7 +20,7 @@ export const RESET = 'veilarbportefoljeflatefs/sortering/SETUP';
 
 const initialState: VeilederoversiktSortering = {
     property: VeilederoversiktSorteringsfelt.ETTERNAVN,
-    direction: SorteringsrekkefolgeVeilederoversikt.STIGENDE
+    direction: SorteringsrekkefolgeVeilederoversikt.NA
 };
 
 // Reducer
