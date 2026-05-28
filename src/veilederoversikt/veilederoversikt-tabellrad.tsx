@@ -15,7 +15,7 @@ export const VeilederoversiktTabellrad = ({veileder}: Props) => {
                     data-testid="veilederoversikt_navn_lenke"
                     className="veilederoversikt_navn_lenke"
                 >
-                    <BodyShort size="small">{`${veileder.navn}`}</BodyShort>
+                    <BodyShort size="small">{`${veileder.etternavn}, ${veileder.fornavn}`}</BodyShort>
                 </Link>
             </Table.HeaderCell>
             <Table.DataCell>

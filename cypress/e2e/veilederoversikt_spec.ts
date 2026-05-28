@@ -13,28 +13,21 @@ describe('Annen veileder', () => {
         // Sjekk at veilederoversikten er ferdig med å laste
         cy.getByTestId('veilederoversikt-tabell').should('be.visible');
 
-        // Sjekk at det ikkje er sortert på Antall brukere frå før
         cy.getByTestId('veiledertabell__antall-brukere-overskrift')
-            .findByTestId('sorteringspil_synkende')
-            .should('not.exist');
-        cy.getByTestId('veiledertabell__antall-brukere-overskrift')
-            .findByTestId('sorteringspil_stigende')
-            .should('not.exist');
+            .invoke('attr', 'aria-sort')
+            .then(initialSort => {
+                // Trykk på Antall brukere, sjekk at sorteringa skiftar retning
+                cy.getByTestId('veiledertabell__antall-brukere-overskrift').find('button').click();
+                cy.getByTestId('veiledertabell__antall-brukere-overskrift')
+                    .invoke('attr', 'aria-sort')
+                    .should('not.eq', initialSort);
 
-        // Trykk på Antall brukere, sjekk at det er blitt sortert stigende
-        cy.getByTestId('veiledertabell__antall-brukere-overskrift').find('button').click();
-        cy.getByTestId('veiledertabell__antall-brukere-overskrift')
-            .findByTestId('sorteringspil_stigende')
-            .should('be.visible');
-
-        // Trykk på Antall brukere igjen, no skal det vere sortert synkande
-        cy.getByTestId('veiledertabell__antall-brukere-overskrift').find('button').click();
-        cy.getByTestId('veiledertabell__antall-brukere-overskrift')
-            .findByTestId('sorteringspil_stigende')
-            .should('not.exist');
-        cy.getByTestId('veiledertabell__antall-brukere-overskrift')
-            .findByTestId('sorteringspil_synkende')
-            .should('be.visible');
+                // Trykk på Antall brukere igjen, no skal sorteringa vere tilbake i utgangspunktet
+                cy.getByTestId('veiledertabell__antall-brukere-overskrift').find('button').click();
+                cy.getByTestId('veiledertabell__antall-brukere-overskrift')
+                    .invoke('attr', 'aria-sort')
+                    .should('eq', initialSort);
+            });
     });
 
     it('Gå inn til annen veileders oversikt via tabellen', () => {

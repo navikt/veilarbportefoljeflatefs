@@ -7,6 +7,7 @@ import {FiltreringVeiledere} from '../filtrering/filtrering-veiledere';
 import FiltreringLabelContainer from '../filtrering/filtrering-label/filtrering-label-container';
 import {lagLablerTilVeiledereMedIdenter} from '../filtrering/filtrering-label/lagLablerTilVeiledereMedIdenter';
 import {endreFiltervalg, fjern, slettEnkeltFilter} from '../ducks/filtrering';
+import {resetSort} from '../ducks/sortering';
 import {ToppMeny} from '../topp-meny/topp-meny';
 import {useOnMount} from '../hooks/use-on-mount';
 import {getSideFromUrl, getSidestorrelseFromUrl} from '../utils/url-utils';
@@ -53,6 +54,7 @@ export function VeilederoversiktSide() {
         const side = getSideFromUrl();
         const sidestorrelse = getSidestorrelseFromUrl();
         dispatch(pagineringSetup({side, sidestorrelse}));
+        dispatch(resetSort());
     });
 
     useSetLocalStorageOnUnmount();

@@ -746,6 +746,7 @@ GRID
     grid-column-end: 3;
     grid-template-columns: 40% 60%;
     margin-top: 0.75rem;
+    font-size: 0.875rem;
 }
 
 .toolbar-container .tabellinfo__hidden {
@@ -774,14 +775,7 @@ GRID
 }
 
 .toolbar-container::before {
-    position: sticky;
-    display: block;
-    grid-column: 1/3;
-    grid-row: 4;
-    top: 11rem;
-    height: 1rem;
-    content: '';
-    box-shadow: 0 8px 5px -5px rgba(0, 0, 0, 0.5);
+    display: none;
 }
 
 .skjemaelement {
@@ -839,8 +833,18 @@ GRID
     grid-column: 1;
 }
 
-.veilarbportefoljeflatefs .oversikt-sideinnhold .filtreringlabel-container__feature,
-.veilarbportefoljeflatefs .oversikt-sideinnhold .filtreringlabel-container__annen-veileder__feature {
+.veilarbportefoljeflatefs .oversikt-sideinnhold .filtrering-label-container,
+.veilarbportefoljeflatefs .oversikt-sideinnhold .filtrering-label-container__annen-veileder {
+    grid-row: 2;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 0.875rem;
+}
+
+.veilarbportefoljeflatefs .oversikt-sideinnhold .filtrering-label-container__feature,
+.veilarbportefoljeflatefs .oversikt-sideinnhold .filtrering-label-container__annen-veileder__feature {
     background-color: #85d5f0;
 }
 
