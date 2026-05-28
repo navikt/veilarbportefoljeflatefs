@@ -1,11 +1,6 @@
 import {Table} from '@navikt/ds-react';
 import {VeilederoversiktTabellrad} from './veilederoversikt-tabellrad';
-import {
-    sortBy,
-    SorteringsrekkefolgeVeilederoversikt,
-    VeilederoversiktSortering,
-    VeilederoversiktSorteringsfelt
-} from '../ducks/sortering';
+import {sortBy, VeilederoversiktSortering, VeilederoversiktSorteringsfelt} from '../ducks/sortering';
 import {VeilederMedPortefoljestorrelse} from './veilederoversikt-sidevisning';
 
 import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
@@ -18,18 +13,14 @@ interface VeiledereTabellProps {
 export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereTabellProps) {
     const dispatch = useAppDispatch();
 
-    const sort = {
+    const sortering = {
         orderBy: currentSortering.property,
-        direction:
-            currentSortering.direction === SorteringsrekkefolgeVeilederoversikt.SYNKENDE
-                ? ('descending' as const)
-                : ('ascending' as const)
+        direction: currentSortering.direction as 'ascending' | 'descending'
     };
-    const sortering = currentSortering.direction === SorteringsrekkefolgeVeilederoversikt.NA ? undefined : sort;
 
     const handleSortChange = (sortKey?: string) => {
         if (sortKey) {
-            dispatch(sortBy(sortKey as VeilederoversiktSorteringsfelt));
+            dispatch(sortBy(sortKey));
         }
     };
 

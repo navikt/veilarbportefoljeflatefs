@@ -5,8 +5,7 @@ export enum VeilederoversiktSorteringsfelt {
 
 export enum SorteringsrekkefolgeVeilederoversikt {
     STIGENDE = 'ascending',
-    SYNKENDE = 'decending',
-    NA = 'none'
+    SYNKENDE = 'descending'
 }
 
 export interface VeilederoversiktSortering {
@@ -20,7 +19,7 @@ export const RESET = 'veilarbportefoljeflatefs/sortering/SETUP';
 
 const initialState: VeilederoversiktSortering = {
     property: VeilederoversiktSorteringsfelt.ETTERNAVN,
-    direction: SorteringsrekkefolgeVeilederoversikt.NA
+    direction: SorteringsrekkefolgeVeilederoversikt.STIGENDE
 };
 
 // Reducer
