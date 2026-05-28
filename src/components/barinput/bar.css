@@ -1,20 +1,15 @@
 .barinput-checkbox,
 .barinput-radio {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: var(--ax-space-4);
 }
-.barinput-checkbox .navds-checkbox__label,
-.barinput-checkbox .navds-checkbox__label-text {
+.barinput-checkbox__checkbox,
+.barinput-radio__radio {
+    width: 100%;
+}
+.barinput-checkbox__checkbox label,
+.barinput-radio__radio label {
     display: flex;
-    gap: 0.5rem;
-}
-.barinput-checkbox .navds-checkbox__label svg {
-    vertical-align: middle;
-}
-.barlabel__antall {
-    padding-right: 0.5rem;
+    justify-content: space-between;
 }
 .forste-barlabel-i-gruppe {
     padding-top: 1rem;

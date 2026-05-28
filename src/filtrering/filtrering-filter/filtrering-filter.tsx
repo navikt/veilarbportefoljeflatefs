@@ -56,7 +56,9 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
     return (
         <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
             <div className="filtrering-filter__kolonne">
-                <Label size="small">Om personen</Label>
+                <Label size="small" as="h4" spacing>
+                    Om personen
+                </Label>
                 <Dropdown
                     name="Alder"
                     id="alder"
@@ -152,7 +154,9 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <Label size="small">Hendelser</Label>
+                <Label size="small" as="h4" spacing>
+                    Hendelser
+                </Label>
                 <Dropdown
                     name="Siste endring av bruker"
                     id="sisteEndringKategori"
@@ -168,7 +172,9 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <Label>Siste svar fra registrering i Arbeidssøkerregisteret</Label>
+                <Label size="small" as="h4" spacing>
+                    Siste svar fra registrering i Arbeidssøkerregisteret
+                </Label>
                 <Dropdown
                     name="Situasjon"
                     id="situasjon"
@@ -260,7 +266,9 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <Label size="small">Oppfølgingsvedtak § 14 a</Label>
+                <Label size="small" as="h4" spacing>
+                    Oppfølgingsvedtak § 14 a
+                </Label>
                 <Dropdown
                     name="Gjeldende vedtak § 14 a"
                     id="gjeldende-vedtak-14a"
@@ -311,7 +319,9 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <Label size="small">Status og brukergrupper</Label>
+                <Label size="small" as="h4" spacing>
+                    Status og brukergrupper
+                </Label>
                 <Dropdown
                     name="CV og jobbønsker"
                     id="cv-og-jobbprofil"
@@ -374,7 +384,9 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <Label size="small">Ytelse</Label>
+                <Label size="small" as="h4" spacing>
+                    Ytelse
+                </Label>
                 <Dropdown
                     name="Dagpenger"
                     id="ytelser-dappenger-alle"
@@ -469,7 +481,9 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <Label size="small">Aktivitet</Label>
+                <Label size="small" as="h4" spacing>
+                    Aktivitet
+                </Label>
                 <Dropdown
                     name="Aktivitet (avtalt med Nav)"
                     id="aktivitet"

@@ -174,7 +174,7 @@ export function EnhetSide() {
                         oversiktType={oversiktType}
                         enhettiltak={enhettiltak.data.tiltak}
                         listevisning={listevisning}
-                        className="filtrering-label-container"
+                        className="filtreringlabel-container"
                     />
                     {harFilter ? (
                         <div className="oversikt__container">

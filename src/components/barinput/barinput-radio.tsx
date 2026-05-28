@@ -1,5 +1,5 @@
 import {ChangeEventHandler} from 'react';
-import {Label, Radio} from '@navikt/ds-react';
+import {Detail, Radio} from '@navikt/ds-react';
 import './bar.css';
 
 interface BarinputRadioProps {
@@ -19,16 +19,12 @@ export const BarInputRadio = ({filterVerdi, handleChange, labelTekst, statustall
                 onChange={handleChange}
                 data-testid={testId}
                 key={filterVerdi}
-                className="mine-filter__filternavn"
+                className="barinput-radio__radio"
                 size="small"
             >
                 {labelTekst}
+                {(!!statustall || statustall === 0) && <Detail weight="semibold">{statustall}</Detail>}
             </Radio>
-            {(!!statustall || statustall === 0) && (
-                <Label className="barlabel__antall" size="small">
-                    {statustall}
-                </Label>
-            )}
         </div>
     );
 };

@@ -1,4 +1,6 @@
-.veilarbportefoljeflatefs .filtrering-label-container {
+.veilarbportefoljeflatefs .filtreringlabel-container {
+    grid-column-start: 2;
+    grid-column-end: 3;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
@@ -8,7 +10,17 @@
     font-size: 20px;
 }
 
-.veilarbportefoljeflatefs .filtreringlabel__container {
+.veilarbportefoljeflatefs .filtreringlabel__med-ikon {
     display: flex;
     align-items: center;
+    gap: 0.25rem;
+}
+
+.veilarbportefoljeflatefs .filtreringlabel__med-ikon .fargekategoriikon [stroke] {
+    stroke: var(--ax-bg-neutral-moderate);
+}
+
+.veilarbportefoljeflatefs .filtreringlabel__med-ikon .fargekategoriikon [fill]:not([stroke]) {
+    fill: #fff;
+    fill-opacity: 1;
 }
