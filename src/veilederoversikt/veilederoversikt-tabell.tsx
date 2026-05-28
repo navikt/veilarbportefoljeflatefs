@@ -43,7 +43,7 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
             <Table.Header>
                 <Table.Row>
                     <Table.ColumnHeader sortable sortKey={VeilederoversiktSorteringsfelt.ETTERNAVN}>
-                        Fornavn, Etternavn
+                        Etternavn, fornavn
                     </Table.ColumnHeader>
                     <Table.HeaderCell>Nav-ident</Table.HeaderCell>
                     <Table.ColumnHeader
