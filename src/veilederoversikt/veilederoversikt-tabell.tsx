@@ -25,6 +25,7 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
                 ? ('descending' as const)
                 : ('ascending' as const)
     };
+    const sortering = currentSortering.direction === SorteringsrekkefolgeVeilederoversikt.NA ? undefined : sort;
 
     const handleSortChange = (sortKey?: string) => {
         if (sortKey) {
@@ -37,7 +38,7 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
             zebraStripes={true}
             data-testid="veilederoversikt-tabell"
             bgcolor="white"
-            sort={sort}
+            sort={sortering}
             onSortChange={handleSortChange}
         >
             <Table.Header>
