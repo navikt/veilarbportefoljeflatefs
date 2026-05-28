@@ -34,7 +34,11 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
         >
             <Table.Header>
                 <Table.Row>
-                    <Table.ColumnHeader sortable sortKey={VeilederoversiktSorteringsfelt.ETTERNAVN}>
+                    <Table.ColumnHeader
+                        sortable
+                        sortKey={VeilederoversiktSorteringsfelt.ETTERNAVN}
+                        data-testid="veiledertabell__etternavn-overskrift"
+                    >
                         Etternavn, Fornavn
                     </Table.ColumnHeader>
                     <Table.HeaderCell>Nav-ident</Table.HeaderCell>
