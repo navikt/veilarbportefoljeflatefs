@@ -39,8 +39,8 @@
     "react-device-detect": "2.2.3",
     "react-dom": "19.2.6",
     "react-redux": "9.3.0",
-    "react-router": "6.30.3",
-    "react-router-dom": "6.30.3",
+    "react-router": "6.30.4",
+    "react-router-dom": "6.30.4",
     "redux": "5.0.1",
     "reselect": "4.1.8"
   },
