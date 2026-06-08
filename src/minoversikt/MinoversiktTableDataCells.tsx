@@ -46,6 +46,7 @@ import {AapKelvinVedtakTilOgMedDatoData} from '../components/tabell/dataCells/Aa
 import {AapKelvinRettighetData} from '../components/tabell/dataCells/AapKelvinRettighetData';
 import {UngdomsprogramStartdatoData} from '../components/tabell/dataCells/UngdomsprogramStartdatoData';
 import {UngdomsprogramMaksdatoData} from '../components/tabell/dataCells/UngdomsprogramMaksdatoData';
+import {UngdomsprogramSluttdatoData} from '../components/tabell/dataCells/UngdomsprogramSluttdatoData';
 import {UngdomsprogramRettighetData} from '../components/tabell/dataCells/UngdomsprogramRettighetData';
 import {TildeltTidspunktData} from '../components/tabell/dataCells/TildeltTidspunktData';
 import {AapArenaYtelsestypeData} from '../components/tabell/dataCells/AapArenaYtelsestypeData';
@@ -168,6 +169,7 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
 
             <UngdomsprogramStartdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
             <UngdomsprogramMaksdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <UngdomsprogramSluttdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
             <UngdomsprogramRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
         </div>
     );

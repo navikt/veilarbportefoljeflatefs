@@ -54,9 +54,10 @@ function filtrerBrukerePaUngdomsprogramytelse(brukere: BrukerModell[], filterval
         const ungdomsprogramData = bruker.ytelser?.ungdomsprogram;
         const harStartdato = Boolean(ungdomsprogramData?.startdato?.trim());
         const harMaksdato = Boolean(ungdomsprogramData?.maksdato?.trim());
+        const harSluttdato = Boolean(ungdomsprogramData?.sluttdato?.trim());
         const harRettighet = Boolean(ungdomsprogramData?.rettighet?.trim());
 
-        return harStartdato || harMaksdato || harRettighet;
+        return harStartdato || harMaksdato || harSluttdato || harRettighet;
     });
 }
 

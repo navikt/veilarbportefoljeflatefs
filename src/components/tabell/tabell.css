@@ -51,6 +51,7 @@
 
 .veilarbportefoljeflatefs .ungdomsprogram-startdato-header,
 .veilarbportefoljeflatefs .ungdomsprogram-maksdato-header,
+.veilarbportefoljeflatefs .ungdomsprogram-sluttdato-header,
 .veilarbportefoljeflatefs .ungdomsprogram-rettighet-header {
     white-space: normal;
     overflow-wrap: anywhere;

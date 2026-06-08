@@ -30,6 +30,7 @@ export enum Sorteringsfelt {
     UNGDOMSPROGRAM_STARTDATO = 'ungdomsprogram_startdato',
     UNGDOMSPROGRAM_MAKSDATO = 'ungdomsprogram_maksdato',
     UNGDOMSPROGRAM_RETTIGHET = 'ungdomsprogram_rettighet',
+    UNGDOMSPROGRAM_SLUTTDATO = 'ungdomsprogram_sluttdato',
 
     TILTAKSPENGER_VEDTAKSDATO_TOM = 'tiltakspenger_vedtaksdato_tom',
     TILTAKSPENGER_RETTIGHET = 'tiltakspenger_rettighet',

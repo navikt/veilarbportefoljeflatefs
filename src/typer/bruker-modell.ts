@@ -73,7 +73,7 @@ export interface Ytelser {
     tiltakspenger: TiltakspengerData | null;
     dagpenger: DagpengerData | null;
     ensligeForsorgereOvergangsstonad: EnsligeForsorgereOvergangsstonad | null;
-    ungdomsprogram?: UngdomsprogramData | null;
+    ungdomsprogram: UngdomsprogramData | null;
 }
 
 export interface YtelserArena {
@@ -223,7 +223,8 @@ export interface DagpengerData {
 }
 
 export interface UngdomsprogramData {
-    startdato?: string | null;
-    maksdato: string | null;
-    rettighet: string | null;
+    startdato: string;
+    maksdato: string;
+    rettighet: string;
+    sluttdato: string | null;
 }

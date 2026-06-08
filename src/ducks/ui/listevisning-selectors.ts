@@ -206,6 +206,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.AAP_KELVIN_RETTIGHET, filtertPaAapIKelvin))
         .concat(addHvis(Kolonne.UNGDOMSPROGRAM_STARTDATO, filtrertPaUngdomsprogramytelse))
         .concat(addHvis(Kolonne.UNGDOMSPROGRAM_MAKSDATO, filtrertPaUngdomsprogramytelse))
+        .concat(addHvis(Kolonne.UNGDOMSPROGRAM_SLUTTDATO, filtrertPaUngdomsprogramytelse))
         .concat(addHvis(Kolonne.UNGDOMSPROGRAM_RETTIGHET, filtrertPaUngdomsprogramytelse))
         .concat(addHvis(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP, filtrertPaBeggeAapArenaOgAapKelvin))
         .concat(addHvis(Kolonne.TILTAKSPENGER_VEDTAKSDATO_TOM, filtrertPaTiltakspenger))

@@ -47,6 +47,7 @@ import {AapKelvinVedtakTilOgMedDatoHeaderHeader} from '../components/tabell/head
 import {AapKelvinRettighetHeader} from '../components/tabell/headerCells/AapKelvinRettighetHeader';
 import {UngdomsprogramStartdatoHeader} from '../components/tabell/headerCells/UngdomsprogramStartdatoHeader';
 import {UngdomsprogramMaksdatoHeader} from '../components/tabell/headerCells/UngdomsprogramMaksdatoHeader';
+import {UngdomsprogramSluttdatoHeader} from '../components/tabell/headerCells/UngdomsprogramSluttdatoHeader';
 import {UngdomsprogramRettighetHeader} from '../components/tabell/headerCells/UngdomsprogramRettighetHeader';
 import {TildeltTidspunktHeader} from '../components/tabell/headerCells/TildeltTidspunktHeader';
 import {TiltakspengerVedtakTilOgMedDatoHeader} from '../components/tabell/headerCells/TiltakspengerVedtakTilOgMedDatoHeader';
@@ -181,6 +182,7 @@ export function MinoversiktTableHeader() {
 
                 <UngdomsprogramStartdatoHeader {...sorteringTilHeaderCell} />
                 <UngdomsprogramMaksdatoHeader {...sorteringTilHeaderCell} />
+                <UngdomsprogramSluttdatoHeader {...sorteringTilHeaderCell} />
                 <UngdomsprogramRettighetHeader {...sorteringTilHeaderCell} />
             </div>
             <div className="brukerliste__gutter-right" />

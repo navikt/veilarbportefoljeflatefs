@@ -75,6 +75,7 @@ export enum Kolonne {
     DAGPENGER_RETTIGHETSTYPE = 'dagpenger_rettighetstype',
     UNGDOMSPROGRAM_STARTDATO = 'ungdomsprogram_startdato',
     UNGDOMSPROGRAM_MAKSDATO = 'ungdomsprogram_maksdato',
+    UNGDOMSPROGRAM_SLUTTDATO = 'ungdomsprogram_sluttdato',
     UNGDOMSPROGRAM_RETTIGHET = 'ungdomsprogram_rettighet'
 }
 
