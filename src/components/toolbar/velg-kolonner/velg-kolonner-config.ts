@@ -83,4 +83,4 @@ alternativerConfig.set(Kolonne.DAGPENGER_RETTIGHETSTYPE, {tekstlabel: 'Rettighet
 alternativerConfig.set(Kolonne.UNGDOMSPROGRAM_STARTDATO, {tekstlabel: 'Ungdomsprogram-ytelse start'});
 alternativerConfig.set(Kolonne.UNGDOMSPROGRAM_MAKSDATO, {tekstlabel: 'Ungdomsprogram-ytelse maksdato'});
 alternativerConfig.set(Kolonne.UNGDOMSPROGRAM_SLUTTDATO, {tekstlabel: 'Ungdomsprogram-ytelse sluttdato'});
-alternativerConfig.set(Kolonne.UNGDOMSPROGRAM_RETTIGHET, {tekstlabel: 'Periode'});
+alternativerConfig.set(Kolonne.UNGDOMSPROGRAM_RETTIGHET, {tekstlabel: 'Ungdomsprogram-ytelse rettighet'});
