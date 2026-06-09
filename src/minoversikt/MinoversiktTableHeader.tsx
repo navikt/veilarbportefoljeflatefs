@@ -45,6 +45,10 @@ import {HuskelappHeader} from '../components/tabell/headerCells/min-oversikt/Hus
 import {HuskelappSistEndretHeader} from '../components/tabell/headerCells/min-oversikt/HuskelappSistEndretHeader';
 import {AapKelvinVedtakTilOgMedDatoHeaderHeader} from '../components/tabell/headerCells/AapKelvinVedtakTilOgMedDatoHeaderHeader';
 import {AapKelvinRettighetHeader} from '../components/tabell/headerCells/AapKelvinRettighetHeader';
+import {UngdomsprogramStartdatoHeader} from '../components/tabell/headerCells/UngdomsprogramStartdatoHeader';
+import {UngdomsprogramMaksdatoHeader} from '../components/tabell/headerCells/UngdomsprogramMaksdatoHeader';
+import {UngdomsprogramSluttdatoHeader} from '../components/tabell/headerCells/UngdomsprogramSluttdatoHeader';
+import {UngdomsprogramRettighetHeader} from '../components/tabell/headerCells/UngdomsprogramRettighetHeader';
 import {TildeltTidspunktHeader} from '../components/tabell/headerCells/TildeltTidspunktHeader';
 import {TiltakspengerVedtakTilOgMedDatoHeader} from '../components/tabell/headerCells/TiltakspengerVedtakTilOgMedDatoHeader';
 import {TiltakspengerRettighetHeader} from '../components/tabell/headerCells/TiltakspengerRettighetHeader';
@@ -175,6 +179,11 @@ export function MinoversiktTableHeader() {
                 <DagpengerResterendeDagerHeader {...sorteringTilHeaderCell} />
                 <DagpengerRettighetHeader {...sorteringTilHeaderCell} />
                 <DagpengerStansDatoHeader {...sorteringTilHeaderCell} />
+
+                <UngdomsprogramStartdatoHeader {...sorteringTilHeaderCell} />
+                <UngdomsprogramMaksdatoHeader {...sorteringTilHeaderCell} />
+                <UngdomsprogramSluttdatoHeader {...sorteringTilHeaderCell} />
+                <UngdomsprogramRettighetHeader {...sorteringTilHeaderCell} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

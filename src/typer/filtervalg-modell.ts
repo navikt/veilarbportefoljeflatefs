@@ -6,7 +6,8 @@ import {
     DagpengerFilter,
     DagpengerFilterArena,
     TiltakspengerFilter,
-    TiltakspengerFilterArena
+    TiltakspengerFilterArena,
+    UngdomsprogramytelseFilter
 } from '../filtrering/filter-konstanter';
 
 /* Vi bruker nøklane i FiltervalgModell til å knyte saman
@@ -57,7 +58,8 @@ export enum Filtervalg {
     ytelseTiltakspengerArena = 'ytelseTiltakspengerArena',
     ytelseTiltakspenger = 'ytelseTiltakspenger',
     ytelseDagpengerArena = 'ytelseDagpengerArena',
-    ytelseDagpenger = 'ytelseDagpenger'
+    ytelseDagpenger = 'ytelseDagpenger',
+    ytelseUngdomsprogram = 'ytelseUngdomsprogram'
 }
 
 export const erGyldigFiltervalg = (filtervalg: string): filtervalg is Filtervalg => {
@@ -114,6 +116,7 @@ export interface FiltervalgModell {
     [Filtervalg.ytelseTiltakspenger]: TiltakspengerFilter[];
     [Filtervalg.ytelseDagpengerArena]: DagpengerFilterArena[];
     [Filtervalg.ytelseDagpenger]: DagpengerFilter[];
+    [Filtervalg.ytelseUngdomsprogram]: UngdomsprogramytelseFilter[];
 }
 
 /**

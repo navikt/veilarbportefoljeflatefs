@@ -63,7 +63,8 @@ export const initialState: FiltervalgModell = {
     ytelseTiltakspengerArena: [],
     ytelseTiltakspenger: [],
     ytelseDagpengerArena: [],
-    ytelseDagpenger: []
+    ytelseDagpenger: [],
+    ytelseUngdomsprogram: []
 };
 
 export function fjern(filterId, verdi, fjernVerdi) {

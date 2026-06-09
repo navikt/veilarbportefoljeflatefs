@@ -296,12 +296,28 @@ const lagDagpengerData = (): DagpengerData | null => {
     };
 };
 
+const lagUngdomsprogramData = () => {
+    const harUngdomsprogram = Math.random() > 0.7;
+
+    if (!harUngdomsprogram) {
+        return null;
+    }
+
+    return {
+        startdato: randomDate({past: true, withoutTimestamp: true}),
+        maksdato: randomDate({past: false, withoutTimestamp: true}),
+        rettighet: Math.random() > 0.5 ? 'Ordinær' : 'Unntak',
+        sluttdato: randomDate({past: false, withoutTimestamp: true})
+    };
+};
+
 const lagYtelser = (): Ytelser => {
     return {
         ytelserArena: lagArenaYtelse(),
         aap: lagAapKelvinData(),
         tiltakspenger: lagTiltakspengerData(),
         dagpenger: lagDagpengerData(),
+        ungdomsprogram: lagUngdomsprogramData(),
         ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger()
     };
 };
@@ -423,6 +439,28 @@ function lagBruker(): BrukerModell {
         fargekategori: lagFargekategori(),
         fargekategoriEnhetId: '1234',
         huskelapp: lagHuskelapp()
+    };
+}
+
+function lagBrukerMedUngdomsprogramytelse(
+    rettighet: 'Ordinær' | 'Unntak',
+    startdato: string,
+    maksdato: string,
+    sluttdato: string
+): BrukerModell {
+    const bruker = lagBruker();
+
+    return {
+        ...bruker,
+        ytelser: {
+            ...bruker.ytelser,
+            ungdomsprogram: {
+                startdato,
+                maksdato,
+                rettighet,
+                sluttdato
+            }
+        }
     };
 }
 
@@ -724,4 +762,21 @@ const lagFargekategori = () => {
     }
 };
 
-export const brukere = new Array(123).fill(0).map(() => lagBruker());
+const brukereMedUngdomsprogramytelse = [
+    lagBrukerMedUngdomsprogramytelse('Ordinær', '2026-09-01', '2027-03-15', '2027-02-28'),
+    lagBrukerMedUngdomsprogramytelse('Unntak', '2027-03-16', '2027-09-30', '2027-09-15'),
+    lagBrukerMedUngdomsprogramytelse('Ordinær', '2026-10-01', '2027-04-10', '2027-03-25'),
+    lagBrukerMedUngdomsprogramytelse('Unntak', '2027-04-11', '2027-10-12', '2027-09-28'),
+    lagBrukerMedUngdomsprogramytelse('Ordinær', '2027-06-15', '2028-01-05', '2027-12-20'),
+    lagBrukerMedUngdomsprogramytelse('Unntak', '2027-08-20', '2028-02-20', '2028-02-01'),
+    lagBrukerMedUngdomsprogramytelse('Ordinær', '2027-11-01', '2028-05-14', '2028-04-30'),
+    lagBrukerMedUngdomsprogramytelse('Unntak', '2027-12-10', '2028-06-30', '2028-06-14'),
+    lagBrukerMedUngdomsprogramytelse('Ordinær', '2028-01-20', '2028-08-22', '2028-08-05'),
+    lagBrukerMedUngdomsprogramytelse('Unntak', '2028-03-01', '2028-11-11', '2028-10-25')
+];
+
+export const brukere = [
+    ...new Array(2).fill(0).map(() => lagBruker()),
+    ...brukereMedUngdomsprogramytelse,
+    ...new Array(111).fill(0).map(() => lagBruker())
+];

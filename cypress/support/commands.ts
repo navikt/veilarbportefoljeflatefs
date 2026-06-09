@@ -83,18 +83,34 @@ Cypress.Commands.add('klikkTab', (tab) => {
 });
 
 Cypress.Commands.add('checkbox', testid => {
-    cy.getByTestId(testid).as('checkbox').should('not.be.checked').check({force: true});
-    cy.get('@checkbox').should('be.checked');
+    cy.getByTestId(testid)
+        .should('not.be.checked')
+        .then($checkbox => {
+            cy.wrap($checkbox).click({force: true});
+        });
+    cy.getByTestId(testid).should('be.checked');
 });
 
 Cypress.Commands.add('checkboxFirst', testid => {
-    cy.getByTestId(testid).not(':disabled').first().as('first-checkbox').should('not.be.checked').check({force: true});
-    cy.get('@first-checkbox').should('be.checked');
+    cy.getByTestId(testid)
+        .not(':disabled')
+        .first()
+        .should('not.be.checked')
+        .then($checkbox => {
+            cy.wrap($checkbox).click({force: true});
+        });
+    cy.getByTestId(testid).not(':disabled').first().should('be.checked');
 });
 
 Cypress.Commands.add('checkboxLast', testid => {
-    cy.getByTestId(testid).not(':disabled').last().as('last-checkbox').should('not.be.checked').check({force: true});
-    cy.get('@last-checkbox').should('be.checked');
+    cy.getByTestId(testid)
+        .not(':disabled')
+        .last()
+        .should('not.be.checked')
+        .then($checkbox => {
+            cy.wrap($checkbox).click({force: true});
+        });
+    cy.getByTestId(testid).not(':disabled').last().should('be.checked');
 });
 
 Cypress.Commands.add('apneLukkeFilterDropdown', filternavn => {

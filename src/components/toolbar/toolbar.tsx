@@ -33,12 +33,12 @@ export function Toolbar({
     scrolling = false,
     isSidebarHidden = false
 }: ToolbarProps) {
-    const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
-    const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
-    const aktiv = valgteBrukere.length > 0;
+    const aktiv = useSelector((state: AppState) => state.portefolje.data.brukere.some(bruker => bruker.markert));
     const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
     const feilmelding = brukerfeilMelding.message;
-    const valgteBrukereFnrs = valgteBrukere.map(bruker => bruker.fnr);
+    const valgteBrukereFnrs = useSelector((state: AppState) =>
+        state.portefolje.data.brukere.filter(bruker => bruker.markert).map(bruker => bruker.fnr)
+    );
 
     const oversikt = side => {
         switch (side) {
