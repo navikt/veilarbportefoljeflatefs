@@ -44,6 +44,10 @@ import {HuskelappFristData} from '../components/tabell/dataCells/min-oversikt/Hu
 import {HuskelappSistEndretData} from '../components/tabell/dataCells/min-oversikt/HuskelappSistEndretData';
 import {AapKelvinVedtakTilOgMedDatoData} from '../components/tabell/dataCells/AapKelvinVedtakTilOgMedDatoData';
 import {AapKelvinRettighetData} from '../components/tabell/dataCells/AapKelvinRettighetData';
+import {UngdomsprogramStartdatoData} from '../components/tabell/dataCells/UngdomsprogramStartdatoData';
+import {UngdomsprogramMaksdatoData} from '../components/tabell/dataCells/UngdomsprogramMaksdatoData';
+import {UngdomsprogramSluttdatoData} from '../components/tabell/dataCells/UngdomsprogramSluttdatoData';
+import {UngdomsprogramRettighetData} from '../components/tabell/dataCells/UngdomsprogramRettighetData';
 import {TildeltTidspunktData} from '../components/tabell/dataCells/TildeltTidspunktData';
 import {AapArenaYtelsestypeData} from '../components/tabell/dataCells/AapArenaYtelsestypeData';
 import {AapArenaVurderingsfristData} from '../components/tabell/dataCells/AapArenaVurderingsfristData';
@@ -162,6 +166,11 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
             <DagpengerResterendeDagerData bruker={bruker} valgteKolonner={valgteKolonner} />
             <DagpengerRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
             <DagpengerStansDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <UngdomsprogramStartdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <UngdomsprogramMaksdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <UngdomsprogramSluttdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <UngdomsprogramRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
         </div>
     );
 }

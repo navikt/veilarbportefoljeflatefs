@@ -73,6 +73,7 @@ interface UsePortefoljeSelector {
 export function usePortefoljeSelector(listevisningType: OversiktType): UsePortefoljeSelector {
     return useSelector((state: AppState) => {
         const result = selectPortefoljeTabell(state, listevisningType);
+
         return {
             ...result,
             brukere: filtrerBrukerePaValgtFargekategori(result.brukere, result.filtervalg, listevisningType)

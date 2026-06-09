@@ -80,3 +80,7 @@ alternativerConfig.set(Kolonne.TILTAKSPENGER_RETTIGHET, {tekstlabel: 'Rettighet 
 alternativerConfig.set(Kolonne.DAGPENGER_STANS, {tekstlabel: 'Utløp dagpenger (DPSAK)'});
 alternativerConfig.set(Kolonne.DAGPENGER_ANTALL_RESTERENDE_DAGER, {tekstlabel: 'Gjenstående dager dagpenger (DPSAK)'});
 alternativerConfig.set(Kolonne.DAGPENGER_RETTIGHETSTYPE, {tekstlabel: 'Rettighet dagpenger (DPSAK)'});
+alternativerConfig.set(Kolonne.UNGDOMSPROGRAM_STARTDATO, {tekstlabel: 'Ungdomsprogram-ytelse start'});
+alternativerConfig.set(Kolonne.UNGDOMSPROGRAM_MAKSDATO, {tekstlabel: 'Ungdomsprogram-ytelse maksdato'});
+alternativerConfig.set(Kolonne.UNGDOMSPROGRAM_SLUTTDATO, {tekstlabel: 'Ungdomsprogram-ytelse sluttdato'});
+alternativerConfig.set(Kolonne.UNGDOMSPROGRAM_RETTIGHET, {tekstlabel: 'Ungdomsprogram-ytelse rettighet'});

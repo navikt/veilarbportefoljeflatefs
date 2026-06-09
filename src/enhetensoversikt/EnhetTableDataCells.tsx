@@ -43,6 +43,10 @@ import {BarnUnder18AarData} from '../components/tabell/dataCells/BarnUnder18AarD
 import {EnsligeForsorgereOmBarnetData} from '../components/tabell/dataCells/EnsligeForsorgereOmBarnetData';
 import {AapKelvinVedtakTilOgMedDatoData} from '../components/tabell/dataCells/AapKelvinVedtakTilOgMedDatoData';
 import {AapKelvinRettighetData} from '../components/tabell/dataCells/AapKelvinRettighetData';
+import {UngdomsprogramStartdatoData} from '../components/tabell/dataCells/UngdomsprogramStartdatoData';
+import {UngdomsprogramMaksdatoData} from '../components/tabell/dataCells/UngdomsprogramMaksdatoData';
+import {UngdomsprogramSluttdatoData} from '../components/tabell/dataCells/UngdomsprogramSluttdatoData';
+import {UngdomsprogramRettighetData} from '../components/tabell/dataCells/UngdomsprogramRettighetData';
 import {TildeltTidspunktData} from '../components/tabell/dataCells/TildeltTidspunktData';
 import {AapArenaYtelsestypeData} from '../components/tabell/dataCells/AapArenaYtelsestypeData';
 import {AapArenaVurderingsfristData} from '../components/tabell/dataCells/AapArenaVurderingsfristData';
@@ -155,6 +159,11 @@ export function EnhetTableDataCells({className, bruker, enhetId, filtervalg, val
             <DagpengerResterendeDagerData bruker={bruker} valgteKolonner={valgteKolonner} />
             <DagpengerRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
             <DagpengerStansDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <UngdomsprogramStartdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <UngdomsprogramMaksdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <UngdomsprogramSluttdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <UngdomsprogramRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
         </div>
     );
 }
