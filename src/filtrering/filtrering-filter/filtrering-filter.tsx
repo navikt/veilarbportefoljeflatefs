@@ -467,7 +467,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         />
                     )}
                 />
-                {!visUngdomsprogramytelse && (
+                {visUngdomsprogramytelse && (
                     <Dropdown
                         name="Ungdomsprogramytelse"
                         id="ytelser-ungdomsprogram"
