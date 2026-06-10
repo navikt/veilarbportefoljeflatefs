@@ -38,6 +38,13 @@ function getDecoratorEnv(): Environment {
     }
 }
 
+function handterFnrEndret(event: CustomEvent<{fnr?: string | null}>) {
+    const fnr = event.detail.fnr;
+    if (fnr) {
+        window.location.href = getVeilarbpersonflateBasePath();
+    }
+}
+
 export function Decorator() {
     const dispatch = useAppDispatch();
     const enhetId = useEnhetSelector();
@@ -51,13 +58,6 @@ export function Decorator() {
 
     function velgEnhet(enhet: string) {
         dispatch(oppdaterValgtEnhet(enhet));
-    }
-
-    function handterFnrEndret(event: CustomEvent<{fnr?: string | null}>) {
-        const fnr = event.detail.fnr;
-        if (fnr) {
-            window.location.href = getVeilarbpersonflateBasePath();
-        }
     }
 
     function handterEnhetEndret(event: CustomEvent<{enhet?: string | null}>) {
