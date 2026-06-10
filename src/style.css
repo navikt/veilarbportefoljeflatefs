@@ -26,7 +26,6 @@
 body {
     height: 100%;
     width: 100%;
-    font-size: 0.875rem;
     font-weight: 400;
     color: #262626;
     font-family: 'Source Sans Pro', Arial, sans-serif;
@@ -52,17 +51,6 @@ html.darkmode {
 
 body.annen-veileder {
     background-color: #85d5f0;
-}
-
-html {
-    height: 100%;
-
-    font-size: 100%;
-    font-family: sans-serif;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-
-    /* Correct the line height in all browsers. (From normalize.css) */
-    line-height: 1.15;
 }
 
 /*!
@@ -519,61 +507,6 @@ img {
 
 [role='button'] {
     cursor: pointer;
-}
-
-body .clearfix::before,
-body .clearfix::after {
-    content: ' ';
-    display: table;
-}
-
-body .clearfix::after {
-    clear: both;
-}
-
-body .center-block {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-body .pull-right {
-    float: right !important;
-}
-
-body .pull-left {
-    float: left !important;
-}
-
-body .hide {
-    display: none !important;
-}
-
-body .show {
-    display: block !important;
-}
-
-body .hidden {
-    display: none !important;
-}
-
-body .invisible {
-    visibility: hidden;
-}
-
-body .text-hide {
-    font: 0px/0 a;
-    color: transparent;
-    text-shadow: none;
-    background-color: transparent;
-    border: 0;
-    position: absolute;
-}
-
-body .liste-uten-listepunkt {
-    margin: 0;
-    padding: 0;
-    list-style: none;
 }
 
 @media (max-width: 767px) {
