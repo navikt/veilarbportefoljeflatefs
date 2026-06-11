@@ -642,14 +642,6 @@ GRID
     position: absolute;
 }
 
-.veilarbportefoljeflatefs .dekorator {
-    font-size: initial;
-
-    .dr-flex.dr-min-w-min.dr-items-center.dr-float-left {
-        font-weight: var(--ax-font-weight-bold);
-    }
-}
-
 .flex {
     display: flex;
 }
@@ -789,10 +781,6 @@ GRID
     grid-column-start: 1;
 }
 
-.veilarbportefoljeflatefs .oversikt-sideinnhold__hidden .filtreringlabel-container {
-    grid-column-start: 1;
-}
-
 .veilarbportefoljeflatefs .oversikt-sideinnhold__hidden .alertstripe__filtrering {
     grid-column-start: 1;
     grid-column-end: 3;
@@ -818,16 +806,6 @@ GRID
     font-size: 0.875rem !important;
 }
 
-/* Gjer at tekst i dekoratøren i oversikten får same storleik som på andre sider*/
-.veilarbportefoljeflatefs .dekorator .aksel-body-short {
-    font-size: initial !important; /* Bruker !important for å overskrive !important frå selector ".veilarbportefoljeflatefs .navds-body-short" */
-}
-
-/* Gjer at tekst i dekoratøren i oversikten får same storleik som på andre sider*/
-.veilarbportefoljeflatefs .dekorator .aksel-label {
-    font-size: initial !important; /* Bruker !important for å overskrive !important frå selector ".veilarbportefoljeflatefs .navds-label" */
-}
-
 @media (max-width: 1200px) {
     .veilarbportefoljeflatefs .oversikt-sideinnhold .oversikt__container {
         grid-column-start: 1;
@@ -843,13 +821,6 @@ GRID
     /* Gjer at secondary-knappar vert kvite uavhengig av bakgrunnsfargen.
      * (I designsystemet er dei gjennomsiktige.) */
     background-color: var(--ax-bg-default);
-}
-
-.veilarbportefoljeflatefs .dekorator .navds-button--secondary,
-.veilarbportefoljeflatefs .dekorator .navds-button--secondary-neutral {
-    /* Unngår at søk-knappen i dekoratøren (og andre knappar i dekoratøren) får kvit bakgrunn.
-     * (I designsystemet er dei gjennomsiktige.) */
-    background-color: initial;
 }
 
 .veilarbportefoljeflatefs .lenke--frittstaende {
