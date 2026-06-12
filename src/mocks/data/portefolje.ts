@@ -421,7 +421,7 @@ function lagBruker(): BrukerModell {
         geografiskBosted: lagGeografiskBosted(),
         tolkebehov: lagTolbebehov(),
         barnUnder18AarData: hentBarnUnder18Aar(),
-        oppfolgingStartdato: '',
+        oppfolgingStartdato: faker.date.between({from: new Date('2015-01-01'), to: new Date()}).toISOString(),
         tildeltTidspunkt: randomDate({past: true, withoutTimestamp: true}),
         veilederId: veilederId,
         egenAnsatt: random_egenAnsatt,

@@ -86,11 +86,7 @@ export function EnhetTableHeader() {
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
             <VelgalleCheckboks />
-            {visFargekategoriKolonne && (
-                <div className="brukerliste__fargekategori-ikonknapp">
-                    <FargekategoriHeader {...sorteringTilHeaderCell} />
-                </div>
-            )}
+            {visFargekategoriKolonne && <FargekategoriHeader {...sorteringTilHeaderCell} />}
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
                 <NavnHeader {...sorteringTilHeaderCell} />
                 <FnrHeader {...sorteringTilHeaderCell} />
