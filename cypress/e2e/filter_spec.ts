@@ -76,7 +76,9 @@ describe('Filter', () => {
         cy.getByTestId('checkbox-filterform_velg-knapp').should('be.disabled');
 
         // Vi nullar det valde filteret ved å trykke på filtreringslabel
-        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(alder['40-49'])}`).should('be.visible').click();
+        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(alder['40-49'])}`)
+            .should('be.visible')
+            .click();
 
         // Opnar filterdropdown igjen. Ser at filter ikkje er valt
         cy.apneLukkeFilterDropdown('alder');
@@ -100,7 +102,7 @@ describe('Filter', () => {
 
         // Fjern alder-filtertaggen, sjå at begge forsvinn
         cy.getByTestId(`filtreringlabel_${tilAlder}-100-ar`).should('be.visible').click();
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 0);
+        cy.getByTestIdPrefix('filtreringlabel_').should('have.length', 0);
     });
 
     it('Hendelser-filterform - Enhetens oversikt', () => {
@@ -114,7 +116,9 @@ describe('Filter', () => {
         cy.getByTestId('lagtTilAvBruker_jobb-jeg-har-na').check({force: true});
 
         // Sjekk at vi får rett tal kolonner. Dei to siste skal vere "Siste endring" og "Dato siste endring"
-        cy.getByTestId('brukerliste_innhold').children().as('kolonneoverskrifter')
+        cy.getByTestId('brukerliste_innhold')
+            .children()
+            .as('kolonneoverskrifter')
             .should('have.length', tallPaKolonnerVedStart);
         cy.get('@kolonneoverskrifter').last().prev().contains('Siste endring');
         cy.get('@kolonneoverskrifter').last().contains('Dato siste endring');
@@ -124,17 +128,27 @@ describe('Filter', () => {
         cy.getByTestId('dropdown-knapp_velg-kolonner').contains('Velg kolonner').click({force: true});
         cy.getByTestId('velg-kolonne-rad_siste_endring').should('be.checked').uncheck({force: true});
         cy.getByTestId('velg-kolonne-rad_veileder').check({force: true});
-        cy.get('@kolonneoverskrifter').should('have.length', tallPaKolonnerVedStart - 1).last().prev().contains('Veileder');
+        cy.get('@kolonneoverskrifter')
+            .should('have.length', tallPaKolonnerVedStart - 1)
+            .last()
+            .prev()
+            .contains('Veileder');
 
         // Tek bort kolonna for "Sist endret dato". Skal no ha 3 kolonner, "Veileder" er sist.
         cy.getByTestId('velg-kolonne-rad_siste_endring_dato').should('be.checked').uncheck({force: true});
-        cy.getByTestId('brukerliste_innhold').children().should('have.length', tallPaKolonnerVedStart - 2).last().contains('Veileder');
+        cy.getByTestId('brukerliste_innhold')
+            .children()
+            .should('have.length', tallPaKolonnerVedStart - 2)
+            .last()
+            .contains('Veileder');
 
         // Lukk kolonnevalg
         cy.getByTestId('dropdown-knapp_velg-kolonner').contains('Velg kolonner').click({force: true});
 
         // Nullstill filtertags
-        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(hendelserEtikett["NY_IJOBB"])}`).should('exist').click();
+        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(hendelserEtikett['NY_IJOBB'])}`)
+            .should('exist')
+            .click();
     });
 
     it('Hendelser-filterform - Min oversikt', () => {
@@ -150,13 +164,15 @@ describe('Filter', () => {
         cy.checkbox('filter_uleste-endringer');
 
         // Sjå at filtertags dukkar opp
-        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(hendelserEtikett["NY_IJOBB"])}`).should('be.visible');
-        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(hendelserEtikett["ULESTE_ENDRINGER"])}`).should('be.visible');
+        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(hendelserEtikett['NY_IJOBB'])}`).should('be.visible');
+        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(hendelserEtikett['ULESTE_ENDRINGER'])}`).should(
+            'be.visible'
+        );
         cy.getByTestId('filtrering_label-container').children().should('have.length', 3);
 
         // Nullstill hendelsesfilteret
         cy.getByTestId('hendelser-filterform_nullstill-knapp').click();
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 0);
+        cy.getByTestIdPrefix('filtreringlabel_').should('have.length', 0);
 
         // Gå attende til enhetens oversikt for å nullstille testen
         cy.getByTestId('sidebar-tab_STATUS').click();
@@ -179,7 +195,7 @@ describe('Filter', () => {
 
         // Nullstill filterval før neste test
         cy.getByTestId('checkbox-filterform_nullstill-knapp').click();
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 0);
+        cy.getByTestIdPrefix('filtreringlabel_').should('have.length', 0);
     });
 
     it('Aktivitet-filterform: Forenklet filter', () => {
@@ -203,8 +219,8 @@ describe('Filter', () => {
         // Ser at talet på filtertags går frå 3 (inkl "nullstill filter") til 0 når ein nullstillar aktivitetsfiltera
         cy.getByTestId('filtrering_label-container').children().should('have.length', 3);
         cy.getByTestId('aktivitet-filterform-forenklet_nullstill-knapp').click();
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 0);
-    })
+        cy.getByTestIdPrefix('filtreringlabel_').should('have.length', 0);
+    });
 
     it('Aktivitet-filterform: Avansert filter', () => {
         // Gå til filterdropdown for Aktivitet
@@ -286,7 +302,7 @@ describe('Filter', () => {
 
         // Sjekkar at vi ikkje har nokon filtertags meir
         cy.getByTestId('filtrering-filter_container').scrollTo('top');
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 0);
+        cy.getByTestIdPrefix('filtreringlabel_').should('have.length', 0);
 
         // Lukkar filterdropdown før neste test
         cy.apneLukkeFilterDropdown('fodselsdato');
@@ -307,7 +323,7 @@ describe('Filter', () => {
 
         // Vi nullstiller og sjekkar at filtertags blir borte
         cy.getByTestId('radio-filterform_nullstill-knapp').click();
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 0);
+        cy.getByTestIdPrefix('filtreringlabel_').should('have.length', 0);
     });
 
     it('Checkbox-filterform: Innsatsgruppe gjeldende vedtak § 14 a', () => {
@@ -318,27 +334,30 @@ describe('Filter', () => {
 
         // Vel filter for Standardinnsats (aka Gode muligheter), får opp filtertag. Nullstill skal vere synleg.
         cy.checkbox(`filter_${InnsatsgruppeGjeldendeVedtak14a.STANDARD_INNSATS}`);
-        cy.getByTestId(`filtreringlabel_${
-            kebabUtenSpesialtegn(innsatsgruppeGjeldendeVedtak14a[InnsatsgruppeGjeldendeVedtak14a.STANDARD_INNSATS])
-        }`).should('be.visible');
+        cy.getByTestId(
+            `filtreringlabel_${kebabUtenSpesialtegn(
+                innsatsgruppeGjeldendeVedtak14a[InnsatsgruppeGjeldendeVedtak14a.STANDARD_INNSATS]
+            )}`
+        ).should('be.visible');
         cy.getByTestId('checkbox-filterform_nullstill-knapp').should('be.enabled');
 
         // Vel eit filter til, no Spesielt tilpasset innsats (aka Trenger veiledning, nedsatt arbeidsevne)
         cy.checkbox(`filter_${InnsatsgruppeGjeldendeVedtak14a.SPESIELT_TILPASSET_INNSATS}`);
-        cy.getByTestId(`filtreringlabel_${
-            kebabUtenSpesialtegn(innsatsgruppeGjeldendeVedtak14a[InnsatsgruppeGjeldendeVedtak14a.SPESIELT_TILPASSET_INNSATS])
-        }`).should('be.visible');
+        cy.getByTestId(
+            `filtreringlabel_${kebabUtenSpesialtegn(
+                innsatsgruppeGjeldendeVedtak14a[InnsatsgruppeGjeldendeVedtak14a.SPESIELT_TILPASSET_INNSATS]
+            )}`
+        ).should('be.visible');
 
         // Sjekkar at vi har rett mengd filtertags
         cy.getByTestId('filtrering_label-container').children().should('have.length', 3);
 
         // Nullstiller med knapp i filterdropdown
         cy.getByTestId('checkbox-filterform_nullstill-knapp').click();
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 0);
+        cy.getByTestIdPrefix('filtreringlabel_').should('have.length', 0);
     });
 
     it('Slett alle filtre', () => {
-
         cy.getByTestId('filtrering-filter_container').scrollTo('bottom');
 
         // Vel eit par aktivitetsfilter
@@ -349,7 +368,6 @@ describe('Filter', () => {
         cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(aktiviteter.TILTAK)}`).should('be.visible');
         cy.getByTestId('filtrering_label-container').children().should('have.length', 3);
         cy.apneLukkeFilterDropdown('aktivitet');
-
 
         // Vel nokre ("Arbeidspraksis i skjermet virksomhet" og "Avklaring")
         cy.getByTestId('dropdown-knapp_tiltakstype').should('be.enabled').click();
@@ -363,7 +381,7 @@ describe('Filter', () => {
 
         // Nullstill filtervalg
         cy.getByTestId('filtreringlabel_nullstill-filtervalg').click();
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 0);
+        cy.getByTestIdPrefix('filtreringlabel_').should('have.length', 0);
         cy.getByTestId('alertstripe_filtrering')
             .should('be.visible')
             .contains('Du må gjøre en filtrering for å se brukere i listen.');
