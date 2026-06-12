@@ -1,14 +1,31 @@
 import {useEffect} from 'react';
-import NAVSPA from '@navikt/navspa';
 import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
 import {useBrukerIKontekstSelector} from './hooks/redux/use-bruker-i-kontekst-selector';
 import {EnvType, getEnv, getVeilarbpersonflateBasePath} from './utils/url-utils';
 import {fjernBrukerIKontekst} from './ducks/bruker-i-kontekst';
-import {DecoratorPropsV3, Environment} from './utils/types/decorator-props-v3';
 import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
 import {useAppDispatch} from './hooks/redux/use-app-dispatch';
 
-const InternflateDecorator = NAVSPA.importer<DecoratorPropsV3>('internarbeidsflate-decorator-v3');
+type Environment = 'q0' | 'q1' | 'q2' | 'q3' | 'q4' | 'prod' | 'local' | 'mock';
+
+declare module 'react' {
+    namespace JSX {
+        interface IntrinsicElements {
+            'internarbeidsflate-decorator': {
+                'app-name': string;
+                enhet?: string;
+                environment: string;
+                'fnr-sync-mode'?: 'sync' | 'writeOnly' | 'ignore';
+                proxy?: string;
+                'show-enheter'?: boolean;
+                'show-search-area'?: boolean;
+                'url-format': 'LOCAL' | 'NAV_NO' | 'ANSATT';
+                onEnhetChanged?: (event: CustomEvent<{enhet?: string | null}>) => void;
+                onFnrChanged?: (event: CustomEvent<{fnr?: string | null}>) => void;
+            };
+        }
+    }
+}
 
 function getDecoratorEnv(): Environment {
     const env = getEnv();
@@ -21,28 +38,11 @@ function getDecoratorEnv(): Environment {
     }
 }
 
-function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): DecoratorPropsV3 {
-    return {
-        appName: 'Arbeidsrettet oppfølging',
-        onFnrChanged: value => {
-            if (value) {
-                window.location.href = getVeilarbpersonflateBasePath();
-            }
-        },
-        fnrSyncMode: 'writeOnly',
-        showSearchArea: true,
-        enhet: enhet ?? undefined,
-        showEnheter: true,
-        onEnhetChanged: value => {
-            if (value) {
-                settValgtEnhet(value);
-            }
-        },
-        proxy: '/modiacontextholder',
-        environment: getDecoratorEnv(),
-        showHotkeys: false,
-        urlFormat: getEnv().ingressType === 'ansatt' ? 'ANSATT' : 'NAV_NO'
-    };
+function handterFnrEndret(event: CustomEvent<{fnr?: string | null}>) {
+    const fnr = event.detail.fnr;
+    if (fnr) {
+        window.location.href = getVeilarbpersonflateBasePath();
+    }
 }
 
 export function Decorator() {
@@ -60,7 +60,27 @@ export function Decorator() {
         dispatch(oppdaterValgtEnhet(enhet));
     }
 
-    const config = getConfig(enhetId, velgEnhet);
+    function handterEnhetEndret(event: CustomEvent<{enhet?: string | null}>) {
+        const enhet = event.detail.enhet;
+        if (enhet) {
+            velgEnhet(enhet);
+        }
+    }
 
-    return <InternflateDecorator {...config} />;
+    const urlFormat = getEnv().ingressType === 'ansatt' ? 'ANSATT' : 'NAV_NO';
+
+    return (
+        <internarbeidsflate-decorator
+            app-name="Arbeidsrettet oppfølging"
+            enhet={enhetId ?? undefined}
+            environment={getDecoratorEnv()}
+            fnr-sync-mode="writeOnly"
+            proxy="/modiacontextholder"
+            show-enheter
+            show-search-area
+            url-format={urlFormat}
+            onEnhetChanged={handterEnhetEndret}
+            onFnrChanged={handterFnrEndret}
+        />
+    );
 }

@@ -56,7 +56,13 @@ export const EndringsloggContainer = ({
                 className="endringslogg-popover"
             >
                 <Popover.Content className="endringslogg-popover-content">
-                    <Heading size="small" level="1" className="endringslogg-overskrift">
+                    <Heading
+                        size="medium"
+                        level="2"
+                        align="center"
+                        textColor="contrast"
+                        className="endringslogg-overskrift"
+                    >
                         Nytt i Arbeidsrettet oppfølging
                     </Heading>
                     <div className="innhold-container">

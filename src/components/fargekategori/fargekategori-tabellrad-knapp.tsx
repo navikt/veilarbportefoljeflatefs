@@ -23,9 +23,9 @@ export function FargekategoriTabellradKnapp({bruker, readOnly = false}: Fargekat
             <div
                 role="img"
                 title={bruker.fargekategori ? Fargekategorinavn[bruker.fargekategori] : 'Ingen kategori'}
-                className="fargekategori-tabellrad-knapp"
+                className="fargekategori-tabellrad-knapp-readonly"
             >
-                {fargekategoriIkonMapper(bruker.fargekategori)}
+                {bruker.fnr ? fargekategoriIkonMapper(bruker.fargekategori ?? null) : null}
             </div>
         );
     }

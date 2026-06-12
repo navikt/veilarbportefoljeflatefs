@@ -42,6 +42,31 @@ describe('Diverse', () => {
         cy.getByTestId('filtreringlabel_sok-pa-fodselsnummer').should('be.visible').click();
     });
 
+    it('Dekoratør-event for enhet holder oss på oversikten', () => {
+        let beforeUnloadCalled = false;
+        cy.on('window:before:unload', () => {
+            beforeUnloadCalled = true;
+        });
+
+        cy.get('internarbeidsflate-decorator').then($element => {
+            const decoratorElement = $element.get(0);
+            decoratorElement.dispatchEvent(new CustomEvent('enhet-changed', {detail: {enhet: '1234'}}));
+        });
+
+        cy.wrap(null).should(() => {
+            expect(beforeUnloadCalled).to.eq(false);
+        });
+        cy.url().should('include', '/enhet');
+    });
+
+    it('Dekoratøren er konfigurert med venta attributt', () => {
+        cy.get('internarbeidsflate-decorator').should('have.attr', 'app-name', 'Arbeidsrettet oppfølging');
+        cy.get('internarbeidsflate-decorator').should('have.attr', 'fnr-sync-mode', 'writeOnly');
+        cy.get('internarbeidsflate-decorator').should('have.attr', 'proxy', '/modiacontextholder');
+        cy.get('internarbeidsflate-decorator').should('have.attr', 'show-search-area');
+        cy.get('internarbeidsflate-decorator').should('have.attr', 'show-enheter');
+    });
+
     it('Søk etter veileder', () => {
         // Filtrerar på Ufordelte brukarar i Enhetens oversikt
         cy.getByTestId('sidebar_content-container').should('be.visible');

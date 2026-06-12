@@ -41,6 +41,10 @@ Cypress.Commands.add('getByTestId', selector => {
     return cy.get(`[data-testid=${selector}]`);
 });
 
+Cypress.Commands.add('getByTestIdPrefix', prefix => {
+    return cy.get(`[data-testid^=${prefix}]`);
+});
+
 Cypress.Commands.add('findByTestId', {prevSubject: true}, (subject, selector) => {
     return subject.find(`[data-testid=${selector}]`);
 });
@@ -77,7 +81,7 @@ Cypress.Commands.add('klikkPaSidebarTab', tab => {
     cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
 });
 
-Cypress.Commands.add('klikkTab', (tab) => {
+Cypress.Commands.add('klikkTab', tab => {
     cy.klikkPaSidebarTab(tab);
     cy.faneErApen(tab);
 });

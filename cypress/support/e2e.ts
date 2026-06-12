@@ -35,6 +35,12 @@ declare global {
             getByTestId(testid: string): Chainable<JQuery<HTMLElement>>;
 
             /**
+             * Henter alle DOM-element der test-id-en startar med eit bestemt prefiks
+             * @example cy.getByTestIdPrefix('filtreringlabel_')
+             */
+            getByTestIdPrefix(prefix: string): Chainable<JQuery<HTMLElement>>;
+
+            /**
              * Henter DOM-elementet som har ein bestemt test-id
              * og er inni det førre DOM-elementet i "kjeda".
              * Kan brukast til å finne element inni andre element, sjølv når dei ikkje er direkte etterkommarar
