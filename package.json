@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@cypress/react": "9.0.2",
-    "@faker-js/faker": "8.4.1",
+    "@faker-js/faker": "10.4.0",
     "@types/jest": "30.0.0",
     "@types/lodash.throttle": "4.1.9",
     "@types/react": "19.2.15",
