@@ -60,7 +60,7 @@ body.annen-veileder {
  */
 /*
 -------------
-CLEARFIX
+CLEARFIX (Tror dette er noen gamle hacks man gjorde før da man brukte float og ikke hadde flex og grid ... Too be deleted)
 -------------
 */
 /* stylelint-disable */
@@ -74,16 +74,6 @@ CLEARFIX
 main {
     display: block;
 }
-
-/**
- * Correct the font size and margin on `h1` elements within `section` and
- * `article` contexts in Chrome, Firefox, and Safari.
- */
-h1 {
-    font-size: 2em;
-    margin: 0.67em 0;
-}
-
 /* Grouping content
    ========================================================================== */
 /**

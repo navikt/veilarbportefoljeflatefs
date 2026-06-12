@@ -1,16 +1,11 @@
 .endringslogg {
     width: fit-content;
     position: relative;
-    --endringslogg-popover-header-background-color: var(--a-surface-inverted);
+    --endringslogg-popover-header-background-color: var(--ax-bg-neutral-strong-pressed);
 }
 
 .endringslogg .endringslogg-popover {
     width: 27rem;
-}
-
-/* Overskriv styling frå Aksel for å få pila til popover-boksen same farge som bakgrunnen på overskrifta. */
-.endringslogg .endringslogg-popover .navds-popover__arrow {
-    background-color: var(--endringslogg-popover-header-background-color);
 }
 
 .endringslogg .endringslogg-popover .endringslogg-popover-content {
@@ -19,14 +14,9 @@
 }
 
 .endringslogg .endringslogg-overskrift {
+    border-radius: var(--ax-radius-12) var(--ax-radius-12) 0 0;
     background-color: var(--endringslogg-popover-header-background-color);
-    color: var(--ax-text-neutral-contrast);
-    padding: 1rem;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    min-height: fit-content;
-    text-align: center;
-    font-size: 1.25rem;
+    padding: 1rem 0;
 }
 
 .endringslogg .endringslogg-popover .endringslogg-popover-content .innhold-container {
