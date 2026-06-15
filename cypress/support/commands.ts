@@ -69,7 +69,7 @@ Cypress.Commands.add('gaTilOversikt', side => {
 
     cy.getByTestId(testId).should('be.visible').click({force: true});
     cy.url().should('include', url);
-    cy.get('.navds-loader', {timeout: 15000}).should('not.exist');
+    cy.get('.aksel-loader', {timeout: 15000}).should('not.exist');
     cy.getByTestId(`side-storrelse_${testId}`).should('be.visible');
 });
 

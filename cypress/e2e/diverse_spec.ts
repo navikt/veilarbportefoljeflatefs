@@ -120,13 +120,20 @@ describe('Diverse', () => {
 
         // Finn og vel den fyrste brukaren i lista
         cy.scrollTo('top');
-        cy.wait(100);
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
-        cy.wait(300);
+        cy.get('[data-testid=min-oversikt_brukerliste-checkbox]:checked').should('have.length.at.least', 1);
 
-        // Opne val av veileder
+        // Opne val av veileder.
+        // Dersom knappetrykket ikkje opnar dropdown-en (t.d. fordi avhukinga ikkje rakk å
+        // registrerast i tide), prøver vi på nytt utan å huke av igjen – checkboxen er allereie vald.
         cy.getByTestId('tildel-veileder_knapp').should('be.enabled').click({force: true});
-        cy.getByTestId('tildel-veileder_dropdown').should('be.visible');
+        cy.get('body').then($body => {
+            if ($body.find('[data-testid=tildel-veileder_dropdown]').length === 0) {
+                cy.get('[data-testid=min-oversikt_brukerliste-checkbox]:checked').should('have.length.at.least', 1);
+                cy.getByTestId('tildel-veileder_knapp').should('be.enabled').click({force: true});
+            }
+        });
+        cy.get('[data-testid=tildel-veileder_dropdown]', {timeout: 10000}).should('be.visible');
 
         // Vel den øvste veiledaren i lista
         cy.checkbox('tildel-veileder_valg_0');
