@@ -54,7 +54,6 @@ export function VeiledergruppeRad({
     return (
         <div className="veileder-gruppe__rad" data-testid="veiledergruppe_rad-wrapper">
             <Radio
-                className="veileder-gruppe__gruppenavn"
                 data-testid={`veiledergruppe-rad_${kebabCase(veilederGruppe.filterNavn)}`}
                 key={veilederGruppe.filterId}
                 name="veiledergruppe"

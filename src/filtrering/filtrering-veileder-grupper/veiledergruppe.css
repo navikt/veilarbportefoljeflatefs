@@ -1,25 +1,4 @@
-.veileder-gruppe {
-    display: flex;
-    flex-direction: column;
-}
 .veileder-gruppe__rad {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 5px;
-}
-.veileder-gruppe__knapperad {
-    display: flex;
-    justify-content: space-between;
-    margin: 1rem 0.5rem 0;
-}
-.veileder-gruppe__gruppenavn {
-    flex: 1;
-    min-width: 0;
-}
-.veiledergruppe-emptystate {
-    text-align: left;
-}
-.veiledergruppe-emptystate__tekst {
-    font-style: italic;
-    margin: 0.5rem 0;
 }

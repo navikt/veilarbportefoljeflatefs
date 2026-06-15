@@ -13,6 +13,7 @@ interface FiltreringLabelMedIkonProps {
 export function FiltreringLabelMedIkon({label, slettFilter, ikon, tittel}: Readonly<FiltreringLabelMedIkonProps>) {
     return (
         <button
+            type="button"
             className="aksel-chips__chip aksel-chips__removable aksel-chips--icon-right"
             data-color="neutral"
             aria-label={tittel}
