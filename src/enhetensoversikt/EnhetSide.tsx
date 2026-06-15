@@ -213,13 +213,14 @@ export function EnhetSide() {
                         </div>
                     ) : (
                         <InfoCard
+                            size="small"
                             data-color="info"
                             data-testid="alertstripe_filtrering"
                             className="alertstripe__filtrering"
                         >
-                            <InfoCard.Header icon={<InformationSquareIcon aria-hidden />}>
-                                <InfoCard.Title>Du må gjøre en filtrering for å se brukere i listen.</InfoCard.Title>
-                            </InfoCard.Header>
+                            <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
+                                Du må gjøre en filtrering for å se brukere i listen.
+                            </InfoCard.Message>
                         </InfoCard>
                     )}
                 </div>
