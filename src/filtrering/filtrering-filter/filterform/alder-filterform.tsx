@@ -1,9 +1,8 @@
 import {useEffect, useState} from 'react';
 import classNames from 'classnames';
-import {BodyShort, Button, Checkbox, CheckboxGroup, TextField} from '@navikt/ds-react';
+import {BodyShort, Button, Checkbox, CheckboxGroup, HGrid, TextField} from '@navikt/ds-react';
 import {FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {Dictionary} from '../../../utils/types/types';
-import {Grid} from '../../../components/grid/grid';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import './filterform.css';
 
@@ -126,7 +125,7 @@ export function AlderFilterform({
                 <>
                     <div className={classNames('checkbox-filterform__valg', className)}>
                         <CheckboxGroup hideLegend legend="" value={checkBoxValg} onChange={submitCheckBoxValg}>
-                            <Grid columns={2}>
+                            <HGrid columns={2}>
                                 {Object.entries(valg).map(([filterKey, filterValue]) => (
                                     <Checkbox
                                         data-testid={`filter_${filterKey}`}
@@ -137,7 +136,7 @@ export function AlderFilterform({
                                         {filterValue}
                                     </Checkbox>
                                 ))}
-                            </Grid>
+                            </HGrid>
                         </CheckboxGroup>
                     </div>
                     <hr className="alder-border" />
