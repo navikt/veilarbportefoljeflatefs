@@ -97,7 +97,6 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                             endreFiltervalg={endreFiltervalg}
                             filtervalg={filtervalg}
                             form={Filtervalg.kjonn}
-                            gridColumns={2}
                         />
                     )}
                 />

@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react';
 import classNames from 'classnames';
 import {Checkbox, CheckboxGroup, Tooltip, UNSAFE_Combobox} from '@navikt/ds-react';
 import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
-import {Grid} from '../../../components/grid/grid';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {useFoedelandSelector} from '../../../hooks/redux/use-foedeland-selector';
 import {FoedelandOptions} from '../../../ducks/foedeland';
@@ -11,10 +10,9 @@ import {landgruppe, landgruppeTooltips} from '../../filter-konstanter';
 interface FoedelandFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
-    gridColumns?: number;
 }
 
-export function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: FoedelandFilterformProps) {
+export function FoedelandFilterform({endreFiltervalg, filtervalg}: FoedelandFilterformProps) {
     const [landgrupppeValg, setLandgrupppeValg] = useState<string[]>(filtervalg.landgruppe);
     const [selectedFoedeland, setSelectedFoedeland] = useState<FoedelandOptions[]>([]);
     const [foedelandSelectOptions, setFoedelandSelectOptions] = useState<FoedelandOptions[]>([]);
@@ -70,35 +68,33 @@ export function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 
         <>
             <form className="skjema checkbox-filterform" data-testid="checkbox-filterform">
                 <div className={classNames('checkbox-filterform__valg', 'landgruppe')}>
-                    <Grid columns={gridColumns}>
-                        <CheckboxGroup
-                            hideLegend
-                            legend=""
-                            onChange={(filtre: string[]) => {
-                                nullstillFoedelandValg();
-                                endreFiltervalg(Filtervalg.landgruppe, filtre);
-                            }}
-                            size="small"
-                            value={landgrupppeValg}
-                        >
-                            {Object.entries(landgruppe).map(([filterKey, filterValue]) => (
-                                <Tooltip
-                                    describesChild // Gjer at innhaldet vert lese opp, ikkje berre tooltip-teksten. Fungerer ikkje med skjermleser grunna div-en inni, og div-en trengs for at det skal fungere for visuelle brukarar, per 2025-07-30. - Ingrid
-                                    content={landgruppeTooltips[filterKey]}
-                                    placement="right"
-                                    offset={-130}
-                                    maxChar={999}
-                                    key={`tooltip-${filterKey}`}
-                                >
-                                    <div>
-                                        <Checkbox key={filterKey} value={filterKey} data-testid={`filter_${filterKey}`}>
-                                            {filterValue}
-                                        </Checkbox>
-                                    </div>
-                                </Tooltip>
-                            ))}
-                        </CheckboxGroup>
-                    </Grid>
+                    <CheckboxGroup
+                        hideLegend
+                        legend=""
+                        onChange={(filtre: string[]) => {
+                            nullstillFoedelandValg();
+                            endreFiltervalg(Filtervalg.landgruppe, filtre);
+                        }}
+                        size="small"
+                        value={landgrupppeValg}
+                    >
+                        {Object.entries(landgruppe).map(([filterKey, filterValue]) => (
+                            <Tooltip
+                                describesChild // Gjer at innhaldet vert lese opp, ikkje berre tooltip-teksten. Fungerer ikkje med skjermleser grunna div-en inni, og div-en trengs for at det skal fungere for visuelle brukarar, per 2025-07-30. - Ingrid
+                                content={landgruppeTooltips[filterKey]}
+                                placement="right"
+                                offset={-130}
+                                maxChar={999}
+                                key={`tooltip-${filterKey}`}
+                            >
+                                <div>
+                                    <Checkbox key={filterKey} value={filterKey} data-testid={`filter_${filterKey}`}>
+                                        {filterValue}
+                                    </Checkbox>
+                                </div>
+                            </Tooltip>
+                        ))}
+                    </CheckboxGroup>
                 </div>
                 <hr />
                 <UNSAFE_Combobox
