@@ -250,20 +250,18 @@
 }
 .veilarbportefoljeflatefs .hendelser-filterform__checkbox-gruppe {
     margin-bottom: 1rem;
+    margin-right: 0.5rem;
     border-bottom: 1px solid #78706a;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 .veilarbportefoljeflatefs .hendelser-filterform__checkbox-gruppe .navds-help-text {
-    margin-right: 1rem;
-    align-self: center;
+    margin-right: 0.5rem;
 }
 .veilarbportefoljeflatefs .hendelser-filterform .nullstill__knapp {
     margin: 0.5rem;
 }
 .veilarbportefoljeflatefs .hendelser-filterform #uleste-endringer {
-    margin-left: 0.5rem;
     align-self: center;
-    transform: scale(1.5);
 }
