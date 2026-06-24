@@ -75,12 +75,14 @@
     align-items: center;
 }
 
-.veilarbportefoljeflatefs .brukerliste__fargekategori-ikonknapp {
-    min-width: 3.125rem;
+.veilarbportefoljeflatefs .fargekategori-tabellrad-knapp {
+    margin-right: 1rem;
 }
 
-.veilarbportefoljeflatefs .brukerliste__fargekategori-ikonknapp .fargekategori-tabellrad-knapp {
-    padding: var(--ax-space-4);
+.veilarbportefoljeflatefs .fargekategori-tabellrad-knapp-readonly {
+    display: flex;
+    padding-left: 0.25rem;
+    min-width: 3rem;
 }
 
 .veilarbportefoljeflatefs .brukerliste__innhold .knapp-uten-padding {

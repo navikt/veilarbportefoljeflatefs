@@ -7,6 +7,7 @@
     --side-padding-x-akse: 3rem;
     --sidebar-bredde: 22rem;
     --gap-mellom-sidebar-og-sokefeltkolonner: 0.8rem;
+    --shadow-small: 0 3px 8px 0 rgb(0 0 0 / 10%), 0 1px 3px 0 rgb(0 0 0 / 10%), 0 0 1px 0 rgb(0 0 0 / 18%);
 }
 
 .veilarbportefoljeflatefs .ord-brekk {
@@ -26,7 +27,6 @@
 body {
     height: 100%;
     width: 100%;
-    font-size: 0.875rem;
     font-weight: 400;
     color: #262626;
     font-family: 'Source Sans Pro', Arial, sans-serif;
@@ -54,17 +54,6 @@ body.annen-veileder {
     background-color: #85d5f0;
 }
 
-html {
-    height: 100%;
-
-    font-size: 100%;
-    font-family: sans-serif;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-
-    /* Correct the line height in all browsers. (From normalize.css) */
-    line-height: 1.15;
-}
-
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -72,7 +61,7 @@ html {
  */
 /*
 -------------
-CLEARFIX
+CLEARFIX (Tror dette er noen gamle hacks man gjorde før da man brukte float og ikke hadde flex og grid ... Too be deleted)
 -------------
 */
 /* stylelint-disable */
@@ -86,16 +75,6 @@ CLEARFIX
 main {
     display: block;
 }
-
-/**
- * Correct the font size and margin on `h1` elements within `section` and
- * `article` contexts in Chrome, Firefox, and Safari.
- */
-h1 {
-    font-size: 2em;
-    margin: 0.67em 0;
-}
-
 /* Grouping content
    ========================================================================== */
 /**
@@ -521,61 +500,6 @@ img {
     cursor: pointer;
 }
 
-body .clearfix::before,
-body .clearfix::after {
-    content: ' ';
-    display: table;
-}
-
-body .clearfix::after {
-    clear: both;
-}
-
-body .center-block {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-body .pull-right {
-    float: right !important;
-}
-
-body .pull-left {
-    float: left !important;
-}
-
-body .hide {
-    display: none !important;
-}
-
-body .show {
-    display: block !important;
-}
-
-body .hidden {
-    display: none !important;
-}
-
-body .invisible {
-    visibility: hidden;
-}
-
-body .text-hide {
-    font: 0px/0 a;
-    color: transparent;
-    text-shadow: none;
-    background-color: transparent;
-    border: 0;
-    position: absolute;
-}
-
-body .liste-uten-listepunkt {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
 @media (max-width: 767px) {
     .hidden-xs {
         display: none !important;
@@ -707,14 +631,6 @@ GRID
 
 .text-hide {
     position: absolute;
-}
-
-.veilarbportefoljeflatefs .dekorator {
-    font-size: initial;
-
-    .dr-flex.dr-min-w-min.dr-items-center.dr-float-left {
-        font-weight: var(--ax-font-weight-bold);
-    }
 }
 
 .flex {
@@ -856,10 +772,6 @@ GRID
     grid-column-start: 1;
 }
 
-.veilarbportefoljeflatefs .oversikt-sideinnhold__hidden .filtreringlabel-container {
-    grid-column-start: 1;
-}
-
 .veilarbportefoljeflatefs .oversikt-sideinnhold__hidden .alertstripe__filtrering {
     grid-column-start: 1;
     grid-column-end: 3;
@@ -869,7 +781,7 @@ GRID
     margin: 4px 8px 4px 12px;
 }
 
-.veilarbportefoljeflatefs .navds-alert__wrapper {
+.veilarbportefoljeflatefs .aksel-alert__wrapper {
     font-size: 0.875rem !important;
 }
 
@@ -883,16 +795,6 @@ GRID
 
 .veilarbportefoljeflatefs .aksel-label {
     font-size: 0.875rem !important;
-}
-
-/* Gjer at tekst i dekoratøren i oversikten får same storleik som på andre sider*/
-.veilarbportefoljeflatefs .dekorator .aksel-body-short {
-    font-size: initial !important; /* Bruker !important for å overskrive !important frå selector ".veilarbportefoljeflatefs .navds-body-short" */
-}
-
-/* Gjer at tekst i dekoratøren i oversikten får same storleik som på andre sider*/
-.veilarbportefoljeflatefs .dekorator .aksel-label {
-    font-size: initial !important; /* Bruker !important for å overskrive !important frå selector ".veilarbportefoljeflatefs .navds-label" */
 }
 
 @media (max-width: 1200px) {
@@ -910,13 +812,6 @@ GRID
     /* Gjer at secondary-knappar vert kvite uavhengig av bakgrunnsfargen.
      * (I designsystemet er dei gjennomsiktige.) */
     background-color: var(--ax-bg-default);
-}
-
-.veilarbportefoljeflatefs .dekorator .navds-button--secondary,
-.veilarbportefoljeflatefs .dekorator .navds-button--secondary-neutral {
-    /* Unngår at søk-knappen i dekoratøren (og andre knappar i dekoratøren) får kvit bakgrunn.
-     * (I designsystemet er dei gjennomsiktige.) */
-    background-color: initial;
 }
 
 .veilarbportefoljeflatefs .lenke--frittstaende {

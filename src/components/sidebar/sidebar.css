@@ -4,7 +4,7 @@
     position: sticky;
     top: 0.5rem;
     z-index: 4;
-    box-shadow: var(--a-shadow-small);
+    box-shadow: var(--shadow-small);
     background-color: white;
     margin-top: 0.5rem;
 }
@@ -26,7 +26,7 @@
     padding: 0.5rem;
     position: absolute;
     width: 100%;
-    box-shadow: var(--a-shadow-small);
+    box-shadow: var(--shadow-small);
 }
 
 .veilarbportefoljeflatefs .sidebar__content-container .filtrering-filter__kolonne {

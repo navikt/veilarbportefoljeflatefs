@@ -1,9 +1,10 @@
 .veilarbportefoljeflatefs .filtreringlabel-container {
     grid-column-start: 2;
     grid-column-end: 3;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+}
+
+.veilarbportefoljeflatefs .oversikt-sideinnhold__hidden .filtreringlabel-container {
+    grid-column-start: 1;
 }
 
 .veilarbportefoljeflatefs .veilederoversikt_sok-veileder {

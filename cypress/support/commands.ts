@@ -41,6 +41,10 @@ Cypress.Commands.add('getByTestId', selector => {
     return cy.get(`[data-testid=${selector}]`);
 });
 
+Cypress.Commands.add('getByTestIdPrefix', prefix => {
+    return cy.get(`[data-testid^=${prefix}]`);
+});
+
 Cypress.Commands.add('findByTestId', {prevSubject: true}, (subject, selector) => {
     return subject.find(`[data-testid=${selector}]`);
 });
@@ -65,7 +69,7 @@ Cypress.Commands.add('gaTilOversikt', side => {
 
     cy.getByTestId(testId).should('be.visible').click({force: true});
     cy.url().should('include', url);
-    cy.get('.navds-loader', {timeout: 15000}).should('not.exist');
+    cy.get('.aksel-loader', {timeout: 15000}).should('not.exist');
     cy.getByTestId(`side-storrelse_${testId}`).should('be.visible');
 });
 
@@ -77,7 +81,7 @@ Cypress.Commands.add('klikkPaSidebarTab', tab => {
     cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
 });
 
-Cypress.Commands.add('klikkTab', (tab) => {
+Cypress.Commands.add('klikkTab', tab => {
     cy.klikkPaSidebarTab(tab);
     cy.faneErApen(tab);
 });

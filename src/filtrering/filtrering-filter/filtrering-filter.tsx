@@ -45,8 +45,6 @@ import './filterform/filterform.css';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import {trackLenkeKlikketEvent} from '../../umami/umami-events';
-import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {VIS_UNGDOMSPROGRAMYTELSE} from '../../konstanter';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -56,7 +54,6 @@ interface FiltreringFilterProps {
 }
 
 export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
-    const visUngdomsprogramytelse = useFeatureSelector()(VIS_UNGDOMSPROGRAMYTELSE);
     return (
         <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
             <div className="filtrering-filter__kolonne">
@@ -97,7 +94,6 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                             endreFiltervalg={endreFiltervalg}
                             filtervalg={filtervalg}
                             form={Filtervalg.kjonn}
-                            gridColumns={2}
                         />
                     )}
                 />
@@ -467,24 +463,22 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         />
                     )}
                 />
-                {visUngdomsprogramytelse && (
-                    <Dropdown
-                        name="Ungdomsprogramytelse"
-                        id="ytelser-ungdomsprogram"
-                        render={() => (
-                            <CheckboxFilterform
-                                filterformOgValgListe={[
-                                    {
-                                        form: Filtervalg.ytelseUngdomsprogram,
-                                        checkboxValg: ungdomsprogramytelseFilter
-                                    }
-                                ]}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                            />
-                        )}
-                    />
-                )}
+                <Dropdown
+                    name="Ungdomsprogramytelse"
+                    id="ytelser-ungdomsprogram"
+                    render={() => (
+                        <CheckboxFilterform
+                            filterformOgValgListe={[
+                                {
+                                    form: Filtervalg.ytelseUngdomsprogram,
+                                    checkboxValg: ungdomsprogramytelseFilter
+                                }
+                            ]}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                        />
+                    )}
+                />
                 <Dropdown
                     name="Rettighetsgruppe (Arena)"
                     id="rettighetsgruppe"

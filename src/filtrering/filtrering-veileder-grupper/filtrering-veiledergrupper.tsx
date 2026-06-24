@@ -56,11 +56,9 @@ export function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppe
         return lagretFilter.length > 0 ? (
             <VeiledergruppeInnhold lagretFilter={sortertVeiledergruppe} oversiktType={oversiktType} />
         ) : (
-            <div className="veiledergruppe-emptystate">
-                <BodyShort size="small" className="veiledergruppe-emptystate__tekst">
-                    Ingen lagrede veiledergrupper på enheten
-                </BodyShort>
-            </div>
+            <BodyShort size="small" spacing>
+                <i>Ingen lagrede veiledergrupper på enheten</i>
+            </BodyShort>
         );
     };
     const veilederGrupperError = () => {

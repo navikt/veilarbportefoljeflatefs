@@ -178,6 +178,16 @@
     padding-left: 0.2rem;
     padding-top: 0.2rem;
 }
+.veilarbportefoljeflatefs
+    .toolbar
+    .sok-veileder-wrapper
+    .velg-kolonner-dropdown
+    .checkbox-filterform__valg
+    .liste-uten-listepunkt {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
 .veilarbportefoljeflatefs .toolbar .sok-veileder-wrapper .toolbarknapp-input .checkbox-filterform__valg .skjemaelement,
 .veilarbportefoljeflatefs
     .toolbar

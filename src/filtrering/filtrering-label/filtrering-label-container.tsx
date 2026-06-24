@@ -10,8 +10,8 @@ import {clearFiltervalg, endreFiltervalg, fjern, initialState, slettEnkeltFilter
 import {pagineringSetup} from '../../ducks/paginering';
 import {avmarkerValgtMineFilter} from '../../ducks/lagret-filter-ui-state';
 import {LagLabelForFiltervalg} from './LagLabelForFiltervalg';
-
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
+import {Chips} from '@navikt/ds-react';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -47,7 +47,7 @@ function FiltreringLabelContainer({
         .reduce((acc, l) => [...acc, ...l], []);
 
     return (
-        <div className={className} data-testid="filtrering_label-container">
+        <Chips className={className} data-testid="filtrering_label-container">
             {filterLabels}
             {filterLabels.length > 0 && (
                 <FiltreringLabel
@@ -58,7 +58,7 @@ function FiltreringLabelContainer({
                     dataColor="neutral"
                 />
             )}
-        </div>
+        </Chips>
     );
 }
 

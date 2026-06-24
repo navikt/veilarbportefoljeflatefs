@@ -3,7 +3,6 @@ import {isEmptyArray} from 'formik';
 import classNames from 'classnames';
 import {Checkbox, CheckboxGroup, UNSAFE_Combobox} from '@navikt/ds-react';
 import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
-import {Grid} from '../../../components/grid/grid';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {useGeografiskbostedSelector} from '../../../hooks/redux/use-geografiskbosted-selector';
 import {GeografiskBostedOptions} from '../../../ducks/geografiskBosted';
@@ -11,14 +10,9 @@ import {GeografiskBostedOptions} from '../../../ducks/geografiskBosted';
 interface GeografiskBostedFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
-    gridColumns?: number;
 }
 
-export function GeografiskBostedFilterform({
-    endreFiltervalg,
-    filtervalg,
-    gridColumns = 1
-}: GeografiskBostedFilterformProps) {
+export function GeografiskBostedFilterform({endreFiltervalg, filtervalg}: GeografiskBostedFilterformProps) {
     const [visGeografiskBosted, setVisGeografiskBosted] = useState<string[]>(filtervalg.visGeografiskBosted);
     const [selectedGeografiskBosted, setSelectedGeografiskBosted] = useState<GeografiskBostedOptions[]>([]);
     const [geografiskBostedOptions, setGeografiskBostedOptions] = useState<GeografiskBostedOptions[]>([]);
@@ -67,23 +61,21 @@ export function GeografiskBostedFilterform({
     return (
         <form className="skjema checkbox-filterform" data-testid="checkbox-filterform">
             <div className={classNames('checkbox-filterform__valg', 'landgruppe')}>
-                <Grid columns={gridColumns}>
-                    <CheckboxGroup
-                        hideLegend
-                        legend=""
-                        onChange={(filtre: string[]) => {
-                            endreFiltervalg(Filtervalg.visGeografiskBosted, filtre);
-                        }}
-                        size="small"
-                        value={visGeografiskBosted}
-                    >
-                        <div>
-                            <Checkbox key="visGeografiskBosted" value="1" data-testid={`filter_vis_geografisk_bosted`}>
-                                Vis geografisk bosted
-                            </Checkbox>
-                        </div>
-                    </CheckboxGroup>
-                </Grid>
+                <CheckboxGroup
+                    hideLegend
+                    legend=""
+                    onChange={(filtre: string[]) => {
+                        endreFiltervalg(Filtervalg.visGeografiskBosted, filtre);
+                    }}
+                    size="small"
+                    value={visGeografiskBosted}
+                >
+                    <div>
+                        <Checkbox key="visGeografiskBosted" value="1" data-testid={`filter_vis_geografisk_bosted`}>
+                            Vis geografisk bosted
+                        </Checkbox>
+                    </div>
+                </CheckboxGroup>
             </div>
             <hr />
             <UNSAFE_Combobox
