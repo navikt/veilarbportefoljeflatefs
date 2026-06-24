@@ -59,7 +59,7 @@ spec:
         - application: veilarbveileder
           namespace: obo
         - application: endringslogg
-          namespace: pto
+          namespace: obo
         - application: modiacontextholder
           namespace: personoversikt
         - application: veilarbportefolje
