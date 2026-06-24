@@ -256,12 +256,6 @@
     flex-direction: row;
     justify-content: space-between;
 }
-.veilarbportefoljeflatefs .hendelser-filterform__checkbox-gruppe .navds-help-text {
-    margin-right: 0.5rem;
-}
 .veilarbportefoljeflatefs .hendelser-filterform .nullstill__knapp {
     margin: 0.5rem;
-}
-.veilarbportefoljeflatefs .hendelser-filterform #uleste-endringer {
-    align-self: center;
 }
