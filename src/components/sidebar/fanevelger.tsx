@@ -59,7 +59,7 @@ export const Fanevelger = ({
                         />
                     )}
                     {valgtFane === SidebarTabs.VEILEDERGRUPPER && (
-                        <FilteringVeiledergrupper oversiktType={oversiktType} />
+                        <FilteringVeiledergrupper oversiktType={oversiktType} filtervalg={filtervalg} />
                     )}
                 </SidebarTab>
             );

@@ -8,8 +8,7 @@ import {AppState} from '../../reducer';
 import {markerValgtVeiledergruppe} from '../../ducks/lagret-filter-ui-state';
 import {veilederlisterErLik} from '../../components/modal/mine-filter';
 import {kebabCase} from '../../utils/utils';
-import {Filtervalg} from '../../typer/filtervalg-modell';
-
+import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface VeiledergruppeRadProps {
@@ -17,13 +16,15 @@ interface VeiledergruppeRadProps {
     onClickRedigerKnapp: () => void;
     oversiktType: OversiktType;
     erValgt: boolean;
+    filtervalg: FiltervalgModell;
 }
 
 export function VeiledergruppeRad({
     veilederGruppe,
     onClickRedigerKnapp,
     oversiktType,
-    erValgt
+    erValgt,
+    filtervalg
 }: VeiledergruppeRadProps) {
     const dispatch = useAppDispatch();
 
@@ -42,7 +43,7 @@ export function VeiledergruppeRad({
         dispatch(markerValgtVeiledergruppe(veilederGruppe, oversiktType));
         oppdaterKolonneAlternativer(
             dispatch,
-            {...veilederGruppe.filterValg, veiledere: veilederGruppe.filterValg.veiledere},
+            {...filtervalg, veiledere: veilederGruppe.filterValg.veiledere},
             oversiktType
         );
 
