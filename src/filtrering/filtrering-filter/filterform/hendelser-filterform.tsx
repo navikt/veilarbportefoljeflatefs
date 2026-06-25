@@ -90,6 +90,7 @@ export function HendelserFilterform({
                         <HelpText
                             strategy="fixed"
                             placement="right"
+                            style={{fontSize: '1.2rem'}}
                             className={`hjelpetekst__${kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}`}
                         >
                             Filteret viser brukere som har endret målet, lagt til, fullført eller avbrutt en aktivitet
