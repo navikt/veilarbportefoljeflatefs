@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from 'react';
 import {useSelector} from 'react-redux';
-import {Heading, RadioGroup} from '@navikt/ds-react';
+import {RadioGroup} from '@navikt/ds-react';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {lagreEndringer, slettGruppe} from '../../ducks/veiledergrupper_filter';
 import {AppState} from '../../reducer';
@@ -103,9 +103,6 @@ export function VeiledergruppeInnhold({lagretFilter, oversiktType}: Veiledergrup
 
     return (
         <div className="veileder-gruppe__valgfelt" ref={outerDivRef}>
-            <Heading spacing size="small">
-                Veiledergrupper
-            </Heading>
             <RadioGroup
                 hideLegend
                 legend=""
