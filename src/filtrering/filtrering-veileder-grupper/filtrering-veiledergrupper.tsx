@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useSelector} from 'react-redux';
-import {Alert, BodyShort, Button} from '@navikt/ds-react';
+import {Alert, BodyShort, Button, Heading} from '@navikt/ds-react';
 import {PlusCircleIcon} from '@navikt/aksel-icons';
 import {AppState} from '../../reducer';
 import {VeiledergruppeModal} from '../../components/modal/veiledergruppe/veiledergruppe-modal';
@@ -76,6 +76,9 @@ export function FilteringVeiledergrupper({oversiktType, filtervalg}: FilteringVe
 
     return (
         <>
+            <Heading spacing size="small">
+                Veiledergrupper
+            </Heading>
             {lagretFilterState.status === STATUS.ERROR ? veilederGrupperError() : veilederGrupperOK()}
             <Button
                 variant="tertiary"
