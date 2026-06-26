@@ -9,7 +9,7 @@ import {VeiledergruppeModal} from '../../components/modal/veiledergruppe/veilede
 import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {visIngenEndringerToast} from '../../store/toast/actions';
-import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {VeiledergruppeRad} from './veiledergruppe_rad';
 import {kebabCase} from '../../utils/utils';

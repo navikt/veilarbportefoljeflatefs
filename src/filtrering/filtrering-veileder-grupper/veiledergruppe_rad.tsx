@@ -3,7 +3,7 @@ import {Radio} from '@navikt/ds-react';
 import {RedigerKnapp} from '../../components/rediger-knapp/rediger-knapp';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {LagretFilter} from '../../ducks/lagret-filter';
-import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {AppState} from '../../reducer';
 import {markerValgtVeiledergruppe} from '../../ducks/lagret-filter-ui-state';
 import {veilederlisterErLik} from '../../components/modal/mine-filter';

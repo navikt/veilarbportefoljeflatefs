@@ -1,4 +1,4 @@
-import {OversiktType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/valgte-kolonner';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {NavnHeader} from '../components/tabell/headerCells/NavnHeader';
 import {FnrHeader} from '../components/tabell/headerCells/FnrHeader';
@@ -68,10 +68,13 @@ import {DagpengerStansDatoHeader} from '../components/tabell/headerCells/Dagpeng
 import {AapKelvinVedtakMaksdatoHeader} from '../components/tabell/headerCells/AapKelvinVedtakMaksdatoHeader';
 
 export function EnhetTableHeader() {
-    const {filtervalg, sorteringsrekkefolge, sorteringsfelt, listevisning} = usePortefoljeSelector(
-        OversiktType.enhetensOversikt
-    );
-    const valgteKolonner = listevisning.valgte;
+    const {
+        filtervalg,
+        sorteringsrekkefolge,
+        sorteringsfelt,
+        valgteKolonner: valgteKolonnerState
+    } = usePortefoljeSelector(OversiktType.enhetensOversikt);
+    const valgteKolonner = valgteKolonnerState.valgte;
     const settSorteringOgHentPortefolje = useSetPortefoljeSortering(OversiktType.enhetensOversikt);
 
     const sorteringTilHeaderCell = {

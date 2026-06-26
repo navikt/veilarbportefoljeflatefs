@@ -7,7 +7,7 @@ import {Etiketter} from '../components/tabell/etiketter';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {MinoversiktTableDataCells} from './MinoversiktTableDataCells';
-import {Kolonne} from '../ducks/ui/listevisning';
+import {Kolonne} from '../ducks/ui/valgte-kolonner';
 import {hentHuskelappForBruker} from '../ducks/portefolje';
 import {FargekategoriTabellradKnapp} from '../components/fargekategori/fargekategori-tabellrad-knapp';
 import {HuskelappIkonInngang} from './huskelapp/HuskelappIkonInngang';

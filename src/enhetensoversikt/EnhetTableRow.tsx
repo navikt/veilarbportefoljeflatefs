@@ -4,7 +4,7 @@ import {Checkbox} from '@navikt/ds-react';
 import {Etiketter} from '../components/tabell/etiketter';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
-import {Kolonne} from '../ducks/ui/listevisning';
+import {Kolonne} from '../ducks/ui/valgte-kolonner';
 import {EnhetTableDataCells} from './EnhetTableDataCells';
 import {OrNothing} from '../utils/types/types';
 import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';

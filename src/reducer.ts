@@ -17,10 +17,10 @@ import {enhetTiltakReducer, EnhettiltakState} from './ducks/enhettiltak';
 import {
     initialStateEnhetensOversikt,
     initialStateMinOversikt,
-    listevisningReducer,
-    ListevisningState,
+    valgteKolonnerReducer,
+    ValgteKolonnerState,
     OversiktType
-} from './ducks/ui/listevisning';
+} from './ducks/ui/valgte-kolonner';
 import {featuresReducer, FeaturesState} from './ducks/features';
 import {toastReducer, ToastState} from './store/toast/reducer';
 import {FiltervalgModell} from './typer/filtervalg-modell';
@@ -68,8 +68,8 @@ function named<S, A extends Action>(
 
 export interface AppState {
     ui: {
-        listevisningMinOversikt: ListevisningState;
-        listevisningEnhetensOversikt: ListevisningState;
+        valgteKolonnerMinOversikt: ValgteKolonnerState;
+        valgteKolonnerEnhetensOversikt: ValgteKolonnerState;
         sidebarMinOversikt: SidebarStateType;
         sidebarEnhetensOversikt: SidebarStateType;
     };
@@ -109,16 +109,16 @@ export interface AppState {
 
 export default combineReducers({
     ui: combineReducers({
-        listevisningMinOversikt: persistentReducer(
-            LocalStorageScope.MIN_OVERSIKT_LISTEVISNING_STATE,
+        valgteKolonnerMinOversikt: persistentReducer(
+            LocalStorageScope.MIN_OVERSIKT_VALGTE_KOLONNER_STATE,
             window.location,
-            named(OversiktType.minOversikt, listevisningReducer),
+            named(OversiktType.minOversikt, valgteKolonnerReducer),
             initialStateMinOversikt
         ),
-        listevisningEnhetensOversikt: persistentReducer(
-            LocalStorageScope.ENHETENS_OVERSIKT_LISTEVISNING_STATE,
+        valgteKolonnerEnhetensOversikt: persistentReducer(
+            LocalStorageScope.ENHETENS_OVERSIKT_VALGTE_KOLONNER_STATE,
             window.location,
-            named(OversiktType.enhetensOversikt, listevisningReducer),
+            named(OversiktType.enhetensOversikt, valgteKolonnerReducer),
             initialStateEnhetensOversikt
         ),
         sidebarMinOversikt: persistentReducer(
