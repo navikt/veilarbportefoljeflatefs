@@ -21,6 +21,7 @@ import '../filtrering-filter/filterform/filterform.css';
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface VeiledergruppeInnholdProps {
+    filtervalg: FiltervalgModell;
     lagretFilter: LagretFilter[];
     oversiktType: OversiktType;
 }
@@ -29,7 +30,7 @@ function isOverflown(element) {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
 }
 
-export function VeiledergruppeInnhold({lagretFilter, oversiktType}: VeiledergruppeInnholdProps) {
+export function VeiledergruppeInnhold({filtervalg, lagretFilter, oversiktType}: VeiledergruppeInnholdProps) {
     const [visEndreGruppeModal, setVisEndreGruppeModal] = useState(false);
     const valgtGruppeEnhetensOversikt = useSelector(
         (state: AppState) => state.mineFilterEnhetensOversikt.valgtVeiledergruppe
@@ -118,6 +119,7 @@ export function VeiledergruppeInnhold({lagretFilter, oversiktType}: Veiledergrup
                             onClickRedigerKnapp={() => setVisEndreGruppeModal(true)}
                             oversiktType={oversiktType}
                             erValgt={veilederGruppe.filterId === valgtGruppe?.filterId}
+                            filtervalg={filtervalg}
                         />
                     );
                 })}

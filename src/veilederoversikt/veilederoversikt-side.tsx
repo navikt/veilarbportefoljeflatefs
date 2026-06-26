@@ -80,7 +80,10 @@ export function VeilederoversiktSide() {
                             <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} filtervalg={filtervalg} />
                         </Box>
                         <Box className="filtrering-veiledere" padding="space-16" borderWidth="1" borderRadius="12">
-                            <FilteringVeiledergrupper oversiktType={OversiktType.veilederOversikt} />
+                            <FilteringVeiledergrupper
+                                oversiktType={OversiktType.veilederOversikt}
+                                filtervalg={filtervalg}
+                            />
                         </Box>
                     </div>
                     <div className="liste-kolonne">

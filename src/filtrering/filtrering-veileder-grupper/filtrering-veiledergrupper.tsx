@@ -16,9 +16,10 @@ import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface FilteringVeiledergruppeProps {
     oversiktType: OversiktType;
+    filtervalg: FiltervalgModell;
 }
 
-export function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppeProps) {
+export function FilteringVeiledergrupper({oversiktType, filtervalg}: FilteringVeiledergruppeProps) {
     const [visVeiledergruppeModal, setVisVeiledergruppeModal] = useState(false);
 
     const lagretFilterState = useSelector((state: AppState) => state.veiledergrupper);
@@ -54,7 +55,11 @@ export function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppe
 
     const veilederGrupperOK = () => {
         return lagretFilter.length > 0 ? (
-            <VeiledergruppeInnhold lagretFilter={sortertVeiledergruppe} oversiktType={oversiktType} />
+            <VeiledergruppeInnhold
+                filtervalg={filtervalg}
+                lagretFilter={sortertVeiledergruppe}
+                oversiktType={oversiktType}
+            />
         ) : (
             <BodyShort size="small" spacing>
                 <i>Ingen lagrede veiledergrupper på enheten</i>
