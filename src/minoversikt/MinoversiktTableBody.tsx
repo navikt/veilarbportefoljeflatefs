@@ -1,7 +1,7 @@
 import {useSelector} from 'react-redux';
 import {MinoversiktTableRow} from './MinoversiktTableRow';
 import {settBrukerSomMarkert} from '../ducks/portefolje';
-import {OversiktType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/valgte-kolonner';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {useOnUnmount} from '../hooks/use-on-unmount';
 import {updateLastPath} from '../utils/url-utils';
@@ -19,7 +19,7 @@ interface Props {
 
 export function MinoversiktTableBody({classNameWrapper}: Props) {
     const forrigeBruker = useBrukerIKontekstSelector();
-    const {brukere, enhetId, filtervalg, listevisning} = usePortefoljeSelector(OversiktType.minOversikt);
+    const {brukere, enhetId, filtervalg, valgteKolonner} = usePortefoljeSelector(OversiktType.minOversikt);
     const portefolje = useSelector((state: AppState) => state.portefolje);
     const dispatch = useAppDispatch();
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
@@ -43,7 +43,7 @@ export function MinoversiktTableBody({classNameWrapper}: Props) {
                                     settMarkert={settMarkert}
                                     varForrigeBruker={forrigeBruker === bruker.fnr}
                                     filtervalg={filtervalg}
-                                    valgteKolonner={listevisning.valgte}
+                                    valgteKolonner={valgteKolonner.valgte}
                                 />
                             ))}
                     </ul>

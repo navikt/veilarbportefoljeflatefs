@@ -1,7 +1,7 @@
 import {ENDRE_FILTER} from '../ducks/filtrering';
 import {logEvent} from '../utils/frontend-logger';
 import {SETT_SORTERING} from '../ducks/portefolje';
-import {ActionTypeKeys, Kolonne} from '../ducks/ui/listevisning';
+import {ActionTypeKeys, Kolonne} from '../ducks/ui/valgte-kolonner';
 import {SORTERT_PA} from '../ducks/sortering';
 import {Filtervalg} from '../typer/filtervalg-modell';
 
@@ -70,7 +70,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             loggEndreFilter(sideNavn, data, store);
             break;
         case ActionTypeKeys.VELG_ALTERNATIV:
-            loggEndreListevisning(sideNavn, kolonne);
+            loggEndreValgteKolonner(sideNavn, kolonne);
             break;
         case ActionTypeKeys.AVVELG_ALTERNATIV:
             loggAvvelgListevalg(sideNavn, kolonne);
@@ -134,12 +134,12 @@ const loggEndreAktivitetFilter = (sideNavn: SideNavn, data: FilterEndringData) =
     });
 };
 
-const loggEndreListevisning = (sideNavn: SideNavn, kolonne: Kolonne) => {
-    logEvent('portefolje.metrikker.listevisning_endret', {sideNavn, kolonne});
+const loggEndreValgteKolonner = (sideNavn: SideNavn, kolonne: Kolonne) => {
+    logEvent('portefolje.metrikker.valgteKolonner_endret', {sideNavn, kolonne});
 };
 
 const loggAvvelgListevalg = (sideNavn: SideNavn, kolonne: Kolonne) => {
-    logEvent('portefolje.metrikker.listevisning_avvelget', {sideNavn, kolonne});
+    logEvent('portefolje.metrikker.valgteKolonner_avvelget', {sideNavn, kolonne});
 };
 
 const loggEndreSortering = (sideNavn: SideNavn, sorteringsfelt: string, rekkefolge: string) => {

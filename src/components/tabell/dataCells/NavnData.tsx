@@ -2,6 +2,7 @@ import {BrukerModell} from '../../../typer/bruker-modell';
 import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../../utils/utils';
 import {getVeilarbpersonflateUrl} from '../../../utils/url-utils';
 import {AksjonKnappMedPopoverFeilmelding} from '../../aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
+import {BodyShort} from '@navikt/ds-react';
 
 interface Props {
     bruker: BrukerModell;
@@ -43,6 +44,7 @@ export const NavnData = ({bruker, enhetId}: Props) => {
                     knappTekst={navn}
                 />
             )}
+            {!navn && <BodyShort size={'small'}>Ikke tilgang til bruker</BodyShort>}
         </div>
     );
 };

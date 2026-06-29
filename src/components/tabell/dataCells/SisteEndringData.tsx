@@ -3,7 +3,7 @@ import {hendelserLabels} from '../../../filtrering/filter-konstanter';
 import {getVeilarbpersonflateUrl} from '../../../utils/url-utils';
 import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../../utils/utils';
 import {AksjonKnappMedPopoverFeilmelding} from '../../aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {DataCellMedLenkeProps} from './DataCellProps';
 
 export function SisteEndringData({bruker, enhetId, valgteKolonner}: DataCellMedLenkeProps) {

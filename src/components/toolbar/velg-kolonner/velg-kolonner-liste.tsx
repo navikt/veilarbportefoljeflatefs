@@ -1,6 +1,6 @@
 import {useSelector} from 'react-redux';
-import {avvelgAlternativ, Kolonne, OversiktType, velgAlternativ} from '../../../ducks/ui/listevisning';
-import {selectMuligeAlternativer, selectValgteAlternativer} from '../../../ducks/ui/listevisning-selectors';
+import {avvelgAlternativ, Kolonne, OversiktType, velgAlternativ} from '../../../ducks/ui/valgte-kolonner';
+import {selectMuligeAlternativer, selectValgteAlternativer} from '../../../ducks/ui/valgte-kolonner-selectors';
 import {VelgKolonnerRad} from './velg-kolonner-rad';
 import {AppState} from '../../../reducer';
 import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
@@ -8,11 +8,11 @@ import {LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG} from '../../../konstan
 
 import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
 
-interface ListevisningProps {
+interface ValgteKolonnerProps {
     oversiktType: OversiktType;
 }
 
-export function VelgKolonnerListe({oversiktType}: ListevisningProps) {
+export function VelgKolonnerListe({oversiktType}: ValgteKolonnerProps) {
     const laVeilederViseFlereEnnTreKolonnerSamtidig = useFeatureSelector()(
         LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG
     );

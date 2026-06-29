@@ -10,7 +10,7 @@ import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-g
 import {useIdentSelector} from '../../../hooks/redux/use-innlogget-ident';
 import {Fnr, FnrList} from '../../fnr-list';
 import {useEnhetSelector} from '../../../hooks/redux/use-enhet-selector';
-import {OversiktType} from '../../../ducks/ui/listevisning';
+import {OversiktType} from '../../../ducks/ui/valgte-kolonner';
 import {TildelVeilederRenderer} from './tildel-veileder-renderer';
 import {
     harFargekategoriSomVilBliSlettetFilter,

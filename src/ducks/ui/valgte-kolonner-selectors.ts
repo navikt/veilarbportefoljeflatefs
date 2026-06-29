@@ -1,11 +1,12 @@
 import {AppState} from '../../reducer';
-import {Kolonne, ListevisningState, OversiktType} from './listevisning';
+import {Kolonne, OversiktType, ValgteKolonnerState} from './valgte-kolonner';
 import {
     AAPFilterKelvin,
     AktiviteterFilternokler,
     AktiviteterValg,
     HAR_14A_VEDTAK,
     I_AVTALT_AKTIVITET,
+    MINE_FARGEKATEGORIER,
     MINE_HUSKELAPPER,
     MOTER_IDAG,
     TILTAKSHENDELSER,
@@ -29,23 +30,23 @@ import {
 
 export function selectMuligeAlternativer(state: AppState, oversiktType: OversiktType): Kolonne[] {
     if (oversiktType === OversiktType.minOversikt) {
-        return state.ui.listevisningMinOversikt.mulige;
+        return state.ui.valgteKolonnerMinOversikt.mulige;
     }
-    return state.ui.listevisningEnhetensOversikt.mulige;
+    return state.ui.valgteKolonnerEnhetensOversikt.mulige;
 }
 
 export function selectValgteAlternativer(state: AppState, oversiktType: OversiktType): Kolonne[] {
     if (oversiktType === OversiktType.minOversikt) {
-        return state.ui.listevisningMinOversikt.valgte;
+        return state.ui.valgteKolonnerMinOversikt.valgte;
     }
-    return state.ui.listevisningEnhetensOversikt.valgte;
+    return state.ui.valgteKolonnerEnhetensOversikt.valgte;
 }
 
-export function selectListeVisning(state: AppState, oversiktType: OversiktType): ListevisningState {
+export function selectValgteKolonner(state: AppState, oversiktType: OversiktType): ValgteKolonnerState {
     if (oversiktType === OversiktType.minOversikt) {
-        return state.ui.listevisningMinOversikt;
+        return state.ui.valgteKolonnerMinOversikt;
     }
-    return state.ui.listevisningEnhetensOversikt;
+    return state.ui.valgteKolonnerEnhetensOversikt;
 }
 
 function addHvis(kolonne: Kolonne, add: boolean): Kolonne[] {
@@ -65,6 +66,14 @@ export function getFiltreringState(state: AppState, oversiktType: OversiktType):
         case OversiktType.veilederOversikt:
             return state.filtreringVeilederoversikt;
     }
+}
+
+export function skalViseFargekategoriKolonne(filtervalg: FiltervalgModell, oversiktType: OversiktType): boolean {
+    return (
+        oversiktType === OversiktType.enhetensOversikt &&
+        filtervalg.ferdigfilterListe.includes(MINE_FARGEKATEGORIER) &&
+        filtervalg.fargekategorier.length > 0
+    );
 }
 
 export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: OversiktType): Kolonne[] {
