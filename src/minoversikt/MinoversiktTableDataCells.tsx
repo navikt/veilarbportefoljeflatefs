@@ -2,7 +2,7 @@ import {NavnData} from '../components/tabell/dataCells/NavnData';
 import {FnrData} from '../components/tabell/dataCells/FnrData';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
-import {Kolonne} from '../ducks/ui/listevisning';
+import {Kolonne} from '../ducks/ui/valgte-kolonner';
 import {SisteEndringData} from '../components/tabell/dataCells/SisteEndringData';
 import {FodelandData} from '../components/tabell/dataCells/FodelandData';
 import {StatsborgerskapData} from '../components/tabell/dataCells/StatsborgerskapData';

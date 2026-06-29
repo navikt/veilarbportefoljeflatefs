@@ -1,8 +1,8 @@
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {createSelector} from 'reselect';
-import {getFiltreringState, selectListeVisning} from '../../ducks/ui/listevisning-selectors';
-import {ListevisningState, OversiktType} from '../../ducks/ui/listevisning';
+import {getFiltreringState, selectValgteKolonner} from '../../ducks/ui/valgte-kolonner-selectors';
+import {ValgteKolonnerState, OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {BrukerModell} from '../../typer/bruker-modell';
 import {FiltervalgModell} from '../../typer/filtervalg-modell';
 import {OrNothing} from '../../utils/types/types';
@@ -14,10 +14,10 @@ import {INGEN_KATEGORI, MINE_FARGEKATEGORIER} from '../../filtrering/filter-kons
 const selectValgtEnhetId = (state: AppState) => state.valgtEnhet.data.enhetId;
 const selectPortefolje = (state: AppState) => state.portefolje;
 const selectEnhetTiltak = (state: AppState) => state.enhettiltak;
-const selectFiltervalgForListevisning = (state: AppState, listevisningType: OversiktType): FiltervalgModell =>
-    getFiltreringState(state, listevisningType);
-const selectListevisningForType = (state: AppState, listevisningType: OversiktType): ListevisningState =>
-    selectListeVisning(state, listevisningType);
+const selectFiltervalgForValgteKolonner = (state: AppState, valgteKolonnerType: OversiktType): FiltervalgModell =>
+    getFiltreringState(state, valgteKolonnerType);
+const selectValgteKolonnerForType = (state: AppState, valgteKolonnerType: OversiktType): ValgteKolonnerState =>
+    selectValgteKolonner(state, valgteKolonnerType);
 
 function filtrerBrukerePaValgtFargekategori(
     brukere: BrukerModell[],
@@ -45,16 +45,16 @@ const selectPortefoljeTabell = createSelector(
     selectEnhetTiltak,
     selectPortefolje,
     selectValgtEnhetId,
-    selectFiltervalgForListevisning,
-    selectListevisningForType,
-    (enhettiltak, portefolje, enhetId, filtervalg, listevisning) => ({
+    selectFiltervalgForValgteKolonner,
+    selectValgteKolonnerForType,
+    (enhettiltak, portefolje, enhetId, filtervalg, valgteKolonner) => ({
         enhettiltak,
         portefolje,
         enhetId,
         sorteringsrekkefolge: portefolje.sorteringsrekkefolge,
         brukere: portefolje.data.brukere,
         filtervalg,
-        listevisning,
+        valgteKolonner,
         sorteringsfelt: portefolje.sorteringsfelt
     })
 );
@@ -66,17 +66,17 @@ interface UsePortefoljeSelector {
     sorteringsrekkefolge: OrNothing<Sorteringsrekkefolge>;
     brukere: BrukerModell[];
     filtervalg: FiltervalgModell;
-    listevisning: ListevisningState;
+    valgteKolonner: ValgteKolonnerState;
     sorteringsfelt: OrNothing<Sorteringsfelt>;
 }
 
-export function usePortefoljeSelector(listevisningType: OversiktType): UsePortefoljeSelector {
+export function usePortefoljeSelector(valgteKolonnerType: OversiktType): UsePortefoljeSelector {
     return useSelector((state: AppState) => {
-        const result = selectPortefoljeTabell(state, listevisningType);
+        const result = selectPortefoljeTabell(state, valgteKolonnerType);
 
         return {
             ...result,
-            brukere: filtrerBrukerePaValgtFargekategori(result.brukere, result.filtervalg, listevisningType)
+            brukere: filtrerBrukerePaValgtFargekategori(result.brukere, result.filtervalg, valgteKolonnerType)
         };
     });
 }

@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 import classNames from 'classnames';
 import {Alert} from '@navikt/ds-react';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
-import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/valgte-kolonner';
 import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import {MinOversiktModalController} from '../components/modal/modal-min-oversikt-controller';
 import {MinoversiktTableBody} from './MinoversiktTableBody';
@@ -50,7 +50,7 @@ const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
 
 export function MinoversiktSide() {
-    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} =
+    const {portefolje, filtervalg, valgteKolonner, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} =
         usePortefoljeSelector(oversiktType);
     const innloggetVeilederIdent = useIdentSelector();
     const gjeldendeVeilederId = useSelectGjeldendeVeileder();
@@ -137,7 +137,7 @@ export function MinoversiktSide() {
                         filtervalg={filtervalg}
                         oversiktType={oversiktType}
                         enhettiltak={enhettiltak.data.tiltak}
-                        listevisning={listevisning}
+                        valgteKolonner={valgteKolonner}
                         className="filtreringlabel-container"
                     />
                     <div className="oversikt__container">

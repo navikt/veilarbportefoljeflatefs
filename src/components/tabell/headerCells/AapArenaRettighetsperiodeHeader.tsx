@@ -1,5 +1,5 @@
 import {HeaderCellMedSorteringBasertPaFiltervalgProps} from './HeaderCellProps';
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 import {

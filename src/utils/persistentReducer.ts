@@ -1,14 +1,14 @@
 import {Action, Reducer} from 'redux';
-import {OversiktType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/valgte-kolonner';
 
 /**
  * Et scope er en unik nøkkel som brukes for å lagre state i LocalStorage.
  *
- * Eksempel: localStorage.getItem('minOversiktListevisningState').
+ * Eksempel: localStorage.getItem('minOversiktValgteKolonnerState').
  */
 export enum LocalStorageScope {
-    MIN_OVERSIKT_LISTEVISNING_STATE = 'minOversiktListevisningState',
-    ENHETENS_OVERSIKT_LISTEVISNING_STATE = 'enhetensOversiktListevisningState',
+    MIN_OVERSIKT_VALGTE_KOLONNER_STATE = 'minOversiktListevisningState',
+    ENHETENS_OVERSIKT_VALGTE_KOLONNER_STATE = 'enhetensOversiktListevisningState',
     MIN_OVERSIKT_SIDEBAR = 'minOversiktSidebar',
     ENHETENS_OVERSIKT_SIDEBAR = 'enhetensOversiktSidebar',
     ENHETS_STATE = 'enhetsState',

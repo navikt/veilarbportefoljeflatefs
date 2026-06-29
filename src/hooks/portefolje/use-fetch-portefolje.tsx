@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import {hentPortefoljeForEnhet, hentPortefoljeForVeileder} from '../../ducks/portefolje';
 import {useEnhetSelector} from '../redux/use-enhet-selector';
 import {usePortefoljeSelector} from '../redux/use-portefolje-selector';
-import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {useSelectGjeldendeVeileder} from './use-select-gjeldende-veileder';
 import {antallFilter} from '../../enhetensoversikt/EnhetSide';
 import {AppState} from '../../reducer';
