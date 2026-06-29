@@ -1,7 +1,11 @@
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {createSelector} from 'reselect';
-import {getFiltreringState, selectValgteKolonner} from '../../ducks/ui/valgte-kolonner-selectors';
+import {
+    getFiltreringState,
+    skalViseFargekategoriKolonne,
+    selectValgteKolonner
+} from '../../ducks/ui/valgte-kolonner-selectors';
 import {ValgteKolonnerState, OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {BrukerModell} from '../../typer/bruker-modell';
 import {FiltervalgModell} from '../../typer/filtervalg-modell';
@@ -9,7 +13,7 @@ import {OrNothing} from '../../utils/types/types';
 import {PortefoljeState} from '../../ducks/portefolje';
 import {EnhettiltakState} from '../../ducks/enhettiltak';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../../typer/kolonnesortering';
-import {INGEN_KATEGORI, MINE_FARGEKATEGORIER} from '../../filtrering/filter-konstanter';
+import {INGEN_KATEGORI} from '../../filtrering/filter-konstanter';
 
 const selectValgtEnhetId = (state: AppState) => state.valgtEnhet.data.enhetId;
 const selectPortefolje = (state: AppState) => state.portefolje;
@@ -24,11 +28,9 @@ function filtrerBrukerePaValgtFargekategori(
     filtervalg: FiltervalgModell,
     oversiktType: OversiktType
 ): BrukerModell[] {
-    const erEnhetensOversikt = oversiktType === OversiktType.enhetensOversikt;
-    const fargekategorierErAktivert = filtervalg.ferdigfilterListe.includes(MINE_FARGEKATEGORIER);
     const valgteFargekategorier = filtervalg.fargekategorier;
 
-    if (!erEnhetensOversikt || !fargekategorierErAktivert || valgteFargekategorier.length === 0) {
+    if (!skalViseFargekategoriKolonne(filtervalg, oversiktType)) {
         return brukere;
     }
 

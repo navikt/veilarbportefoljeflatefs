@@ -4,12 +4,12 @@ import {Checkbox} from '@navikt/ds-react';
 import {Etiketter} from '../components/tabell/etiketter';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
-import {Kolonne} from '../ducks/ui/valgte-kolonner';
+import {Kolonne, OversiktType} from '../ducks/ui/valgte-kolonner';
 import {EnhetTableDataCells} from './EnhetTableDataCells';
 import {OrNothing} from '../utils/types/types';
 import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
 import {FargekategoriTabellradKnapp} from '../components/fargekategori/fargekategori-tabellrad-knapp';
-import {MINE_FARGEKATEGORIER} from '../filtrering/filter-konstanter';
+import {skalViseFargekategoriKolonne} from '../ducks/ui/valgte-kolonner-selectors';
 import './enhetensoversikt.css';
 import './brukerliste.css';
 
@@ -43,8 +43,7 @@ export function EnhetTableRow({bruker, settMarkert, enhetId, filtervalg, valgteK
     const classname = classNames('brukerliste__element', 'brukerliste_rad', {
         'brukerliste--forrigeBruker': varForrigeBruker
     });
-    const visFargekategoriKolonne =
-        filtervalg.ferdigfilterListe.includes(MINE_FARGEKATEGORIER) && filtervalg.fargekategorier.length > 0;
+    const visFargekategoriKolonne = skalViseFargekategoriKolonne(filtervalg, OversiktType.enhetensOversikt);
 
     return (
         <li className={classname}>
