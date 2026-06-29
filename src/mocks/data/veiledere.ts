@@ -31,6 +31,12 @@ function lagVeiledere(): VeilederModell[] {
         fornavn: 'Testias',
         etternavn: 'Testesen'
     });
+    veiledere.push({
+        ident: lagTilfeldigVeilederId(),
+        navn: 'Aasen, Test',
+        fornavn: 'Test',
+        etternavn: 'Aasen'
+    });
 
     return veiledere;
 }
