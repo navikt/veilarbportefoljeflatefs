@@ -24,7 +24,7 @@ function lagVeileder(): VeilederModell {
 }
 
 function lagVeiledere(): VeilederModell[] {
-    const veiledere = new Array(40).fill(0).map(() => lagVeileder());
+    const veiledere = new Array(37).fill(0).map(() => lagVeileder());
     veiledere.push({
         ident: lagTilfeldigVeilederId(),
         navn: 'Testesen, Testias',
@@ -42,6 +42,12 @@ function lagVeiledere(): VeilederModell[] {
         navn: 'Aalerud, Test',
         fornavn: 'Test',
         etternavn: 'Aalerud'
+    });
+    veiledere.push({
+        ident: lagTilfeldigVeilederId(),
+        navn: 'Olstad, Test',
+        fornavn: 'Test',
+        etternavn: 'Olstad'
     });
 
     return veiledere;
