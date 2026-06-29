@@ -6,6 +6,7 @@ import {
     AktiviteterValg,
     HAR_14A_VEDTAK,
     I_AVTALT_AKTIVITET,
+    MINE_FARGEKATEGORIER,
     MINE_HUSKELAPPER,
     MOTER_IDAG,
     TILTAKSHENDELSER,
@@ -65,6 +66,14 @@ export function getFiltreringState(state: AppState, oversiktType: OversiktType):
         case OversiktType.veilederOversikt:
             return state.filtreringVeilederoversikt;
     }
+}
+
+export function skalViseFargekategoriKolonne(filtervalg: FiltervalgModell, oversiktType: OversiktType): boolean {
+    return (
+        oversiktType === OversiktType.enhetensOversikt &&
+        filtervalg.ferdigfilterListe.includes(MINE_FARGEKATEGORIER) &&
+        filtervalg.fargekategorier.length > 0
+    );
 }
 
 export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: OversiktType): Kolonne[] {
