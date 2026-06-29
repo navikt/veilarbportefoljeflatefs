@@ -1,4 +1,4 @@
-import {OversiktType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/valgte-kolonner';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {NavnHeader} from '../components/tabell/headerCells/NavnHeader';
 import {FnrHeader} from '../components/tabell/headerCells/FnrHeader';
@@ -71,10 +71,13 @@ import {DagpengerResterendeDagerHeader} from '../components/tabell/headerCells/D
 import {AapKelvinVedtakMaksdatoHeader} from '../components/tabell/headerCells/AapKelvinVedtakMaksdatoHeader';
 
 export function MinoversiktTableHeader() {
-    const {filtervalg, sorteringsrekkefolge, listevisning, sorteringsfelt} = usePortefoljeSelector(
-        OversiktType.minOversikt
-    );
-    const valgteKolonner = listevisning.valgte;
+    const {
+        filtervalg,
+        sorteringsrekkefolge,
+        valgteKolonner: valgteKolonnerState,
+        sorteringsfelt
+    } = usePortefoljeSelector(OversiktType.minOversikt);
+    const valgteKolonner = valgteKolonnerState.valgte;
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(OversiktType.minOversikt);
 
     const sorteringTilHeaderCell = {

@@ -17,8 +17,7 @@ import {useSetEnhetIUrl} from '../hooks/portefolje/use-set-enhet-i-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import {FilteringVeiledergrupper} from '../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 import {useFetchStatustallForVeileder} from '../hooks/portefolje/use-fetch-statustall';
-import {VeiledergruppePanel} from './veiledergruppe-panel';
-import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/valgte-kolonner';
 import {LagredeFilterUIController} from '../filtrering/lagrede-filter-controller';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
@@ -77,12 +76,15 @@ export function VeilederoversiktSide() {
             <Innholdslaster avhengigheter={[statustall]}>
                 <div className="oversikt-sideinnhold-veilederside" role="tabpanel" id={`oversikt-sideinnhold_${id}`}>
                     <div className="status-filter-kolonne">
-                        <Box className="sok-veileder" padding="space-16" borderWidth="1" borderRadius="12">
+                        <Box className="filtrering-veiledere" padding="space-16" borderWidth="1" borderRadius="12">
                             <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} filtervalg={filtervalg} />
                         </Box>
-                        <VeiledergruppePanel tittel="Veiledergrupper">
-                            <FilteringVeiledergrupper oversiktType={OversiktType.veilederOversikt} />
-                        </VeiledergruppePanel>
+                        <Box className="filtrering-veiledere" padding="space-16" borderWidth="1" borderRadius="12">
+                            <FilteringVeiledergrupper
+                                oversiktType={OversiktType.veilederOversikt}
+                                filtervalg={filtervalg}
+                            />
+                        </Box>
                     </div>
                     <div className="liste-kolonne">
                         <FiltreringLabelContainer

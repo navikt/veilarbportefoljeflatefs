@@ -10,7 +10,7 @@ import {DARKMODE} from '../konstanter';
 import {Moteplan} from '../minoversikt/moteplan/Moteplan';
 import {useEnhetSelector} from '../hooks/redux/use-enhet-selector';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
-import {OversiktType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/valgte-kolonner';
 import {Endringslogg} from '../components/endringslogg/endringslogg';
 import './topp-meny.css';
 

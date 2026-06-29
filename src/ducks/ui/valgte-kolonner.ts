@@ -1,13 +1,13 @@
 import {Dispatch} from 'redux';
-import {getMuligeKolonner} from './listevisning-selectors';
+import {getMuligeKolonner} from './valgte-kolonner-selectors';
 import {FiltervalgModell} from '../../typer/filtervalg-modell';
 
 export enum ActionTypeKeys {
-    VELG_ALTERNATIV = 'listevisning/velg_alternativ',
-    AVVELG_ALTERNATIV = 'listevisning/avvelg_alternativ',
-    OPPDATER_VALGTE_ALTERNATIV = 'listevisning/oppdater_valgte_alternativ',
-    OPPDATER_MULIGE_ALTERNATIV = 'listevisning/oppdater_mulige_alternativ',
-    LUKK_INFOPANEL = 'listevisning/lukk_infopanel',
+    VELG_ALTERNATIV = 'valgteKolonner/velg_alternativ',
+    AVVELG_ALTERNATIV = 'valgteKolonner/avvelg_alternativ',
+    OPPDATER_VALGTE_ALTERNATIV = 'valgteKolonner/oppdater_valgte_alternativ',
+    OPPDATER_MULIGE_ALTERNATIV = 'valgteKolonner/oppdater_mulige_alternativ',
+    LUKK_INFOPANEL = 'valgteKolonner/lukk_infopanel',
     OTHER_ACTION = '__OTHER_ACTION__'
 }
 
@@ -85,12 +85,12 @@ export enum OversiktType {
     veilederOversikt = 'veilederOversikt'
 }
 
-interface ListevisningAction {
+interface ValgteKolonnerAction {
     type: ActionTypeKeys.VELG_ALTERNATIV | ActionTypeKeys.AVVELG_ALTERNATIV;
     kolonne: Kolonne;
 }
 
-interface OppdaterListevisningAction {
+interface OppdaterValgteKolonnerAction {
     type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV | ActionTypeKeys.OPPDATER_MULIGE_ALTERNATIV;
     kolonner: Kolonne[];
 }
@@ -103,21 +103,21 @@ interface OtherAction {
     type: ActionTypeKeys.OTHER_ACTION;
 }
 
-type ListevisningActions = ListevisningAction | OppdaterListevisningAction | LukkInfopanelAction | OtherAction;
+type ValgteKolonnerActions = ValgteKolonnerAction | OppdaterValgteKolonnerAction | LukkInfopanelAction | OtherAction;
 
-export interface ListevisningState {
+export interface ValgteKolonnerState {
     valgte: Kolonne[];
     mulige: Kolonne[];
     lukketInfopanel: boolean;
 }
 
-export const initialStateEnhetensOversikt: ListevisningState = {
+export const initialStateEnhetensOversikt: ValgteKolonnerState = {
     valgte: [],
     mulige: [],
     lukketInfopanel: false
 };
 
-export const initialStateMinOversikt: ListevisningState = {
+export const initialStateMinOversikt: ValgteKolonnerState = {
     valgte: [],
     mulige: [],
     lukketInfopanel: false
@@ -130,7 +130,7 @@ function addIfNotExists(kolonne: Kolonne, kolonner: Kolonne[]): Kolonne[] {
     return [...kolonner, kolonne];
 }
 
-export function listevisningReducer(state = initialStateMinOversikt, action: ListevisningActions) {
+export function valgteKolonnerReducer(state = initialStateMinOversikt, action: ValgteKolonnerActions) {
     switch (action.type) {
         case ActionTypeKeys.VELG_ALTERNATIV:
             return {...state, valgte: addIfNotExists(action.kolonne, state.valgte)};
@@ -163,7 +163,7 @@ export const lukkInfopanel = (oversiktType: OversiktType) => ({
 });
 
 export const oppdaterKolonneAlternativer = (
-    dispatch: Dispatch<OppdaterListevisningAction>,
+    dispatch: Dispatch<OppdaterValgteKolonnerAction>,
     filterValg: FiltervalgModell,
     oversiktType: OversiktType
 ) => {

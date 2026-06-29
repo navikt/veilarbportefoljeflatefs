@@ -7,7 +7,7 @@ import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
 import {AppState} from '../../reducer';
 import {NullstillKnapp} from '../nullstill-valg-knapp/nullstill-knapp';
 import {endreFiltervalg} from '../../ducks/filtrering';
-import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/valgte-kolonner';
 import './veileder-checkbox-liste.css';
 
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
