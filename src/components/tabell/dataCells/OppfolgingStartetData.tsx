@@ -1,4 +1,4 @@
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {DataCellProps} from './DataCellProps';
 import {oppfolgingStartetDato} from '../../../utils/dato-utils';
 import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';

@@ -1,6 +1,6 @@
 import {HeaderCellProps} from './HeaderCellProps';
 import {SorteringHeader} from '../sortering-header';
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 
 export const UngdomsprogramMaksdatoHeader = ({

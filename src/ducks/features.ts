@@ -4,8 +4,7 @@ import {
     DARKMODE,
     LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG,
     PORTEFOLJE_FEATURES,
-    VIS_FARGEKATEGORIER_I_ENHETENS_OVERSIKT,
-    VIS_UNGDOMSPROGRAMYTELSE
+    VIS_FARGEKATEGORIER_I_ENHETENS_OVERSIKT
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -17,8 +16,7 @@ export interface FeaturesState {
 const initalState: FeaturesState = {
     [DARKMODE]: false,
     [LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG]: false,
-    [VIS_FARGEKATEGORIER_I_ENHETENS_OVERSIKT]: false,
-    [VIS_UNGDOMSPROGRAMYTELSE]: false
+    [VIS_FARGEKATEGORIER_I_ENHETENS_OVERSIKT]: false
 };
 
 // Reducer

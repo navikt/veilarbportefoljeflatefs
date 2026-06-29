@@ -6,7 +6,7 @@ import {DragAndDropContainer} from './drag-and-drop-container';
 import {MineFilterRad} from '../mine-filter-rad';
 import {useOnlyOnUnmount} from './use-only-onUnmount-hook';
 import {LagretFilter} from '../../../ducks/lagret-filter';
-import {oppdaterKolonneAlternativer, OversiktType} from '../../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../../ducks/ui/valgte-kolonner';
 import {OrNothing} from '../../../utils/types/types';
 import {Tiltak} from '../../../ducks/enhettiltak';
 import {AppState} from '../../../reducer';

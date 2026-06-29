@@ -1,12 +1,12 @@
 import {usePortefoljeSelector} from '../redux/use-portefolje-selector';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {STIGENDE, SYNKENDE} from '../../konstanter';
 import {settSortering} from '../../ducks/portefolje';
 
 import {useAppDispatch} from '../redux/use-app-dispatch';
 
-export function useSetPortefoljeSortering(listevisningType: OversiktType) {
-    const {sorteringsfelt, sorteringsrekkefolge} = usePortefoljeSelector(listevisningType);
+export function useSetPortefoljeSortering(valgteKolonnerType: OversiktType) {
+    const {sorteringsfelt, sorteringsrekkefolge} = usePortefoljeSelector(valgteKolonnerType);
     const dispatch = useAppDispatch();
 
     function settSorteringogHentPortefolje(felt) {

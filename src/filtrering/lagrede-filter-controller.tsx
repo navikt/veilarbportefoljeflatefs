@@ -9,7 +9,7 @@ import {
 } from '../ducks/lagret-filter-ui-state';
 import {erObjektValuesTomt, lagretFilterValgModellErLik} from '../components/modal/mine-filter/mine-filter-utils';
 import {AppState} from '../reducer';
-import {OversiktType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/valgte-kolonner';
 import {veilederlisterErLik} from '../components/modal/veiledergruppe/veileder-gruppe-utils';
 
 import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
