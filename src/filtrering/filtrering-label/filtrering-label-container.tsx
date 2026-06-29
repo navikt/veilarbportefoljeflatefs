@@ -4,7 +4,7 @@ import {FiltreringLabel} from './filtrering-label';
 import {alleFargekategoriFilterAlternativer, MINE_FARGEKATEGORIER} from '../filter-konstanter';
 import {EnhetModell} from '../../typer/enhet-og-veiledere-modeller';
 import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
-import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {hentMineFilterForVeileder} from '../../ducks/mine-filter';
 import {clearFiltervalg, endreFiltervalg, fjern, initialState, slettEnkeltFilter} from '../../ducks/filtrering';
 import {pagineringSetup} from '../../ducks/paginering';

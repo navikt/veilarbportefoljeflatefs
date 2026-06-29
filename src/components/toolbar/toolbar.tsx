@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import {Alert, Heading} from '@navikt/ds-react';
 import {MagnifyingGlassIcon, PersonPlusIcon} from '@navikt/aksel-icons';
 import {Paginering} from './paginering/paginering';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {AppState} from '../../reducer';
 import {ToolbarKnapp} from './toolbar-knapp';
 import {useWindowWidth} from '../../hooks/use-window-width';

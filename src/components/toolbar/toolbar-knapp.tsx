@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import {Button, useEventListener} from '@navikt/ds-react';
 import TildelVeileder from '../modal/tildel-veileder/tildel-veileder';
 import SokVeileder from './sok-veileder';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {nullstillBrukerfeil, oppdaterBrukerfeil} from '../../ducks/brukerfeilmelding';
 import {AppState} from '../../reducer';
 

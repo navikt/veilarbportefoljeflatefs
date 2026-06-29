@@ -9,7 +9,7 @@ import {VeiledergruppeModal} from '../../components/modal/veiledergruppe/veilede
 import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {visIngenEndringerToast} from '../../store/toast/actions';
-import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {VeiledergruppeRad} from './veiledergruppe_rad';
 import {kebabCase} from '../../utils/utils';
@@ -21,6 +21,7 @@ import '../filtrering-filter/filterform/filterform.css';
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface VeiledergruppeInnholdProps {
+    filtervalg: FiltervalgModell;
     lagretFilter: LagretFilter[];
     oversiktType: OversiktType;
 }
@@ -29,7 +30,7 @@ function isOverflown(element) {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
 }
 
-export function VeiledergruppeInnhold({lagretFilter, oversiktType}: VeiledergruppeInnholdProps) {
+export function VeiledergruppeInnhold({filtervalg, lagretFilter, oversiktType}: VeiledergruppeInnholdProps) {
     const [visEndreGruppeModal, setVisEndreGruppeModal] = useState(false);
     const valgtGruppeEnhetensOversikt = useSelector(
         (state: AppState) => state.mineFilterEnhetensOversikt.valgtVeiledergruppe
@@ -118,6 +119,7 @@ export function VeiledergruppeInnhold({lagretFilter, oversiktType}: Veiledergrup
                             onClickRedigerKnapp={() => setVisEndreGruppeModal(true)}
                             oversiktType={oversiktType}
                             erValgt={veilederGruppe.filterId === valgtGruppe?.filterId}
+                            filtervalg={filtervalg}
                         />
                     );
                 })}

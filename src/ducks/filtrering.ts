@@ -2,7 +2,7 @@ import {ReactNode} from 'react';
 import {FargekategoriModell} from '../typer/bruker-modell';
 import {Filtervalg, FiltervalgModell} from '../typer/filtervalg-modell';
 import {VELG_MINE_FILTER} from './lagret-filter-ui-state';
-import {OversiktType} from './ui/listevisning';
+import {OversiktType} from './ui/valgte-kolonner';
 import {LagretFilter} from './lagret-filter';
 import {
     AktiviteterValg,

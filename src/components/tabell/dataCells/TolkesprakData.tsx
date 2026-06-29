@@ -1,5 +1,5 @@
 import {tolkBehovSpraak} from '../../../utils/utils';
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 import {useTolkbehovSelector} from '../../../hooks/redux/use-tolkbehovspraak-selector';
 import {DataCellMedInnholdBasertPaFiltervalgProps} from './DataCellProps';

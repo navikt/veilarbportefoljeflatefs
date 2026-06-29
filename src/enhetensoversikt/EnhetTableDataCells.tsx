@@ -1,6 +1,6 @@
 import {NavnData} from '../components/tabell/dataCells/NavnData';
 import {FnrData} from '../components/tabell/dataCells/FnrData';
-import {Kolonne} from '../ducks/ui/listevisning';
+import {Kolonne} from '../ducks/ui/valgte-kolonner';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {VeilederNavnData} from '../components/tabell/dataCells/enhetens-oversikt/veilederNavnData';
