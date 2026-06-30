@@ -4,7 +4,7 @@ import {Button, TextField} from '@navikt/ds-react';
 import {TrashIcon} from '@navikt/aksel-icons';
 import {AppState} from '../../../reducer';
 import {LagretFilterValideringsError} from './mine-filter-modal';
-import {erTomtObjekt, feilValidering} from './mine-filter-utils';
+import {erTomtObjekt, feilValidering, mapFiltermodellTilAktiveValgOgStringify} from './mine-filter-utils';
 import {ErrorModalType, MineFilterVarselModal} from './mine-filter-varsel-modal';
 import {BekreftSlettingModal} from '../varselmodal/bekreft-sletting-modal';
 import {lagreEndringer, slettFilter} from '../../../ducks/mine-filter';
@@ -49,6 +49,7 @@ export function OppdaterMineFilter({gammeltFilterNavn, filterId, lukkModal, over
                 lagreEndringer({
                     filterNavn: trimmetFilterNavn,
                     filterValg: filterValg,
+                    aktiveFilterValg: mapFiltermodellTilAktiveValgOgStringify(filterValg),
                     filterId: filterId
                 })
             ).then(() => {

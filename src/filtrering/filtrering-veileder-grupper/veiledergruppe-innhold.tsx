@@ -19,6 +19,7 @@ import './veiledergruppe.css';
 import '../filtrering-filter/filterform/filterform.css';
 
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
+import {mapFiltermodellTilAktiveValgOgStringify} from '../../components/modal/mine-filter/mine-filter-utils';
 
 interface VeiledergruppeInnholdProps {
     filtervalg: FiltervalgModell;
@@ -64,7 +65,8 @@ export function VeiledergruppeInnhold({filtervalg, lagretFilter, oversiktType}: 
                     {
                         filterId: valgtGruppe.filterId,
                         filterNavn: gruppeNavn,
-                        filterValg
+                        filterValg: filterValg,
+                        aktiveFilterValg: mapFiltermodellTilAktiveValgOgStringify(filterValg)
                     },
                     enhet
                 )

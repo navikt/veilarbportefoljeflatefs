@@ -4,6 +4,7 @@ export interface LagretFilter {
     filterNavn: string;
     filterId: number;
     filterValg: FiltervalgModell;
+    aktiveFilterValg?: string | null; //TODO: nullable mens jeg tester
     opprettetDato: Date;
     sortOrder: number | null;
     filterCleanup: boolean;
@@ -20,12 +21,14 @@ export interface LagretFilterState {
 export interface RedigerLagretFilter {
     filterNavn: string;
     filterValg: FiltervalgModell;
+    aktiveFilterValg: string;
     filterId: number;
 }
 
 export interface NyttLagretFilter {
     filterNavn: string;
     filterValg: FiltervalgModell;
+    aktiveFilterValg: string;
 }
 
 export interface SorteringOgId {

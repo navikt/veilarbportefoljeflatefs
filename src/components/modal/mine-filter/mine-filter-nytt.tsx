@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {BodyShort, Button, TextField} from '@navikt/ds-react';
 import {AppState} from '../../../reducer';
-import {erTomtObjekt, feilValidering} from './mine-filter-utils';
+import {erTomtObjekt, feilValidering, mapFiltermodellTilAktiveValgOgStringify} from './mine-filter-utils';
 import {LagretFilterValideringsError} from './mine-filter-modal';
 import {ErrorModalType, MineFilterVarselModal} from './mine-filter-varsel-modal';
 import {lagreNyttFilter} from '../../../ducks/mine-filter';
@@ -40,7 +40,8 @@ export function LagreNyttMineFilter({lukkModal, oversiktType}: LagreNyttMineFilt
             dispatch(
                 lagreNyttFilter({
                     filterNavn: filterNavn,
-                    filterValg: filterValg
+                    filterValg: filterValg,
+                    aktiveFilterValg: mapFiltermodellTilAktiveValgOgStringify(filterValg)
                 })
             ).then(() => {
                 endreValgtSidebarTab({

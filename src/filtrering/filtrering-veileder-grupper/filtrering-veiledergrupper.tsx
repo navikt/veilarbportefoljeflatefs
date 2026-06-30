@@ -13,6 +13,7 @@ import {STATUS} from '../../ducks/utils';
 import {VeiledergruppeInnhold} from './veiledergruppe-innhold';
 
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
+import {mapFiltermodellTilAktiveValgOgStringify} from '../../components/modal/mine-filter/mine-filter-utils';
 
 interface FilteringVeiledergruppeProps {
     oversiktType: OversiktType;
@@ -35,7 +36,8 @@ export function FilteringVeiledergrupper({oversiktType, filtervalg}: FilteringVe
                 lageNyGruppe(
                     {
                         filterNavn: gruppeNavn,
-                        filterValg
+                        filterValg: filterValg,
+                        aktiveFilterValg: mapFiltermodellTilAktiveValgOgStringify(filterValg)
                     },
                     enhet
                 )
