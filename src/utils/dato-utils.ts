@@ -2,42 +2,45 @@ import moment from 'moment';
 import {Maybe} from './types';
 import {SkjermingEtikettConfig} from '../model-interfaces';
 
-export const erGyldigISODato = isoDato => isoDato && moment(isoDato, moment.ISO_8601).isValid();
+const DATE_LOCALES = ['nb-no', 'nn-no', 'en-gb', 'en-us'];
+const DATE_FORMAT: Intl.DateTimeFormatOptions = {day: '2-digit', month: '2-digit', year: 'numeric'};
+const ISO_DATO_UTEN_TID_REGEX = /^\d{4}-\d{2}-\d{2}$/;
+const TIDLIGSTE_OPPFOLGINGSDATO = new Date('2017-12-04');
+
+export const erGyldigISODato = isoDato => Boolean(isoDato) && moment(isoDato, moment.ISO_8601).isValid();
 
 function erLocalDate(dato): boolean {
     return dato.year && dato.monthValue && dato.dayOfMonth;
 }
 
 export function toDate(dato): Maybe<Date> {
-    if (typeof dato === 'undefined' || dato === null) {
+    if (dato === undefined || dato === null) {
         return null;
     }
-    return erLocalDate(dato) ? new Date(dato.year, dato.monthValue - 1, dato.dayOfMonth) : new Date(dato);
+
+    if (erLocalDate(dato)) {
+        return new Date(Date.UTC(dato.year, dato.monthValue - 1, dato.dayOfMonth));
+    }
+
+    if (typeof dato === 'string' && ISO_DATO_UTEN_TID_REGEX.test(dato)) {
+        const [year, month, day] = dato.split('-').map(Number);
+        return new Date(Date.UTC(year, month - 1, day));
+    }
+
+    const date = new Date(dato);
+    return Number.isNaN(date.getTime()) ? null : date;
 }
 
 export function toDatePrettyPrint(dato): Maybe<string> {
-    if (typeof dato === 'undefined' || dato === null) {
-        return null;
-    }
-
     const date = toDate(dato);
-    if (!date) {
-        return null;
-    }
-
-    const days = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
-    const months = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
-    const years = date.getFullYear();
-
-    return `${days}.${months}.${years}`;
+    return date ? toDateString(date) : null;
 }
 
-export const toDateString = (dato): string =>
-    new Date(dato).toLocaleDateString(['nb-no', 'nn-no', 'en-gb', 'en-us'], {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-    });
+export const toDateString = (dato): string => {
+    const date = toDate(dato);
+
+    return date ? date.toLocaleDateString(DATE_LOCALES, DATE_FORMAT) : '';
+};
 
 export const dateToISODate = dato => {
     const parsetDato = moment.parseZone(dato);
@@ -45,19 +48,7 @@ export const dateToISODate = dato => {
 };
 
 export function dateGreater(date1, date2) {
-    const year1 = date1.getFullYear();
-    const year2 = date2.getFullYear();
-
-    const mon1 = date1.getMonth();
-    const mon2 = date2.getMonth();
-
-    const day1 = date1.getDate();
-    const day2 = date2.getDate();
-
-    if (year1 > year2) return true;
-    else if (year1 === year2 && mon1 > mon2) return true;
-
-    return year1 === year2 && mon1 === mon2 && day1 > day2;
+    return moment(date1).isAfter(date2, 'day');
 }
 
 /**
@@ -96,14 +87,12 @@ export function validerDatoFelt(input, fra, valgfritt) {
 }
 
 export function oppfolgingStartetDato(dato: string): Maybe<Date> {
-    if (!dato) {
+    const oppfolgingStartetDato = toDate(dato);
+    if (!oppfolgingStartetDato) {
         return null;
     }
 
-    const oppfolgingStartetDato = new Date(dato);
-    const tidligsteDato = new Date('2017-12-04');
-
-    return oppfolgingStartetDato < tidligsteDato ? tidligsteDato : oppfolgingStartetDato;
+    return oppfolgingStartetDato < TIDLIGSTE_OPPFOLGINGSDATO ? TIDLIGSTE_OPPFOLGINGSDATO : oppfolgingStartetDato;
 }
 
 export function hentSkjermetInfo(egenAnsatt: boolean | null, skjermetTil: string | null): SkjermingEtikettConfig {

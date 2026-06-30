@@ -1,6 +1,6 @@
 import {Field, FieldProps, getIn} from 'formik';
 import {DateInputProps, ErrorMessage, useDatepicker, DatePicker} from '@navikt/ds-react';
-import {dateToISODate, validerDatoFelt} from '../../../utils/dato-utils';
+import {dateToISODate, toDate, validerDatoFelt} from '../../../utils/dato-utils';
 import classNames from 'classnames';
 
 interface DatoVelgerProps {
@@ -17,7 +17,7 @@ const DatoVelger = ({formikProps, size, label, name}: DatoVelgerProps) => {
     } = formikProps;
 
     const {datepickerProps, inputProps} = useDatepicker({
-        defaultSelected: field.value ? new Date(field.value) : undefined,
+        defaultSelected: toDate(field.value) ?? undefined,
         onDateChange: (date?: Date) => setFieldValue(field.name, dateToISODate(date)),
         inputFormat: 'dd.MM.yyyy',
         fromDate: new Date(),

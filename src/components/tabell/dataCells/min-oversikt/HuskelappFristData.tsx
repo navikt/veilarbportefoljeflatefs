@@ -3,7 +3,7 @@ import {DataCellProps} from '../DataCellProps';
 import {DatoDataCellType} from '../../dataCellTypes/DatoDataCellType';
 
 export const HuskelappFristData = ({bruker, valgteKolonner}: DataCellProps) => {
-    const huskeLappFrist = bruker.huskelapp?.frist ? new Date(bruker.huskelapp.frist) : null;
+    const huskeLappFrist = bruker.huskelapp?.frist ? bruker.huskelapp.frist : null;
 
     return (
         <DatoDataCellType
