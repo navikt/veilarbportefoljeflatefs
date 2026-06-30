@@ -236,6 +236,11 @@ export function hentEnhetTiltak(enhetId) {
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
+export function hentTiltakstyper(enhetId) {
+    const url = `${VEILARBPORTEFOLJE_URL}/enhet/${enhetId}/tiltakstyper`;
+    return fetchToJson(url, MED_CREDENTIALS);
+}
+
 export function hentFeatures(featureQueryString: string) {
     return fetchToJson(`${API_BASE_URL}${FEATURE_URL}?${featureQueryString}`);
 }

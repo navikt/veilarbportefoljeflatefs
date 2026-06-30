@@ -13,6 +13,7 @@ import {withAuth} from './auth';
 import {DEFAULT_DELAY_MILLISECONDS} from '../constants';
 import {EndreHuskelapp, LagreHuskelapp} from '../../ducks/huskelapp';
 import {rnd} from '../utils';
+import {tiltakstyper} from '../data/tiltakstyper';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, innloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -119,6 +120,12 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
         '/veilarbportefolje/api/enhet/:enhetId/tiltak',
         withAuth(async () => {
             return HttpResponse.json(tiltak);
+        })
+    ),
+    http.get(
+        '/veilarbportefolje/api/enhet/:enhetId/tiltakstyper',
+        withAuth(async () => {
+            return HttpResponse.json(tiltakstyper);
         })
     ),
     http.get(
