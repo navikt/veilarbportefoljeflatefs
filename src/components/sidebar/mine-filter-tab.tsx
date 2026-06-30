@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {HelpText} from '@navikt/ds-react';
 import {SidebarTab} from './sidebar-tab';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {ToggleSwitch} from '../../filtrering/filtrering-mine-filter/toggle-switch/toggle-switch';
 import {FiltreringMineFilter} from '../../filtrering/filtrering-mine-filter/filtrering-mine-filter';
 import {AppState} from '../../reducer';

@@ -2,6 +2,7 @@ import {fakerNB_NO as faker} from '@faker-js/faker';
 import {rnd} from '../utils';
 import {MOCK_CONFIG} from '../constants';
 import {VeilederePaEnhetModell, VeilederModell} from '../../typer/enhet-og-veiledere-modeller';
+import {FASTE_VEILEDERE} from './faste-veiledere';
 
 faker.seed(MOCK_CONFIG.seed);
 
@@ -24,15 +25,14 @@ function lagVeileder(): VeilederModell {
 }
 
 function lagVeiledere(): VeilederModell[] {
-    const veiledere = new Array(40).fill(0).map(() => lagVeileder());
-    veiledere.push({
+    const tilfeldige = new Array(37).fill(0).map(() => lagVeileder());
+    const faste = FASTE_VEILEDERE.map(({fornavn, etternavn}) => ({
         ident: lagTilfeldigVeilederId(),
-        navn: 'Testesen, Testias',
-        fornavn: 'Testias',
-        etternavn: 'Testesen'
-    });
-
-    return veiledere;
+        navn: `${etternavn}, ${fornavn}`,
+        fornavn,
+        etternavn
+    }));
+    return [...tilfeldige, ...faste];
 }
 
 export const veiledere = lagVeiledere();

@@ -1,6 +1,6 @@
 import {OrNothing} from '../utils/types/types';
 import {LagretFilter} from './lagret-filter';
-import {OversiktType} from './ui/listevisning';
+import {OversiktType} from './ui/valgte-kolonner';
 
 // Actions
 export const VELG_MINE_FILTER = 'lagretfilter_velg/VELG_MINE_FILTER';

@@ -1,6 +1,6 @@
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {SidebarStateType} from '../../ducks/sidebar-tab';
 
 export enum SidebarTabs {

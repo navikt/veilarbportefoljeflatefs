@@ -1,7 +1,7 @@
 import {Dispatch, SetStateAction, useEffect, useRef} from 'react';
 import {Alert, BodyShort} from '@navikt/ds-react';
 import {LagretFilter} from '../../ducks/lagret-filter';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {DragAndDrop} from './drag-and-drop/drag-and-drop';
 import {slettFilter} from '../../ducks/mine-filter';
 import {OrNothing} from '../../utils/types/types';

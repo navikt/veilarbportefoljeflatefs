@@ -31,7 +31,7 @@ import {Dropdown} from '../../components/dropdown/dropdown';
 import {FodselsdatoFilterform} from './filterform/fodselsdato-filterform';
 import {AlderFilterform} from './filterform/alder-filterform';
 import {RadioFilterform} from './filterform/radio-filterform';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {AktivitetFilterformController} from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
 import {GeografiskBostedFilterform} from './filterform/geografiskbosted-filterform';

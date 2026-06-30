@@ -1,7 +1,7 @@
 import {ReactNode} from 'react';
 import {SidebarTab} from './sidebar-tab';
 import {FiltreringStatus, StatustallForStatusfane} from '../../filtrering/filtrering-status/filtrering-status';
-import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {FiltervalgModell} from '../../typer/filtervalg-modell';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';

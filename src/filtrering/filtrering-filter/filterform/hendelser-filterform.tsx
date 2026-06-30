@@ -4,7 +4,7 @@ import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill
 import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {hendelserLabels, ulesteEndringer} from '../../filter-konstanter';
 import {kebabCase} from '../../../utils/utils';
-import {OversiktType} from '../../../ducks/ui/listevisning';
+import {OversiktType} from '../../../ducks/ui/valgte-kolonner';
 import {OrNothing} from '../../../utils/types/types';
 import './filterform.css';
 

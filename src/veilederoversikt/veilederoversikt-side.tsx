@@ -17,7 +17,7 @@ import {useSetEnhetIUrl} from '../hooks/portefolje/use-set-enhet-i-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import {FilteringVeiledergrupper} from '../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 import {useFetchStatustallForVeileder} from '../hooks/portefolje/use-fetch-statustall';
-import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/valgte-kolonner';
 import {LagredeFilterUIController} from '../filtrering/lagrede-filter-controller';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
