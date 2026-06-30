@@ -1,9 +1,3 @@
-.rediger-huskelapp-modal .navds-body-short,
-.rediger-huskelapp-modal .navds-alert__wrapper {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-}
-
 .rediger-huskelapp-modal {
     min-width: fit-content;
 }
@@ -71,7 +65,7 @@
     align-items: flex-end; /* Dyttar knappane til botnen når slettebekreftinga er synleg */
 }
 
-.veilarbportefoljeflatefs .ny-huskelapp-form .navds-label {
+.veilarbportefoljeflatefs .ny-huskelapp-form .aksel-label {
     /* !important er brukt for å overskrive hardkodinga av alle labels til 0.875rem i style.css */
     font-size: var(--ax-font-size-medium) !important;
 }

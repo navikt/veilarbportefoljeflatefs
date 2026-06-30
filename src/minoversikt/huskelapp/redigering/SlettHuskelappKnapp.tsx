@@ -1,6 +1,6 @@
 import {TrashIcon} from '@navikt/aksel-icons';
 import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selector';
-import {OversiktType} from '../../../ducks/ui/listevisning';
+import {OversiktType} from '../../../ducks/ui/valgte-kolonner';
 import {handleSlettHuskelapp} from './slettHuskelapp';
 import {BrukerModell} from '../../../typer/bruker-modell';
 import {KnappMedBekreftHandling} from '../../../components/knapp-med-slettebekreftelse/KnappMedBekreftHandling';

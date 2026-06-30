@@ -1,5 +1,5 @@
 import {HeaderCellProps} from './HeaderCellProps';
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {Header} from '../header';
 
 export const TolkebehovHeader = ({valgteKolonner}: HeaderCellProps) => (

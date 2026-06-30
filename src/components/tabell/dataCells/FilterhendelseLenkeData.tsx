@@ -1,4 +1,4 @@
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {LenkeDataCellType} from '../dataCellTypes/LenkeDataCellType';
 import {DataCellMedLenkeProps} from './DataCellProps';
 

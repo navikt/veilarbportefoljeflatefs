@@ -7,6 +7,7 @@
     --side-padding-x-akse: 3rem;
     --sidebar-bredde: 22rem;
     --gap-mellom-sidebar-og-sokefeltkolonner: 0.8rem;
+    --shadow-small: 0 3px 8px 0 rgb(0 0 0 / 10%), 0 1px 3px 0 rgb(0 0 0 / 10%), 0 0 1px 0 rgb(0 0 0 / 18%);
 }
 
 .veilarbportefoljeflatefs .ord-brekk {

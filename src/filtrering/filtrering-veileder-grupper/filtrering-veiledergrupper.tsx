@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useSelector} from 'react-redux';
-import {Alert, BodyShort, Button} from '@navikt/ds-react';
+import {Alert, BodyShort, Button, Heading} from '@navikt/ds-react';
 import {PlusCircleIcon} from '@navikt/aksel-icons';
 import {AppState} from '../../reducer';
 import {VeiledergruppeModal} from '../../components/modal/veiledergruppe/veiledergruppe-modal';
@@ -8,7 +8,7 @@ import {endreFiltervalg, initialState} from '../../ducks/filtrering';
 import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
 import {lageNyGruppe} from '../../ducks/veiledergrupper_filter';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
-import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {STATUS} from '../../ducks/utils';
 import {VeiledergruppeInnhold} from './veiledergruppe-innhold';
 
@@ -16,9 +16,10 @@ import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface FilteringVeiledergruppeProps {
     oversiktType: OversiktType;
+    filtervalg: FiltervalgModell;
 }
 
-export function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppeProps) {
+export function FilteringVeiledergrupper({oversiktType, filtervalg}: FilteringVeiledergruppeProps) {
     const [visVeiledergruppeModal, setVisVeiledergruppeModal] = useState(false);
 
     const lagretFilterState = useSelector((state: AppState) => state.veiledergrupper);
@@ -54,13 +55,15 @@ export function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppe
 
     const veilederGrupperOK = () => {
         return lagretFilter.length > 0 ? (
-            <VeiledergruppeInnhold lagretFilter={sortertVeiledergruppe} oversiktType={oversiktType} />
+            <VeiledergruppeInnhold
+                filtervalg={filtervalg}
+                lagretFilter={sortertVeiledergruppe}
+                oversiktType={oversiktType}
+            />
         ) : (
-            <div className="veiledergruppe-emptystate">
-                <BodyShort size="small" className="veiledergruppe-emptystate__tekst">
-                    Ingen lagrede veiledergrupper på enheten
-                </BodyShort>
-            </div>
+            <BodyShort size="small" spacing>
+                <i>Ingen lagrede veiledergrupper på enheten</i>
+            </BodyShort>
         );
     };
     const veilederGrupperError = () => {
@@ -73,6 +76,9 @@ export function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppe
 
     return (
         <>
+            <Heading spacing size="small">
+                Veiledergrupper
+            </Heading>
             {lagretFilterState.status === STATUS.ERROR ? veilederGrupperError() : veilederGrupperOK()}
             <Button
                 variant="tertiary"

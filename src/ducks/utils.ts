@@ -1,4 +1,4 @@
-import {OversiktType} from './ui/listevisning';
+import {OversiktType} from './ui/valgte-kolonner';
 
 export const STATUS = {
     NOT_STARTED: 'NOT_STARTED',

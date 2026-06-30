@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useLayoutEffect, useRef} from 'react';
 import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
 import {useBrukerIKontekstSelector} from './hooks/redux/use-bruker-i-kontekst-selector';
 import {EnvType, getEnv, getVeilarbpersonflateBasePath} from './utils/url-utils';
@@ -12,6 +12,7 @@ declare module 'react' {
     namespace JSX {
         interface IntrinsicElements {
             'internarbeidsflate-decorator': {
+                ref?: React.Ref<HTMLElement>;
                 'app-name': string;
                 enhet?: string;
                 environment: string;
@@ -20,8 +21,6 @@ declare module 'react' {
                 'show-enheter'?: boolean;
                 'show-search-area'?: boolean;
                 'url-format': 'LOCAL' | 'NAV_NO' | 'ANSATT';
-                onEnhetChanged?: (event: CustomEvent<{enhet?: string | null}>) => void;
-                onFnrChanged?: (event: CustomEvent<{fnr?: string | null}>) => void;
             };
         }
     }
@@ -38,17 +37,37 @@ function getDecoratorEnv(): Environment {
     }
 }
 
-function handterFnrEndret(event: CustomEvent<{fnr?: string | null}>) {
-    const fnr = event.detail.fnr;
-    if (fnr) {
-        window.location.href = getVeilarbpersonflateBasePath();
-    }
-}
-
 export function Decorator() {
     const dispatch = useAppDispatch();
     const enhetId = useEnhetSelector();
     const brukerIKontekst = useBrukerIKontekstSelector();
+    const decoratorRef = useRef<HTMLElement>(null);
+
+    useLayoutEffect(() => {
+        const el = decoratorRef.current;
+        if (!el) return;
+
+        const onEnhetChanged = (e: Event) => {
+            const enhet = (e as CustomEvent<{enhet?: string | null}>).detail.enhet;
+            if (enhet) {
+                dispatch(oppdaterValgtEnhet(enhet));
+            }
+        };
+
+        const onFnrChanged = (e: Event) => {
+            const fnr = (e as CustomEvent<{fnr?: string | null}>).detail.fnr;
+            if (fnr) {
+                window.location.href = getVeilarbpersonflateBasePath();
+            }
+        };
+
+        el.addEventListener('enhet-changed', onEnhetChanged);
+        el.addEventListener('fnr-changed', onFnrChanged);
+        return () => {
+            el.removeEventListener('enhet-changed', onEnhetChanged);
+            el.removeEventListener('fnr-changed', onFnrChanged);
+        };
+    }, [dispatch]);
 
     useEffect(() => {
         if (brukerIKontekst && !window.location.href.includes('/tilbake')) {
@@ -56,21 +75,11 @@ export function Decorator() {
         }
     }, [brukerIKontekst, dispatch]);
 
-    function velgEnhet(enhet: string) {
-        dispatch(oppdaterValgtEnhet(enhet));
-    }
-
-    function handterEnhetEndret(event: CustomEvent<{enhet?: string | null}>) {
-        const enhet = event.detail.enhet;
-        if (enhet) {
-            velgEnhet(enhet);
-        }
-    }
-
     const urlFormat = getEnv().ingressType === 'ansatt' ? 'ANSATT' : 'NAV_NO';
 
     return (
         <internarbeidsflate-decorator
+            ref={decoratorRef}
             app-name="Arbeidsrettet oppfølging"
             enhet={enhetId ?? undefined}
             environment={getDecoratorEnv()}
@@ -79,8 +88,6 @@ export function Decorator() {
             show-enheter
             show-search-area
             url-format={urlFormat}
-            onEnhetChanged={handterEnhetEndret}
-            onFnrChanged={handterFnrEndret}
         />
     );
 }

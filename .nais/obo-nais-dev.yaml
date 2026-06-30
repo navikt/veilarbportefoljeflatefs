@@ -8,7 +8,7 @@ metadata:
   annotations:
     wonderwall.nais.io/beta: "true"
 spec:
-  image: europe-north1-docker.pkg.dev/nais-management-233d/poao/poao-frontend:2026.05.04_08.28-44f053d6a1a4
+  image: europe-north1-docker.pkg.dev/nais-management-233d/poao/poao-frontend:2026.06.15_08.35-d63d247dcd18
   port: 8080
   ingresses:
     - https://veilarbportefoljeflate.intern.dev.nav.no
@@ -90,11 +90,6 @@ spec:
             }
           },
           "redirects": [
-            {
-              "fromPath": "/internarbeidsflatedecorator/*",
-              "toUrl": "https://cdn.nav.no/personoversikt/internarbeidsflate-decorator-v3/dev",
-              "preserveFromPath": false
-            },
             {
               "fromPath": "/veilarbpersonflatefs/*",
               "toUrl": "https://veilarbpersonflate.intern.dev.nav.no",

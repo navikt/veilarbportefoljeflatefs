@@ -3,7 +3,7 @@ import {BodyShort, Tag} from '@navikt/ds-react';
 import {VeilederModell} from '../../../../typer/enhet-og-veiledere-modeller';
 import {BrukerModell} from '../../../../typer/bruker-modell';
 import {AppState} from '../../../../reducer';
-import {Kolonne} from '../../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../../ducks/ui/valgte-kolonner';
 import {DataCellProps} from '../DataCellProps';
 
 export function VeilederNavnData({bruker, valgteKolonner}: DataCellProps) {

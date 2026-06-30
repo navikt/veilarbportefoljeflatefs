@@ -9,7 +9,7 @@ import {selectFraIndex, selectSidestorrelse} from '../components/toolbar/paginer
 import {visTilordningOkModal} from './modal';
 import {AppState} from '../reducer';
 import {OrNothing} from '../utils/types/types';
-import {OversiktType} from './ui/listevisning';
+import {OversiktType} from './ui/valgte-kolonner';
 import {capitalize} from '../utils/utils';
 import {hentStatustallForEnhet} from './statustall/statustall-enhet';
 import {toJson} from '../middleware/api';

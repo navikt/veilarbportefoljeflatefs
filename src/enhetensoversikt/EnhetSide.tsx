@@ -9,7 +9,7 @@ import {EnhetTableBody} from './EnhetTableBody';
 import {EnhetTableHeader} from './EnhetTableHeader';
 import {ToppMeny} from '../topp-meny/topp-meny';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
-import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/valgte-kolonner';
 import {useSetStateFromUrl} from '../hooks/portefolje/use-set-state-from-url';
 import {useFetchPortefolje} from '../hooks/portefolje/use-fetch-portefolje';
 import FiltreringLabelContainer from '../filtrering/filtrering-label/filtrering-label-container';
@@ -74,7 +74,7 @@ const oversiktType = OversiktType.enhetensOversikt;
 const id = 'enhetens-oversikt';
 
 export function EnhetSide() {
-    const {portefolje, filtervalg, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak, listevisning} =
+    const {portefolje, filtervalg, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak, valgteKolonner} =
         usePortefoljeSelector(oversiktType);
     const statustallFetchStatus: StatustallEnhetState = useFetchStatustallForEnhet(enhetId);
     const statustall: StatustallEnhet = useStatustallEnhetSelector();
@@ -173,7 +173,7 @@ export function EnhetSide() {
                         }}
                         oversiktType={oversiktType}
                         enhettiltak={enhettiltak.data.tiltak}
-                        listevisning={listevisning}
+                        valgteKolonner={valgteKolonner}
                         className="filtreringlabel-container"
                     />
                     {harFilter ? (
@@ -213,13 +213,14 @@ export function EnhetSide() {
                         </div>
                     ) : (
                         <InfoCard
+                            size="small"
                             data-color="info"
                             data-testid="alertstripe_filtrering"
                             className="alertstripe__filtrering"
                         >
-                            <InfoCard.Header icon={<InformationSquareIcon aria-hidden />}>
-                                <InfoCard.Title>Du må gjøre en filtrering for å se brukere i listen.</InfoCard.Title>
-                            </InfoCard.Header>
+                            <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
+                                Du må gjøre en filtrering for å se brukere i listen.
+                            </InfoCard.Message>
                         </InfoCard>
                     )}
                 </div>

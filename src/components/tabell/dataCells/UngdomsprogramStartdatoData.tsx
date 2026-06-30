@@ -1,5 +1,5 @@
 import {DataCellProps} from './DataCellProps';
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
 
 export const UngdomsprogramStartdatoData = ({bruker, valgteKolonner}: DataCellProps) => {
