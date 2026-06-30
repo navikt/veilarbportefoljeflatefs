@@ -6,6 +6,7 @@ import {trackLinkClick} from './utils/utils';
 import {EndringsloggLink} from './endringslogg-link';
 import './endringslogg.css';
 import {PortableText} from '@portabletext/react';
+import {toDate} from '../../utils/dato-utils';
 
 interface EndringsloggContentProps {
     innleggsListe: EndringsloggEntryWithSeenStatus[];
@@ -38,7 +39,11 @@ export const EndringsloggContent = ({innleggsListe}: EndringsloggContentProps) =
 };
 
 const isoTimeStringToDate = (dateString: string) => {
-    const date = new Date(dateString);
+    const date = toDate(dateString);
+    if (!date) {
+        return '';
+    }
+
     return date.getDate() + '. ' + date.toLocaleString('no-NO', {year: 'numeric', month: 'long'}).toLowerCase();
 };
 

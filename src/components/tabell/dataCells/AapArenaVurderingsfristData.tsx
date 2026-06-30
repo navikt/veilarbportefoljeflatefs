@@ -2,7 +2,7 @@ import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {DataCellProps} from './DataCellProps';
 import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 import {Innsatsgruppe} from '../../../typer/bruker-modell';
-import {dateGreater, toDateString} from '../../../utils/dato-utils';
+import {dateGreater, toDate, toDateString} from '../../../utils/dato-utils';
 
 export const AapArenaVurderingsfristData = ({bruker, valgteKolonner}: DataCellProps) => {
     const vurderingsfristAAP = aapVurderingsfrist(
@@ -32,7 +32,11 @@ function aapVurderingsfrist(
         // makstid == ordinær rettighetsperiode
         if (utlopsdatoOrdinerRettighet) {
             // Hvis utlopsdatoOrdinerRettighet eksisterer så er brukeren BATT (filtreres backend)
-            const vurderingsfrist = new Date(utlopsdatoOrdinerRettighet);
+            const vurderingsfrist = toDate(utlopsdatoOrdinerRettighet);
+            if (!vurderingsfrist) {
+                return undefined;
+            }
+
             vurderingsfrist.setDate(vurderingsfrist.getDate() - 40); // 5 ukers frist er spesifisert av servicerutinen for AAP, på ordinær er den ikke nøyaktig på det vi får fra Arena, så setter den til 40 dager
             return dateGreater(vurderingsfrist, iDag)
                 ? toDateString(vurderingsfrist)
@@ -47,7 +51,12 @@ function aapVurderingsfrist(
         if (!utlopsdatoVedtak) {
             return undefined;
         }
-        const vurderingsfrist = new Date(utlopsdatoVedtak);
+
+        const vurderingsfrist = toDate(utlopsdatoVedtak);
+        if (!vurderingsfrist) {
+            return undefined;
+        }
+
         vurderingsfrist.setDate(vurderingsfrist.getDate() - 35); // 35 dager/5 ukers frist er spesifisert av servicerutinen for AAP
         return dateGreater(vurderingsfrist, iDag)
             ? toDateString(vurderingsfrist)
