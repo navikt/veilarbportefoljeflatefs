@@ -17,9 +17,8 @@ import {hentMineFilterForVeileder} from '../../ducks/mine-filter';
 import '../../components/sidebar/sidebar.css';
 import './veiledergruppe.css';
 import '../filtrering-filter/filterform/filterform.css';
-
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
-import {mapFiltermodellTilAktiveValgOgStringify} from '../../components/modal/mine-filter/mine-filter-utils';
+import {mapFiltermodellTilAktiveValgOgStringify} from '../../components/modal/mine-filter/mine-filter-mapper';
 
 interface VeiledergruppeInnholdProps {
     filtervalg: FiltervalgModell;

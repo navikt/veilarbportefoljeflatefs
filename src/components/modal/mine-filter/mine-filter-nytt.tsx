@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {BodyShort, Button, TextField} from '@navikt/ds-react';
 import {AppState} from '../../../reducer';
-import {erTomtObjekt, feilValidering, mapFiltermodellTilAktiveValgOgStringify} from './mine-filter-utils';
+import {erTomtObjekt, feilValidering} from './mine-filter-utils';
 import {LagretFilterValideringsError} from './mine-filter-modal';
 import {ErrorModalType, MineFilterVarselModal} from './mine-filter-varsel-modal';
 import {lagreNyttFilter} from '../../../ducks/mine-filter';
@@ -10,8 +10,8 @@ import {useRequestHandler} from '../../../hooks/use-request-handler';
 import {OversiktType} from '../../../ducks/ui/valgte-kolonner';
 import {SidebarTabs} from '../../../store/sidebar/sidebar-view-store';
 import {endreValgtSidebarTab} from '../../sidebar/sidebar';
-
 import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
+import {mapFiltermodellTilAktiveValgOgStringify} from './mine-filter-mapper';
 
 interface LagreNyttMineFilterProps {
     oversiktType: OversiktType;

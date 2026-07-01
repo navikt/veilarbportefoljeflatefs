@@ -4,7 +4,7 @@ import {Button, TextField} from '@navikt/ds-react';
 import {TrashIcon} from '@navikt/aksel-icons';
 import {AppState} from '../../../reducer';
 import {LagretFilterValideringsError} from './mine-filter-modal';
-import {erTomtObjekt, feilValidering, mapFiltermodellTilAktiveValgOgStringify} from './mine-filter-utils';
+import {erTomtObjekt, feilValidering} from './mine-filter-utils';
 import {ErrorModalType, MineFilterVarselModal} from './mine-filter-varsel-modal';
 import {BekreftSlettingModal} from '../varselmodal/bekreft-sletting-modal';
 import {lagreEndringer, slettFilter} from '../../../ducks/mine-filter';
@@ -13,8 +13,8 @@ import {avmarkerSisteValgtMineFilter} from '../../../ducks/lagret-filter-ui-stat
 import {OversiktType} from '../../../ducks/ui/valgte-kolonner';
 import {SidebarTabs} from '../../../store/sidebar/sidebar-view-store';
 import {endreValgtSidebarTab} from '../../sidebar/sidebar';
-
 import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
+import {mapFiltermodellTilAktiveValgOgStringify} from './mine-filter-mapper';
 
 interface OppdaterMineFilterProps {
     oversiktType: OversiktType;

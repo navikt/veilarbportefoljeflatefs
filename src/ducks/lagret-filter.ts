@@ -4,8 +4,18 @@ export interface LagretFilter {
     filterNavn: string;
     filterId: number;
     filterValg: FiltervalgModell;
-    aktiveFilterValg?: string | null; //TODO: nullable mens jeg tester
-    opprettetDato: Date;
+    sortOrder: number | null;
+    filterCleanup: boolean;
+    aktiv: boolean;
+    note: string;
+}
+
+export interface LagretFilterDTO {
+    filterNavn: string;
+    filterId: number;
+    filterValg: FiltervalgModell;
+    aktiveFilterValg: string;
+    opprettetDato: string;
     sortOrder: number | null;
     filterCleanup: boolean;
     aktiv: boolean;

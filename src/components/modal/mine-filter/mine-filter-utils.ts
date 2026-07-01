@@ -1,7 +1,7 @@
 import {isEmptyArray, isObject} from 'formik';
-import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
+import {FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {LagretFilterValideringsError} from './mine-filter-modal';
-import {AktiviteterFilternokler, AktiviteterValg} from '../../../filtrering/filter-konstanter';
+import {AktiviteterValg} from '../../../filtrering/filter-konstanter';
 
 export function lagretFilterValgModellErLik(filter1?: FiltervalgModell, filter2?: FiltervalgModell): boolean {
     return deepEqual(filter1, filter2);
@@ -71,31 +71,4 @@ export function feilValidering(filterNavn, filterValg, eksisterendeFilter, filte
     }
 
     return feilmelding;
-}
-
-export function mapFiltermodellTilAktiveValgOgStringify(filtervalg: FiltervalgModell): string {
-    const aktiveFiltre = Object.fromEntries(
-        Object.entries(filtervalg).filter(([key, value]) => {
-            // Spesialhåndtering av aktiviteter
-            if (key === Filtervalg.aktiviteter) {
-                return !erDefaultAktiviteter(value as AktiviteterFilternokler | undefined);
-            }
-            // Generiske defaults
-            if (value == null) return false;
-            if (typeof value === 'string') return value !== '';
-            if (Array.isArray(value)) return value.length > 0;
-
-            // Ta med alle filtre som ikke er defaults
-            return true;
-        })
-    );
-    return JSON.stringify(aktiveFiltre);
-}
-
-function erDefaultAktiviteter(aktiviteter: AktiviteterFilternokler | undefined): boolean {
-    if (!aktiviteter) {
-        return true;
-    }
-
-    return Object.values(aktiviteter).every(verdi => verdi === AktiviteterValg.NA);
 }

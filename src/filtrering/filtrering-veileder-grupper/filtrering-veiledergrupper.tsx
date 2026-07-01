@@ -13,7 +13,7 @@ import {STATUS} from '../../ducks/utils';
 import {VeiledergruppeInnhold} from './veiledergruppe-innhold';
 
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
-import {mapFiltermodellTilAktiveValgOgStringify} from '../../components/modal/mine-filter/mine-filter-utils';
+import {mapFiltermodellTilAktiveValgOgStringify} from '../../components/modal/mine-filter/mine-filter-mapper';
 
 interface FilteringVeiledergruppeProps {
     oversiktType: OversiktType;
