@@ -2,13 +2,16 @@ import {LagretFilter, LagretFilterDTO} from '../../../ducks/lagret-filter';
 import {initialState as filtervalgInitialState} from '../../../ducks/filtrering';
 import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {AktiviteterFilternokler, AktiviteterValg} from '../../../filtrering/filter-konstanter';
+import {filtervalgValidators} from './mine-filter-validering-filtermodel-utils';
 
 // Mapper som lese fra lagret-filter objectet som kommer fra veilarbfilter:
 export function mapLagretFilterFraDTO(dto: LagretFilterDTO, brukAktiveFiltervalg: boolean): LagretFilter {
     return {
         filterNavn: dto.filterNavn,
         filterId: dto.filterId,
-        filterValg: brukAktiveFiltervalg ? mapAktiveValgTilFiltermodell(dto.aktiveFilterValg) : dto.filterValg,
+        filterValg: brukAktiveFiltervalg
+            ? mapAktiveValgTilFiltermodell(dto.filterValg, dto.aktiveFilterValg)
+            : dto.filterValg,
         sortOrder: dto.sortOrder,
         filterCleanup: dto.filterCleanup,
         aktiv: dto.aktiv,
@@ -16,22 +19,36 @@ export function mapLagretFilterFraDTO(dto: LagretFilterDTO, brukAktiveFiltervalg
     };
 }
 
-export function mapAktiveValgTilFiltermodell(aktiveFilterValg: string | null | undefined): FiltervalgModell {
+export function mapAktiveValgTilFiltermodell(
+    filtervalg: FiltervalgModell,
+    aktiveFilterValg: string | null | undefined
+): FiltervalgModell {
+    // midlertidig sjekk til databasen får populert data for alle brukere, default til opprinnelige filtervalg
     if (!aktiveFilterValg) {
-        return {...filtervalgInitialState};
+        return {...filtervalg};
     }
+
     try {
         const parsed = JSON.parse(aktiveFilterValg);
-        // todo: her kan det legges inn migreringslogikk til når vi har endret på filtervalg-modellen,
-        //  f.eks. endra navn på filter eller endra format på verdi, eller selve verdien.
-        //  Dette gjøres for å kunne migrere databasen i veilarbfilter i et eget steg uten at ting brekker.
+        if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+            throw new Error('aktiveFilterValg er ikke et objekt');
+        }
+
+        // Sjekk om nøkler og verdier er gyldige i filtermodellen FØR de settes i state
+        for (const [key, value] of Object.entries(parsed)) {
+            // TODO - legg muligheter for mapping-logikk ved endringer i eksisterende filtervalg her
+            const validator = filtervalgValidators[key as Filtervalg];
+            if (!validator) {
+                throw new Error('Ukjente nøkkelverdi i aktiveFiltervalg');
+            }
+            const gyldigeVerdier = validator(value);
+            if (gyldigeVerdier === undefined) {
+                throw new Error('Ukjente verdier eller datatype i aktiveFiltervalg');
+            }
+        }
         return {...filtervalgInitialState, ...parsed};
     } catch (e) {
-        // TODO: legg på feilmelding her om det ikke fungerer så ting ikke krasjer som før,
-        //  og heller returner null e.l. så hele filteret blir fjerna fra lista.
-        // eslint-disable-next-line no-console
-        console.error('Kunne ikkje parse aktiveFilterValg', e);
-        return {...filtervalgInitialState};
+        throw new Error('Feil ved parsing av filtervalg for lagra filter', {cause: e});
     }
 }
 

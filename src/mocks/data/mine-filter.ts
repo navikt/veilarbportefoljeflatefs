@@ -1,8 +1,8 @@
 import {initialState} from '../../ducks/filtrering';
-import {LagretFilter} from '../../ducks/lagret-filter';
+import {LagretFilterDTO} from '../../ducks/lagret-filter';
 import {InnsatsgruppeGjeldendeVedtak14a} from '../../typer/bruker-modell';
 
-export const mineFilter = (): LagretFilter[] => {
+export const mineFilter = (): LagretFilterDTO[] => {
     return [
         {
             filterNavn: '1. Unge arbeidsledige møter idag',
@@ -13,6 +13,7 @@ export const mineFilter = (): LagretFilter[] => {
                 ferdigfilterListe: ['MOTER_IDAG'],
                 tiltakstyper: ['UTDYRK']
             },
+            aktiveFilterValg: '{"alder": ["40-49"], "kjonn": "K"}',
             filterCleanup: false,
             sortOrder: null,
             aktiv: true,
@@ -27,6 +28,7 @@ export const mineFilter = (): LagretFilter[] => {
                 formidlingsgruppe: ['ARBS'],
                 tiltakstyper: ['TULLETOES', 'UTDYRK']
             },
+            aktiveFilterValg: '{"alder": ["40-49"], "kjonn": "M"}',
             filterCleanup: false,
             sortOrder: null,
             aktiv: true,
@@ -36,6 +38,7 @@ export const mineFilter = (): LagretFilter[] => {
             filterNavn: 'Denne brukes til test la stå',
             filterId: 3,
             filterValg: {...initialState, kjonn: 'K', formidlingsgruppe: ['ARBS']},
+            aktiveFilterValg: '{"alder": ["40-49"], "kjonn": "K"}',
             filterCleanup: false,
             sortOrder: null,
             aktiv: true,
@@ -45,6 +48,7 @@ export const mineFilter = (): LagretFilter[] => {
             filterNavn: 'Kvinner',
             filterId: 6,
             filterValg: {...initialState, kjonn: 'K'},
+            aktiveFilterValg: '{"alder": ["40-49"], "kjonn": "K"}',
             filterCleanup: false,
             sortOrder: null,
             aktiv: true,
@@ -57,6 +61,7 @@ export const mineFilter = (): LagretFilter[] => {
                 ...initialState,
                 ferdigfilterListe: ['NYE_BRUKERE_FOR_VEILEDER']
             },
+            aktiveFilterValg: '{"alder": ["40-49"], "kjonn": "K"}',
             filterCleanup: false,
             sortOrder: null,
             aktiv: true,
@@ -66,6 +71,7 @@ export const mineFilter = (): LagretFilter[] => {
             filterNavn: 'UfordelteBrukere',
             filterId: 11,
             filterValg: {...initialState, ferdigfilterListe: ['UFORDELTE_BRUKERE']},
+            aktiveFilterValg: '{"alder": ["40-49"], "kjonn": "K"}',
             filterCleanup: false,
             sortOrder: 1,
             aktiv: true,
@@ -78,6 +84,7 @@ export const mineFilter = (): LagretFilter[] => {
                 ...initialState,
                 ferdigfilterListe: ['ER_SYKMELDT_MED_ARBEIDSGIVER', 'NYE_BRUKERE_FOR_VEILEDER']
             },
+            aktiveFilterValg: '{"alder": ["40-49"], "kjonn": "K"}',
             filterCleanup: false,
             sortOrder: null,
             aktiv: false,
