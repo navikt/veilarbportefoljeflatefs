@@ -41,13 +41,13 @@ type Validator = (value: unknown) => unknown | undefined;
 const isString = (v: unknown): v is string => typeof v === 'string';
 const isStringArray = (v: unknown): v is string[] => Array.isArray(v) && v.every(isString);
 
-/** Sjekker at verdier kun er de som ligger i `tillate`. Returner undefined om input ikkje er en liste. */
+/** Sjekker at verdier kun er de som ligger i `tillate`. Returner undefined om input ikke er en liste. */
 const enumArray =
     (tillate: readonly string[]): Validator =>
     v =>
         isStringArray(v) ? v.filter(x => tillate.includes(x)) : undefined;
 
-/** Aksepter ei liste av strengar uten enum-sjekk (fritekst frå backend, f eks veileder-ID-er). */
+/** Aksepter en liste av strenger uten enum-sjekk (fritekst fra backend, f eks veileder-ID-er). */
 const stringArray: Validator = v => (isStringArray(v) ? v : undefined);
 
 /** Nullbar streng; bare gyldige enum-verdier tillat. */
