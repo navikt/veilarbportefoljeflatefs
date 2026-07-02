@@ -4,6 +4,8 @@ export const tiltakstyper = {
         MIDLONTIL: 'Midlertidig lønnstilskudd',
         JOBBK: 'Jobbklubb',
         ARBTREN: 'Arbeidstrening',
+        PRAKSORD: 'Arbeidspraksis i ordinær virksomhet',
+        PRAKSKJERM: 'Arbeidspraksis i skjermet virksomhet',
         DIGIOPPARB: 'Digitalt oppfølgingstiltak for arbeidsledige (jobbklubb)',
         ARBFORB: 'Arbeidsforberedende trening (AFT)',
         ENKELAMO: 'Enkeltplass AMO',
