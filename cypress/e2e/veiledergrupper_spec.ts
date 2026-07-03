@@ -1,11 +1,13 @@
 import {kebabCase} from '../../src/utils/utils';
+import {FASTE_VEILEDERE} from '../../src/mocks/data/faste-veiledere';
 
 const gruppenavn = 'Voffvoff';
 const gruppenavnRedigert = 'Mjaumjau';
 const eksisterendeGruppenavn = 'Gruppen brukes til test la stå';
-const testnavn1 = 'Aalerud';
+const [, aasen, aalerud] = FASTE_VEILEDERE;
+const testnavn1 = aalerud.etternavn;
 const testnavn2 = 'Johansen';
-const testnavn3 = 'Aasen';
+const testnavn3 = aasen.etternavn;
 const minstEnVeileder = 'Du må legge til veiledere.';
 
 before('Start server', () => {
