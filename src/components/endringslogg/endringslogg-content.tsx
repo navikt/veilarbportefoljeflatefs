@@ -6,7 +6,10 @@ import {trackLinkClick} from './utils/utils';
 import {EndringsloggLink} from './endringslogg-link';
 import './endringslogg.css';
 import {PortableText} from '@portabletext/react';
-import {toDate} from '../../utils/dato-utils';
+import dayjs from 'dayjs';
+import 'dayjs/locale/nb';
+
+dayjs.locale('nb');
 
 interface EndringsloggContentProps {
     innleggsListe: EndringsloggEntryWithSeenStatus[];
@@ -38,13 +41,9 @@ export const EndringsloggContent = ({innleggsListe}: EndringsloggContentProps) =
     );
 };
 
-const isoTimeStringToDate = (dateString: string) => {
-    const date = toDate(dateString);
-    if (!date) {
-        return '';
-    }
-
-    return date.getDate() + '. ' + date.toLocaleString('no-NO', {year: 'numeric', month: 'long'}).toLowerCase();
+const formateDateMedMaanednavn = (dateString: string) => {
+    const date = dayjs(dateString).format('D. MMMM YY');
+    return date ? date : '';
 };
 
 const EndringsloggEntry = ({
@@ -67,7 +66,7 @@ const EndringsloggEntry = ({
                         'endringslogg-info-nye-notifikasjoner': !seen
                     })}
                 />
-                <Label size={'small'}>{isoTimeStringToDate(date!)}</Label>
+                <Label size={'small'}>{formateDateMedMaanednavn(date!)}</Label>
             </div>
             <div className={classNames('endringslogg-innhold', 'endringslogg-kolonne')}>
                 <Heading size="small" level="2">

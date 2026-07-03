@@ -29,6 +29,7 @@
     "@reduxjs/toolkit": "2.12.0",
     "browserslist": "4.28.2",
     "classnames": "2.5.1",
+    "dayjs": "^1.11.21",
     "formik": "2.4.9",
     "lodash.throttle": "4.1.1",
     "moment": "2.30.1",

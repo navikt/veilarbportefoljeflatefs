@@ -1,17 +1,16 @@
 import moment from 'moment';
 import {Maybe} from './types';
 import {SkjermingEtikettConfig} from '../model-interfaces';
+import dayjs from 'dayjs';
 
-const DATE_LOCALES = ['nb-no', 'nn-no', 'en-gb', 'en-us'];
-const DATE_FORMAT: Intl.DateTimeFormatOptions = {day: '2-digit', month: '2-digit', year: 'numeric'};
-const ISO_DATO_UTEN_TID_REGEX = /^\d{4}-\d{2}-\d{2}$/;
-const TIDLIGSTE_OPPFOLGINGSDATO = new Date('2017-12-04');
-
-export const erGyldigISODato = isoDato => Boolean(isoDato) && moment(isoDato, moment.ISO_8601).isValid();
-
-function erLocalDate(dato): boolean {
-    return dato.year && dato.monthValue && dato.dayOfMonth;
-}
+// Dayjs funksjoner:
+export const formaterDato = (dato: string | null | undefined) => {
+    if (!dato) {
+        return null;
+    }
+    const parsed = dayjs(dato);
+    return parsed.isValid() ? parsed.format('DD.MM.YYYY') : null;
+};
 
 export function toDate(dato): Maybe<Date> {
     if (dato === undefined || dato === null) {
@@ -31,25 +30,31 @@ export function toDate(dato): Maybe<Date> {
     return Number.isNaN(date.getTime()) ? null : date;
 }
 
-export function toDatePrettyPrint(dato): Maybe<string> {
-    const date = toDate(dato);
-    return date ? toDateString(date) : null;
+function erLocalDate(dato): boolean {
+    return dato.year && dato.monthValue && dato.dayOfMonth;
 }
+const ISO_DATO_UTEN_TID_REGEX = /^\d{4}-\d{2}-\d{2}$/;
 
-export const toDateString = (dato): string => {
-    const date = toDate(dato);
-
-    return date ? date.toLocaleDateString(DATE_LOCALES, DATE_FORMAT) : '';
-};
-
+// dato velgern
 export const dateToISODate = dato => {
     const parsetDato = moment.parseZone(dato);
     return dato && parsetDato.isValid() ? parsetDato.format('YYYY-MM-DD') : dato;
 };
 
-export function dateGreater(date1, date2) {
-    return moment(date1).isAfter(date2, 'day');
+export function validerDatoFelt(input, fra, valgfritt) {
+    let error;
+    const inputDato = moment(input);
+    const fraDato = moment(fra);
+    if (!valgfritt && !input) {
+        error = 'Du må angi en frist';
+    } else if (input && !erGyldigISODato(input)) {
+        error = 'Datoen du har oppgitt er ikke en gyldig dato';
+    } else if (fra && fraDato.isAfter(inputDato, 'day')) {
+        error = 'Fristen må være i dag eller senere';
+    }
+    return error;
 }
+export const erGyldigISODato = isoDato => Boolean(isoDato) && moment(isoDato, moment.ISO_8601).isValid();
 
 /**
  * Returnerer varighet (minutt) som tekst på formatet "[timer]t [minutt]min".
@@ -72,27 +77,14 @@ export function formaterVarighetSomTimerOgMinutt(varighetMinutter: number) {
     return timerString + mellomrom + minutterString;
 }
 
-export function validerDatoFelt(input, fra, valgfritt) {
-    let error;
-    const inputDato = moment(input);
-    const fraDato = moment(fra);
-    if (!valgfritt && !input) {
-        error = 'Du må angi en frist';
-    } else if (input && !erGyldigISODato(input)) {
-        error = 'Datoen du har oppgitt er ikke en gyldig dato';
-    } else if (fra && fraDato.isAfter(inputDato, 'day')) {
-        error = 'Fristen må være i dag eller senere';
-    }
-    return error;
-}
-
-export function oppfolgingStartetDato(dato: string): Maybe<Date> {
-    const oppfolgingStartetDato = toDate(dato);
+export function oppfolgingStartetDato(dato: string): Maybe<string> {
+    const tidligsteOppfolgingsdato = dayjs('2017-12-04');
+    const oppfolgingStartetDato = dayjs(dato);
     if (!oppfolgingStartetDato) {
         return null;
     }
 
-    return oppfolgingStartetDato < TIDLIGSTE_OPPFOLGINGSDATO ? TIDLIGSTE_OPPFOLGINGSDATO : oppfolgingStartetDato;
+    return oppfolgingStartetDato.isBefore(tidligsteOppfolgingsdato) ? '2017-12-04' : dato;
 }
 
 export function hentSkjermetInfo(egenAnsatt: boolean | null, skjermetTil: string | null): SkjermingEtikettConfig {
@@ -104,8 +96,8 @@ export function hentSkjermetInfo(egenAnsatt: boolean | null, skjermetTil: string
         };
     }
 
-    const daysUntil = moment(skjermetTil).diff(moment(), 'days');
-    const tittelVerdi = !skjermetTil ? 'Skjermet' : 'Skjermet til ' + moment(skjermetTil).format('DD.MM.YYYY');
+    const daysUntil = dayjs(skjermetTil).diff(dayjs(), 'days');
+    const tittelVerdi = !skjermetTil ? 'Skjermet' : 'Skjermet til ' + formaterDato(skjermetTil);
 
     if (daysUntil < 5) {
         return {
