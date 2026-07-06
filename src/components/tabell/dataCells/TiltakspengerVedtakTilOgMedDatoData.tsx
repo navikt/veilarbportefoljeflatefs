@@ -4,7 +4,7 @@ import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 
 export const TiltakspengerVedtakTilOgMedDatoData = ({bruker, valgteKolonner}: DataCellProps) => {
     const tilOgMedVedtaksdato = bruker.ytelser.tiltakspenger?.vedtaksdatoTilOgMed
-        ? new Date(bruker.ytelser.tiltakspenger.vedtaksdatoTilOgMed)
+        ? bruker.ytelser.tiltakspenger.vedtaksdatoTilOgMed
         : null;
 
     return (

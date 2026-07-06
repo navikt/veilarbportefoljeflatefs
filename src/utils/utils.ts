@@ -11,21 +11,6 @@ export function lag2Sifret(n: number): string {
     return n < 10 ? `0${n}` : `${n}`;
 }
 
-export function ukerIgjenTilUtlopsdato(utlopsdatoStr?: string): number | undefined {
-    if (!utlopsdatoStr) {
-        return undefined;
-    }
-
-    const utlopsdato = new Date(utlopsdatoStr);
-    if (Number.isNaN(utlopsdato.getTime())) {
-        return undefined;
-    }
-    const now = new Date();
-    const millisDiff = utlopsdato.getTime() - now.getTime();
-
-    return Math.round(millisDiff / (7 * 24 * 3600 * 1000));
-}
-
 export function ytelsestypetekst(brukerytelse: string) {
     if (brukerytelse === 'AAP_MAXTID') {
         return 'Ordinær';

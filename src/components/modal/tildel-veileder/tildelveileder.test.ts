@@ -4,6 +4,7 @@ import {
     harHuskelappSomVilBliSlettetFilter,
     ingentingHosBrukerVilBliSlettet
 } from './tildel-veileder-utils';
+import dayjs from 'dayjs';
 
 /** Minifisert utgåve av BrukerModell der vi berre har med felta som er relevant i testane */
 interface MiniBrukerModell {
@@ -24,7 +25,7 @@ describe('Testar logikk for tildeling av veileder', () => {
         const irrelevanteHuskelappProps = {
             huskelappId: '1',
             frist: null,
-            endretDato: new Date(),
+            endretDato: dayjs().format('YYYY-MM-DD'),
             endretAv: 'Z111111'
         };
 
