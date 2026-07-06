@@ -1,5 +1,4 @@
-import {ukerIgjenTilUtlopsdato} from './utils';
-import {fomraterTilNorskDateString, oppfolgingStartetDato} from './dato-utils';
+import {fomraterTilNorskDateString, oppfolgingStartetDato, ukerIgjenTilUtlopsdato} from './dato-utils';
 import {oppfolingsdatoEnsligeForsorgere} from './enslig-forsorger';
 import dayjs from 'dayjs';
 

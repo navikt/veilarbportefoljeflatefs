@@ -95,3 +95,13 @@ export function hentSkjermetInfo(egenAnsatt: boolean | null, skjermetTil: string
         };
     }
 }
+export function ukerIgjenTilUtlopsdato(utlopsdatoStr?: string): number | undefined {
+    if (!utlopsdatoStr) {
+        return undefined;
+    }
+    const utlopsdato = dayjs(utlopsdatoStr);
+    if (!utlopsdato.isValid()) {
+        return undefined;
+    }
+    return Math.round(utlopsdato.diff(dayjs(), 'week', true));
+}
