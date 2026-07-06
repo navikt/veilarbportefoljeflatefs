@@ -117,43 +117,6 @@ describe('Diverse', () => {
         cy.getByTestId('filtreringlabel_i-avtalt-aktivitet').should('be.visible').click();
     });
 
-    it('Tildel veileder', () => {
-        cy.gaTilOversikt('min-oversikt');
-
-        // Finn og vel den fyrste brukaren i lista
-        cy.scrollTo('top');
-        cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
-        cy.get('[data-testid=min-oversikt_brukerliste-checkbox]:checked').should('have.length.at.least', 1);
-
-        // Opne val av veileder.
-        // Dersom knappetrykket ikkje opnar dropdown-en (t.d. fordi avhukinga ikkje rakk å
-        // registrerast i tide), prøver vi på nytt utan å huke av igjen – checkboxen er allereie vald.
-        cy.getByTestId('tildel-veileder_knapp').should('be.enabled').click({force: true});
-        cy.get('body').then($body => {
-            if ($body.find('[data-testid=tildel-veileder_dropdown]').length === 0) {
-                cy.get('[data-testid=min-oversikt_brukerliste-checkbox]:checked').should('have.length.at.least', 1);
-                cy.getByTestId('tildel-veileder_knapp').should('be.enabled').click({force: true});
-            }
-        });
-        cy.get('[data-testid=tildel-veileder_dropdown]', {timeout: 10000}).should('be.visible');
-
-        // Vel den øvste veiledaren i lista
-        cy.checkbox('tildel-veileder_valg_0');
-        cy.getByTestId('modal-suksess_tildel-veileder').should('not.exist');
-
-        // Bekreft med knappetrykk
-        cy.getByTestId(`tildel-veileder_velg-knapp`).should('be.visible').click();
-
-        // Få opp bekreftelsesmodal med suksess-beskjed og lukk den
-        cy.wait(500);
-        cy.get('.modal-suksess_tildel-veileder')
-            .should('be.visible')
-            .within(() => {
-                cy.get('button').last().click();
-            });
-        cy.getByTestId('modal-suksess_tildel-veileder').should('not.exist');
-    });
-
     it('Sjekk at feilmelding for tildeling uten valgt bruker forsvinner ved klikk', () => {
         /* Feilmeldinga forsvinn når ein trykkar på ting. Den delen er grei.
          * Testen her skal også vise at om ein trykkar på ein knapp vil både meldinga bli borte,

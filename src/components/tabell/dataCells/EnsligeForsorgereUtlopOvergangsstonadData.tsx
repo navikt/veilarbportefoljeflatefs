@@ -4,7 +4,7 @@ import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
 
 export const EnsligeForsorgereUtlopOvergangsstonadData = ({bruker, valgteKolonner}: DataCellProps) => {
     const overgangsstonadUtlopsdato = bruker.ytelser.ensligeForsorgereOvergangsstonad?.utlopsDato
-        ? new Date(bruker.ytelser.ensligeForsorgereOvergangsstonad?.utlopsDato)
+        ? bruker.ytelser.ensligeForsorgereOvergangsstonad?.utlopsDato
         : null;
 
     return (
