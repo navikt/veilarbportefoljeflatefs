@@ -1,5 +1,5 @@
 import {ukerIgjenTilUtlopsdato} from './utils';
-import {formaterDato, oppfolgingStartetDato} from './dato-utils';
+import {fomraterTilNorskDateString, oppfolgingStartetDato} from './dato-utils';
 import {oppfolingsdatoEnsligeForsorgere} from './enslig-forsorger';
 import dayjs from 'dayjs';
 
@@ -38,7 +38,7 @@ describe('Date utils', () => {
             const barnEttHalvtAar = yngsteBarnFodselsdag.clone().add(6, 'months').format('YYYY-MM-DD');
 
             expect(oppfolingsdatoEnsligeForsorgere(yngsteBarnFodselsdag)).toBe(
-                `${formaterDato(barnEttHalvtAar)} (Barn 6 mnd)`
+                `${fomraterTilNorskDateString(barnEttHalvtAar)} (Barn 6 mnd)`
             );
         });
 
@@ -48,7 +48,7 @@ describe('Date utils', () => {
             const barnEttHalvtAar = yngsteBarnFodselsdag.clone().add(6, 'months').format('YYYY-MM-DD');
 
             expect(oppfolingsdatoEnsligeForsorgere(yngsteBarnFodselsdag)).toBe(
-                `${formaterDato(barnEttHalvtAar)} (Barn 6 mnd)`
+                `${fomraterTilNorskDateString(barnEttHalvtAar)} (Barn 6 mnd)`
             );
         });
 
@@ -58,7 +58,7 @@ describe('Date utils', () => {
             const barnEttAar = yngsteBarnFodselsdag.add(1, 'year').format('YYYY-MM-DD');
 
             expect(oppfolingsdatoEnsligeForsorgere(yngsteBarnFodselsdag)).toBe(
-                `${formaterDato(barnEttAar)} (Barn 1 år)`
+                `${fomraterTilNorskDateString(barnEttAar)} (Barn 1 år)`
             );
         });
 
@@ -68,7 +68,7 @@ describe('Date utils', () => {
             const barnEttAar = yngsteBarnFodselsdag.clone().add(6, 'months').format('YYYY-MM-DD');
 
             expect(oppfolingsdatoEnsligeForsorgere(yngsteBarnFodselsdag)).toBe(
-                `${formaterDato(barnEttAar)} (Barn 6 mnd)`
+                `${fomraterTilNorskDateString(barnEttAar)} (Barn 6 mnd)`
             );
         });
 
@@ -78,7 +78,7 @@ describe('Date utils', () => {
             const barnEttAar = yngsteBarnFodselsdag.clone().add(1, 'years').format('YYYY-MM-DD');
 
             expect(oppfolingsdatoEnsligeForsorgere(yngsteBarnFodselsdag)).toBe(
-                `${formaterDato(barnEttAar)} (Barn 1 år)`
+                `${fomraterTilNorskDateString(barnEttAar)} (Barn 1 år)`
             );
         });
     });

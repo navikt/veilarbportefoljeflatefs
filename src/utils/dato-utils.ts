@@ -1,10 +1,8 @@
-import moment from 'moment';
 import {Maybe} from './types';
 import {SkjermingEtikettConfig} from '../model-interfaces';
 import dayjs from 'dayjs';
 
-// Dayjs funksjoner:
-export const formaterDato = (dato: string | null | undefined) => {
+export const fomraterTilNorskDateString = (dato: Maybe<string>) => {
     if (!dato) {
         return null;
     }
@@ -12,49 +10,27 @@ export const formaterDato = (dato: string | null | undefined) => {
     return parsed.isValid() ? parsed.format('DD.MM.YYYY') : null;
 };
 
-export function toDate(dato): Maybe<Date> {
-    if (dato === undefined || dato === null) {
-        return null;
-    }
-
-    if (erLocalDate(dato)) {
-        return new Date(Date.UTC(dato.year, dato.monthValue - 1, dato.dayOfMonth));
-    }
-
-    if (typeof dato === 'string' && ISO_DATO_UTEN_TID_REGEX.test(dato)) {
-        const [year, month, day] = dato.split('-').map(Number);
-        return new Date(Date.UTC(year, month - 1, day));
-    }
-
-    const date = new Date(dato);
-    return Number.isNaN(date.getTime()) ? null : date;
-}
-
-function erLocalDate(dato): boolean {
-    return dato.year && dato.monthValue && dato.dayOfMonth;
-}
-const ISO_DATO_UTEN_TID_REGEX = /^\d{4}-\d{2}-\d{2}$/;
-
-// dato velgern
-export const dateToISODate = dato => {
-    const parsetDato = moment.parseZone(dato);
-    return dato && parsetDato.isValid() ? parsetDato.format('YYYY-MM-DD') : dato;
-};
-
+// dato velgeren
 export function validerDatoFelt(input, fra, valgfritt) {
     let error;
-    const inputDato = moment(input);
-    const fraDato = moment(fra);
+    const inputDato = dayjs(input);
+    const fraDato = dayjs(fra);
+
     if (!valgfritt && !input) {
         error = 'Du må angi en frist';
-    } else if (input && !erGyldigISODato(input)) {
+    } else if (input && !inputDato.isValid()) {
         error = 'Datoen du har oppgitt er ikke en gyldig dato';
     } else if (fra && fraDato.isAfter(inputDato, 'day')) {
         error = 'Fristen må være i dag eller senere';
     }
     return error;
 }
-export const erGyldigISODato = isoDato => Boolean(isoDato) && moment(isoDato, moment.ISO_8601).isValid();
+
+export const formaterDateTilIsoDateString = (dato?: Date | string) => {
+    if (!dato) return dato;
+    const parsed = dayjs(dato);
+    return parsed.isValid() ? parsed.format('YYYY-MM-DD') : undefined;
+};
 
 /**
  * Returnerer varighet (minutt) som tekst på formatet "[timer]t [minutt]min".
@@ -97,7 +73,7 @@ export function hentSkjermetInfo(egenAnsatt: boolean | null, skjermetTil: string
     }
 
     const daysUntil = dayjs(skjermetTil).diff(dayjs(), 'days');
-    const tittelVerdi = !skjermetTil ? 'Skjermet' : 'Skjermet til ' + formaterDato(skjermetTil);
+    const tittelVerdi = !skjermetTil ? 'Skjermet' : 'Skjermet til ' + fomraterTilNorskDateString(skjermetTil);
 
     if (daysUntil < 5) {
         return {

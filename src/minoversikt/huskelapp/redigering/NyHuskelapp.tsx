@@ -4,7 +4,7 @@ import {HuskelappInfoAlert} from './HuskelappInfoAlert';
 import {FormikTekstArea} from '../../../components/formik/formik-tekstarea';
 import {FormikDatoVelger} from '../../../components/formik/formik-datovelger/formik-datovelger';
 import {HuskelappModell} from '../../../typer/bruker-modell';
-import {formaterDato} from '../../../utils/dato-utils';
+import {fomraterTilNorskDateString} from '../../../utils/dato-utils';
 import './rediger-huskelapp.css';
 
 interface Props {
@@ -41,7 +41,7 @@ export const NyHuskelapp = ({huskelapp, onSubmit, setHuskelappEndret}: Props) =>
             </Formik>
             {huskelapp && (
                 <Detail>
-                    <i>{`Endret ${formaterDato(huskelapp?.endretDato)} av ${huskelapp?.endretAv}`}</i>
+                    <i>{`Endret ${fomraterTilNorskDateString(huskelapp?.endretDato)} av ${huskelapp?.endretAv}`}</i>
                 </Detail>
             )}
             <HuskelappInfoAlert />

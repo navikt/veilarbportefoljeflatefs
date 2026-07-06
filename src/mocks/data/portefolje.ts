@@ -1,4 +1,3 @@
-import moment from 'moment';
 import {fakerNB_NO as faker} from '@faker-js/faker';
 import {veiledere} from './veiledere';
 import {hendelserLabels} from '../../filtrering/filter-konstanter';
@@ -32,6 +31,7 @@ import {
 import {rnd} from '../utils';
 import {MOCK_CONFIG} from '../constants';
 import {MoteplanModell} from '../../typer/moteplan';
+import dayjs from 'dayjs';
 
 faker.seed(MOCK_CONFIG.seed);
 
@@ -143,16 +143,16 @@ export const lagHuskelapp = (): HuskelappModell | null => {
     return {
         huskelappId: huskeklappId,
         kommentar: '\n\n' + lagOverskrift() + '\n\nDette skal bort ',
-        frist: moment().add(rnd(0, 20), 'days').add(rnd(0, 23), 'hours').toDate(),
+        frist: dayjs().add(rnd(0, 20), 'days').format('YYYY-MM-DD'),
         enhetId: maybeHuskelapp > 0.7 ? '0220' : '1234',
         endretAv: 'Meg selv',
-        endretDato: moment().subtract(rnd(0, 20), 'days').subtract(rnd(0, 23), 'hours').toDate()
+        endretDato: dayjs().subtract(rnd(0, 20), 'days').format('YYYY-MM-DD')
     };
 };
 
 const lagTiltakshendelse = (): TiltakshendelseModell => ({
     id: '54f06061-4383-417d-a063-1c4fc4701a78',
-    opprettet: new Date(),
+    opprettet: dayjs().format('YYYY-MM-DD'),
     tekst: 'Forslag: Avslutt deltakelse',
     lenke: 'https://www.nav.no/54f06061-4383-417d-a063-1c4fc4701a78',
     tiltakstype: 'ARBFORB'
@@ -187,41 +187,41 @@ function lagVedtakUtkast(): Utkast14a | null {
 
 const lagGjeldende14aVedtak = (): GjeldendeVedtak14aModell | null => {
     const maybe14aVedtak = rnd(0, 1);
-    const today = new Date();
+    const today = dayjs();
 
     if (maybe14aVedtak < 0.15) {
         return {
             innsatsgruppe: InnsatsgruppeGjeldendeVedtak14a.GRADERT_VARIG_TILPASSET_INNSATS,
             hovedmal: Hovedmal.BEHOLDE_ARBEID,
-            fattetDato: new Date(today.setMonth(today.getDay() - 5))
+            fattetDato: today.subtract(5, 'day').format('YYYY-MM-DD')
         };
     }
     if (maybe14aVedtak < 0.3) {
         return {
             innsatsgruppe: InnsatsgruppeGjeldendeVedtak14a.SPESIELT_TILPASSET_INNSATS,
             hovedmal: Hovedmal.OKE_DELTAKELSE,
-            fattetDato: new Date(today.setMonth(today.getDay() - 14))
+            fattetDato: today.subtract(14, 'day').format('YYYY-MM-DD')
         };
     }
     if (maybe14aVedtak < 0.45) {
         return {
             innsatsgruppe: InnsatsgruppeGjeldendeVedtak14a.SITUASJONSBESTEMT_INNSATS,
             hovedmal: Hovedmal.SKAFFE_ARBEID,
-            fattetDato: new Date(today.setMonth(today.getDay() - 9))
+            fattetDato: today.subtract(9, 'day').format('YYYY-MM-DD')
         };
     }
     if (maybe14aVedtak < 0.6) {
         return {
             innsatsgruppe: InnsatsgruppeGjeldendeVedtak14a.STANDARD_INNSATS,
             hovedmal: Hovedmal.SKAFFE_ARBEID,
-            fattetDato: new Date(today.setMonth(today.getDay() - 7))
+            fattetDato: today.subtract(7, 'day').format('YYYY-MM-DD')
         };
     }
     if (maybe14aVedtak < 0.75) {
         return {
             innsatsgruppe: InnsatsgruppeGjeldendeVedtak14a.VARIG_TILPASSET_INNSATS,
             hovedmal: Hovedmal.SKAFFE_ARBEID,
-            fattetDato: new Date(today.setMonth(today.getDay() - 20))
+            fattetDato: today.subtract(20, 'day').format('YYYY-MM-DD')
         };
     }
     return null;
@@ -229,19 +229,19 @@ const lagGjeldende14aVedtak = (): GjeldendeVedtak14aModell | null => {
 
 const lagHendelse = (): HendelseInnhold | null => {
     const maybeHendelse = rnd(0, 1);
-    const today = new Date();
+    const today = dayjs();
 
     if (maybeHendelse < 0.25) {
         return {
             beskrivelse: 'Bruker har et utgått varsel',
-            dato: new Date(today.setMonth(today.getDay() - 4)).toString(),
+            dato: today.subtract(4, 'day').format('YYYY-MM-DD'),
             lenke: 'https://veilarbpersonflate.intern.dev.nav.no/aktivitetsplan'
         };
     }
     if (maybeHendelse < 0.5) {
         return {
             beskrivelse: 'Bruker har et udelt samtalereferat',
-            dato: new Date(today.setMonth(today.getDay() - 7)).toString(),
+            dato: today.subtract(7, 'day').format('YYYY-MM-DD'),
             lenke: 'https://veilarbpersonflate.intern.dev.nav.no/aktivitetsplan'
         };
     }
@@ -262,8 +262,8 @@ const lagAapKelvinData = (): AapKelvinData | null => {
     };
 
     return {
-        vedtaksdatoTilOgMed: randomDate({past: true, withoutTimestamp: true}),
-        maksdato: randomDate({past: false, withoutTimestamp: true}),
+        vedtaksdatoTilOgMed: randomDate({past: true}),
+        maksdato: randomDate({past: false}),
         rettighetstype: tilfeldigRettighetstype()
     };
 };
@@ -276,7 +276,7 @@ const lagTiltakspengerData = (): TiltakspengerData | null => {
     };
 
     return {
-        vedtaksdatoTilOgMed: randomDate({past: true, withoutTimestamp: true}),
+        vedtaksdatoTilOgMed: randomDate({past: true}),
         rettighet: tilfeldigRettigheter()
     };
 };
@@ -290,8 +290,8 @@ const lagDagpengerData = (): DagpengerData | null => {
     const randomNumber = rnd(0, 1);
 
     return {
-        datoStans: randomNumber > 0.3 ? randomDate({past: false, withoutTimestamp: true}) : null,
-        resterendeDager: rnd(2, 500).toString() + ' dager (per ' + randomDate({past: false, withoutTimestamp: true}),
+        datoStans: randomNumber > 0.3 ? randomDate({past: false}) : null,
+        resterendeDager: rnd(2, 500).toString() + ' dager (per ' + randomDate({past: false}),
         rettighetstype: tilfeldigRettigheter()
     };
 };
@@ -304,10 +304,10 @@ const lagUngdomsprogramData = () => {
     }
 
     return {
-        startdato: randomDate({past: true, withoutTimestamp: true}),
-        maksdato: randomDate({past: false, withoutTimestamp: true}),
+        startdato: randomDate({past: true}),
+        maksdato: randomDate({past: false}),
         rettighet: Math.random() > 0.5 ? 'Ordinær' : 'Unntak',
-        sluttdato: randomDate({past: false, withoutTimestamp: true})
+        sluttdato: randomDate({past: false})
     };
 };
 
@@ -327,14 +327,14 @@ const lagGeografiskBosted = (): GeografiskBosted => {
         bostedKommune: hentBostedKommune(),
         bostedBydel: hentBostedBydel(),
         bostedKommuneUkjentEllerUtland: '-',
-        bostedSistOppdatert: randomDate({past: true, withoutTimestamp: true})
+        bostedSistOppdatert: randomDate({past: true})
     };
 };
 
 const lagMeldingerVenterPaSvar = (): MeldingerVenterPaSvar => {
     return {
-        datoMeldingVenterPaNav: randomDate({past: true, withoutTimestamp: true}),
-        datoMeldingVenterPaBruker: randomDate({past: true, withoutTimestamp: true})
+        datoMeldingVenterPaNav: randomDate({past: true}),
+        datoMeldingVenterPaBruker: randomDate({past: true})
     };
 };
 
@@ -370,7 +370,7 @@ const lagSisteEndringAvBruker = (): SisteEndringAvBruker | null => {
     const randomSisteEndring = randomEndring();
 
     return {
-        tidspunkt: randomDate({past: true, withoutTimestamp: true}),
+        tidspunkt: randomDate({past: true}),
         kategori: randomSisteEndring,
         aktivitetId: '12345'
     };
@@ -378,8 +378,8 @@ const lagSisteEndringAvBruker = (): SisteEndringAvBruker | null => {
 
 const lagAktiviteterAvtaltMedNav = (): AktiviteterAvtaltMedNav => {
     return {
-        nesteUtlopsdatoForAlleAktiviteter: randomDate({past: false, withoutTimestamp: true}),
-        nesteUtlopsdatoForFiltrerteAktiviteter: randomDate({past: false, withoutTimestamp: true}),
+        nesteUtlopsdatoForAlleAktiviteter: randomDate({past: false}),
+        nesteUtlopsdatoForFiltrerteAktiviteter: randomDate({past: false}),
         nyesteUtlopteAktivitet: null,
         aktivitetStart: null,
         nesteAktivitetStart: null,
@@ -389,7 +389,7 @@ const lagAktiviteterAvtaltMedNav = (): AktiviteterAvtaltMedNav => {
 
 const lagMoteMedNav = (): MoteMedNavIDag | null => {
     const harMoteMedNavIDag = Math.random() < 0.3;
-    const klokkeslett = moment(randomDateInNearFuture(), 'YYYY-MM-DD HH:mm').format('HH:mm');
+    const klokkeslett = dayjs(randomDateInNearFuture()).format('HH:mm');
     const varighetMinutter = randomMotevarighet();
 
     if (harMoteMedNavIDag) {
@@ -422,7 +422,7 @@ function lagBruker(): BrukerModell {
         tolkebehov: lagTolbebehov(),
         barnUnder18AarData: hentBarnUnder18Aar(),
         oppfolgingStartdato: faker.date.between({from: new Date('2015-01-01'), to: new Date()}).toISOString(),
-        tildeltTidspunkt: randomDate({past: true, withoutTimestamp: true}),
+        tildeltTidspunkt: randomDate({past: true}),
         veilederId: veilederId,
         egenAnsatt: random_egenAnsatt,
         skjermetTil: random_harSkjermetTil ? randomDateInNearFuture() : '',
@@ -432,7 +432,7 @@ function lagBruker(): BrukerModell {
         aktiviteterAvtaltMedNav: lagAktiviteterAvtaltMedNav(),
         moteMedNavIDag: lagMoteMedNav(),
         sisteEndringAvBruker: lagSisteEndringAvBruker(),
-        utdanningOgSituasjonSistEndret: randomDate({past: false, withoutTimestamp: true}),
+        utdanningOgSituasjonSistEndret: randomDate({past: false}),
         nesteSvarfristCvStillingFraNav: '2023-06-12',
         ytelser: lagYtelser(),
         vedtak14a: lagVedtak14a(),
@@ -522,21 +522,21 @@ const lagTolbebehov = (): Tolkebehov => {
         return {
             talespraaktolk: tilfeldigSprak(),
             tegnspraaktolk: '',
-            sistOppdatert: randomDate({past: true, withoutTimestamp: true})
+            sistOppdatert: randomDate({past: true})
         };
     } else if (skalHaTolkebehov < 2) {
         // Bare tegnspråktolk
         return {
             talespraaktolk: '',
             tegnspraaktolk: tilfeldigSprak(),
-            sistOppdatert: randomDate({past: true, withoutTimestamp: true})
+            sistOppdatert: randomDate({past: true})
         };
     } else if (skalHaTolkebehov < 3) {
         // Både tegn- og talespråktolk
         return {
             talespraaktolk: tilfeldigSprak(),
             tegnspraaktolk: tilfeldigSprak(),
-            sistOppdatert: randomDate({past: true, withoutTimestamp: true})
+            sistOppdatert: randomDate({past: true})
         };
     } else {
         // Ingen tolkebehov
@@ -580,27 +580,21 @@ const randomEndring = () => {
 interface RandomDateProps {
     past: boolean;
     /** Returns a date without timestamp, formatted as YYYY-MM-DD*/
-    withoutTimestamp?: boolean;
+    withTimestamp?: boolean;
 }
 
-const randomDate = ({past, withoutTimestamp = false}: RandomDateProps) => {
-    const dag = rnd(1, 31);
-    const mnd = rnd(1, 12);
-    let ar = rnd(0, 4) + new Date().getFullYear();
-    if (past) {
-        ar = -rnd(0, 4) + new Date().getFullYear();
-    }
-    const date = new Date(ar, mnd - 1, dag).toISOString();
+const randomDate = ({past, withTimestamp = true}: RandomDateProps) => {
+    const yearOffset = past ? -rnd(0, 4) : rnd(0, 4);
+    const date = dayjs()
+        .add(yearOffset, 'year')
+        .month(rnd(1, 12) - 1)
+        .date(rnd(1, 31));
 
-    if (withoutTimestamp) {
-        return date.slice(0, 10); // End slice at 10 to only get the "YYYY-MM-DD"-part of the ISO-date-string
-    }
-
-    return date;
+    return withTimestamp ? date.format('YYYY-MM-DD HH:ss') : date.format('YYYY-MM-DD');
 };
 
 const randomDateInNearFuture = () => {
-    return moment()
+    return dayjs()
         .add(rnd(0, 20), 'days')
         .add(rnd(0, 23), 'hours')
         .add(rnd(10, 50), 'minutes')
@@ -623,7 +617,7 @@ export function hentHuskelappForBruker(fnr: string, enhetId: string) {
         brukerFnr: fnr,
         kommentar:
             '\n\n\n\n   HEIII   \nasdfølkjasdølfkajsdøflkajsdølfjaksdfølajskdøflajsdølfkjasødlfjaøsldjfølasjdølfjasøjldfjaøldf',
-        frist: moment().add(rnd(0, 20), 'days').add(rnd(0, 23), 'hours').format('YYYY-MM-DD'),
+        frist: dayjs().add(rnd(0, 20), 'days').add(rnd(0, 23), 'hours').format('YYYY-MM-DD'),
         endretAv: 'Meg selv'
     };
 }
@@ -715,8 +709,8 @@ const lagRandomOvergangsstonadForEnsligForsorger = (): EnsligeForsorgereOvergang
     return {
         vedtaksPeriodetype: hentRandomVedtaksperiodeType(),
         harAktivitetsplikt: hentRandomAktivitetsplikt(),
-        utlopsDato: new Date(randomDate({past: false, withoutTimestamp: true})),
-        yngsteBarnsFodselsdato: new Date(randomDate({past: false, withoutTimestamp: true}))
+        utlopsDato: randomDate({past: false}),
+        yngsteBarnsFodselsdato: randomDate({past: false})
     };
 };
 

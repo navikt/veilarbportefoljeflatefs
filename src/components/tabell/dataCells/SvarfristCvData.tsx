@@ -1,10 +1,10 @@
 import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 import {DataCellProps} from './DataCellProps';
-import {formaterDato} from '../../../utils/dato-utils';
+import {fomraterTilNorskDateString} from '../../../utils/dato-utils';
 
 export const SvarfristCvData = ({bruker, valgteKolonner}: DataCellProps) => {
-    const formatertDato = formaterDato(bruker.nesteSvarfristCvStillingFraNav);
+    const formatertDato = fomraterTilNorskDateString(bruker.nesteSvarfristCvStillingFraNav);
 
     return (
         <TekstDataCellType
