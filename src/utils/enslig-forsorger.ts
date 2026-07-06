@@ -7,12 +7,15 @@ export const mapOmAktivitetsPlikt = (aktivitetsplikt?: boolean): string => {
     return aktivitetsplikt ? 'Aktivitetsplikt' : 'Ikke aktivitetsplikt';
 };
 
-export const oppfolingsdatoEnsligeForsorgere = (yngsteBarsFoedselsdato?: string) => {
-    if (!yngsteBarsFoedselsdato) {
+export const oppfolingsdatoEnsligeForsorgere = (yngsteBarnsFoedselsdato?: string) => {
+    if (!yngsteBarnsFoedselsdato) {
         return '';
     }
 
-    const foedselsdatoDayjs = dayjs(yngsteBarsFoedselsdato);
+    const foedselsdatoDayjs = dayjs(yngsteBarnsFoedselsdato);
+    if (!foedselsdatoDayjs.isValid()) {
+        return 'Ugyldig dato';
+    }
 
     if (dayjs().diff(foedselsdatoDayjs, 'month') < 6) {
         return `${foedselsdatoDayjs.add(6, 'month').format('DD.MM.YYYY')} (Barn 6 mnd)`;

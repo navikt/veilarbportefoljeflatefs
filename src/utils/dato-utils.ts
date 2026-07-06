@@ -56,7 +56,7 @@ export function formaterVarighetSomTimerOgMinutt(varighetMinutter: number) {
 export function oppfolgingStartetDato(dato: string): Maybe<string> {
     const tidligsteOppfolgingsdato = dayjs('2017-12-04');
     const oppfolgingStartetDato = dayjs(dato);
-    if (!oppfolgingStartetDato) {
+    if (!oppfolgingStartetDato.isValid()) {
         return null;
     }
 

@@ -583,14 +583,14 @@ interface RandomDateProps {
     withTimestamp?: boolean;
 }
 
-const randomDate = ({past, withTimestamp = true}: RandomDateProps) => {
+const randomDate = ({past, withTimestamp = false}: RandomDateProps) => {
     const yearOffset = past ? -rnd(0, 4) : rnd(0, 4);
     const date = dayjs()
         .add(yearOffset, 'year')
         .month(rnd(1, 12) - 1)
         .date(rnd(1, 31));
 
-    return withTimestamp ? date.format('YYYY-MM-DD HH:ss') : date.format('YYYY-MM-DD');
+    return withTimestamp ? date.format('YYYY-MM-DD HH:mm') : date.format('YYYY-MM-DD');
 };
 
 const randomDateInNearFuture = () => {

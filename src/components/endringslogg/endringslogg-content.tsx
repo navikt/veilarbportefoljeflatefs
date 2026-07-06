@@ -42,8 +42,8 @@ export const EndringsloggContent = ({innleggsListe}: EndringsloggContentProps) =
 };
 
 const formateDateMedMaanednavn = (dateString: string) => {
-    const date = dayjs(dateString).format('D. MMMM YY');
-    return date ? date : '';
+    const parsed = dayjs(dateString);
+    return parsed.isValid() ? parsed.format('D. MMMM YYYY') : '';
 };
 
 const EndringsloggEntry = ({
