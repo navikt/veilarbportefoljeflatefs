@@ -1,10 +1,10 @@
 import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 import {DataCellProps} from './DataCellProps';
-import {fomraterTilNorskDateString} from '../../../utils/dato-utils';
+import {formaterTilNorskDateString} from '../../../utils/dato-utils';
 
 export const GjeldendeVedtak14aVedtaksdatoData = ({bruker, valgteKolonner}: DataCellProps) => {
-    const formatertDato = fomraterTilNorskDateString(bruker.vedtak14a.gjeldendeVedtak14a?.fattetDato);
+    const formatertDato = formaterTilNorskDateString(bruker.vedtak14a.gjeldendeVedtak14a?.fattetDato);
 
     return (
         <TekstDataCellType

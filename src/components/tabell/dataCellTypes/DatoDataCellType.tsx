@@ -1,7 +1,7 @@
 import {BodyShort} from '@navikt/ds-react';
 import {DataCellTypeProps} from './DataCellTypeProps';
 import {Maybe} from '../../../utils/types';
-import {fomraterTilNorskDateString} from '../../../utils/dato-utils';
+import {formaterTilNorskDateString} from '../../../utils/dato-utils';
 
 interface Props extends DataCellTypeProps {
     dato: Maybe<string>;
@@ -12,7 +12,7 @@ export function DatoDataCellType({dato, skalVises = true, className}: Props) {
         return null;
     }
 
-    const formatertDato = fomraterTilNorskDateString(dato);
+    const formatertDato = formaterTilNorskDateString(dato);
     if (!formatertDato) {
         return (
             //  Sørger med dette for at spanen tar akkurat like mye plass som et felt med dato

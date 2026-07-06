@@ -2,7 +2,7 @@ import {Maybe} from './types';
 import {SkjermingEtikettConfig} from '../model-interfaces';
 import dayjs from 'dayjs';
 
-export const fomraterTilNorskDateString = (dato: Maybe<string>) => {
+export const formaterTilNorskDateString = (dato: Maybe<string>) => {
     if (!dato) {
         return null;
     }
@@ -73,7 +73,7 @@ export function hentSkjermetInfo(egenAnsatt: boolean | null, skjermetTil: string
     }
 
     const daysUntil = dayjs(skjermetTil).diff(dayjs(), 'days');
-    const tittelVerdi = !skjermetTil ? 'Skjermet' : 'Skjermet til ' + fomraterTilNorskDateString(skjermetTil);
+    const tittelVerdi = !skjermetTil ? 'Skjermet' : 'Skjermet til ' + formaterTilNorskDateString(skjermetTil);
 
     if (daysUntil < 5) {
         return {
