@@ -232,11 +232,15 @@ export function slettHuskelapp(huskelappId: string) {
 }
 
 export function hentEnhetTiltak(enhetId) {
+    // eslint-disable-next-line no-console
+    console.log('hentEnhetTiltak for enhetId', enhetId);
     const url = `${VEILARBPORTEFOLJE_URL}/enhet/${enhetId}/tiltak`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
 export function hentTiltakstyper(enhetId) {
+    // eslint-disable-next-line no-console
+    console.log('hentTiltakstyper for enhetId', enhetId);
     const url = `${VEILARBPORTEFOLJE_URL}/enhet/${enhetId}/tiltakstyper`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
