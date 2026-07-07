@@ -65,11 +65,6 @@
     align-items: flex-end; /* Dyttar knappane til botnen når slettebekreftinga er synleg */
 }
 
-.veilarbportefoljeflatefs .ny-huskelapp-form .aksel-label {
-    /* !important er brukt for å overskrive hardkodinga av alle labels til 0.875rem i style.css */
-    font-size: var(--ax-font-size-medium) !important;
-}
-
 .rediger-huskelapp-modal.fiks-for-gammel-datovelger {
     /* Fiks som gjer heile datovelgaren synleg sjølv om han flyt ut over grensene til foreldremodalen. */
     /* Denne kan fjernast når vi ikkje bruker Datepicker frå nav-datovelger meir */

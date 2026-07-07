@@ -1,5 +1,5 @@
 .tour-modal {
-    padding: 0 !important;
+    padding: 0;
     background-color: var(--ax-bg-default);
     min-width: 33.25rem;
     max-width: 33.25rem;

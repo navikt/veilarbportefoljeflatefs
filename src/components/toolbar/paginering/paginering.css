@@ -6,7 +6,7 @@
 .veilarbportefoljeflatefs .paginering__knapp {
     border: 1px solid transparent;
     border-left: 1px solid #a0a0a0;
-    background-color: transparent !important;
+    background-color: transparent;
     width: 30%;
     padding: 0.25rem 0.5rem;
     border-radius: 0;

@@ -33,7 +33,7 @@
 }
 
 .veiledergruppe-modal__tekst {
-    margin: 0.5rem 0 !important;
+    margin: 0.5rem 0;
 }
 
 .veiledergruppe-modal__gruppenavntekst {
@@ -103,7 +103,7 @@
 }
 
 .veiledergruppe-modal__knappegruppe__slett {
-    margin-left: auto !important;
+    margin-left: auto;
 }
 
 .endringer-ikke-lagret-modal__knappegruppe {

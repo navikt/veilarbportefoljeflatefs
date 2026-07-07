@@ -519,7 +519,7 @@ GRID
 }
 
 .text--left {
-    text-align: left !important;
+    text-align: left;
 }
 
 .toolbar-container {
@@ -659,19 +659,19 @@ GRID
 }
 
 .veilarbportefoljeflatefs .aksel-alert__wrapper {
-    font-size: 0.875rem !important;
+    font-size: 0.875rem;
 }
 
 .veilarbportefoljeflatefs .aksel-body-short {
-    font-size: 0.875rem !important;
+    font-size: 0.875rem;
 }
 
 .veilarbportefoljeflatefs .skjemaelement__label {
-    font-size: 0.875rem !important;
+    font-size: 0.875rem;
 }
 
 .veilarbportefoljeflatefs .aksel-label {
-    font-size: 0.875rem !important;
+    font-size: 0.875rem;
 }
 
 @media (max-width: 1200px) {
