@@ -1,3 +1,5 @@
+import {FASTE_VEILEDERE} from '../../src/mocks/data/faste-veiledere';
+
 before('Start server', () => {
     cy.clearAllLocalStorage();
     cy.clearAllSessionStorage();
@@ -24,7 +26,8 @@ describe('Annen veileder', () => {
     });
 
     it('Søk veileder i veilederoversikt', () => {
-        const veilederSomfinnes = 'Olstad';
+        const [, , , olstad] = FASTE_VEILEDERE;
+        const veilederSomfinnes = olstad.etternavn;
         const veilederSomIkkeFinnes = 'Olstadzzz';
 
         cy.getByTestId('veilederoversikt_sok-veileder-input').click();

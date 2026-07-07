@@ -110,7 +110,7 @@ export enum Innsatsgruppe {
 
 export interface TiltakshendelseModell {
     id: string;
-    opprettet: Date;
+    opprettet: string;
     tekst: string;
     lenke: string;
     tiltakstype: string | null;
@@ -133,7 +133,7 @@ export interface Vedtak14a {
 export interface GjeldendeVedtak14aModell {
     innsatsgruppe: InnsatsgruppeGjeldendeVedtak14a;
     hovedmal: Hovedmal | null;
-    fattetDato: Date;
+    fattetDato: string;
 }
 
 export interface Utkast14a {
@@ -150,8 +150,8 @@ export interface Statsborgerskap {
 export interface EnsligeForsorgereOvergangsstonad {
     vedtaksPeriodetype: string;
     harAktivitetsplikt?: boolean;
-    utlopsDato: Date;
-    yngsteBarnsFodselsdato: Date;
+    utlopsDato: string;
+    yngsteBarnsFodselsdato: string;
 }
 
 export interface BarnUnder18AarModell {
@@ -170,9 +170,9 @@ export enum FargekategoriModell {
 
 export interface HuskelappModell {
     huskelappId: string | null;
-    frist?: Date | null;
+    frist?: string | null;
     kommentar?: string | null;
-    endretDato: Date | null;
+    endretDato: string | null;
     endretAv: string | null;
     enhetId: string | null;
 }
@@ -202,7 +202,7 @@ export interface HendelseInnhold {
 export interface Tolkebehov {
     talespraaktolk: string;
     tegnspraaktolk: string;
-    sistOppdatert: string | null; // LocalDate i backend
+    sistOppdatert: string | null;
 }
 
 export interface AapKelvinData {

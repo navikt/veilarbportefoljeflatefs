@@ -1,4 +1,3 @@
-import moment from 'moment';
 import {BrowserRouter} from 'react-router-dom';
 import {Routing} from './routing';
 import {Provider} from 'react-redux';
@@ -8,12 +7,6 @@ import {RedirectPortefolje} from './redirect-portefolje';
 import {useBrukeraktivitetTokenRefresh} from './hooks/use-brukeraktivitet-token-refresh';
 import {settSesjonStatusGyldig, settSesjonStatusUtlopt} from './ducks/informasjonsmelding';
 import {store} from './store';
-
-moment.locale('nb');
-
-moment.updateLocale('nb', {
-    monthsShort: ['jan', 'feb', 'mar', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'des']
-});
 
 function Application() {
     useBrukeraktivitetTokenRefresh(
@@ -25,7 +18,6 @@ function Application() {
         <Provider store={store}>
             <BrowserRouter
                 basename={import.meta.env.BASE_URL}
-                future={{v7_startTransition: true, v7_relativeSplatPath: true}}
             >
                 <InitialDataProvider>
                     <RedirectPortefolje>
