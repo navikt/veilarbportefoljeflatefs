@@ -16,6 +16,7 @@ export const VIS_FARGEKATEGORIER_I_ENHETENS_OVERSIKT =
     'veilarbportefoljeflatefs.vis_fargekategorier_i_enhetens_oversikt';
 export const BRUK_MAPPING_AV_AKTIVE_FILTERVALG_I_MINE_FILTRE =
     'veilarbportefoljeflatefs.bruk_mapping_av_aktive_filtervalg_i_mine_filtre';
+export const BRUK_TILTAKSAKTIVITET_FRA_AKTIVITETSPLAN = 'veilarbportefolje.bruk_tiltaksaktivitet_fra_aktivitetsplan';
 
 //HUSK Å LEGG TIL FEATURE-TOGGLE HER OGSÅ!!!!!!!!!
 export const PORTEFOLJE_FEATURES = [
@@ -23,5 +24,6 @@ export const PORTEFOLJE_FEATURES = [
     VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
     LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG,
     VIS_FARGEKATEGORIER_I_ENHETENS_OVERSIKT,
+    BRUK_TILTAKSAKTIVITET_FRA_AKTIVITETSPLAN,
     BRUK_MAPPING_AV_AKTIVE_FILTERVALG_I_MINE_FILTRE
 ];
