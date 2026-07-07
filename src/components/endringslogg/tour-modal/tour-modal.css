@@ -6,11 +6,6 @@
     border-radius: 6px;
 }
 
-.tour-modal.lukknapp {
-    top: 1.25rem;
-    right: 1.5rem;
-}
-
 .tour-modal__main--bilde {
     width: 100%;
     height: 100%;

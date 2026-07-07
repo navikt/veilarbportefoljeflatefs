@@ -15,11 +15,6 @@
     word-break: break-word;
 }
 
-.veilarbportefoljeflatefs .ord-brekk-alle {
-    hyphens: auto;
-    word-break: break-all;
-}
-
 .veilarbportefoljeflatefs .juster-tekst-venstre {
     text-align: left;
 }
@@ -598,15 +593,6 @@ GRID
     column-gap: var(--gap-mellom-sidebar-og-sokefeltkolonner);
     grid-template-columns: var(--sidebar-bredde) auto;
     grid-template-rows: auto auto auto;
-}
-
-.veilarbportefoljeflatefs .oversikt-sideinnhold .annen-veileder-varsel {
-    grid-column: 2;
-    grid-row: 1;
-    text-align: right;
-    margin: 0;
-    font-weight: bolder;
-    padding-right: 1rem;
 }
 
 .veilarbportefoljeflatefs .oversikt-sideinnhold .alertstripe__annen-veileder-varsel {

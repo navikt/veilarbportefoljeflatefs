@@ -4,10 +4,6 @@
 .veilarbportefoljeflatefs .sidebar__content-container .mine-filter__valgfelt .mine-filter__rad {
     margin-bottom: 5px;
 }
-.veilarbportefoljeflatefs .mine-filter-wrapper__tekst {
-    font-style: italic;
-    margin: 0.5rem 0;
-}
 .veilarbportefoljeflatefs .mine-filter-emptystate {
     text-align: left;
 }
@@ -24,15 +20,6 @@
     align-items: center;
 }
 .veilarbportefoljeflatefs .mine-filter_alertstripe {
-    display: flex;
-    justify-content: space-between;
-}
-.veilarbportefoljeflatefs .mine-filter_alertstripe .alertstripe_lukknapp {
-    height: 24px;
-    width: 24px;
-    border: none;
-}
-.veilarbportefoljeflatefs .mine-filter_alertstripe .alertstripe__tekst {
     display: flex;
     justify-content: space-between;
 }

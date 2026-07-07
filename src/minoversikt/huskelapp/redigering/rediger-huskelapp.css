@@ -38,10 +38,6 @@
     transform: translateY(-116%);
 }
 
-.rediger-huskelapp-modal .rediger-huskelapp-modal-pil {
-    margin: auto;
-}
-
 .rediger-huskelapp-modal .ny-huskelapp {
     flex-grow: 1;
     max-width: 26rem;
