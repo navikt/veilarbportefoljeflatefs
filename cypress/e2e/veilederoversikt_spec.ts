@@ -11,7 +11,6 @@ beforeEach('Gå til veilederoversikten', () => {
 });
 
 describe('Annen veileder', () => {
-
     it('Gå inn til annen veileders oversikt via tabellen', () => {
         // Sjekk at veilederoversikten er ferdig med å laste
         cy.getByTestId('veilederoversikt-tabell').should('be.visible');
