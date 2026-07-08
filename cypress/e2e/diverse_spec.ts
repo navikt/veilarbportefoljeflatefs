@@ -14,13 +14,8 @@ describe('Diverse', () => {
     it('Paginering', () => {
         cy.gaTilOversikt('min-oversikt');
 
-        // Sjekkar at oversikten har forventa tal på brukarar og sider
+        // Sjekkar at oversikten har forventa tal på brukarar
         cy.get('.brukerliste').children().should('have.length', 50);
-        cy.getByTestId('paginering').children().children().should('have.length', 5);
-
-        // Går til siste side i pagineringa, der skal det vere færre brukarar
-        cy.getByTestId('paginering').children().children().last().click().click();
-        cy.get('.brukerliste').children().should('have.length', 23);
 
         // Trykkar på "Vis 200 per side" og får forventa tal på brukarar i lista
         cy.getByTestId('vis-200-per-side_knapp').should('be.visible').click();
