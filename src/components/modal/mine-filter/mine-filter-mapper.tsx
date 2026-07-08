@@ -1,5 +1,5 @@
 import {LagretFilter, LagretFilterDTO} from '../../../ducks/lagret-filter';
-import {initialState as filtervalgInitialState} from '../../../ducks/filtrering';
+import {initialState, initialState as filtervalgInitialState} from '../../../ducks/filtrering';
 import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {AktiviteterFilternokler, AktiviteterValg} from '../../../filtrering/filter-konstanter';
 import {filtervalgValidators} from './mine-filter-validering-filtermodel-utils';
@@ -9,9 +9,7 @@ export function mapLagretFilterFraDTO(dto: LagretFilterDTO, brukAktiveFiltervalg
     return {
         filterNavn: dto.filterNavn,
         filterId: dto.filterId,
-        filterValg: brukAktiveFiltervalg
-            ? mapAktiveValgTilFiltermodell(dto.filterValg, dto.aktiveFilterValg)
-            : dto.filterValg,
+        filterValg: brukAktiveFiltervalg ? mapAktiveValgTilFiltermodell(dto.aktiveFilterValg) : dto.filterValg,
         sortOrder: dto.sortOrder,
         filterCleanup: dto.filterCleanup,
         aktiv: dto.aktiv,
@@ -19,13 +17,10 @@ export function mapLagretFilterFraDTO(dto: LagretFilterDTO, brukAktiveFiltervalg
     };
 }
 
-export function mapAktiveValgTilFiltermodell(
-    filtervalg: FiltervalgModell,
-    aktiveFilterValg: string | null | undefined
-): FiltervalgModell {
-    // midlertidig sjekk til databasen får populert data for alle brukere, default til opprinnelige filtervalg
+export function mapAktiveValgTilFiltermodell(aktiveFilterValg: string | null | undefined): FiltervalgModell {
+    // Noen filtre har ikke lengre verdier pga fjerning av gamle filtervalg, og da skal vi ikke kaste feil, men heller returnere default state
     if (!aktiveFilterValg) {
-        return {...filtervalg};
+        return {...initialState};
     }
 
     try {

@@ -4,7 +4,6 @@ import {
     AktiviteterAvtaltMedNav,
     AktiviteterFilternokler,
     AktiviteterValg,
-    alder,
     alleFargekategoriFilterAlternativer,
     barnUnder18Aar as barnUnder18AarKonst,
     cvJobbprofil,
@@ -43,9 +42,11 @@ const isStringArray = (v: unknown): v is string[] => Array.isArray(v) && v.every
 
 /** Sjekker at verdier kun er de som ligger i `tillate`. Returner undefined om input ikke er en liste. */
 const enumArray =
-    (tillate: readonly string[]): Validator =>
-    v =>
-        isStringArray(v) ? v.filter(x => tillate.includes(x)) : undefined;
+    (tillateEnums: readonly string[]): Validator =>
+    v => {
+        if (!isStringArray(v)) return undefined;
+        return v.every(x => tillateEnums.includes(x)) ? v : undefined;
+    };
 
 /** Aksepter en liste av strenger uten enum-sjekk (fritekst fra backend, f eks veileder-ID-er). */
 const stringArray: Validator = v => (isStringArray(v) ? v : undefined);
@@ -76,7 +77,7 @@ const aktiviteterValidator: Validator = v => {
 
 export const filtervalgValidators: Partial<Record<Filtervalg, Validator>> = {
     [Filtervalg.ferdigfilterListe]: enumArray(Object.keys(ferdigfilterListeLabelTekst)),
-    [Filtervalg.alder]: enumArray(Object.keys(alder)),
+    [Filtervalg.alder]: stringArray,
     [Filtervalg.kjonn]: nullableEnum(Object.keys(kjonn)),
     [Filtervalg.landgruppe]: enumArray(Object.keys(landgruppe)),
     [Filtervalg.foedeland]: stringArray,
