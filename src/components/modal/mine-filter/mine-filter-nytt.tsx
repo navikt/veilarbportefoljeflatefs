@@ -10,8 +10,8 @@ import {useRequestHandler} from '../../../hooks/use-request-handler';
 import {OversiktType} from '../../../ducks/ui/valgte-kolonner';
 import {SidebarTabs} from '../../../store/sidebar/sidebar-view-store';
 import {endreValgtSidebarTab} from '../../sidebar/sidebar';
-
 import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
+import {mapFiltermodellTilAktiveValgOgStringify} from './mine-filter-mapper';
 
 interface LagreNyttMineFilterProps {
     oversiktType: OversiktType;
@@ -40,7 +40,8 @@ export function LagreNyttMineFilter({lukkModal, oversiktType}: LagreNyttMineFilt
             dispatch(
                 lagreNyttFilter({
                     filterNavn: filterNavn,
-                    filterValg: filterValg
+                    filterValg: filterValg,
+                    aktiveFilterValg: mapFiltermodellTilAktiveValgOgStringify(filterValg)
                 })
             ).then(() => {
                 endreValgtSidebarTab({

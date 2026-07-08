@@ -1,6 +1,7 @@
 import {AppState} from '../reducer';
 import {hentFeatures} from '../middleware/api';
 import {
+    BRUK_MAPPING_AV_AKTIVE_FILTERVALG_I_MINE_FILTRE,
     DARKMODE,
     LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG,
     PORTEFOLJE_FEATURES,
@@ -18,6 +19,7 @@ const initalState: FeaturesState = {
     [DARKMODE]: false,
     [LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG]: false,
     [VIS_FARGEKATEGORIER_I_ENHETENS_OVERSIKT]: false,
+    [BRUK_MAPPING_AV_AKTIVE_FILTERVALG_I_MINE_FILTRE]: false,
     [BRUK_TILTAKSAKTIVITET_FRA_AKTIVITETSPLAN]: false
 };
 
