@@ -76,15 +76,15 @@ export const erGyldigFiltervalg = (filtervalg: string): filtervalg is Filtervalg
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 export interface FiltervalgModell {
     [Filtervalg.ferdigfilterListe]: string[];
-    [Filtervalg.alder]?: string[];
-    [Filtervalg.kjonn]?: null | string;
+    [Filtervalg.alder]: string[];
+    [Filtervalg.kjonn]: null | string;
     [Filtervalg.landgruppe]: string[];
     [Filtervalg.foedeland]: string[];
     [Filtervalg.fodselsdagIMnd]?: string[];
     [Filtervalg.formidlingsgruppe]?: string[];
     [Filtervalg.servicegruppe]?: string[];
     [Filtervalg.veiledere]: string[];
-    [Filtervalg.aktiviteter]?: AktiviteterFilternokler;
+    [Filtervalg.aktiviteter]: AktiviteterFilternokler;
     [Filtervalg.aktiviteterForenklet]: string[];
     [Filtervalg.tiltakstyper]: string[];
     [Filtervalg.navnEllerFnrQuery]: string;

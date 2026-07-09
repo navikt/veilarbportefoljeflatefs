@@ -1,64 +1,36 @@
-import moment from 'moment';
 import {Maybe} from './types';
 import {SkjermingEtikettConfig} from '../model-interfaces';
+import dayjs from 'dayjs';
 
-export const erGyldigISODato = isoDato => isoDato && moment(isoDato, moment.ISO_8601).isValid();
-
-function erLocalDate(dato): boolean {
-    return dato.year && dato.monthValue && dato.dayOfMonth;
-}
-
-export function toDate(dato): Maybe<Date> {
-    if (typeof dato === 'undefined' || dato === null) {
+export const formaterTilNorskDateString = (dato: Maybe<string>) => {
+    if (!dato) {
         return null;
     }
-    return erLocalDate(dato) ? new Date(dato.year, dato.monthValue - 1, dato.dayOfMonth) : new Date(dato);
-}
-
-export function toDatePrettyPrint(dato): Maybe<string> {
-    if (typeof dato === 'undefined' || dato === null) {
-        return null;
-    }
-
-    const date = toDate(dato);
-    if (!date) {
-        return null;
-    }
-
-    const days = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
-    const months = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
-    const years = date.getFullYear();
-
-    return `${days}.${months}.${years}`;
-}
-
-export const toDateString = (dato): string =>
-    new Date(dato).toLocaleDateString(['nb-no', 'nn-no', 'en-gb', 'en-us'], {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-    });
-
-export const dateToISODate = dato => {
-    const parsetDato = moment.parseZone(dato);
-    return dato && parsetDato.isValid() ? parsetDato.format('YYYY-MM-DD') : dato;
+    const parsed = dayjs(dato);
+    return parsed.isValid() ? parsed.format('DD.MM.YYYY') : null;
 };
 
-export function dateGreater(date1, date2) {
-    const year1 = date1.getFullYear();
-    const year2 = date2.getFullYear();
+// dato velgeren
+export function validerDatoFelt(input, fra, valgfritt) {
+    let error;
+    const inputDato = dayjs(input);
+    const fraDato = dayjs(fra);
 
-    const mon1 = date1.getMonth();
-    const mon2 = date2.getMonth();
-
-    const day1 = date1.getDate();
-    const day2 = date2.getDate();
-
-    if (year1 > year2) return true;
-    else if (year1 === year2 && mon1 > mon2) return true;
-
-    return year1 === year2 && mon1 === mon2 && day1 > day2;
+    if (!valgfritt && !input) {
+        error = 'Du må angi en frist';
+    } else if (input && !inputDato.isValid()) {
+        error = 'Datoen du har oppgitt er ikke en gyldig dato';
+    } else if (fra && fraDato.isAfter(inputDato, 'day')) {
+        error = 'Fristen må være i dag eller senere';
+    }
+    return error;
 }
+
+export const formaterDateTilIsoDateString = (dato?: Date | string) => {
+    if (!dato) return dato;
+    const parsed = dayjs(dato);
+    return parsed.isValid() ? parsed.format('YYYY-MM-DD') : undefined;
+};
 
 /**
  * Returnerer varighet (minutt) som tekst på formatet "[timer]t [minutt]min".
@@ -81,29 +53,14 @@ export function formaterVarighetSomTimerOgMinutt(varighetMinutter: number) {
     return timerString + mellomrom + minutterString;
 }
 
-export function validerDatoFelt(input, fra, valgfritt) {
-    let error;
-    const inputDato = moment(input);
-    const fraDato = moment(fra);
-    if (!valgfritt && !input) {
-        error = 'Du må angi en frist';
-    } else if (input && !erGyldigISODato(input)) {
-        error = 'Datoen du har oppgitt er ikke en gyldig dato';
-    } else if (fra && fraDato.isAfter(inputDato, 'day')) {
-        error = 'Fristen må være i dag eller senere';
-    }
-    return error;
-}
-
-export function oppfolgingStartetDato(dato: string): Maybe<Date> {
-    if (!dato) {
+export function oppfolgingStartetDato(dato: string): Maybe<string> {
+    const tidligsteOppfolgingsdato = dayjs('2017-12-04');
+    const oppfolgingStartetDato = dayjs(dato);
+    if (!oppfolgingStartetDato.isValid()) {
         return null;
     }
 
-    const oppfolgingStartetDato = new Date(dato);
-    const tidligsteDato = new Date('2017-12-04');
-
-    return oppfolgingStartetDato < tidligsteDato ? tidligsteDato : oppfolgingStartetDato;
+    return oppfolgingStartetDato.isBefore(tidligsteOppfolgingsdato) ? '2017-12-04' : dato;
 }
 
 export function hentSkjermetInfo(egenAnsatt: boolean | null, skjermetTil: string | null): SkjermingEtikettConfig {
@@ -115,8 +72,8 @@ export function hentSkjermetInfo(egenAnsatt: boolean | null, skjermetTil: string
         };
     }
 
-    const daysUntil = moment(skjermetTil).diff(moment(), 'days');
-    const tittelVerdi = !skjermetTil ? 'Skjermet' : 'Skjermet til ' + moment(skjermetTil).format('DD.MM.YYYY');
+    const daysUntil = dayjs(skjermetTil).diff(dayjs(), 'days');
+    const tittelVerdi = !skjermetTil ? 'Skjermet' : 'Skjermet til ' + formaterTilNorskDateString(skjermetTil);
 
     if (daysUntil < 5) {
         return {
@@ -137,4 +94,14 @@ export function hentSkjermetInfo(egenAnsatt: boolean | null, skjermetTil: string
             type: 'info'
         };
     }
+}
+export function ukerIgjenTilUtlopsdato(utlopsdatoStr?: string): number | undefined {
+    if (!utlopsdatoStr) {
+        return undefined;
+    }
+    const utlopsdato = dayjs(utlopsdatoStr);
+    if (!utlopsdato.isValid()) {
+        return undefined;
+    }
+    return Math.round(utlopsdato.diff(dayjs(), 'week', true));
 }

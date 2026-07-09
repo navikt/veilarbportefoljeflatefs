@@ -1,4 +1,3 @@
-import {fakerNB_NO as faker} from '@faker-js/faker';
 import {initialState} from '../../ducks/filtrering';
 import {veiledere} from './veiledere';
 import {LagretFilter} from '../../ducks/lagret-filter';
@@ -10,17 +9,11 @@ export const veiledergrupper = (): LagretFilter[] => {
     const veilederGruppe4 = veiledere.slice(16, 22).map(v => v.ident);
     const veilederGruppe5 = veiledere.slice(23, 27).map(v => v.ident);
 
-    const datointervall = {
-        from: new Date('2015-01-01'),
-        to: new Date()
-    };
-
     return [
         {
             filterNavn: 'Fantastic 4',
             filterId: 12,
             filterValg: {...initialState, veiledere: veilederGruppe1},
-            opprettetDato: faker.date.between(datointervall),
             sortOrder: null,
             filterCleanup: false,
             aktiv: true,
@@ -30,7 +23,6 @@ export const veiledergrupper = (): LagretFilter[] => {
             filterNavn: 'Prinsessegruppen',
             filterId: 13,
             filterValg: {...initialState, veiledere: veilederGruppe2},
-            opprettetDato: faker.date.between(datointervall),
             sortOrder: null,
             filterCleanup: false,
             aktiv: true,
@@ -40,7 +32,6 @@ export const veiledergrupper = (): LagretFilter[] => {
             filterNavn: 'Team Awesome',
             filterId: 14,
             filterValg: {...initialState, veiledere: veilederGruppe3},
-            opprettetDato: faker.date.between(datointervall),
             sortOrder: null,
             filterCleanup: false,
             aktiv: true,
@@ -50,7 +41,6 @@ export const veiledergrupper = (): LagretFilter[] => {
             filterNavn: 'Team VOFF',
             filterId: 15,
             filterValg: {...initialState, veiledere: veilederGruppe4},
-            opprettetDato: faker.date.between(datointervall),
             sortOrder: null,
             filterCleanup: false,
             aktiv: true,
@@ -60,7 +50,6 @@ export const veiledergrupper = (): LagretFilter[] => {
             filterNavn: 'Ungdomsavdelingen',
             filterId: 16,
             filterValg: {...initialState, veiledere: veilederGruppe5},
-            opprettetDato: faker.date.between(datointervall),
             sortOrder: null,
             filterCleanup: false,
             aktiv: true,
@@ -70,7 +59,6 @@ export const veiledergrupper = (): LagretFilter[] => {
             filterNavn: 'Gruppen brukes til test la stå',
             filterId: 17,
             filterValg: {...initialState, veiledere: veilederGruppe5},
-            opprettetDato: faker.date.between(datointervall),
             sortOrder: null,
             filterCleanup: true,
             aktiv: true,

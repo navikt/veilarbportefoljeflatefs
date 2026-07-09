@@ -1,5 +1,5 @@
 import {http, HttpResponse, RequestHandler} from 'msw';
-import {LagretFilter, SorteringOgId} from '../../ducks/lagret-filter';
+import {LagretFilter, LagretFilterDTO, SorteringOgId} from '../../ducks/lagret-filter';
 import {veiledergrupper} from '../data/veiledergrupper';
 import {mineFilter} from '../data/mine-filter';
 import {withAuth} from './auth';
@@ -67,7 +67,7 @@ export const veilarbfilterHandlers: RequestHandler[] = [
     http.put(
         '/veilarbfilter/api/minelagredefilter',
         withAuth(async ({request}) => {
-            const oppdaterFilterRequest = (await request.json()) as LagretFilter;
+            const oppdaterFilterRequest = (await request.json()) as LagretFilterDTO;
 
             let filterIndex = customMineFilter.findIndex(elem => elem.filterId === oppdaterFilterRequest.filterId);
             customMineFilter[filterIndex] = {...oppdaterFilterRequest, aktiv: true};
