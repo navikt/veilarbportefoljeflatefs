@@ -1,6 +1,6 @@
 .veilarbportefoljeflatefs-laster-modal {
-    overflow: hidden !important;
-    width: auto !important;
+    overflow: hidden;
+    width: auto;
 }
 .veilarbportefoljeflatefs-laster-modal .modal {
     outline: none;

@@ -1,14 +1,9 @@
 .tour-modal {
-    padding: 0 !important;
+    padding: 0;
     background-color: var(--ax-bg-default);
     min-width: 33.25rem;
     max-width: 33.25rem;
     border-radius: 6px;
-}
-
-.tour-modal.lukknapp {
-    top: 1.25rem;
-    right: 1.5rem;
 }
 
 .tour-modal__main--bilde {

@@ -2,29 +2,10 @@
     margin-bottom: 0.5rem;
 }
 
-.veiledergruppe-modal__form .typo-feilmelding {
-    max-width: 40rem;
-}
-
 .veiledergruppe-modal__form .checkbox-filterform__valg {
     max-height: 16rem;
     overflow-x: auto;
     padding: 0.5rem 0.5rem 0;
-}
-
-.veiledergruppe-modal__form .checkbox-filterform__valg__double {
-    display: grid;
-    max-height: 16rem;
-    overflow-x: auto;
-    padding: 0.5rem 0.5rem 0;
-}
-
-.veiledergruppe-modal__form .checkbox-filterform__valg-knapp {
-    margin-top: 1rem;
-}
-
-.veiledergruppe-modal__form .checkbox-filterform__under-valg {
-    padding: 0.5rem 0 0.5rem 0.5rem;
 }
 
 .veiledergruppe-modal__form .checkbox-filterform__alertstripe {
@@ -33,7 +14,7 @@
 }
 
 .veiledergruppe-modal__tekst {
-    margin: 0.5rem 0 !important;
+    margin: 0.5rem 0;
 }
 
 .veiledergruppe-modal__gruppenavntekst {
@@ -103,7 +84,7 @@
 }
 
 .veiledergruppe-modal__knappegruppe__slett {
-    margin-left: auto !important;
+    margin-left: auto;
 }
 
 .endringer-ikke-lagret-modal__knappegruppe {

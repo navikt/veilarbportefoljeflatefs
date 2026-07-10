@@ -112,13 +112,6 @@
     border-bottom: 1px solid #fff;
     padding-bottom: 1rem;
 }
-.veilarbportefoljeflatefs .dropdown .knapperad {
-    padding: 0;
-}
-.veilarbportefoljeflatefs .visuallyhidden {
-    position: absolute;
-    left: -1000000000px;
-}
 .veilarbportefoljeflatefs #veilederside-toolbar {
     padding-left: 0;
     margin-bottom: 0;
