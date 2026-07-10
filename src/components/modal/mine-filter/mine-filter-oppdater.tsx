@@ -13,8 +13,8 @@ import {avmarkerSisteValgtMineFilter} from '../../../ducks/lagret-filter-ui-stat
 import {OversiktType} from '../../../ducks/ui/valgte-kolonner';
 import {SidebarTabs} from '../../../store/sidebar/sidebar-view-store';
 import {endreValgtSidebarTab} from '../../sidebar/sidebar';
-
 import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
+import {mapFiltermodellTilAktiveValgOgStringify} from './mine-filter-mapper';
 
 interface OppdaterMineFilterProps {
     oversiktType: OversiktType;
@@ -49,6 +49,7 @@ export function OppdaterMineFilter({gammeltFilterNavn, filterId, lukkModal, over
                 lagreEndringer({
                     filterNavn: trimmetFilterNavn,
                     filterValg: filterValg,
+                    aktiveFilterValg: mapFiltermodellTilAktiveValgOgStringify(filterValg),
                     filterId: filterId
                 })
             ).then(() => {

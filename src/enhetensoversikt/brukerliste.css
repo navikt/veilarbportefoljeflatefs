@@ -39,27 +39,10 @@
     margin-left: calc(1rem + 1px);
 }
 
-.veilarbportefoljeflatefs .brukerliste--borders {
-    border-top: 1px solid #a0a0a0;
-    border-bottom: 1px solid #a0a0a0;
-}
-
-.veilarbportefoljeflatefs .brukerliste--border-bottom {
-    border-bottom: 2px solid #a0a0a0;
-}
-
 .veilarbportefoljeflatefs .brukerliste--forrigeBruker {
     box-shadow:
         inset -1px 0 0 2px #6a6a6a,
         inset 1px 0 0 2px #a0a0a0;
-}
-
-.veilarbportefoljeflatefs .brukerliste__overskriftheader {
-    display: flex;
-    font-weight: bold;
-    font-size: 1rem;
-    min-height: 2rem;
-    padding: 5px 0;
 }
 
 .veilarbportefoljeflatefs .brukerliste__sorteringheader {

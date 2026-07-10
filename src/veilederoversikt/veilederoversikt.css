@@ -11,27 +11,6 @@
     padding: 0.5rem;
     max-height: 40vh;
 }
-.veiledersok__wrapper {
-    margin-top: 1rem;
-    width: 25%;
-    margin-right: 75%;
-}
-.veiledersok__wrapper .veiledere__soketabell a {
-    border-bottom: none;
-    color: #0067c5;
-    text-decoration: none;
-}
-.tildelveileder_wrapper {
-    min-height: 3rem;
-}
-.veileder__hide {
-    display: none;
-}
-
-.oversikt-sideinnhold-veilederside .veiledertabell__sorteringskolonne button {
-    padding-left: 0;
-    padding-right: 0;
-}
 
 .status-filter-kolonne .filtrering-veiledere {
     margin: 0.5rem 0 1rem;

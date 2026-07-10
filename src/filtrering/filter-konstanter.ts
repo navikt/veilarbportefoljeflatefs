@@ -137,9 +137,6 @@ export const manuellBrukerStatus = {
     MANUELL: {label: 'Manuell oppfølging'},
     KRR: {label: 'Reservert i KRR'}
 };
-export const manuellBrukerStatusUtenKRR = {
-    MANUELL: {label: 'Manuell oppfølging'}
-};
 
 export const rettighetsgruppeArena = {
     AAP: {label: 'Arbeidsavklaringspenger (Arena)'},
