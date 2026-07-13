@@ -40,56 +40,6 @@ function write(scope: LocalStorageScope, content: any) {
     return localStorage.setItem(scope, JSON.stringify(content));
 }
 
-function erFiltreringEndret(scope: LocalStorageScope, initialState: any) {
-    const content = localStorage.getItem(scope);
-    if (!content || content === 'undefined') {
-        return true;
-    }
-
-    const stored = JSON.parse(content);
-
-    const keysFromStorage = Object.keys(stored);
-    const keysFromInitialState = Object.keys(initialState);
-
-    if (keysFromStorage.length !== keysFromInitialState.length) {
-        return true;
-    }
-
-    if (!keysFromStorage.every(key => keysFromInitialState.includes(key))) {
-        return true;
-    }
-
-    // Sjekk at typene stemmer overens
-    for (const key of keysFromInitialState) {
-        const expected = initialState[key];
-        const actual = stored[key];
-
-        if (Array.isArray(expected)) {
-            if (!Array.isArray(actual)) return true;
-        } else if (expected === null) {
-            if (actual !== null && actual !== undefined && typeof actual !== 'string') {
-                return true;
-            }
-        } else if (typeof expected !== typeof actual) {
-            return true;
-        }
-
-        // ekstra validering på godkjente key og values i filtermodell scopene
-        if (scope === LocalStorageScope.ENHETS_STATE || scope === LocalStorageScope.VEILEDER_STATE) {
-            const validator = filtervalgValidators[key as Filtervalg];
-            if (!validator) {
-                return true;
-            }
-            const gyldigeVerdier = validator(actual);
-            if (gyldigeVerdier === undefined) {
-                return true;
-            }
-        }
-    }
-
-    return false;
-}
-
 /**
  * Funksjon som forsøker å holde state for en gitt state-slice (gitt ved `reducer`-parameteret) i sync med LocalStorage.
  * Dersom `state` (fra `reducer`-funksjonen) er `undefined`, vil den forsøke å lese fra LocalStorage. Dersom state endres
@@ -101,7 +51,7 @@ function erFiltreringEndret(scope: LocalStorageScope, initialState: any) {
  * @param reducer - Reducer-funksjonen som skal brukes.
  * @param initialFilterstate - Initial state for filtrering.
  */
-export function persistentReducer<S, A extends Action>(
+export function persistentReducer<S extends Record<string, unknown>, A extends Action>(
     scope: LocalStorageScope,
     location: Location,
     reducer: (state: S | undefined, action: A & {name: OversiktType}) => S,
@@ -126,4 +76,57 @@ export function persistentReducer<S, A extends Action>(
 
         return stateResultatFraReducer;
     };
+}
+
+function erFiltreringEndret(scope: LocalStorageScope, initialState: Record<string, unknown>): boolean {
+    const stored = lesLagretState(scope);
+    if (!stored) return true;
+
+    if (!harSammeNokler(stored, initialState)) return true;
+
+    const typerStemmer = Object.keys(initialState).every(key => harSammeType(initialState[key], stored[key]));
+    if (!typerStemmer) return true;
+
+    if (erFiltervalgScope(scope) && !harGyldigeFiltervalgVerdier(stored)) return true;
+
+    return false;
+}
+
+function harSammeNokler(a: object, b: object): boolean {
+    const aKeys = Object.keys(a);
+    const bKeys = Object.keys(b);
+    if (aKeys.length !== bKeys.length) return false;
+    return aKeys.every(k => bKeys.includes(k));
+}
+
+function harSammeType(expected: unknown, actual: unknown): boolean {
+    if (Array.isArray(expected)) {
+        return Array.isArray(actual);
+    }
+    if (expected === null) {
+        return actual === null || actual === undefined || typeof actual === 'string';
+    }
+    return typeof expected === typeof actual;
+}
+
+function erFiltervalgScope(scope: LocalStorageScope): boolean {
+    return scope === LocalStorageScope.ENHETS_STATE || scope === LocalStorageScope.VEILEDER_STATE;
+}
+
+function harGyldigeFiltervalgVerdier(stored: Record<string, unknown>): boolean {
+    return Object.entries(stored).every(([key, verdi]) => {
+        const validator = filtervalgValidators[key as Filtervalg];
+        if (!validator) return true;
+        return validator(verdi) !== undefined;
+    });
+}
+
+function lesLagretState(scope: LocalStorageScope): Record<string, unknown> | undefined {
+    const content = localStorage.getItem(scope);
+    if (!content || content === 'undefined') return undefined;
+    try {
+        return JSON.parse(content);
+    } catch {
+        return undefined;
+    }
 }
