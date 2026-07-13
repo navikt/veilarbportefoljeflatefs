@@ -51,7 +51,7 @@ function write(scope: LocalStorageScope, content: any) {
  * @param reducer - Reducer-funksjonen som skal brukes.
  * @param initialFilterstate - Initial state for filtrering.
  */
-export function persistentReducer<S extends Record<string, unknown>, A extends Action>(
+export function persistentReducer<S, A extends Action>(
     scope: LocalStorageScope,
     location: Location,
     reducer: (state: S | undefined, action: A & {name: OversiktType}) => S,
@@ -78,7 +78,7 @@ export function persistentReducer<S extends Record<string, unknown>, A extends A
     };
 }
 
-function erFiltreringEndret(scope: LocalStorageScope, initialState: Record<string, unknown>): boolean {
+function erFiltreringEndret(scope: LocalStorageScope, initialState: any): boolean {
     const stored = lesLagretState(scope);
     if (!stored) return true;
 
