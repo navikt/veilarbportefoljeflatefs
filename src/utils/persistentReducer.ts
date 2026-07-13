@@ -81,7 +81,7 @@ function erFiltreringEndret(scope: LocalStorageScope, initialState: any) {
                 return true;
             }
             const gyldigeVerdier = validator(actual);
-            if (!gyldigeVerdier) {
+            if (gyldigeVerdier === undefined) {
                 return true;
             }
         }
