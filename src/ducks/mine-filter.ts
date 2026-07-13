@@ -15,8 +15,6 @@ import {
     SorteringOgId
 } from './lagret-filter';
 import {mapLagretFilterFraDTO} from '../components/modal/mine-filter/mine-filter-mapper';
-import {sjekkFeature} from './features';
-import {BRUK_MAPPING_AV_AKTIVE_FILTERVALG_I_MINE_FILTRE} from '../konstanter';
 
 // Actions
 export const HENT_MINEFILTER_OK = 'lagredefilter/OK';
@@ -149,33 +147,25 @@ export function mineFilterReducer(state: LagretFilterState = initialState, actio
 
 export function hentMineFilterForVeileder() {
     return doThenDispatch(
-        (_dispatch, getState) =>
-            hentMineFilter().then((dtoer: LagretFilterDTO[]) => {
-                const bruk = sjekkFeature(getState(), BRUK_MAPPING_AV_AKTIVE_FILTERVALG_I_MINE_FILTRE);
-                return dtoer.map(dto => mapLagretFilterFraDTO(dto, bruk));
-            }),
+        () => hentMineFilter().then((dtoer: LagretFilterDTO[]) => dtoer.map(dto => mapLagretFilterFraDTO(dto))),
         {OK: HENT_MINEFILTER_OK, FEILET: HENT_MINEFILTER_FEILET, PENDING: HENT_MINEFILTER_PENDING}
     );
 }
 
 export function lagreEndringer(endringer: RedigerLagretFilter) {
-    return doThenDispatch(
-        (_dispatch, getState) =>
-            redigerMineFilter(endringer).then(dto =>
-                mapLagretFilterFraDTO(dto, sjekkFeature(getState(), BRUK_MAPPING_AV_AKTIVE_FILTERVALG_I_MINE_FILTRE))
-            ),
-        {OK: REDIGER_MINEFILTER_OK, FEILET: REDIGER_MINEFILTER_FEILET, PENDING: REDIGER_MINEFILTER_PENDING}
-    );
+    return doThenDispatch(() => redigerMineFilter(endringer).then(dto => mapLagretFilterFraDTO(dto)), {
+        OK: REDIGER_MINEFILTER_OK,
+        FEILET: REDIGER_MINEFILTER_FEILET,
+        PENDING: REDIGER_MINEFILTER_PENDING
+    });
 }
 
 export function lagreNyttFilter(nyttFilter: NyttLagretFilter) {
-    return doThenDispatch(
-        (_dispatch, getState) =>
-            nyttMineFilter(nyttFilter).then(dto =>
-                mapLagretFilterFraDTO(dto, sjekkFeature(getState(), BRUK_MAPPING_AV_AKTIVE_FILTERVALG_I_MINE_FILTRE))
-            ),
-        {OK: NY_MINEFILTER_OK, FEILET: NY_MINEFILTER_FEILET, PENDING: NY_MINEFILTER_PENDING}
-    );
+    return doThenDispatch(() => nyttMineFilter(nyttFilter).then(dto => mapLagretFilterFraDTO(dto)), {
+        OK: NY_MINEFILTER_OK,
+        FEILET: NY_MINEFILTER_FEILET,
+        PENDING: NY_MINEFILTER_PENDING
+    });
 }
 
 export function slettFilter(filterId: number) {

@@ -5,11 +5,11 @@ import {AktiviteterFilternokler, AktiviteterValg} from '../../../filtrering/filt
 import {filtervalgValidators} from './mine-filter-validering-filtermodel-utils';
 
 // Mapper som lese fra lagret-filter objectet som kommer fra veilarbfilter:
-export function mapLagretFilterFraDTO(dto: LagretFilterDTO, brukAktiveFiltervalg: boolean): LagretFilter {
+export function mapLagretFilterFraDTO(dto: LagretFilterDTO): LagretFilter {
     return {
         filterNavn: dto.filterNavn,
         filterId: dto.filterId,
-        filterValg: brukAktiveFiltervalg ? mapAktiveValgTilFiltermodell(dto.aktiveFilterValg) : dto.filterValg,
+        filterValg: mapLagraFiltervalgTilFiltermodell(dto.aktiveFilterValg),
         sortOrder: dto.sortOrder,
         filterCleanup: dto.filterCleanup,
         aktiv: dto.aktiv,
@@ -17,7 +17,7 @@ export function mapLagretFilterFraDTO(dto: LagretFilterDTO, brukAktiveFiltervalg
     };
 }
 
-export function mapAktiveValgTilFiltermodell(aktiveFilterValg: string | null | undefined): FiltervalgModell {
+export function mapLagraFiltervalgTilFiltermodell(aktiveFilterValg: string | null | undefined): FiltervalgModell {
     // Noen filtre har ikke lengre verdier pga fjerning av gamle filtervalg, og da skal vi ikke kaste feil, men heller returnere default state
     if (!aktiveFilterValg) {
         return {...initialState};
