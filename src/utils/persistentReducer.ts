@@ -60,7 +60,7 @@ function erFiltreringEndret(scope: LocalStorageScope, initialState: any) {
     }
 
     // Sjekk at typene stemmer overens
-    for (const [key, value] of keysFromInitialState) {
+    for (const key of keysFromInitialState) {
         const expected = initialState[key];
         const actual = stored[key];
 
@@ -80,7 +80,7 @@ function erFiltreringEndret(scope: LocalStorageScope, initialState: any) {
             if (!validator) {
                 return true;
             }
-            const gyldigeVerdier = validator(value);
+            const gyldigeVerdier = validator(actual);
             if (!gyldigeVerdier) {
                 return true;
             }
