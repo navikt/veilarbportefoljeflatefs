@@ -1,5 +1,7 @@
 import {Action, Reducer} from 'redux';
 import {OversiktType} from '../ducks/ui/valgte-kolonner';
+import {filtervalgValidators} from '../components/modal/mine-filter/mine-filter-validering-filtermodel-utils';
+import {Filtervalg} from '../typer/filtervalg-modell';
 
 /**
  * Et scope er en unik nøkkel som brukes for å lagre state i LocalStorage.
@@ -45,6 +47,7 @@ function erFiltreringEndret(scope: LocalStorageScope, initialState: any) {
     }
 
     const stored = JSON.parse(content);
+
     const keysFromStorage = Object.keys(stored);
     const keysFromInitialState = Object.keys(initialState);
 
@@ -57,7 +60,7 @@ function erFiltreringEndret(scope: LocalStorageScope, initialState: any) {
     }
 
     // Sjekk at typene stemmer overens
-    for (const key of keysFromInitialState) {
+    for (const [key, value] of keysFromInitialState) {
         const expected = initialState[key];
         const actual = stored[key];
 
@@ -69,6 +72,18 @@ function erFiltreringEndret(scope: LocalStorageScope, initialState: any) {
             }
         } else if (typeof expected !== typeof actual) {
             return true;
+        }
+
+        // ekstra validering på godkjente key og values i filtermodell scopene
+        if (scope === LocalStorageScope.ENHETS_STATE || scope === LocalStorageScope.VEILEDER_STATE) {
+            const validator = filtervalgValidators[key as Filtervalg];
+            if (!validator) {
+                return true;
+            }
+            const gyldigeVerdier = validator(value);
+            if (!gyldigeVerdier) {
+                return true;
+            }
         }
     }
 
