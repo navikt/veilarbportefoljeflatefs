@@ -58,9 +58,6 @@
     outline: 2px solid var(--ax-border-focus);
     outline-offset: 2px;
 }
-.toggle-switch-las {
-    cursor: pointer;
-}
 .toggle-switch-las__apen {
     position: absolute;
     top: 0.2rem;
