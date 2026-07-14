@@ -78,9 +78,11 @@ export function FilteringVeiledergrupper({oversiktType, filtervalg}: FilteringVe
 
     return (
         <>
-            <Heading spacing size="small">
-                Veiledergrupper
-            </Heading>
+            {oversiktType === OversiktType.veilederOversikt && (
+                <Heading spacing size="small">
+                    Veiledergrupper
+                </Heading>
+            )}
             {lagretFilterState.status === STATUS.ERROR ? veilederGrupperError() : veilederGrupperOK()}
             <Button
                 variant="tertiary"
