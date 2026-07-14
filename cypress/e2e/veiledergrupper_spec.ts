@@ -59,7 +59,8 @@ describe('Veiledergrupper', () => {
             cy.getByTestId('timed-toast_gruppen-er-opprettet').contains('Gruppen er opprettet');
 
             // Sjekkar at den nye gruppa vart lagt til og at den er vald
-            cy.get('@veiledergrupper').should('have.length', veiledergrupperForOpprettNy.length + 1)
+            cy.get('@veiledergrupper')
+                .should('have.length', veiledergrupperForOpprettNy.length + 1)
                 .contains(gruppenavn);
             cy.getByTestId(`veiledergruppe-rad_${kebabCase(gruppenavn)}`).should('be.checked');
 
@@ -93,7 +94,6 @@ describe('Veiledergrupper', () => {
             cy.get('@veiledergrupper').contains(gruppenavnRedigert);
             cy.get('@veiledergrupper').should('have.length', veiledergrupperForRedigering.length);
         });
-
     });
 
     it('Rediger filtervalg', () => {
@@ -106,7 +106,9 @@ describe('Veiledergrupper', () => {
             cy.getByTestId('veiledergruppe_modal_valgt-veileder_fjern-knapp').first().click();
             cy.getByTestId('veiledergruppe_modal_valgt-veileder_fjern-knapp').first().click();
             cy.getByTestId('veiledergruppe_modal_antall-valgte-veiledere_0').should('exist');
-            cy.getByTestId('veiledergruppe_modal_valgte-veiledere_wrapper').contains('Ingen veiledere lagt til i gruppen');
+            cy.getByTestId('veiledergruppe_modal_valgte-veiledere_wrapper').contains(
+                'Ingen veiledere lagt til i gruppen'
+            );
 
             // Prøv å lagre utan veiledarar, bli stoppa av validering
             cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();

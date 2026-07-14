@@ -6,19 +6,19 @@ export interface LagretFilter {
     filterValg: FiltervalgModell;
     sortOrder: number | null;
     filterCleanup: boolean;
-    aktiv: boolean;
-    note: string;
+    aktiv?: boolean;
+    note?: string;
 }
 
 export interface LagretFilterDTO {
     filterNavn: string;
     filterId: number;
     filterValg: FiltervalgModell;
-    aktiveFilterValg?: string | null; // kan være null til databasen har fått populert de nye kolonnen med data
+    aktiveFilterValg: string;
     sortOrder: number | null;
     filterCleanup: boolean;
-    aktiv: boolean;
-    note: string;
+    aktiv?: boolean;
+    note?: string;
 }
 
 export interface LagretFilterState {
