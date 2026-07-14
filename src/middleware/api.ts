@@ -150,12 +150,12 @@ export function hentAktivBruker(): Promise<InnloggetVeilederModell> {
     return fetchToJson(`${VEILARBVEILEDER_URL}/api/veileder/v2/me`, MED_CREDENTIALS);
 }
 
-export function hentEnhetsFilterGrupper(enhetId) {
+export function hentEnhetsFilterGrupper(enhetId): Promise<LagretFilterDTO[]> {
     const url = `${VEILARBFILTER_URL}/enhet/${enhetId}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function hentMineFilter() {
+export function hentMineFilter(): Promise<LagretFilterDTO[]> {
     const url = `${VEILARBFILTER_URL}/minelagredefilter`;
     return fetchToJson(url, MED_CREDENTIALS);
 }

@@ -1,6 +1,7 @@
 import {hentEnhetsFilterGrupper, nyVeiledergruppe, redigerVeiledergruppe, slettVeiledergruppe} from '../middleware/api';
 import {doThenDispatch, STATUS} from './utils';
-import {LagretFilterState, NyttLagretFilter, RedigerLagretFilter} from './lagret-filter';
+import {LagretFilterDTO, LagretFilterState, NyttLagretFilter, RedigerLagretFilter} from './lagret-filter';
+import {mapLagretFilterFraDTO} from '../components/modal/mine-filter/mine-filter-mapper';
 
 // Actions
 export const HENT_VEILEDERGRUPPER_OK = 'veiledergrupper/OK';
@@ -75,16 +76,22 @@ export function veiledergrupperLagretFilterReducer(state: LagretFilterState = in
 
 // Action Creators
 export function hentLagretFilterForEnhet(enhetId) {
-    return doThenDispatch(() => hentEnhetsFilterGrupper(enhetId), {
-        OK: HENT_VEILEDERGRUPPER_OK,
-        FEILET: HENT_VEILEDERGRUPPER_FEILET,
-        PENDING: HENT_VEILEDERGRUPPER_PENDING
-    });
+    return doThenDispatch(
+        () =>
+            hentEnhetsFilterGrupper(enhetId).then((dtoer: LagretFilterDTO[]) =>
+                dtoer.map(dto => mapLagretFilterFraDTO(dto))
+            ),
+        {
+            OK: HENT_VEILEDERGRUPPER_OK,
+            FEILET: HENT_VEILEDERGRUPPER_FEILET,
+            PENDING: HENT_VEILEDERGRUPPER_PENDING
+        }
+    );
 }
 
 // Action Creators
 export function lagreEndringer(endringer: RedigerLagretFilter, enhetId: string) {
-    return doThenDispatch(() => redigerVeiledergruppe(endringer, enhetId), {
+    return doThenDispatch(() => redigerVeiledergruppe(endringer, enhetId).then(dto => mapLagretFilterFraDTO(dto)), {
         OK: REDIGER_VEILEDERGRUPPER_OK,
         FEILET: REDIGER_VEILEDERGRUPPER_FEILET,
         PENDING: REDIGER_VEILEDERGRUPPER_PENDING
@@ -93,7 +100,7 @@ export function lagreEndringer(endringer: RedigerLagretFilter, enhetId: string) 
 
 // Action Creators
 export function lageNyGruppe(endringer: NyttLagretFilter, enhetId: string) {
-    return doThenDispatch(() => nyVeiledergruppe(endringer, enhetId), {
+    return doThenDispatch(() => nyVeiledergruppe(endringer, enhetId).then(dto => mapLagretFilterFraDTO(dto)), {
         OK: NY_VEILEDERGRUPPER_OK,
         FEILET: NY_VEILEDERGRUPPER_FEILET,
         PENDING: NY_VEILEDERGRUPPER_PENDING

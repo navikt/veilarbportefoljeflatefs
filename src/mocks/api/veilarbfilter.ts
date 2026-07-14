@@ -30,7 +30,7 @@ export const veilarbfilterHandlers: RequestHandler[] = [
                     return oppdatertGruppe;
                 }
                 return v;
-            }) as LagretFilter[];
+            }) as LagretFilterDTO[];
 
             return HttpResponse.json(oppdatertGruppe);
         })
@@ -38,7 +38,7 @@ export const veilarbfilterHandlers: RequestHandler[] = [
     http.post(
         '/veilarbfilter/api/enhet/:enhetId',
         withAuth(async ({request}) => {
-            const opprettFilterRequest = (await request.json()) as LagretFilter;
+            const opprettFilterRequest = (await request.json()) as LagretFilterDTO;
             const filterId = Math.floor(Math.random() * 100) + 500;
             customVeiledergrupper = [...customVeiledergrupper, {...opprettFilterRequest, filterId}];
 
@@ -77,7 +77,7 @@ export const veilarbfilterHandlers: RequestHandler[] = [
     http.post(
         '/veilarbfilter/api/minelagredefilter',
         withAuth(async ({request}) => {
-            const opprettFilterRequest = (await request.json()) as LagretFilter;
+            const opprettFilterRequest = (await request.json()) as LagretFilterDTO;
             const filterId = Math.floor(Math.random() * 100) + 500;
             customMineFilter = [...customMineFilter, {...opprettFilterRequest, filterId, aktiv: true}];
 
