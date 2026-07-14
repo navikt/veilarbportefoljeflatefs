@@ -96,6 +96,38 @@ describe('Veiledergrupper', () => {
         });
     });
 
+    it('Rediger filtervalg', () => {
+        // Henter veiledergrupper så vi kan sjekke at det er like mange før og etter redigering
+        cy.get('@veiledergrupper').then(veiledergrupperForRedigering => {
+            // Opne redigering
+            cy.getByTestId(`rediger-veiledergruppe_knapp_${kebabCase(gruppenavnRedigert)}`).click();
+
+            // Ta bort begge dei valde veilederane
+            cy.getByTestId('veiledergruppe_modal_valgt-veileder_fjern-knapp').first().click();
+            cy.getByTestId('veiledergruppe_modal_valgt-veileder_fjern-knapp').first().click();
+            cy.getByTestId('veiledergruppe_modal_antall-valgte-veiledere_0').should('exist');
+            cy.getByTestId('veiledergruppe_modal_valgte-veiledere_wrapper').contains(
+                'Ingen veiledere lagt til i gruppen'
+            );
+
+            // Prøv å lagre utan veiledarar, bli stoppa av validering
+            cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
+            cy.getByTestId('veiledergruppe_modal_form').contains(minstEnVeileder);
+
+            // Legg til ny veiledar ("Aasen")
+            cy.getByTestId('veiledergruppe_modal_sok-veileder-input').type(testnavn3);
+            cy.getByTestId('veiledergruppe_modal_veileder-checkbox_0').check({force: true});
+
+            // Lagre
+            cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
+            cy.getByTestId('timed-toast_gruppen-er-lagret').should('be.visible').contains('Gruppen er lagret');
+
+            // Sjekk at redigeringa fungerte
+            cy.get('@veiledergrupper').should('have.length', veiledergrupperForRedigering.length);
+            cy.getByTestId('filtrering_label-container').children().should('have.length', 2).contains(testnavn3);
+        });
+    });
+
     it('Slett veiledergruppe', () => {
         cy.get('@veiledergrupper').then(veiledergrupperForSletting => {
             // Opne redigering

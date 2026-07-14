@@ -1,8 +1,9 @@
 import {http, HttpResponse, RequestHandler} from 'msw';
-import {LagretFilter, LagretFilterDTO, SorteringOgId} from '../../ducks/lagret-filter';
+import {LagretFilterDTO, NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../../ducks/lagret-filter';
 import {veiledergrupper} from '../data/veiledergrupper';
 import {mineFilter} from '../data/mine-filter';
 import {withAuth} from './auth';
+import {mapLagraFiltervalgTilFiltermodell} from '../../components/modal/mine-filter/mine-filter-mapper';
 
 let customVeiledergrupper = veiledergrupper();
 let customMineFilter = mineFilter();
@@ -17,20 +18,21 @@ export const veilarbfilterHandlers: RequestHandler[] = [
     http.put(
         '/veilarbfilter/api/enhet/:enhetId',
         withAuth(async ({request}) => {
-            const oppdaterFilterRequest = (await request.json()) as LagretFilter;
+            const oppdaterFilterRequest = (await request.json()) as RedigerLagretFilter;
 
-            let oppdatertGruppe = {};
+            let oppdatertGruppe: LagretFilterDTO | undefined;
             customVeiledergrupper = customVeiledergrupper.map(v => {
                 if (v.filterId === oppdaterFilterRequest.filterId) {
                     oppdatertGruppe = {
                         ...v,
                         filterNavn: oppdaterFilterRequest.filterNavn,
-                        filterValg: oppdaterFilterRequest.filterValg
+                        filterValg: mapLagraFiltervalgTilFiltermodell(oppdaterFilterRequest.aktiveFilterValg),
+                        aktiveFilterValg: oppdaterFilterRequest.aktiveFilterValg
                     };
                     return oppdatertGruppe;
                 }
                 return v;
-            }) as LagretFilterDTO[];
+            });
 
             return HttpResponse.json(oppdatertGruppe);
         })
@@ -38,11 +40,17 @@ export const veilarbfilterHandlers: RequestHandler[] = [
     http.post(
         '/veilarbfilter/api/enhet/:enhetId',
         withAuth(async ({request}) => {
-            const opprettFilterRequest = (await request.json()) as LagretFilterDTO;
+            const opprettFilterRequest = (await request.json()) as NyttLagretFilter;
             const filterId = Math.floor(Math.random() * 100) + 500;
-            customVeiledergrupper = [...customVeiledergrupper, {...opprettFilterRequest, filterId}];
-
-            return HttpResponse.json({...opprettFilterRequest, filterId});
+            const nyGruppe: LagretFilterDTO = {
+                ...opprettFilterRequest,
+                filterId,
+                filterValg: mapLagraFiltervalgTilFiltermodell(opprettFilterRequest.aktiveFilterValg),
+                sortOrder: null,
+                filterCleanup: false
+            };
+            customVeiledergrupper = [...customVeiledergrupper, nyGruppe];
+            return HttpResponse.json(nyGruppe);
         })
     ),
     http.delete(
