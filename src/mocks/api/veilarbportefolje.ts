@@ -14,6 +14,18 @@ import {DEFAULT_DELAY_MILLISECONDS} from '../constants';
 import {EndreHuskelapp, LagreHuskelapp} from '../../ducks/huskelapp';
 import {rnd} from '../utils';
 import {tiltakstyper} from '../data/tiltakstyper';
+import {
+    LagreNyVeiledergruppePortefolje,
+    LagretFilterPortefolje,
+    LagretVeiledergruppePortefolje,
+    RedigerVeiledergruppePortefolje,
+    SorteringOgId
+} from '../../ducks/lagret-filter';
+import {veiledergrupperPortefolje} from '../data/veiledergrupper-portefolje';
+import {mineFilterPortefolje} from '../data/mine-filter-portefolje';
+
+let customVeiledergrupper = veiledergrupperPortefolje();
+let customMineFilter = mineFilterPortefolje();
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, innloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -238,6 +250,123 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
                 error: [],
                 data: slettHuskelappRequest
             });
+        })
+    ),
+
+    http.get(
+        '/veilarbportefolje/api/lagredefilter/veiledergruppe/:enhetId',
+        withAuth(async () => {
+            return HttpResponse.json(customVeiledergrupper);
+        })
+    ),
+    http.put(
+        '/veilarbportefolje/api/lagredefilter/veiledergruppe/:enhetId',
+        withAuth(async ({request}) => {
+            const oppdaterFilterRequest = (await request.json()) as RedigerVeiledergruppePortefolje;
+
+            let oppdatertGruppe: LagretVeiledergruppePortefolje | undefined;
+            customVeiledergrupper = customVeiledergrupper.map(v => {
+                if (v.filterId === oppdaterFilterRequest.filterId) {
+                    oppdatertGruppe = {
+                        ...v,
+                        filterNavn: oppdaterFilterRequest.filterNavn,
+                        veiledere: oppdaterFilterRequest.veiledere
+                    };
+                    return oppdatertGruppe;
+                }
+                return v;
+            });
+
+            return HttpResponse.json(oppdatertGruppe);
+        })
+    ),
+    http.post(
+        '/veilarbportefolje/api/lagredefilter/veiledergruppe/:enhetId',
+        withAuth(async ({request}) => {
+            const opprettFilterRequest = (await request.json()) as LagreNyVeiledergruppePortefolje;
+            const filterId = Math.floor(Math.random() * 100) + 500;
+            const nyGruppe: LagretVeiledergruppePortefolje = {
+                ...opprettFilterRequest,
+                filterId,
+                veiledere: opprettFilterRequest.veiledere
+            };
+            customVeiledergrupper = [...customVeiledergrupper, nyGruppe];
+            return HttpResponse.json(nyGruppe);
+        })
+    ),
+    http.delete(
+        '/veilarbportefolje/api/lagredefilter/veiledergruppe/:enhetId/filter/:filterId',
+        withAuth(async ({params}) => {
+            const filterId = parseInt(params.filterId as string);
+
+            if (!isNaN(filterId)) {
+                customVeiledergrupper = customVeiledergrupper.filter(v => v.filterId !== filterId);
+                return new HttpResponse(null, {status: 200});
+            }
+
+            return new HttpResponse(null, {status: 401});
+        })
+    ),
+    http.get(
+        '/veilarbportefolje/api/lagredefilter/minefilter',
+        withAuth(async () => {
+            return HttpResponse.json(customMineFilter);
+        })
+    ),
+    http.put(
+        '/veilarbportefolje/api/lagredefilter/minefilter',
+        withAuth(async ({request}) => {
+            const oppdaterFilterRequest = (await request.json()) as LagretFilterPortefolje;
+
+            const filterIndex = customMineFilter.findIndex(elem => elem.filterId === oppdaterFilterRequest.filterId);
+            customMineFilter[filterIndex] = {
+                ...customMineFilter[filterIndex],
+                ...oppdaterFilterRequest
+            };
+            return HttpResponse.json(customMineFilter[filterIndex]);
+        })
+    ),
+    http.post(
+        '/veilarbportefolje/api/lagredefilter/minefilter',
+        withAuth(async ({request}) => {
+            const opprettFilterRequest = (await request.json()) as LagretFilterPortefolje;
+            const filterId = Math.floor(Math.random() * 100) + 500;
+            const nyttFilter: LagretFilterPortefolje = {
+                ...opprettFilterRequest,
+                filterId,
+                sortOrder: 0,
+                aktiv: true
+            };
+            customMineFilter = [...customMineFilter, nyttFilter];
+
+            return HttpResponse.json(nyttFilter);
+        })
+    ),
+    http.delete(
+        '/veilarbportefolje/api/lagredefilter/minefilter/:filterId',
+        withAuth(async ({params}) => {
+            const filterId = parseInt(params.filterId as string);
+
+            if (!isNaN(filterId)) {
+                customMineFilter = customMineFilter.filter(v => v.filterId !== filterId);
+                return new HttpResponse(null, {status: 200});
+            }
+
+            return new HttpResponse(null, {status: 401});
+        })
+    ),
+    http.post(
+        '/veilarbportefolje/api/lagredefilter/minefilter/lagresortering',
+        withAuth(async ({request}) => {
+            const sorteringer = (await request.json()) as SorteringOgId[];
+            sorteringer.forEach(elem => {
+                const customMineFilterElem = customMineFilter.find(filter => elem.filterId === filter.filterId);
+                if (customMineFilterElem) {
+                    customMineFilterElem.sortOrder = elem.sortOrder;
+                }
+            });
+
+            return HttpResponse.json(customMineFilter);
         })
     )
 ];

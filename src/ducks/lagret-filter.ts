@@ -52,3 +52,46 @@ export enum HandlingsType {
     HENTE,
     SORTERING
 }
+
+// Nye klasser som går til veilarbportefolje:
+export interface LagretFilterPortefolje {
+    filterNavn: string;
+    filterId: number;
+    filterValg: FiltervalgModell;
+    sortOrder: number;
+    aktiv: boolean;
+    ikke_aktiv_beskrivelse: string;
+}
+
+export interface LagreNyttFilterPortefolje {
+    filterNavn: string;
+    filterValg: FiltervalgModell;
+}
+
+export interface RedigerLagretFilterPortefolje {
+    filterNavn: string;
+    filterId: number;
+    filterValg: FiltervalgModell;
+}
+
+export interface SortOrderPortefolje {
+    sortOrder: number;
+    filterId: number;
+}
+
+export interface LagretVeiledergruppePortefolje {
+    filterNavn: string;
+    filterId: number;
+    veiledere: string[];
+}
+
+export interface LagreNyVeiledergruppePortefolje {
+    filterNavn: string;
+    veiledere: string[];
+}
+
+export interface RedigerVeiledergruppePortefolje {
+    filterNavn: string;
+    filterId: number;
+    veiledere: string[];
+}

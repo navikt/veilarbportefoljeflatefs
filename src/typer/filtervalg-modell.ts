@@ -90,7 +90,7 @@ export interface FiltervalgModell {
     [Filtervalg.navnEllerFnrQuery]: string;
     [Filtervalg.rettighetsgruppe]?: string[];
     [Filtervalg.manuellBrukerStatus]?: string[];
-    [Filtervalg.veilederNavnQuery]: string; // Dette filteret finst i veilarbfilter, men ikkje i Filtervalg-klassen hos veilarbportefolje
+    [Filtervalg.veilederNavnQuery]: string; // Dette filteret finst kun i frontend for å søke i en liste med veilederidenter
     [Filtervalg.registreringstype]: string[];
     [Filtervalg.cvJobbprofil]: null | string;
     [Filtervalg.utdanning]: string[];
@@ -102,7 +102,7 @@ export interface FiltervalgModell {
     [Filtervalg.tolkBehovSpraak]: string[];
     [Filtervalg.stillingFraNavFilter]: string[];
     [Filtervalg.geografiskBosted]: string[];
-    [Filtervalg.visGeografiskBosted]: string[]; // Dette filteret finst i veilarbfilter, men ikkje i Filtervalg-klassen hos veilarbportefolje
+    [Filtervalg.visGeografiskBosted]: string[]; // Dette filteret brukes kun til å styre visning av bosted-kolonner i frontend
     [Filtervalg.ensligeForsorgere]: string[];
     [Filtervalg.barnUnder18Aar]: string[];
     [Filtervalg.barnUnder18AarAlder]: string[];
