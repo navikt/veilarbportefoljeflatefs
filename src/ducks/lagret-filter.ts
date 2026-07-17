@@ -66,7 +66,7 @@ export interface LagreNyttFilterPortefolje {
     filterValg: FiltervalgModell;
 }
 
-export interface OppdaterFilterPortefolje {
+export interface RedigerLagretFilterPortefolje {
     filterNavn: string;
     filterId: number;
     filterValg: FiltervalgModell;
@@ -75,4 +75,21 @@ export interface OppdaterFilterPortefolje {
 export interface SortOrderPortefolje {
     sortOrder: number;
     filterId: number;
+}
+
+export interface LagretVeiledergruppePortefolje {
+    filterNavn: string;
+    filterId: number;
+    veiledere: string[];
+}
+
+export interface LagreNyVeiledergruppePortefolje {
+    filterNavn: string;
+    veiledere: string[];
+}
+
+export interface RedigerVeiledergruppePortefolje {
+    filterNavn: string;
+    filterId: number;
+    veiledere: string[];
 }

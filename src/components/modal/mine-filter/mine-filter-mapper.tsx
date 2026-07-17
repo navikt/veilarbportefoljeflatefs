@@ -1,4 +1,4 @@
-import {LagretFilter, LagretFilterDTO} from '../../../ducks/lagret-filter';
+import {LagretFilter, LagretFilterDTO, LagretVeiledergruppePortefolje} from '../../../ducks/lagret-filter';
 import {initialState, initialState as filtervalgInitialState} from '../../../ducks/filtrering';
 import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {AktiviteterFilternokler, AktiviteterValg} from '../../../filtrering/filter-konstanter';
@@ -14,6 +14,17 @@ export function mapLagretFilterFraDTO(dto: LagretFilterDTO): LagretFilter {
         filterCleanup: dto.filterCleanup,
         aktiv: dto.aktiv,
         note: dto.note
+    };
+}
+
+// Mapper som lese fra veiledergruppe objectet som kommer fra veilarbportefolje:
+export function mapVeiledergrupperTilLagretFilter(dto: LagretVeiledergruppePortefolje): LagretFilter {
+    return {
+        filterNavn: dto.filterNavn,
+        filterId: dto.filterId,
+        filterValg: {...filtervalgInitialState, [Filtervalg.veiledere]: dto.veiledere ?? []},
+        sortOrder: null,
+        filterCleanup: false
     };
 }
 

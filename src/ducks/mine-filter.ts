@@ -2,10 +2,10 @@ import {doThenDispatch, handterFeil, sendResultatTilDispatch, STATUS} from './ut
 import {
     hentMineFilter,
     hentMineFilterPortefolje,
+    lagreNyttMineFilterPortefolje,
     lagreSorteringFiltere,
     lagreSorteringMineFilterePortefolje,
     nyttMineFilter,
-    nyttMineFilterPortefolje,
     redigerMineFilter,
     redigerMineFilterPortefolje,
     slettMineFilter,
@@ -17,8 +17,8 @@ import {
     LagretFilterDTO,
     LagretFilterState,
     NyttLagretFilter,
-    OppdaterFilterPortefolje,
     RedigerLagretFilter,
+    RedigerLagretFilterPortefolje,
     SorteringOgId,
     SortOrderPortefolje
 } from './lagret-filter';
@@ -169,12 +169,12 @@ export function hentMineFilterForVeileder() {
     );
 }
 
-export function lagreEndringer(endringer: RedigerLagretFilter | OppdaterFilterPortefolje) {
+export function lagreEndringer(endringer: RedigerLagretFilter | RedigerLagretFilterPortefolje) {
     return doThenDispatch(
         (_dispatch, getState) => {
             const brukFilterFraPortefolje = sjekkFeature(getState(), BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE);
             if (brukFilterFraPortefolje) {
-                return redigerMineFilterPortefolje(endringer as OppdaterFilterPortefolje);
+                return redigerMineFilterPortefolje(endringer as RedigerLagretFilterPortefolje);
             } else {
                 redigerMineFilter(endringer as RedigerLagretFilter).then(dto => mapLagretFilterFraDTO(dto));
             }
@@ -192,7 +192,7 @@ export function lagreNyttFilter(nyttFilter: NyttLagretFilter | LagreNyttFilterPo
         (_dispatch, getState) => {
             const brukFilterFraPortefolje = sjekkFeature(getState(), BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE);
             if (brukFilterFraPortefolje) {
-                return nyttMineFilterPortefolje(nyttFilter as LagreNyttFilterPortefolje);
+                return lagreNyttMineFilterPortefolje(nyttFilter as LagreNyttFilterPortefolje);
             } else {
                 nyttMineFilter(nyttFilter as NyttLagretFilter).then(dto => mapLagretFilterFraDTO(dto));
             }
