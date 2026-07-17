@@ -1,20 +1,30 @@
 import {doThenDispatch, handterFeil, sendResultatTilDispatch, STATUS} from './utils';
 import {
     hentMineFilter,
+    hentMineFilterPortefolje,
     lagreSorteringFiltere,
+    lagreSorteringMineFilterePortefolje,
     nyttMineFilter,
+    nyttMineFilterPortefolje,
     redigerMineFilter,
-    slettMineFilter
+    redigerMineFilterPortefolje,
+    slettMineFilter,
+    slettMineFilterPortefolje
 } from '../middleware/api';
 import {
     HandlingsType,
+    LagreNyttFilterPortefolje,
     LagretFilterDTO,
     LagretFilterState,
     NyttLagretFilter,
+    OppdaterFilterPortefolje,
     RedigerLagretFilter,
-    SorteringOgId
+    SorteringOgId,
+    SortOrderPortefolje
 } from './lagret-filter';
 import {mapLagretFilterFraDTO} from '../components/modal/mine-filter/mine-filter-mapper';
+import {sjekkFeature} from './features';
+import {BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE} from '../konstanter';
 
 // Actions
 export const HENT_MINEFILTER_OK = 'lagredefilter/OK';
@@ -147,39 +157,83 @@ export function mineFilterReducer(state: LagretFilterState = initialState, actio
 
 export function hentMineFilterForVeileder() {
     return doThenDispatch(
-        () => hentMineFilter().then((dtoer: LagretFilterDTO[]) => dtoer.map(dto => mapLagretFilterFraDTO(dto))),
+        (_dispatch, getState) => {
+            const brukFilterFraPortefolje = sjekkFeature(getState(), BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE);
+            if (brukFilterFraPortefolje) {
+                return hentMineFilterPortefolje();
+            } else {
+                hentMineFilter().then((dtoer: LagretFilterDTO[]) => dtoer.map(dto => mapLagretFilterFraDTO(dto)));
+            }
+        },
         {OK: HENT_MINEFILTER_OK, FEILET: HENT_MINEFILTER_FEILET, PENDING: HENT_MINEFILTER_PENDING}
     );
 }
 
-export function lagreEndringer(endringer: RedigerLagretFilter) {
-    return doThenDispatch(() => redigerMineFilter(endringer).then(dto => mapLagretFilterFraDTO(dto)), {
-        OK: REDIGER_MINEFILTER_OK,
-        FEILET: REDIGER_MINEFILTER_FEILET,
-        PENDING: REDIGER_MINEFILTER_PENDING
-    });
+export function lagreEndringer(endringer: RedigerLagretFilter | OppdaterFilterPortefolje) {
+    return doThenDispatch(
+        (_dispatch, getState) => {
+            const brukFilterFraPortefolje = sjekkFeature(getState(), BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE);
+            if (brukFilterFraPortefolje) {
+                return redigerMineFilterPortefolje(endringer as OppdaterFilterPortefolje);
+            } else {
+                redigerMineFilter(endringer as RedigerLagretFilter).then(dto => mapLagretFilterFraDTO(dto));
+            }
+        },
+        {
+            OK: REDIGER_MINEFILTER_OK,
+            FEILET: REDIGER_MINEFILTER_FEILET,
+            PENDING: REDIGER_MINEFILTER_PENDING
+        }
+    );
 }
 
-export function lagreNyttFilter(nyttFilter: NyttLagretFilter) {
-    return doThenDispatch(() => nyttMineFilter(nyttFilter).then(dto => mapLagretFilterFraDTO(dto)), {
-        OK: NY_MINEFILTER_OK,
-        FEILET: NY_MINEFILTER_FEILET,
-        PENDING: NY_MINEFILTER_PENDING
-    });
+export function lagreNyttFilter(nyttFilter: NyttLagretFilter | LagreNyttFilterPortefolje) {
+    return doThenDispatch(
+        (_dispatch, getState) => {
+            const brukFilterFraPortefolje = sjekkFeature(getState(), BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE);
+            if (brukFilterFraPortefolje) {
+                return nyttMineFilterPortefolje(nyttFilter as LagreNyttFilterPortefolje);
+            } else {
+                nyttMineFilter(nyttFilter as NyttLagretFilter).then(dto => mapLagretFilterFraDTO(dto));
+            }
+        },
+        {
+            OK: NY_MINEFILTER_OK,
+            FEILET: NY_MINEFILTER_FEILET,
+            PENDING: NY_MINEFILTER_PENDING
+        }
+    );
 }
 
 export function slettFilter(filterId: number) {
-    return doThenDispatch(() => slettMineFilter(filterId), {
-        OK: SLETT_MINEFILTER_OK,
-        FEILET: SLETT_MINEFILTER_FEILET,
-        PENDING: SLETT_MINEFILTER_PENDING
-    });
+    return doThenDispatch(
+        (_dispatch, getState) => {
+            const brukFilterFraPortefolje = sjekkFeature(getState(), BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE);
+            if (brukFilterFraPortefolje) {
+                return slettMineFilterPortefolje(filterId);
+            } else {
+                return slettMineFilter(filterId);
+            }
+        },
+        {
+            OK: SLETT_MINEFILTER_OK,
+            FEILET: SLETT_MINEFILTER_FEILET,
+            PENDING: SLETT_MINEFILTER_PENDING
+        }
+    );
 }
 
-export function lagreSorteringForFilter(sorteringOgIder: SorteringOgId[]) {
-    return dispatch => {
-        return lagreSorteringFiltere(sorteringOgIder)
-            .then(data => sendResultatTilDispatch(dispatch, SORTER_MINEFILTER_OK)(data))
-            .catch(handterFeil(dispatch, SORTER_MINEFILTER_FEILET));
+export function lagreSorteringForFilter(sorteringOgIder: SorteringOgId[] | SortOrderPortefolje[]) {
+    return (dispatch, getState) => {
+        const brukFilterFraPortefolje = sjekkFeature(getState(), BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE);
+        if (brukFilterFraPortefolje) {
+            return lagreSorteringMineFilterePortefolje(sorteringOgIder as SortOrderPortefolje[])
+                .then(data => sendResultatTilDispatch(dispatch, SORTER_MINEFILTER_OK)(data))
+                .catch(handterFeil(dispatch, SORTER_MINEFILTER_FEILET));
+        } else {
+            return lagreSorteringFiltere(sorteringOgIder as SorteringOgId[])
+                .then(data => sendResultatTilDispatch(dispatch, SORTER_MINEFILTER_OK)(data))
+                .catch(handterFeil(dispatch, SORTER_MINEFILTER_FEILET));
+        }
     };
 }
