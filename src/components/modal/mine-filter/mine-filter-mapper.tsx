@@ -37,7 +37,7 @@ export function mapLagretFilterFraPortefoljeTilLagretFilter(dto: LagretFilterPor
     return {
         filterNavn: dto.filterNavn,
         filterId: dto.filterId,
-        filterValg: dto.filterValg,
+        filterValg: {...dto.filterValg, veilederNavnQuery: initialState[Filtervalg.veilederNavnQuery]},
         sortOrder: dto.sortOrder,
         filterCleanup: false,
         aktiv: true
