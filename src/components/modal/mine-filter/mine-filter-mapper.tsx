@@ -41,7 +41,8 @@ export function mapLagretFilterFraPortefoljeTilLagretFilter(dto: LagretFilterPor
         filterValg: {...dto.filterValg, veilederNavnQuery: initialState[Filtervalg.veilederNavnQuery]},
         sortOrder: dto.sortOrder,
         filterCleanup: false,
-        aktiv: true
+        aktiv: dto.aktiv,
+        note: dto.ikke_aktiv_beskrivelse
     };
 }
 

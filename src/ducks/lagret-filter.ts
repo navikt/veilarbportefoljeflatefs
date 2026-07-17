@@ -59,6 +59,8 @@ export interface LagretFilterPortefolje {
     filterId: number;
     filterValg: FiltervalgModell;
     sortOrder: number;
+    aktiv: boolean;
+    ikke_aktiv_beskrivelse: string;
 }
 
 export interface LagreNyttFilterPortefolje {
