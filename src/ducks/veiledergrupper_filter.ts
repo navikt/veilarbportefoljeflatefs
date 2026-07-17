@@ -103,11 +103,11 @@ export function hentLagretFilterForEnhet(enhetId: string) {
         (_dispatch, getState) => {
             const brukFilterFraPortefolje = sjekkFeature(getState(), BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE);
             if (brukFilterFraPortefolje) {
-                hentVeiledergrupperForEnhetPortefolje(enhetId).then((dtoer: LagretVeiledergruppePortefolje[]) =>
+                return hentVeiledergrupperForEnhetPortefolje(enhetId).then((dtoer: LagretVeiledergruppePortefolje[]) =>
                     dtoer.map(dto => mapVeiledergrupperTilLagretFilter(dto))
                 );
             } else {
-                hentEnhetsFilterGrupper(enhetId).then((dtoer: LagretFilterDTO[]) =>
+                return hentEnhetsFilterGrupper(enhetId).then((dtoer: LagretFilterDTO[]) =>
                     dtoer.map(dto => mapLagretFilterFraDTO(dto))
                 );
             }
@@ -131,11 +131,11 @@ export function lagreEndringer(endringer: RedigerLagretFilter, enhetId: string) 
                     filterId: endringer.filterId,
                     veiledere: endringer.filterValg[Filtervalg.veiledere]
                 };
-                redigerVeiledergruppePortefolje(redigerVeiledergruppe, enhetId).then(dto =>
+                return redigerVeiledergruppePortefolje(redigerVeiledergruppe, enhetId).then(dto =>
                     mapVeiledergrupperTilLagretFilter(dto)
                 );
             } else {
-                redigerVeiledergruppe(endringer, enhetId).then(dto => mapLagretFilterFraDTO(dto));
+                return redigerVeiledergruppe(endringer, enhetId).then(dto => mapLagretFilterFraDTO(dto));
             }
         },
         {
@@ -156,11 +156,11 @@ export function lageNyGruppe(endringer: NyttLagretFilter, enhetId: string) {
                     filterNavn: endringer.filterNavn,
                     veiledere: endringer.filterValg[Filtervalg.veiledere]
                 };
-                lagreNyVeiledergruppePortefolje(nyVeiledergruppe, enhetId).then(dto =>
+                return lagreNyVeiledergruppePortefolje(nyVeiledergruppe, enhetId).then(dto =>
                     mapVeiledergrupperTilLagretFilter(dto)
                 );
             } else {
-                nyVeiledergruppe(endringer, enhetId).then(dto => mapLagretFilterFraDTO(dto));
+                return nyVeiledergruppe(endringer, enhetId).then(dto => mapLagretFilterFraDTO(dto));
             }
         },
         {

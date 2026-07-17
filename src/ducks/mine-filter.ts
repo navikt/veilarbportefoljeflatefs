@@ -162,7 +162,9 @@ export function hentMineFilterForVeileder() {
             if (brukFilterFraPortefolje) {
                 return hentMineFilterPortefolje();
             } else {
-                hentMineFilter().then((dtoer: LagretFilterDTO[]) => dtoer.map(dto => mapLagretFilterFraDTO(dto)));
+                return hentMineFilter().then((dtoer: LagretFilterDTO[]) =>
+                    dtoer.map(dto => mapLagretFilterFraDTO(dto))
+                );
             }
         },
         {OK: HENT_MINEFILTER_OK, FEILET: HENT_MINEFILTER_FEILET, PENDING: HENT_MINEFILTER_PENDING}
@@ -176,7 +178,7 @@ export function lagreEndringer(endringer: RedigerLagretFilter | RedigerLagretFil
             if (brukFilterFraPortefolje) {
                 return redigerMineFilterPortefolje(endringer as RedigerLagretFilterPortefolje);
             } else {
-                redigerMineFilter(endringer as RedigerLagretFilter).then(dto => mapLagretFilterFraDTO(dto));
+                return redigerMineFilter(endringer as RedigerLagretFilter).then(dto => mapLagretFilterFraDTO(dto));
             }
         },
         {
@@ -194,7 +196,7 @@ export function lagreNyttFilter(nyttFilter: NyttLagretFilter | LagreNyttFilterPo
             if (brukFilterFraPortefolje) {
                 return lagreNyttMineFilterPortefolje(nyttFilter as LagreNyttFilterPortefolje);
             } else {
-                nyttMineFilter(nyttFilter as NyttLagretFilter).then(dto => mapLagretFilterFraDTO(dto));
+                return nyttMineFilter(nyttFilter as NyttLagretFilter).then(dto => mapLagretFilterFraDTO(dto));
             }
         },
         {
