@@ -318,8 +318,11 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
         withAuth(async ({request}) => {
             const oppdaterFilterRequest = (await request.json()) as LagretFilterPortefolje;
 
-            let filterIndex = customMineFilter.findIndex(elem => elem.filterId === oppdaterFilterRequest.filterId);
-            customMineFilter[filterIndex] = {...oppdaterFilterRequest};
+            const filterIndex = customMineFilter.findIndex(elem => elem.filterId === oppdaterFilterRequest.filterId);
+            customMineFilter[filterIndex] = {
+                ...customMineFilter[filterIndex],
+                ...oppdaterFilterRequest
+            };
             return HttpResponse.json(customMineFilter[filterIndex]);
         })
     ),
@@ -328,9 +331,15 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
         withAuth(async ({request}) => {
             const opprettFilterRequest = (await request.json()) as LagretFilterPortefolje;
             const filterId = Math.floor(Math.random() * 100) + 500;
-            customMineFilter = [...customMineFilter, {...opprettFilterRequest, filterId}];
+            const nyttFilter: LagretFilterPortefolje = {
+                ...opprettFilterRequest,
+                filterId,
+                sortOrder: 0,
+                aktiv: true
+            };
+            customMineFilter = [...customMineFilter, nyttFilter];
 
-            return HttpResponse.json({...opprettFilterRequest, filterId, aktiv: true});
+            return HttpResponse.json(nyttFilter);
         })
     ),
     http.delete(

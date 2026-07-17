@@ -182,8 +182,13 @@ export function lagreEndringer(endringer: RedigerLagretFilter | RedigerLagretFil
         (_dispatch, getState) => {
             const brukFilterFraPortefolje = sjekkFeature(getState(), BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE);
             if (brukFilterFraPortefolje) {
-                return redigerMineFilterPortefolje(endringer as RedigerLagretFilterPortefolje).then(dto =>
-                    mapLagretFilterFraPortefoljeTilLagretFilter(dto)
+                const redigerLagretFilter: RedigerLagretFilterPortefolje = {
+                    filterNavn: endringer.filterNavn,
+                    filterId: endringer.filterId,
+                    filterValg: endringer.filterValg
+                };
+                return redigerMineFilterPortefolje(redigerLagretFilter).then(
+                    mapLagretFilterFraPortefoljeTilLagretFilter
                 );
             } else {
                 return redigerMineFilter(endringer as RedigerLagretFilter).then(dto => mapLagretFilterFraDTO(dto));
@@ -202,7 +207,11 @@ export function lagreNyttFilter(nyttFilter: NyttLagretFilter | LagreNyttFilterPo
         (_dispatch, getState) => {
             const brukFilterFraPortefolje = sjekkFeature(getState(), BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE);
             if (brukFilterFraPortefolje) {
-                return lagreNyttMineFilterPortefolje(nyttFilter as LagreNyttFilterPortefolje).then(dto =>
+                const lagreNyttFilter: LagreNyttFilterPortefolje = {
+                    filterNavn: nyttFilter.filterNavn,
+                    filterValg: nyttFilter.filterValg
+                };
+                return lagreNyttMineFilterPortefolje(lagreNyttFilter).then(dto =>
                     mapLagretFilterFraPortefoljeTilLagretFilter(dto)
                 );
             } else {
