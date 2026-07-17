@@ -15,6 +15,7 @@ import {
     HandlingsType,
     LagreNyttFilterPortefolje,
     LagretFilterDTO,
+    LagretFilterPortefolje,
     LagretFilterState,
     NyttLagretFilter,
     RedigerLagretFilter,
@@ -22,7 +23,10 @@ import {
     SorteringOgId,
     SortOrderPortefolje
 } from './lagret-filter';
-import {mapLagretFilterFraDTO} from '../components/modal/mine-filter/mine-filter-mapper';
+import {
+    mapLagretFilterFraDTO,
+    mapLagretFilterFraPortefoljeTilLagretFilter
+} from '../components/modal/mine-filter/mine-filter-mapper';
 import {sjekkFeature} from './features';
 import {BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE} from '../konstanter';
 
@@ -160,7 +164,9 @@ export function hentMineFilterForVeileder() {
         (_dispatch, getState) => {
             const brukFilterFraPortefolje = sjekkFeature(getState(), BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE);
             if (brukFilterFraPortefolje) {
-                return hentMineFilterPortefolje();
+                return hentMineFilterPortefolje().then((dtoer: LagretFilterPortefolje[]) =>
+                    dtoer.map(dto => mapLagretFilterFraPortefoljeTilLagretFilter(dto))
+                );
             } else {
                 return hentMineFilter().then((dtoer: LagretFilterDTO[]) =>
                     dtoer.map(dto => mapLagretFilterFraDTO(dto))
@@ -176,7 +182,9 @@ export function lagreEndringer(endringer: RedigerLagretFilter | RedigerLagretFil
         (_dispatch, getState) => {
             const brukFilterFraPortefolje = sjekkFeature(getState(), BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE);
             if (brukFilterFraPortefolje) {
-                return redigerMineFilterPortefolje(endringer as RedigerLagretFilterPortefolje);
+                return redigerMineFilterPortefolje(endringer as RedigerLagretFilterPortefolje).then(dto =>
+                    mapLagretFilterFraPortefoljeTilLagretFilter(dto)
+                );
             } else {
                 return redigerMineFilter(endringer as RedigerLagretFilter).then(dto => mapLagretFilterFraDTO(dto));
             }
@@ -194,7 +202,9 @@ export function lagreNyttFilter(nyttFilter: NyttLagretFilter | LagreNyttFilterPo
         (_dispatch, getState) => {
             const brukFilterFraPortefolje = sjekkFeature(getState(), BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE);
             if (brukFilterFraPortefolje) {
-                return lagreNyttMineFilterPortefolje(nyttFilter as LagreNyttFilterPortefolje);
+                return lagreNyttMineFilterPortefolje(nyttFilter as LagreNyttFilterPortefolje).then(dto =>
+                    mapLagretFilterFraPortefoljeTilLagretFilter(dto)
+                );
             } else {
                 return nyttMineFilter(nyttFilter as NyttLagretFilter).then(dto => mapLagretFilterFraDTO(dto));
             }

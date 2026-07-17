@@ -1,4 +1,9 @@
-import {LagretFilter, LagretFilterDTO, LagretVeiledergruppePortefolje} from '../../../ducks/lagret-filter';
+import {
+    LagretFilter,
+    LagretFilterDTO,
+    LagretFilterPortefolje,
+    LagretVeiledergruppePortefolje
+} from '../../../ducks/lagret-filter';
 import {initialState, initialState as filtervalgInitialState} from '../../../ducks/filtrering';
 import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {AktiviteterFilternokler, AktiviteterValg} from '../../../filtrering/filter-konstanter';
@@ -25,6 +30,17 @@ export function mapVeiledergrupperTilLagretFilter(dto: LagretVeiledergruppePorte
         filterValg: {...filtervalgInitialState, [Filtervalg.veiledere]: dto.veiledere ?? []},
         sortOrder: null,
         filterCleanup: false
+    };
+}
+
+export function mapLagretFilterFraPortefoljeTilLagretFilter(dto: LagretFilterPortefolje): LagretFilter {
+    return {
+        filterNavn: dto.filterNavn,
+        filterId: dto.filterId,
+        filterValg: dto.filterValg,
+        sortOrder: dto.sortOrder,
+        filterCleanup: false,
+        aktiv: true
     };
 }
 
