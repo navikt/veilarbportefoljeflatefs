@@ -285,7 +285,7 @@ export function slettVeiledergruppePortefolje(enhetId: string | undefined | null
 }
 
 export function fetchPortefoljeStorrelser(enhetId) {
-    const url = `${VEILARBPORTEFOLJE_URL}/enhetId/${enhetId}/portefoljestorrelser`;
+    const url = `${VEILARBPORTEFOLJE_URL}/enhet/${enhetId}/portefoljestorrelser`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
