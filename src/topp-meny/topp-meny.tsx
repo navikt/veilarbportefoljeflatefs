@@ -5,8 +5,6 @@ import {Lenker} from './lenker';
 import {AppState} from '../reducer';
 import {STATUS} from '../ducks/utils';
 import {DarkModeToggle} from '../components/toggle/dark-mode-toggle';
-import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {DARKMODE} from '../konstanter';
 import {Moteplan} from '../minoversikt/moteplan/Moteplan';
 import {useEnhetSelector} from '../hooks/redux/use-enhet-selector';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
@@ -23,7 +21,6 @@ export function ToppMeny({erPaloggetVeileder = false, oversiktType}: Props) {
     //VENTER PÅ ATT HENTE PORTEFOLJESTORRELSER FØR ATT VETA OM VI SKA VISA MIN OVERSIKT LENKEN ELLER EJ
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
     const innloggetVeileder = useSelector((state: AppState) => state.innloggetVeileder);
-    const harDarkModeFeatureToggle = useFeatureSelector()(DARKMODE);
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const enhet = useEnhetSelector();
 
@@ -38,7 +35,7 @@ export function ToppMeny({erPaloggetVeileder = false, oversiktType}: Props) {
     return (
         <div className="topp-meny">
             <Lenker erPaloggetVeileder={erPaloggetVeileder} />
-            {harDarkModeFeatureToggle && <DarkModeToggle />}
+            <DarkModeToggle />
             <Toasts />
             {oversiktType === OversiktType.minOversikt && enhet && (
                 <Moteplan veileder={gjeldendeVeileder} enhet={enhet} />

@@ -41,10 +41,6 @@ body {
     }
 }
 
-html.darkmode {
-    filter: invert(90%);
-}
-
 body.annen-veileder {
     background-color: #85d5f0;
 }
