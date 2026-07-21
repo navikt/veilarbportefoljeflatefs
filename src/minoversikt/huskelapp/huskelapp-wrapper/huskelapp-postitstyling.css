@@ -22,7 +22,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    background: white;
+    background: var(--ax-bg-default);
     border-width: 0 20px 20px 0;
     border-style: solid;
     border-color: hsl(64, 89%, 84%) transparent;

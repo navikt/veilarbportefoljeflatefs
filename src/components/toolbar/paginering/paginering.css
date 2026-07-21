@@ -5,7 +5,7 @@
 }
 .veilarbportefoljeflatefs .paginering__knapp {
     border: 1px solid transparent;
-    border-left: 1px solid #a0a0a0;
+    border-left: 1px solid var(--ax-border-default);
     background-color: transparent;
     width: 30%;
     padding: 0.25rem 0.5rem;
@@ -13,7 +13,7 @@
 }
 .veilarbportefoljeflatefs .paginering__knapp:hover {
     box-shadow: none;
-    border-bottom: 1px solid #a0a0a0;
+    border-bottom: 1px solid var(--ax-border-default);
     cursor: pointer;
 }
 .veilarbportefoljeflatefs .paginering__knapp:first-child {
@@ -21,12 +21,12 @@
     min-width: fit-content;
 }
 .veilarbportefoljeflatefs .paginering__knapp:last-child {
-    border-right: 1px solid #a0a0a0;
+    border-right: 1px solid var(--ax-border-default);
 }
 .veilarbportefoljeflatefs .paginering__knapp.disabled {
     pointer-events: none;
     cursor: default;
-    color: #c9c9c9;
+    color: var(--ax-text-neutral-subtle);
 }
 .veilarbportefoljeflatefs .paginering__knapp:focus {
     box-shadow: 0 0 0 3px #00347d;

@@ -2,7 +2,7 @@
     background-color: transparent;
     border-radius: 4px;
     border-collapse: separate;
-    border-bottom: 1px solid #6a6a6a;
+    border-bottom: 1px solid var(--ax-border-neutral-strong);
     border-top: none;
     margin-right: 0;
     border-spacing: 0;
@@ -11,16 +11,16 @@
 .tabell caption {
     padding-top: 8px;
     padding-bottom: 8px;
-    color: #7f756c;
+    color: var(--ax-text-neutral-subtle);
     text-align: left;
 }
 .tabell td:first-child,
 .tabell th:first-child {
-    border-left: 1px solid #6a6a6a;
+    border-left: 1px solid var(--ax-border-neutral-strong);
 }
 .tabell td:last-child,
 .tabell th:last-child {
-    border-right: 1px solid #6a6a6a;
+    border-right: 1px solid var(--ax-border-neutral-strong);
 }
 .tabell th:last-child {
     border-right: none;
@@ -30,7 +30,7 @@
 }
 .tabell thead th {
     background-color: var(--ax-bg-neutral-soft);
-    border-bottom: 1px solid #6a6a6a;
+    border-bottom: 1px solid var(--ax-border-neutral-strong);
     position: sticky;
     top: 2.5rem;
     -webkit-backface-visibility: hidden;
@@ -43,7 +43,7 @@
     padding: 8px;
     line-height: 1.42857143;
     vertical-align: top;
-    border-top: 1px solid #a0a0a0;
+    border-top: 1px solid var(--ax-border-default);
 }
 .tabell thead tr:first-child th,
 .tabell thead tr:first-child td {
@@ -59,11 +59,11 @@
     border-bottom: none;
 }
 .tabell tbody tr:nth-child(odd) {
-    background-color: #fff;
+    background-color: var(--ax-bg-default);
 }
 .tabell tbody th,
 .tabell tbody td {
-    border-bottom: 1px solid #a0a0a0;
+    border-bottom: 1px solid var(--ax-border-default);
     border-top: none;
     font-weight: normal;
 }

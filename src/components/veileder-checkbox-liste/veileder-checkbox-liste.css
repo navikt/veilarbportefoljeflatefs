@@ -3,7 +3,7 @@
     overflow-x: auto;
     padding: 0.5rem;
     position: relative;
-    border-bottom: 1px solid #a0a0a0;
+    border-bottom: 1px solid var(--ax-border-default);
 }
 .veilarbportefoljeflatefs .veilederoversikt-nullstill-knapp {
     padding: 0.5rem 0 0;

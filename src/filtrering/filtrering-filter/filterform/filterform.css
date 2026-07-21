@@ -24,7 +24,7 @@
 .veilarbportefoljeflatefs .aktivitet-filterform__knappegruppe {
     display: flex;
     justify-content: space-between;
-    border-top: 1px solid #c9c9c9;
+    border-top: 1px solid var(--ax-border-neutral-subtle);
 }
 .veilarbportefoljeflatefs .aktivitet-filterform__knappegruppe .filterknapp {
     padding: 0.5rem;
@@ -118,7 +118,7 @@
     position: relative;
     cursor: pointer;
     padding: 0.3rem 0.5rem;
-    background-color: white;
+    background-color: var(--ax-bg-default);
     border: 1px solid transparent;
     border-radius: 4px;
 }
@@ -168,7 +168,7 @@
     input[type='checkbox']:checked
     + label {
     background-color: #0056b4;
-    color: white;
+    color: var(--ax-text-neutral-contrast);
 }
 .veilarbportefoljeflatefs
     #Fødselsdato-dropdown__innhold
@@ -223,7 +223,7 @@
 .veilarbportefoljeflatefs .hendelser-filterform__checkbox-gruppe {
     margin-bottom: 1rem;
     margin-right: 0.5rem;
-    border-bottom: 1px solid #78706a;
+    border-bottom: 1px solid var(--ax-border-neutral-strong);
     display: flex;
     flex-direction: row;
     justify-content: space-between;

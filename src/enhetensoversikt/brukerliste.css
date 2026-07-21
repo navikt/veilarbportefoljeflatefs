@@ -5,13 +5,13 @@
 }
 
 .veilarbportefoljeflatefs .brukerliste li.brukerliste_rad:nth-child(odd) {
-    background-color: #fff;
+    background-color: var(--ax-bg-default);
 }
 
 .veilarbportefoljeflatefs .brukerliste li.brukerliste_rad {
-    border-left: 1px solid #6a6a6a;
-    border-right: 1px solid #6a6a6a;
-    border-top: 1px solid #a0a0a0;
+    border-left: 1px solid var(--ax-border-neutral-strong);
+    border-right: 1px solid var(--ax-border-neutral-strong);
+    border-top: 1px solid var(--ax-border-default);
 }
 
 .veilarbportefoljeflatefs .brukerliste li.brukerliste_rad:first-child {
@@ -19,7 +19,7 @@
 }
 
 .veilarbportefoljeflatefs .brukerliste li.brukerliste_rad:last-child {
-    border-bottom: 1px solid #a0a0a0;
+    border-bottom: 1px solid var(--ax-border-default);
     border-radius: 0 0 var(--ax-radius-4) var(--ax-radius-4);
 }
 
@@ -41,8 +41,8 @@
 
 .veilarbportefoljeflatefs .brukerliste--forrigeBruker {
     box-shadow:
-        inset -1px 0 0 2px #6a6a6a,
-        inset 1px 0 0 2px #a0a0a0;
+        inset -1px 0 0 2px var(--ax-border-neutral-strong),
+        inset 1px 0 0 2px var(--ax-border-default);
 }
 
 .veilarbportefoljeflatefs .brukerliste__sorteringheader {
@@ -93,7 +93,7 @@
 
 .veilarbportefoljeflatefs .enhet-tabell {
     background-color: var(--ax-bg-neutral-soft);
-    border-top-color: #fff;
+    border-top-color: var(--ax-bg-default);
     border-bottom: none;
     border-radius: 0 0 4px 4px;
     margin-bottom: 0;

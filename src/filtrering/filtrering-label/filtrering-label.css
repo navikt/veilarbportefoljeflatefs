@@ -18,6 +18,6 @@
 }
 
 .veilarbportefoljeflatefs .filtreringlabel__med-ikon .fargekategoriikon [fill]:not([stroke]) {
-    fill: #fff;
+    fill: var(--ax-bg-default);
     fill-opacity: 1;
 }
