@@ -16,6 +16,11 @@
     background-color: #f9fccc;
 }
 
+.huskelapp__postit p.aksel-detail,
+.huskelapp__postit p.navds-detail {
+    color: #23262a;
+}
+
 .huskelapp__postit::before {
     /*flippen i top høyre*/
     content: '';
