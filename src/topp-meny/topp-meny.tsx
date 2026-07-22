@@ -22,6 +22,7 @@ export function ToppMeny({erPaloggetVeileder = false, oversiktType}: Props) {
     //VENTER PÅ ATT HENTE PORTEFOLJESTORRELSER FØR ATT VETA OM VI SKA VISA MIN OVERSIKT LENKEN ELLER EJ
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
     const innloggetVeileder = useSelector((state: AppState) => state.innloggetVeileder);
+    const harDarkModeFeatureToggle = useFeatureSelector()(DARKMODE);
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const enhet = useEnhetSelector();
 
