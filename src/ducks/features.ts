@@ -2,6 +2,7 @@ import {AppState} from '../reducer';
 import {hentFeatures} from '../middleware/api';
 import {
     BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE,
+    DARKMODE,
     BRUK_TILTAKSAKTIVITET_FRA_AKTIVITETSPLAN,
     LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG,
     PORTEFOLJE_FEATURES
