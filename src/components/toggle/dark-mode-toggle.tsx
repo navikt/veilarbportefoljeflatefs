@@ -1,14 +1,9 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {Switch} from '@navikt/ds-react';
 import './dark-mode-toggle.css';
 
 export function DarkModeToggle() {
-    const [darkmode, setDarkmode] = useState(localStorage.getItem('darkmode') === 'true');
-
-    useEffect(() => {
-        document.documentElement.classList.toggle('darkmode', darkmode);
-        localStorage.setItem('darkmode', darkmode + '');
-    }, [darkmode]);
+    const [darkmode, setDarkmode] = useState(false);
 
     return (
         <div className="dark-mode-toggle">
