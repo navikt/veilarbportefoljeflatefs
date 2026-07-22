@@ -35,12 +35,12 @@ export function ToppMeny({erPaloggetVeileder = false, oversiktType}: Props) {
     return (
         <div className="topp-meny">
             <Lenker erPaloggetVeileder={erPaloggetVeileder} />
-            <DarkModeToggle />
             <Toasts />
             {oversiktType === OversiktType.minOversikt && enhet && (
                 <Moteplan veileder={gjeldendeVeileder} enhet={enhet} />
             )}
             <Endringslogg userId={innloggetVeileder.data?.ident!} />
+            <DarkModeToggle />
         </div>
     );
 }

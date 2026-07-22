@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react';
 import {Switch} from '@navikt/ds-react';
-import './dark-mode-toggle.css';
 
 const THEME_STORAGE_KEY = 'veilarbportefoljeflatefs.theme';
 
@@ -29,10 +28,8 @@ export function DarkModeToggle() {
     }, [darkmode]);
 
     return (
-        <div className="dark-mode-toggle">
-            <Switch size="medium" onChange={() => setDarkmode(!darkmode)} checked={darkmode}>
-                Slå {darkmode ? ' av ' : ' på '} mørk modus
-            </Switch>
-        </div>
+        <Switch size="medium" onChange={() => setDarkmode(!darkmode)} checked={darkmode}>
+            Slå {darkmode ? ' av ' : ' på '} mørk modus
+        </Switch>
     );
 }
