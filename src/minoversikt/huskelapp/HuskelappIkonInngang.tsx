@@ -14,7 +14,15 @@ export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
             <Button
                 size="small"
                 variant="tertiary"
-                icon={harHuskelapp ? <HuskelappIkon /> : <HuskelappIkonTomt />}
+                icon={
+                    harHuskelapp ? (
+                        <span className="light">
+                            <HuskelappIkon />
+                        </span>
+                    ) : (
+                        <HuskelappIkonTomt />
+                    )
+                }
                 title={harHuskelapp ? 'Endre huskelapp' : 'Opprett huskelapp'}
                 onClick={() => setSkalViseHuskelappModal(true)}
             />

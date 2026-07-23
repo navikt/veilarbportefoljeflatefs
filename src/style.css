@@ -23,7 +23,7 @@ body {
     height: 100%;
     width: 100%;
     font-weight: 400;
-    color: #262626;
+    color: var(--ax-text-neutral);
     font-family: 'Source Sans Pro', Arial, sans-serif;
 
     /* Det som set grå bakgrunn på heile sida */

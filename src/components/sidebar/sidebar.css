@@ -5,7 +5,7 @@
     top: 0.5rem;
     z-index: 4;
     box-shadow: var(--shadow-small);
-    background-color: white;
+    background-color: var(--ax-bg-default);
     margin-top: 0.5rem;
 }
 
@@ -22,7 +22,7 @@
 .veilarbportefoljeflatefs .sidebar__content-container {
     height: fit-content;
     z-index: 5;
-    background-color: white;
+    background-color: var(--ax-bg-default);
     padding: 0.5rem;
     position: absolute;
     width: 100%;
