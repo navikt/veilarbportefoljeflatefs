@@ -15,6 +15,7 @@ export interface FeaturesState {
 }
 
 const initalState: FeaturesState = {
+    [DARKMODE]: false,
     [LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG]: false,
     [BRUK_TILTAKSAKTIVITET_FRA_AKTIVITETSPLAN]: false,
     [BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE]: false
