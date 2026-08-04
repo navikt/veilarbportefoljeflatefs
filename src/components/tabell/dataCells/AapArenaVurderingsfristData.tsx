@@ -2,7 +2,7 @@ import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {DataCellProps} from './DataCellProps';
 import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 import {Innsatsgruppe} from '../../../typer/bruker-modell';
-import {dateGreater, toDateString} from '../../../utils/dato-utils';
+import dayjs from 'dayjs';
 
 export const AapArenaVurderingsfristData = ({bruker, valgteKolonner}: DataCellProps) => {
     const vurderingsfristAAP = aapVurderingsfrist(
@@ -27,30 +27,44 @@ function aapVurderingsfrist(
     utlopsdatoVedtak?: string,
     utlopsdatoOrdinerRettighet?: string
 ): string | undefined {
-    const iDag = new Date();
+    const iDag = dayjs();
+
     if (brukerYtelse === 'AAP_MAXTID') {
         // makstid == ordinær rettighetsperiode
         if (utlopsdatoOrdinerRettighet) {
             // Hvis utlopsdatoOrdinerRettighet eksisterer så er brukeren BATT (filtreres backend)
-            const vurderingsfrist = new Date(utlopsdatoOrdinerRettighet);
-            vurderingsfrist.setDate(vurderingsfrist.getDate() - 40); // 5 ukers frist er spesifisert av servicerutinen for AAP, på ordinær er den ikke nøyaktig på det vi får fra Arena, så setter den til 40 dager
-            return dateGreater(vurderingsfrist, iDag)
-                ? toDateString(vurderingsfrist)
-                : `Utløpt: ${toDateString(vurderingsfrist)}`;
-        } else if (innsatsgruppe === Innsatsgruppe.BATT) {
+            // 5 ukers frist er spesifisert av servicerutinen for AAP, på ordinær er den ikke nøyaktig på det vi får fra Arena, så setter den til 40 dager
+            const vurderingsfrist = dayjs(utlopsdatoOrdinerRettighet).subtract(40, 'day');
+            if (!vurderingsfrist.isValid()) {
+                return undefined;
+            }
+
+            const vurderingsfristFormatert = vurderingsfrist.format('DD.MM.YYYY');
+            return vurderingsfrist.isAfter(iDag) ? vurderingsfristFormatert : `Utløpt: ${vurderingsfristFormatert}`;
+        }
+
+        if (innsatsgruppe === Innsatsgruppe.BATT) {
             // Hvis bruker er BATT, så har vi ikke fått melding fra Arena som oppretter en ordinerutlopsdato
             return 'Mangler data';
-        } else {
-            return 'Ikke spesielt tilpasset innsats';
         }
-    } else if (brukerYtelse === 'AAP_UNNTAK') {
+        return 'Ikke spesielt tilpasset innsats';
+    }
+
+    if (brukerYtelse === 'AAP_UNNTAK') {
         if (!utlopsdatoVedtak) {
             return undefined;
         }
-        const vurderingsfrist = new Date(utlopsdatoVedtak);
-        vurderingsfrist.setDate(vurderingsfrist.getDate() - 35); // 35 dager/5 ukers frist er spesifisert av servicerutinen for AAP
-        return dateGreater(vurderingsfrist, iDag)
-            ? toDateString(vurderingsfrist)
-            : `Utløpt: ${toDateString(vurderingsfrist)}`;
+
+        // 35 dager/5 ukers frist er spesifisert av servicerutinen for AAP
+        const vurderingsfrist = dayjs(utlopsdatoVedtak).subtract(35, 'day');
+
+        if (!vurderingsfrist.isValid()) {
+            return undefined;
+        }
+
+        const vurderingsfristFormatert = vurderingsfrist.format('DD.MM.YYYY');
+        return vurderingsfrist.isAfter(iDag) ? vurderingsfristFormatert : `Utløpt: ${vurderingsfristFormatert}`;
     }
+
+    return undefined;
 }

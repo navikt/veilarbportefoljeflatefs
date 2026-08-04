@@ -28,7 +28,7 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
         <Table
             zebraStripes={true}
             data-testid="veilederoversikt-tabell"
-            bgcolor="white"
+            style={{backgroundColor: 'var(--ax-bg-default)'}}
             sort={sortering}
             onSortChange={handleSortChange}
         >

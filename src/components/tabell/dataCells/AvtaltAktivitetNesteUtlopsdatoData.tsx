@@ -6,7 +6,7 @@ export const AvtaltAktivitetNesteUtlopsdatoData = ({bruker, valgteKolonner}: Dat
     <DatoDataCellType
         dato={
             bruker.aktiviteterAvtaltMedNav.nesteUtlopsdatoForAlleAktiviteter
-                ? new Date(bruker.aktiviteterAvtaltMedNav.nesteUtlopsdatoForAlleAktiviteter)
+                ? bruker.aktiviteterAvtaltMedNav.nesteUtlopsdatoForAlleAktiviteter
                 : null
         }
         skalVises={valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}

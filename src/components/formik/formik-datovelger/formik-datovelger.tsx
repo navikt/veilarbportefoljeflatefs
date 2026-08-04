@@ -1,7 +1,8 @@
 import {Field, FieldProps, getIn} from 'formik';
-import {DateInputProps, ErrorMessage, useDatepicker, DatePicker} from '@navikt/ds-react';
-import {dateToISODate, validerDatoFelt} from '../../../utils/dato-utils';
+import {DateInputProps, DatePicker, ErrorMessage, useDatepicker} from '@navikt/ds-react';
+import {formaterDateTilIsoDateString, validerDatoFelt} from '../../../utils/dato-utils';
 import classNames from 'classnames';
+import dayjs from 'dayjs';
 
 interface DatoVelgerProps {
     formikProps: FieldProps;
@@ -17,8 +18,8 @@ const DatoVelger = ({formikProps, size, label, name}: DatoVelgerProps) => {
     } = formikProps;
 
     const {datepickerProps, inputProps} = useDatepicker({
-        defaultSelected: field.value ? new Date(field.value) : undefined,
-        onDateChange: (date?: Date) => setFieldValue(field.name, dateToISODate(date)),
+        defaultSelected: field.value && dayjs(field.value).isValid() ? dayjs(field.value).toDate() : undefined,
+        onDateChange: (date?: Date) => setFieldValue(field.name, formaterDateTilIsoDateString(date)),
         inputFormat: 'dd.MM.yyyy',
         fromDate: new Date(),
         onValidate: val => {
@@ -51,7 +52,7 @@ const DatoVelger = ({formikProps, size, label, name}: DatoVelgerProps) => {
 
 export const FormikDatoVelger = ({name}: {name: string}) => {
     return (
-        <Field validate={(value: string) => validerDatoFelt(value, new Date(), true)} name={name} id={name}>
+        <Field validate={(value: string) => validerDatoFelt(value, dayjs(), true)} name={name} id={name}>
             {(props: FieldProps) => {
                 const error = getIn(props.form.errors, name);
                 const datePickerClassName = classNames('skjemaelement', 'datovelger', {

@@ -45,7 +45,7 @@
     padding: 0;
     background-color: transparent;
     min-width: 2rem;
-    color: #262626;
+    color: var(--ax-text-neutral);
     border: none;
 }
 

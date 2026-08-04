@@ -3,9 +3,7 @@ import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
 
 export const UngdomsprogramSluttdatoData = ({bruker, valgteKolonner}: DataCellProps) => {
-    const sluttdato = bruker.ytelser.ungdomsprogram?.sluttdato
-        ? new Date(bruker.ytelser.ungdomsprogram.sluttdato)
-        : null;
+    const sluttdato = bruker.ytelser.ungdomsprogram?.sluttdato ? bruker.ytelser.ungdomsprogram.sluttdato : null;
 
     return (
         <DatoDataCellType

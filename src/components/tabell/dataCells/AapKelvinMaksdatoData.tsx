@@ -3,7 +3,7 @@ import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
 
 export const AapKelvinMaksdatoData = ({bruker, valgteKolonner}: DataCellProps) => {
-    const maksdato = bruker.ytelser.aap?.maksdato ? new Date(bruker.ytelser.aap.maksdato) : null;
+    const maksdato = bruker.ytelser.aap?.maksdato ? bruker.ytelser.aap.maksdato : null;
 
     return (
         <DatoDataCellType

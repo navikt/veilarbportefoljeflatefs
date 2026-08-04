@@ -7,7 +7,7 @@ export const AvtaltAktivitetForrigeStartdatoAktivitetData = ({bruker, valgteKolo
         className="col col-xs-2"
         dato={
             bruker.aktiviteterAvtaltMedNav.forrigeAktivitetStart
-                ? new Date(bruker.aktiviteterAvtaltMedNav.forrigeAktivitetStart)
+                ? bruker.aktiviteterAvtaltMedNav.forrigeAktivitetStart
                 : null
         }
         skalVises={valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}

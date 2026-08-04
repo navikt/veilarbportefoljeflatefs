@@ -1,7 +1,6 @@
 import {MouseEvent, ReactNode} from 'react';
 import {XMarkIcon} from '@navikt/aksel-icons';
 import './filtrering-label.css';
-import '../filtrering-skjema.css';
 
 interface FiltreringLabelMedIkonProps {
     label: string;

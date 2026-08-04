@@ -1,29 +1,6 @@
 .veilarbportefoljeflatefs .portefolje__container {
     margin-bottom: 2rem;
 }
-.veilarbportefoljeflatefs .velgfiltermelding {
-    text-align: center;
-}
-.veilarbportefoljeflatefs .velgfiltermelding__ikon {
-    position: relative;
-    height: 2.5rem;
-    width: 2.5rem;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 100%;
-    background-color: #ffaa33;
-}
-.veilarbportefoljeflatefs .velgfiltermelding__ikon:after {
-    content: '';
-    position: absolute;
-    width: 70%;
-    height: 0.5rem;
-    display: block;
-    margin-left: 15%;
-    background-color: #fff;
-    top: calc(1.25rem - 0.25rem);
-    border-radius: 2px;
-}
 .veilarbportefoljeflatefs .filtrering-navn-fnr {
     width: 100%;
     max-width: 50%;

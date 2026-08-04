@@ -72,7 +72,7 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker}: P
         >
             <Modal.Header>
                 <div className="rediger-huskelapp-modal-header">
-                    <span className="rediger-huskelapp-modal-header-ikon">
+                    <span className="rediger-huskelapp-modal-header-ikon light">
                         <HuskelappIkon aria-hidden />
                     </span>
                     <Heading

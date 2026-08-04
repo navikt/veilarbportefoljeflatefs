@@ -4,7 +4,6 @@ import {useEventListener} from '../../hooks/use-event-listener';
 import {vedKlikkUtenfor} from '../../utils/utils';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {XMarkOctagonIcon} from '@navikt/aksel-icons';
-import './aksjon-knapp-med-popover-feilmelding.css';
 
 type AksjonKnappMedPopoverFeilmeldingProps = {
     klikkAksjon: (...args) => Promise<void>;

@@ -26,7 +26,6 @@ import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {Bleed} from '@navikt/ds-react';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {VIS_FARGEKATEGORIER_I_ENHETENS_OVERSIKT} from '../../konstanter';
 
 type FargekategoriUnderfilterKonfigurasjon = {
     filterLabel: string;
@@ -163,11 +162,6 @@ export function FilterStatusMineFargekategorier({oversiktType}: FilterStatusFarg
     const filtervalg = usePortefoljeSelector(oversiktType).filtervalg;
     const ferdigfilter = filtervalg.ferdigfilterListe;
     const fargekategoriFilter = filtervalg.fargekategorier;
-
-    const erEnhetensOversikt = oversiktType === OversiktType.enhetensOversikt;
-    if (erEnhetensOversikt && !harFeature(VIS_FARGEKATEGORIER_I_ENHETENS_OVERSIKT)) {
-        return null;
-    }
 
     const hovedfilterChecked =
         ferdigfilter.includes(MINE_FARGEKATEGORIER) &&

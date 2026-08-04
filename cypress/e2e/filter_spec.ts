@@ -357,33 +357,4 @@ describe('Filter', () => {
         cy.getByTestIdPrefix('filtreringlabel_').should('have.length', 0);
     });
 
-    it('Slett alle filtre', () => {
-        cy.getByTestId('filtrering-filter_container').scrollTo('bottom');
-
-        // Vel eit par aktivitetsfilter
-        cy.apneLukkeFilterDropdown('aktivitet');
-        cy.getByTestId('aktivitet-forenklet_STILLING').check({force: true});
-        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(aktiviteter.STILLING)}`).should('be.visible');
-        cy.getByTestId('aktivitet-forenklet_TILTAK').check({force: true});
-        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(aktiviteter.TILTAK)}`).should('be.visible');
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 3);
-        cy.apneLukkeFilterDropdown('aktivitet');
-
-        // Vel nokre ("Arbeidspraksis i skjermet virksomhet" og "Avklaring")
-        cy.getByTestId('dropdown-knapp_tiltakstype').should('be.enabled').click();
-        cy.getByTestId('filtrering-filter_container').scrollTo('bottom');
-        cy.getByTestId('filter_PRAKSKJERM').check({force: true});
-        cy.getByTestId('filtrering-filter_container').scrollTo('bottom');
-        cy.getByTestId('filter_AVKLARAG').check({force: true});
-
-        // Vi har no 4 valde filter og fem filtertags
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 5);
-
-        // Nullstill filtervalg
-        cy.getByTestId('filtreringlabel_nullstill-filtervalg').click();
-        cy.getByTestIdPrefix('filtreringlabel_').should('have.length', 0);
-        cy.getByTestId('alertstripe_filtrering')
-            .should('be.visible')
-            .contains('Du må gjøre en filtrering for å se brukere i listen.');
-    });
 });

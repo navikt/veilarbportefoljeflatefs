@@ -1,8 +1,8 @@
 import {initialState} from '../../ducks/filtrering';
-import {LagretFilterDTO} from '../../ducks/lagret-filter';
+import {LagretFilterPortefolje} from '../../ducks/lagret-filter';
 import {InnsatsgruppeGjeldendeVedtak14a} from '../../typer/bruker-modell';
 
-export const mineFilter = (): LagretFilterDTO[] => {
+export const mineFilterPortefolje = (): LagretFilterPortefolje[] => {
     return [
         {
             filterNavn: '1. Unge arbeidsledige møter idag',
@@ -13,11 +13,9 @@ export const mineFilter = (): LagretFilterDTO[] => {
                 ferdigfilterListe: ['MOTER_IDAG'],
                 tiltakstyper: ['UTDYRK']
             },
-            aktiveFilterValg: '{"alder": ["20-24"], "ferdigfilterListe": ["MOTER_IDAG"], "tiltakstyper": ["UTDYRK"]}',
-            filterCleanup: false,
-            sortOrder: null,
+            sortOrder: 0,
             aktiv: true,
-            note: ''
+            ikke_aktiv_beskrivelse: ''
         },
         {
             filterNavn: 'TiltaksFilter',
@@ -28,32 +26,25 @@ export const mineFilter = (): LagretFilterDTO[] => {
                 formidlingsgruppe: ['ARBS'],
                 tiltakstyper: ['TULLETOES', 'UTDYRK']
             },
-            aktiveFilterValg:
-                '{"innsatsgruppeGjeldendeVedtak14a": ["SPESIELT_TILPASSET_INNSATS"], "formidlingsgruppe": ["ARBS"], "tiltakstyper": ["TULLETOES", "UTDYRK"]}',
-            filterCleanup: false,
-            sortOrder: null,
+            sortOrder: 0,
             aktiv: true,
-            note: 'delete filter'
+            ikke_aktiv_beskrivelse: 'delete filter'
         },
         {
             filterNavn: 'Denne brukes til test la stå',
             filterId: 3,
             filterValg: {...initialState, kjonn: 'K', formidlingsgruppe: ['ARBS']},
-            aktiveFilterValg: '{"kjonn": "K", "formidlingsgruppe": ["ARBS"]}',
-            filterCleanup: false,
-            sortOrder: null,
+            sortOrder: 0,
             aktiv: true,
-            note: ''
+            ikke_aktiv_beskrivelse: ''
         },
         {
             filterNavn: 'Kvinner',
             filterId: 6,
             filterValg: {...initialState, kjonn: 'K'},
-            aktiveFilterValg: '{"kjonn": "K"}',
-            filterCleanup: false,
-            sortOrder: null,
+            sortOrder: 0,
             aktiv: true,
-            note: ''
+            ikke_aktiv_beskrivelse: ''
         },
         {
             filterNavn: 'Nye brukere',
@@ -62,21 +53,17 @@ export const mineFilter = (): LagretFilterDTO[] => {
                 ...initialState,
                 ferdigfilterListe: ['NYE_BRUKERE_FOR_VEILEDER']
             },
-            aktiveFilterValg: '{"ferdigfilterListe": ["NYE_BRUKERE_FOR_VEILEDER"]}',
-            filterCleanup: false,
-            sortOrder: null,
+            sortOrder: 0,
             aktiv: true,
-            note: ''
+            ikke_aktiv_beskrivelse: ''
         },
         {
             filterNavn: 'UfordelteBrukere',
             filterId: 11,
             filterValg: {...initialState, ferdigfilterListe: ['UFORDELTE_BRUKERE']},
-            aktiveFilterValg: '{"ferdigfilterListe": ["UFORDELTE_BRUKERE"]}',
-            filterCleanup: false,
             sortOrder: 1,
             aktiv: true,
-            note: ''
+            ikke_aktiv_beskrivelse: ''
         },
         {
             filterNavn: 'Permitterte filter',
@@ -85,11 +72,9 @@ export const mineFilter = (): LagretFilterDTO[] => {
                 ...initialState,
                 ferdigfilterListe: ['ER_SYKMELDT_MED_ARBEIDSGIVER', 'NYE_BRUKERE_FOR_VEILEDER']
             },
-            aktiveFilterValg: '{"ferdigfilterListe": ["ER_SYKMELDT_MED_ARBEIDSGIVER", "NYE_BRUKERE_FOR_VEILEDER"]}',
-            filterCleanup: false,
-            sortOrder: null,
+            sortOrder: 0,
             aktiv: false,
-            note: 'Alle utenom permitterte etter 09.03.2020'
+            ikke_aktiv_beskrivelse: 'Alle utenom permitterte etter 09.03.2020'
         }
     ];
 };

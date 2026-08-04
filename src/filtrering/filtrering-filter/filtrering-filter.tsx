@@ -40,7 +40,6 @@ import {TolkebehovFilterform} from './filterform/tolkebehov-filterform';
 import {BarnUnder18FilterForm} from './filterform/barn-under-18-filterform';
 import {CheckboxFilterform} from './filterform/checkbox-filterform';
 import '../../components/sidebar/sidebar.css';
-import '../filtrering-skjema.css';
 import './filterform/filterform.css';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {ExternalLinkIcon} from '@navikt/aksel-icons';

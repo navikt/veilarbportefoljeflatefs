@@ -9,7 +9,7 @@
 }
 
 .veilarbportefoljeflatefs .moteplan_popover {
-    z-index: 1201 !important;
+    z-index: 1201;
     padding: 2px; /* Unngår at eventuell scrollbar legg seg over border på popover */
 }
 
@@ -46,7 +46,7 @@
 }
 
 .veilarbportefoljeflatefs .moteplan_tabell_tittelrad th {
-    padding-bottom: 0 !important;
+    padding-bottom: 0;
     font-size: 1rem;
     font-weight: normal;
     font-variant: all-small-caps;

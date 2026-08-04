@@ -4,7 +4,6 @@ import {lagConfig} from '../filter-konstanter';
 import {FilterFeilModal} from '../../components/modal/filter-feil-modal';
 import {kebabUtenSpesialtegn} from '../../utils/utils';
 import './filtrering-label.css';
-import '../filtrering-skjema.css';
 
 interface FiltreringLabelProps {
     label: string | {label: string};

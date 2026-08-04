@@ -1,17 +1,16 @@
 import {useSelector} from 'react-redux';
-import classNames from 'classnames';
 import Toasts from '../components/toast/toast';
 import {Lenker} from './lenker';
 import {AppState} from '../reducer';
 import {STATUS} from '../ducks/utils';
 import {DarkModeToggle} from '../components/toggle/dark-mode-toggle';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {DARKMODE} from '../konstanter';
 import {Moteplan} from '../minoversikt/moteplan/Moteplan';
 import {useEnhetSelector} from '../hooks/redux/use-enhet-selector';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
 import {OversiktType} from '../ducks/ui/valgte-kolonner';
 import {Endringslogg} from '../components/endringslogg/endringslogg';
+import {DARKMODE} from '../konstanter';
 import './topp-meny.css';
 
 interface Props {
@@ -38,12 +37,12 @@ export function ToppMeny({erPaloggetVeileder = false, oversiktType}: Props) {
     return (
         <div className="topp-meny">
             <Lenker erPaloggetVeileder={erPaloggetVeileder} />
-            {harDarkModeFeatureToggle && <DarkModeToggle />}
             <Toasts />
             {oversiktType === OversiktType.minOversikt && enhet && (
                 <Moteplan veileder={gjeldendeVeileder} enhet={enhet} />
             )}
             <Endringslogg userId={innloggetVeileder.data?.ident!} />
+            {harDarkModeFeatureToggle && <DarkModeToggle />}
         </div>
     );
 }
