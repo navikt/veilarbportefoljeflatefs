@@ -10,6 +10,7 @@ import {
     I_AVTALT_AKTIVITET,
     IKKE_I_AVTALT_AKTIVITET,
     INAKTIVE_BRUKERE,
+    KANDIDAT_FOR_UTMELDING,
     MINE_HUSKELAPPER,
     MOTER_IDAG,
     NYE_BRUKERE_FOR_VEILEDER,
@@ -216,6 +217,12 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         handleChange={handleRadioButtonChange}
                         labelTekst={ferdigfilterListeLabelTekst[INAKTIVE_BRUKERE]}
                         statustall={statustallMedBrukerinnsyn.inaktiveBrukere}
+                    />
+                    <BarInputRadio
+                        filterVerdi={KANDIDAT_FOR_UTMELDING}
+                        handleChange={handleRadioButtonChange}
+                        labelTekst={ferdigfilterListeLabelTekst[KANDIDAT_FOR_UTMELDING]}
+                        statustall={statustallMedBrukerinnsyn.kandidatForUtmelding}
                     />
                 </div>
                 <div className="forste-barlabel-i-gruppe">

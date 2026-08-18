@@ -64,6 +64,11 @@ export const Etiketter = ({bruker}: EtiketterProps) => {
                     Sykmeldt
                 </Tag>
             )}
+            {bruker.etiketter.kandidatForUtmelding && (
+                <Tag data-color="warning" variant="outline" size="small" className="tabell-etikett">
+                    Kandidat for utmelding
+                </Tag>
+            )}
         </>
     );
 };

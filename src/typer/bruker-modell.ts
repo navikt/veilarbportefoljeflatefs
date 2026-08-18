@@ -46,6 +46,7 @@ export interface Etiketter {
     harSikkerhetstiltak: boolean;
     diskresjonskodeFortrolig: string | null;
     profileringResultat: Profileringsresultat | null;
+    kandidatForUtmelding: boolean;
 }
 
 export interface MoteMedNavIDag {
