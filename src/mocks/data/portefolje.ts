@@ -245,6 +245,13 @@ const lagHendelse = (): HendelseInnhold | null => {
             lenke: 'https://veilarbpersonflate.intern.dev.nav.no/aktivitetsplan'
         };
     }
+    if (maybeHendelse < 0.75) {
+        return {
+            beskrivelse: 'Arbeidssøkerperiode avsluttet av bruker',
+            dato: today.subtract(7, 'day').format('YYYY-MM-DD'),
+            lenke: 'https://veilarbpersonflate.intern.dev.nav.no/aktivitetsplan'
+        };
+    }
     return null;
 };
 
@@ -355,7 +362,8 @@ const lagEtiketter = (): Etiketter => {
         trengerOppfolgingsvedtak: false,
         harBehovForArbeidsevneVurdering: false,
         diskresjonskodeFortrolig: null,
-        profileringResultat: null
+        profileringResultat: null,
+        kandidatForUtmelding: false
     };
 };
 
