@@ -128,7 +128,7 @@ export function MinoversiktTableHeader() {
                 <VenterPaSvarFraBrukerHeader {...sorteringTilHeaderCell} />
 
                 <FilterhendelseLenkeHeader {...sorteringTilHeaderCell} filtervalg={filtervalg} />
-                <FilterhendelseDatoOpprettetHeaderHeader {...sorteringTilHeaderCell} />
+                <FilterhendelseDatoOpprettetHeaderHeader {...sorteringTilHeaderCell} filtervalg={filtervalg} />
 
                 <TiltakshendelseLenkeHeader {...sorteringTilHeaderCell} />
                 <TiltakshendelseDatoOpprettetHeader {...sorteringTilHeaderCell} />

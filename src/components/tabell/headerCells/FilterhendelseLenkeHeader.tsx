@@ -23,12 +23,10 @@ export const FilterhendelseLenkeHeader = ({
                 erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.FILTERHENDELSE_BESKRIVELSE_ENUM}
                 rekkefolge={rekkefolge}
                 onClick={onClick}
-                tekst="Årsak for avslutning"
-                title="Lenke til årsak for avslutning"
-                className="col col-xs-2"
-            >
-                Årsak for avslutning
-            </SorteringHeader>
+                tekst="Årsak til avslutning"
+                title="Lenke til å behandle årsak til avslutning"
+                className="col col-xs-2-5"
+            />
         );
     }
 
