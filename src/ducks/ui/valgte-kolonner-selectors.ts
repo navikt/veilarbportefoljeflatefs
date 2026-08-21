@@ -6,15 +6,16 @@ import {
     AktiviteterValg,
     HAR_14A_VEDTAK,
     I_AVTALT_AKTIVITET,
+    KANDIDAT_FOR_UTMELDING,
     MINE_FARGEKATEGORIER,
     MINE_HUSKELAPPER,
     MOTER_IDAG,
     TILTAKSHENDELSER,
     TiltakspengerFilter,
     TiltakspengerFilterArena,
-    UngdomsprogramytelseFilter,
     UDELT_SAMTALEREFERAT,
     UNDER_VURDERING,
+    UngdomsprogramytelseFilter,
     UTGATTE_VARSEL,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
@@ -158,7 +159,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaTiltakshendelse = filtervalg.ferdigfilterListe.includes(TILTAKSHENDELSER);
 
-    const filtrertPaHendelse = [UTGATTE_VARSEL, UDELT_SAMTALEREFERAT].some(f =>
+    const filtrertPaHendelse = [UTGATTE_VARSEL, UDELT_SAMTALEREFERAT, KANDIDAT_FOR_UTMELDING].some(f =>
         filtervalg.ferdigfilterListe.includes(f)
     );
 

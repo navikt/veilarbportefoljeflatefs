@@ -123,8 +123,8 @@ export function EnhetTableHeader() {
                 <VenterPaSvarFraNavHeader {...sorteringTilHeaderCell} />
                 <VenterPaSvarFraBrukerHeader {...sorteringTilHeaderCell} />
 
-                <FilterhendelseLenkeHeader {...sorteringTilHeaderCell} />
-                <FilterhendelseDatoOpprettetHeaderHeader {...sorteringTilHeaderCell} />
+                <FilterhendelseLenkeHeader {...sorteringTilHeaderCell} filtervalg={filtervalg} />
+                <FilterhendelseDatoOpprettetHeaderHeader {...sorteringTilHeaderCell} filtervalg={filtervalg} />
 
                 <TiltakshendelseLenkeHeader {...sorteringTilHeaderCell} />
                 <TiltakshendelseDatoOpprettetHeader {...sorteringTilHeaderCell} />
