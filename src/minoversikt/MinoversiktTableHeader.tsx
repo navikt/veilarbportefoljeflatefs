@@ -21,7 +21,7 @@ import {GjeldendeVedtak14aInnsatsgruppeHeader} from '../components/tabell/header
 import {GjeldendeVedtak14aHovedmalHeader} from '../components/tabell/headerCells/GjeldendeVedtak14aHovedmalHeader';
 import {GjeldendeVedtak14aVedtaksdatoHeader} from '../components/tabell/headerCells/GjeldendeVedtak14aVedtaksdatoHeader';
 import {FilterhendelseLenkeHeader} from '../components/tabell/headerCells/FilterhendelseLenkeHeader';
-import {FilterhendelseDatoOpprettetHeaderHeader} from '../components/tabell/headerCells/FilterhendelseDatoOpprettetHeaderHeader';
+import {FilterhendelseDatoOpprettetHeader} from '../components/tabell/headerCells/FilterhendelseDatoOpprettetHeader';
 import {TiltakshendelseDatoOpprettetHeader} from '../components/tabell/headerCells/TiltakshendelseDatoOpprettetHeader';
 import {TiltakshendelseLenkeHeader} from '../components/tabell/headerCells/TiltakshendelseLenkeHeader';
 import {EnsligeForsorgereOmBarnetHeader} from '../components/tabell/headerCells/EnsligeForsorgereOmBarnetHeader';
@@ -69,6 +69,7 @@ import {DagpengerRettighetHeader} from '../components/tabell/headerCells/Dagpeng
 import {DagpengerStansDatoHeader} from '../components/tabell/headerCells/DagpengerStansDatoHeader';
 import {DagpengerResterendeDagerHeader} from '../components/tabell/headerCells/DagpengerResterendeDagerHeader';
 import {AapKelvinVedtakMaksdatoHeader} from '../components/tabell/headerCells/AapKelvinVedtakMaksdatoHeader';
+import {FilterhendelseDatoFristHeader} from '../components/tabell/headerCells/FilterhendelseDatoFristHeader';
 
 export function MinoversiktTableHeader() {
     const {
@@ -128,7 +129,8 @@ export function MinoversiktTableHeader() {
                 <VenterPaSvarFraBrukerHeader {...sorteringTilHeaderCell} />
 
                 <FilterhendelseLenkeHeader {...sorteringTilHeaderCell} filtervalg={filtervalg} />
-                <FilterhendelseDatoOpprettetHeaderHeader {...sorteringTilHeaderCell} filtervalg={filtervalg} />
+                <FilterhendelseDatoOpprettetHeader {...sorteringTilHeaderCell} filtervalg={filtervalg} />
+                <FilterhendelseDatoFristHeader {...sorteringTilHeaderCell} filtervalg={filtervalg} />
 
                 <TiltakshendelseLenkeHeader {...sorteringTilHeaderCell} />
                 <TiltakshendelseDatoOpprettetHeader {...sorteringTilHeaderCell} />

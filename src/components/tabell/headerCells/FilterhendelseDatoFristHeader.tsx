@@ -5,7 +5,7 @@ import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 import {Filtervalg} from '../../../typer/filtervalg-modell';
 import {KANDIDAT_FOR_UTMELDING} from '../../../filtrering/filter-konstanter';
 
-export const FilterhendelseDatoOpprettetHeaderHeader = ({
+export const FilterhendelseDatoFristHeader = ({
     gjeldendeSorteringsfelt,
     valgteKolonner,
     rekkefolge,
@@ -13,18 +13,15 @@ export const FilterhendelseDatoOpprettetHeaderHeader = ({
     filtervalg
 }: HeaderCellMedSorteringBasertPaFiltervalgProps) => {
     const kandidatForUtmelding = filtervalg[Filtervalg.ferdigfilterListe].includes(KANDIDAT_FOR_UTMELDING);
-    const tekst = kandidatForUtmelding ? 'Dato for årsak' : 'Dato for hendelse';
-    const tooltipTekst = kandidatForUtmelding ? 'Dato da årsaken oppsto' : 'Dato da hendelsen ble opprettet';
-
     return (
         <SorteringHeader
-            skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_DATO_OPPRETTET)}
-            sortering={Sorteringsfelt.FILTERHENDELSE_DATO_OPPRETTET}
-            erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.FILTERHENDELSE_DATO_OPPRETTET}
+            skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_DATO_FRIST) && kandidatForUtmelding}
+            sortering={Sorteringsfelt.FILTERHENDELSE_DATO_FRIST}
+            erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.FILTERHENDELSE_DATO_FRIST}
             rekkefolge={rekkefolge}
             onClick={onClick}
-            tekst={tekst}
-            title={tooltipTekst}
+            tekst={'Automatisk avslutning'}
+            title={'Dato når arbeidsrettet oppfølging avsluttes automatisk'}
             className="col col-xs-2"
         />
     );
