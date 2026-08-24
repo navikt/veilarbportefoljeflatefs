@@ -97,6 +97,7 @@ export function useAlternativerConfig(oversiktType: OversiktType) {
         alternativerConfig.set(Kolonne.FILTERHENDELSE_DATO_OPPRETTET, {
             tekstlabel: kandidatForUtmelding ? 'Dato for årsak' : 'Dato for hendelse'
         });
+        alternativerConfig.set(Kolonne.FILTERHENDELSE_DATO_FRIST, {tekstlabel: 'Automatisk avslutning'});
         alternativerConfig.set(Kolonne.AAP_KELVIN_TOM_VEDTAKSDATO, {tekstlabel: 'Vedtak AAP til og med-dato (Kelvin)'});
         alternativerConfig.set(Kolonne.AAP_KELVIN_MAKSDATO, {tekstlabel: 'Maksdato AAP (Kelvin)'});
         alternativerConfig.set(Kolonne.AAP_KELVIN_RETTIGHET, {tekstlabel: 'Rettighet AAP (Kelvin)'});

@@ -197,6 +197,7 @@ export enum Hovedmal {
 export interface HendelseInnhold {
     beskrivelse: string;
     dato: string;
+    datoFrist: string | null;
     lenke: string;
 }
 
