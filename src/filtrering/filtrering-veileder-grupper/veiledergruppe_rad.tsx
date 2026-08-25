@@ -1,3 +1,4 @@
+import {useMemo} from 'react';
 import {useSelector} from 'react-redux';
 import {Radio} from '@navikt/ds-react';
 import {RedigerKnapp} from '../../components/rediger-knapp/rediger-knapp';
@@ -28,8 +29,10 @@ export function VeiledergruppeRad({
 }: VeiledergruppeRadProps) {
     const dispatch = useAppDispatch();
 
-    const lagredeGrupper = useSelector((state: AppState) =>
-        state.veiledergrupper.data.filter(v => v.filterId !== veilederGruppe.filterId)
+    const veiledergrupper = useSelector((state: AppState) => state.veiledergrupper.data);
+    const lagredeGrupper = useMemo(
+        () => veiledergrupper.filter(v => v.filterId !== veilederGruppe.filterId),
+        [veiledergrupper, veilederGruppe.filterId]
     );
 
     const erDetLikGruppe = () => {

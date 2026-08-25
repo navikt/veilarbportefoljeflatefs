@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {useSelector} from 'react-redux';
 import classNames from 'classnames';
 import {Alert, Button, Heading, Modal} from '@navikt/ds-react';
@@ -138,8 +138,10 @@ export function VeiledergruppeModal({
         onRequestClose();
     }
 
-    const lagredeGrupper = useSelector((state: AppState) =>
-        state.veiledergrupper.data.filter(v => v.filterId !== initialVerdi.filterId)
+    const veiledergrupper = useSelector((state: AppState) => state.veiledergrupper.data);
+    const lagredeGrupper = useMemo(
+        () => veiledergrupper.filter(v => v.filterId !== initialVerdi.filterId),
+        [veiledergrupper, initialVerdi.filterId]
     );
 
     const lagredeGruppeNavn = lagredeGrupper
