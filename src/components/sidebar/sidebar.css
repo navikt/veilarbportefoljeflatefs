@@ -23,7 +23,6 @@
     height: fit-content;
     z-index: 5;
     background-color: var(--ax-bg-default);
-    padding: 0.5rem;
     position: absolute;
     width: 100%;
     box-shadow: var(--shadow-small);
@@ -40,22 +39,23 @@
 .veilarbportefoljeflatefs .sidebar__content-container .veileder-gruppe__valgfelt {
     height: auto;
     overflow-y: auto;
-    padding: 0.5rem 0.5rem 0;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
     max-height: 70vh;
 }
 
 .veilarbportefoljeflatefs .sidebar__content-container .sidebar-header {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    margin-left: 0.5rem;
-
     display: flex;
-    align-items: center;
-    column-gap: 0.5rem;
+    justify-content: space-between;
+    margin: 1rem;
 }
 
-.veilarbportefoljeflatefs .sidebar__content-container .sidebar-header .sidebar-header__tekst {
-    margin-right: auto;
+.veilarbportefoljeflatefs .filtrering-oversikt__totalt-antall {
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.veilarbportefoljeflatefs #veiledergruppe__ny-gruppe-knapp {
+    margin: 0.5rem 0.25rem;
 }
 
 @media (max-height: 1250px) {

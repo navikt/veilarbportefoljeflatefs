@@ -35,7 +35,6 @@ import {
 } from '../../konstanter';
 import {FilterStatusMineFargekategorier} from './fargekategori';
 import {StatustallInnhold} from '../../ducks/statustall/statustall-typer';
-import './filtrering-status.css';
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 /** Denne typen tek i mot StatustallEnhet og StatustallVeileder på formatet til StatustallEnhet.

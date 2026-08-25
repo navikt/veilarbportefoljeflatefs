@@ -85,13 +85,14 @@ export function FilteringVeiledergrupper({oversiktType, filtervalg}: FilteringVe
             )}
             {lagretFilterState.status === STATUS.ERROR ? veilederGrupperError() : veilederGrupperOK()}
             <Button
+                size="small"
                 variant="tertiary"
                 icon={<PlusCircleIcon aria-hidden={true} />}
                 onClick={() => {
                     setVisVeiledergruppeModal(true);
                 }}
+                id="veiledergruppe__ny-gruppe-knapp"
                 data-testid="veiledergruppe_ny-gruppe_knapp"
-                size="small"
             >
                 Ny gruppe
             </Button>
