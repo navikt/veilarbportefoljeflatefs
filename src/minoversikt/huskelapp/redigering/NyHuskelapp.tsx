@@ -40,7 +40,7 @@ export const NyHuskelapp = ({huskelapp, onSubmit, setHuskelappEndret}: Props) =>
                 }}
             </Formik>
             {huskelapp && (
-                <Detail>
+                <Detail className="huskelapp__endret-av">
                     <i>{`Endret ${formaterTilNorskDateString(huskelapp?.endretDato)} av ${huskelapp?.endretAv}`}</i>
                 </Detail>
             )}

@@ -1,3 +1,7 @@
+.veilarbportefoljeflatefs .knapp-med-bekreft-handling {
+    background-color: #f9fccc;
+}
+
 .veilarbportefoljeflatefs .knapp-med-bekreft-handling .bekreft-handling-feilet {
     margin-bottom: var(--ax-space-16);
 }
