@@ -1,3 +1,4 @@
+import {useMemo} from 'react';
 import {useSelector} from 'react-redux';
 import classNames from 'classnames';
 import {Alert, Heading} from '@navikt/ds-react';
@@ -36,8 +37,10 @@ export function Toolbar({
     const aktiv = useSelector((state: AppState) => state.portefolje.data.brukere.some(bruker => bruker.markert));
     const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
     const feilmelding = brukerfeilMelding.message;
-    const valgteBrukereFnrs = useSelector((state: AppState) =>
-        state.portefolje.data.brukere.filter(bruker => bruker.markert).map(bruker => bruker.fnr)
+    const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
+    const valgteBrukereFnrs = useMemo(
+        () => brukere.filter(bruker => bruker.markert).map(bruker => bruker.fnr),
+        [brukere]
     );
 
     const oversikt = side => {
