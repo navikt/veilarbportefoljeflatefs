@@ -1,4 +1,4 @@
-import {NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router';
 import {useParams} from 'react-router';
 import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import {useVeilederHarPortefolje} from '../hooks/portefolje/use-veileder-har-portefolje';

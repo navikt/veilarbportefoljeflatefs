@@ -1,4 +1,4 @@
-import {Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router';
 import {MinoversiktSide} from './minoversikt/MinoversiktSide';
 import {EnhetSide} from './enhetensoversikt/EnhetSide';
 import {VeilederoversiktSide} from './veilederoversikt/veilederoversikt-side';
