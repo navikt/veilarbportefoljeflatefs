@@ -26,6 +26,8 @@ jobs:
         run: npm run build:mock
       - name: Run tests
         run: npm run test:ci
+      - name: Install Cypress binary
+        run: ./node_modules/.bin/cypress install --force
       - name: Cypress run
         uses: cypress-io/github-action@c32f12761482a282d24ca0fd7466d8ae86f54ba8 # ratchet:cypress-io/github-action@v7.4.2
         with:
