@@ -53,9 +53,9 @@ export function CheckboxFilterformValg({
                 size="small"
                 value={checkboxerSomHarBlittValgt}
             >
-                {Object.entries(checkboxValg).map(([filterKey, filterValue]) => (
-                    <div key={filterKey}>{checkboxComponent([filterKey, filterValue])}</div>
-                ))}
+                {Object.entries(checkboxValg).map(([filterKey, filterValue]) =>
+                    checkboxComponent([filterKey, filterValue])
+                )}
             </CheckboxGroup>
         </div>
     );
