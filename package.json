@@ -55,7 +55,7 @@
     "@vitejs/plugin-react": "6.0.5",
     "browserslist": "4.28.8",
     "cypress": "15.20.1",
-    "eslint": "9.39.5",
+    "eslint": "10.8.1",
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "7.1.1",
