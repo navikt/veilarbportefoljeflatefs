@@ -1,4 +1,4 @@
-import {BodyShort, Button, Detail, Heading} from '@navikt/ds-react';
+import {BodyShort, Button, Detail, Heading, Theme} from '@navikt/ds-react';
 import {formaterTilNorskDateString} from '../../../utils/dato-utils';
 import {BrukerModell, HuskelappModell} from '../../../typer/bruker-modell';
 import {HuskelappPostitWrapper} from '../huskelapp-wrapper/HuskelappPostitWrapper';
@@ -13,22 +13,24 @@ interface Props {
 
 export const HuskelappForPanel = ({huskelapp, bruker, onEndreHuskelapp}: Props) => (
     <HuskelappPostitWrapper>
-        <Heading level="3" size="xsmall" spacing>
-            {huskelapp?.frist ? `Frist: ${formaterTilNorskDateString(huskelapp.frist)}` : 'Ingen frist satt'}
-        </Heading>
-        <BodyShort size="small" spacing className="huskelapp-visning__kommentar">
-            {huskelapp?.kommentar}
-        </BodyShort>
-        <Detail spacing>
-            <i>
-                Endret {formaterTilNorskDateString(huskelapp?.endretDato)} av {huskelapp?.endretAv}
-            </i>
-        </Detail>
-        <div className="huskelapp-panelvisning__handlingsknapper">
-            <SlettHuskelappKnapp bruker={bruker} size="xsmall" bekreftelsesmelding={{overskriftsnivaa: '4'}} />
-            <Button type="button" size="xsmall" variant="primary" onClick={onEndreHuskelapp}>
-                Endre
-            </Button>
-        </div>
+        <Theme theme="light" hasBackground={false}>
+            <Heading level="3" size="xsmall" spacing>
+                {huskelapp?.frist ? `Frist: ${formaterTilNorskDateString(huskelapp.frist)}` : 'Ingen frist satt'}
+            </Heading>
+            <BodyShort size="small" spacing className="huskelapp-visning__kommentar">
+                {huskelapp?.kommentar}
+            </BodyShort>
+            <Detail spacing>
+                <i>
+                    Endret {formaterTilNorskDateString(huskelapp?.endretDato)} av {huskelapp?.endretAv}
+                </i>
+            </Detail>
+            <div className="huskelapp-panelvisning__handlingsknapper">
+                <SlettHuskelappKnapp bruker={bruker} size="xsmall" bekreftelsesmelding={{overskriftsnivaa: '4'}} />
+                <Button type="button" size="xsmall" variant="primary" onClick={onEndreHuskelapp}>
+                    Endre
+                </Button>
+            </div>
+        </Theme>
     </HuskelappPostitWrapper>
 );

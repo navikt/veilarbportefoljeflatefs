@@ -1,7 +1,3 @@
-.veilarbportefoljeflatefs .knapp-med-bekreft-handling {
-    background-color: #f9fccc;
-}
-
 .veilarbportefoljeflatefs .knapp-med-bekreft-handling .bekreft-handling-feilet {
     margin-bottom: var(--ax-space-16);
 }
@@ -21,9 +17,4 @@
     margin-top: var(--ax-space-8);
     display: flex;
     gap: 0.5rem;
-}
-
-.veilarbportefoljeflatefs .knapp-med-bekreft-handling .bekreft-handling .bekreft-handling__knapper > button {
-    /* Motverkar margin:auto frå designsystemet for knappar i modalfooter  */
-    margin: 0;
 }
