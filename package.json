@@ -21,7 +21,6 @@
     "test:ci": "vitest run"
   },
   "dependencies": {
-    "@amplitude/analytics-browser": "2.45.6",
     "@grafana/faro-web-sdk": "2.10.0",
     "@navikt/aksel-icons": "8.16.1",
     "@navikt/ds-css": "8.16.1",
