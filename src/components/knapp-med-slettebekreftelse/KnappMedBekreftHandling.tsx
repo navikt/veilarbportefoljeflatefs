@@ -15,8 +15,8 @@ interface KnappMedBekreftHandlingProps {
     };
     bekreftknapp: {
         tekst: string;
-        onClick: () => Promise<unknown> | unknown;
-        onClickThen?: () => void | Promise<unknown>;
+        onClick: () => void | Promise<void>;
+        onClickThen?: () => void | Promise<void>;
     };
     feilmelding: string;
 }
@@ -34,14 +34,18 @@ export const KnappMedBekreftHandling = ({
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    const bekreftHandling = () => {
+    const bekreftHandling = async () => {
         setLoading(true);
 
-        Promise.resolve(bekreftknapp.onClick())
-            .then(() => setLoading(false))
-            .catch(() => setError(true))
-            .finally(() => setVisSlettebekreftelse(false))
-            .then(() => bekreftknapp.onClickThen?.());
+        try {
+            await bekreftknapp.onClick();
+            await bekreftknapp.onClickThen?.();
+        } catch {
+            setError(true);
+        } finally {
+            setLoading(false);
+            setVisSlettebekreftelse(false);
+        }
     };
 
     return (
