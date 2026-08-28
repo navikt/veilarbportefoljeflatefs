@@ -5,8 +5,6 @@ export interface LagretFilter {
     filterId: number;
     filterValg: FiltervalgModell;
     sortOrder: number | null;
-    aktiv?: boolean;
-    note?: string;
 }
 
 export interface LagretFilterDTO {
@@ -15,8 +13,6 @@ export interface LagretFilterDTO {
     filterValg: FiltervalgModell;
     aktiveFilterValg: string;
     sortOrder: number | null;
-    aktiv?: boolean;
-    note?: string;
 }
 
 export interface LagretFilterState {
@@ -57,8 +53,6 @@ export interface LagretFilterPortefolje {
     filterId: number;
     filterValg: FiltervalgModell;
     sortOrder: number;
-    aktiv: boolean;
-    ikke_aktiv_beskrivelse: string;
 }
 
 export interface LagreNyttFilterPortefolje {

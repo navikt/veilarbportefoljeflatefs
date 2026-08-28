@@ -1,23 +1,12 @@
 import {Dispatch, SetStateAction, useEffect, useRef} from 'react';
-import {Alert, BodyShort} from '@navikt/ds-react';
+import {BodyShort} from '@navikt/ds-react';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {DragAndDrop} from './drag-and-drop/drag-and-drop';
-import {slettFilter} from '../../ducks/mine-filter';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import {AlertVistLoggdata, loggVisningAvAlert} from '../../umami/logg-visning-av-alert';
 import './mine-filter_innhold.css';
 import '../../components/sidebar/sidebar.css';
-
-import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
-
-const loggdataForAlerter: {[key: string]: AlertVistLoggdata} = {
-    harInaktiveFilter: {
-        tekst: '[Navn på lagret filter] er slettet fordi filteret [filterverdi] er fjernet',
-        variant: 'info'
-    }
-} as const;
 
 export interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -41,27 +30,9 @@ export function MineFilterInnhold({
     enhettiltak
 }: LagredeFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
-    const dispatch = useAppDispatch();
-
-    const filtrertListe = () => {
+    const aktiveFilter = () => {
         return lagretFilter.filter(elem => fjernUtilgjengeligeFilter(elem));
     };
-
-    const aktiveFilter = () => {
-        return filtrertListe().filter(elem => elem.aktiv);
-    };
-
-    const inaktiveFilter = () => {
-        return filtrertListe().filter(elem => !elem.aktiv);
-    };
-
-    function visHarInaktiveFilterAlertOgLoggTilUmami() {
-        const harInaktiveFilter = inaktiveFilter().length !== 0;
-        if (harInaktiveFilter) {
-            loggVisningAvAlert(loggdataForAlerter.harInaktiveFilter);
-        }
-        return harInaktiveFilter;
-    }
 
     useEffect(() => {
         if (outerDivRef.current && isOverflown(outerDivRef.current)) {
@@ -72,31 +43,15 @@ export function MineFilterInnhold({
 
     const hentFiltrertListeinnhold = () => {
         return (
-            <>
-                {visHarInaktiveFilterAlertOgLoggTilUmami() && (
-                    <Alert
-                        variant={loggdataForAlerter.harInaktiveFilter.variant}
-                        className="mine-filter_alertstripe"
-                        data-testid="mine-filter_alertstripe"
-                        size="small"
-                        closeButton={true}
-                        onClose={() => dispatch(slettFilter(inaktiveFilter()[0].filterId))}
-                    >
-                        {`'${inaktiveFilter()[0].filterNavn}' er slettet fordi filteret '${
-                            inaktiveFilter()[0].note
-                        }' er fjernet.`}
-                    </Alert>
-                )}
-                <div className="mine-filter__valgfelt" ref={outerDivRef} data-testid="mine-filter_radio-container">
-                    <DragAndDrop
-                        stateFilterOrder={aktiveFilter()}
-                        oversiktType={oversiktType}
-                        isDraggable={isDraggable}
-                        setisDraggable={setisDraggable}
-                        enhettiltak={enhettiltak}
-                    />
-                </div>
-            </>
+            <div className="mine-filter__valgfelt" ref={outerDivRef} data-testid="mine-filter_radio-container">
+                <DragAndDrop
+                    stateFilterOrder={aktiveFilter()}
+                    oversiktType={oversiktType}
+                    isDraggable={isDraggable}
+                    setisDraggable={setisDraggable}
+                    enhettiltak={enhettiltak}
+                />
+            </div>
         );
     };
 
@@ -110,5 +65,5 @@ export function MineFilterInnhold({
         );
     };
 
-    return filtrertListe().length > 0 ? hentFiltrertListeinnhold() : getEmptyState();
+    return aktiveFilter().length > 0 ? hentFiltrertListeinnhold() : getEmptyState();
 }

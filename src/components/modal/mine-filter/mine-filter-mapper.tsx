@@ -9,19 +9,17 @@ import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {AktiviteterFilternokler, AktiviteterValg} from '../../../filtrering/filter-konstanter';
 import {filtervalgValidators} from './mine-filter-validering-filtermodel-utils';
 
-// Mapper som lese fra lagret-filter objectet som kommer fra veilarbfilter:
+// Mapper som leser fra lagret-filter objectet som kommer fra veilarbfilter:
 export function mapLagretFilterFraDTO(dto: LagretFilterDTO): LagretFilter {
     return {
         filterNavn: dto.filterNavn,
         filterId: dto.filterId,
         filterValg: mapLagraFiltervalgTilFiltermodell(dto.aktiveFilterValg),
-        sortOrder: dto.sortOrder,
-        aktiv: dto.aktiv,
-        note: dto.note
+        sortOrder: dto.sortOrder
     };
 }
 
-// Mapper som lese fra veiledergruppe objectet som kommer fra veilarbportefolje:
+// Mapper som leser fra veiledergruppe objectet som kommer fra veilarbportefolje:
 export function mapVeiledergrupperTilLagretFilter(dto: LagretVeiledergruppePortefolje): LagretFilter {
     return {
         filterNavn: dto.filterNavn,
@@ -31,15 +29,13 @@ export function mapVeiledergrupperTilLagretFilter(dto: LagretVeiledergruppePorte
     };
 }
 
-// Mapper som lese fra mine filer objectet som kommer fra veilarbportefolje:
+// Mapper som leser fra mine filer objectet som kommer fra veilarbportefolje:
 export function mapLagretFilterFraPortefoljeTilLagretFilter(dto: LagretFilterPortefolje): LagretFilter {
     return {
         filterNavn: dto.filterNavn,
         filterId: dto.filterId,
         filterValg: {...dto.filterValg, veilederNavnQuery: initialState[Filtervalg.veilederNavnQuery]},
-        sortOrder: dto.sortOrder,
-        aktiv: dto.aktiv,
-        note: dto.ikke_aktiv_beskrivelse
+        sortOrder: dto.sortOrder
     };
 }
 

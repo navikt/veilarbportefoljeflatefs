@@ -77,7 +77,7 @@ export const veilarbfilterHandlers: RequestHandler[] = [
             const oppdaterFilterRequest = (await request.json()) as LagretFilterDTO;
 
             const filterIndex = customMineFilter.findIndex(elem => elem.filterId === oppdaterFilterRequest.filterId);
-            customMineFilter[filterIndex] = {...oppdaterFilterRequest, aktiv: true};
+            customMineFilter[filterIndex] = {...oppdaterFilterRequest};
             return HttpResponse.json(customMineFilter[filterIndex]);
         })
     ),
@@ -86,9 +86,9 @@ export const veilarbfilterHandlers: RequestHandler[] = [
         withAuth(async ({request}) => {
             const opprettFilterRequest = (await request.json()) as LagretFilterDTO;
             const filterId = Math.floor(Math.random() * 100) + 500;
-            customMineFilter = [...customMineFilter, {...opprettFilterRequest, filterId, aktiv: true}];
+            customMineFilter = [...customMineFilter, {...opprettFilterRequest, filterId}];
 
-            return HttpResponse.json({...opprettFilterRequest, filterId, aktiv: true});
+            return HttpResponse.json({...opprettFilterRequest, filterId});
         })
     ),
     http.delete(
