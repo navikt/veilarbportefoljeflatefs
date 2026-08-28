@@ -5,7 +5,6 @@ export interface LagretFilter {
     filterId: number;
     filterValg: FiltervalgModell;
     sortOrder: number | null;
-    filterCleanup: boolean;
     aktiv?: boolean;
     note?: string;
 }
@@ -16,7 +15,6 @@ export interface LagretFilterDTO {
     filterValg: FiltervalgModell;
     aktiveFilterValg: string;
     sortOrder: number | null;
-    filterCleanup: boolean;
     aktiv?: boolean;
     note?: string;
 }

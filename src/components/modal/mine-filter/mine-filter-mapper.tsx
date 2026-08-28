@@ -16,7 +16,6 @@ export function mapLagretFilterFraDTO(dto: LagretFilterDTO): LagretFilter {
         filterId: dto.filterId,
         filterValg: mapLagraFiltervalgTilFiltermodell(dto.aktiveFilterValg),
         sortOrder: dto.sortOrder,
-        filterCleanup: dto.filterCleanup,
         aktiv: dto.aktiv,
         note: dto.note
     };
@@ -28,8 +27,7 @@ export function mapVeiledergrupperTilLagretFilter(dto: LagretVeiledergruppePorte
         filterNavn: dto.filterNavn,
         filterId: dto.filterId,
         filterValg: {...filtervalgInitialState, [Filtervalg.veiledere]: dto.veiledere ?? []},
-        sortOrder: null,
-        filterCleanup: false
+        sortOrder: null
     };
 }
 
@@ -40,7 +38,6 @@ export function mapLagretFilterFraPortefoljeTilLagretFilter(dto: LagretFilterPor
         filterId: dto.filterId,
         filterValg: {...dto.filterValg, veilederNavnQuery: initialState[Filtervalg.veilederNavnQuery]},
         sortOrder: dto.sortOrder,
-        filterCleanup: false,
         aktiv: dto.aktiv,
         note: dto.ikke_aktiv_beskrivelse
     };

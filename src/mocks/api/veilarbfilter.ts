@@ -46,8 +46,7 @@ export const veilarbfilterHandlers: RequestHandler[] = [
                 ...opprettFilterRequest,
                 filterId,
                 filterValg: mapLagraFiltervalgTilFiltermodell(opprettFilterRequest.aktiveFilterValg),
-                sortOrder: null,
-                filterCleanup: false
+                sortOrder: null
             };
             customVeiledergrupper = [...customVeiledergrupper, nyGruppe];
             return HttpResponse.json(nyGruppe);
@@ -77,7 +76,7 @@ export const veilarbfilterHandlers: RequestHandler[] = [
         withAuth(async ({request}) => {
             const oppdaterFilterRequest = (await request.json()) as LagretFilterDTO;
 
-            let filterIndex = customMineFilter.findIndex(elem => elem.filterId === oppdaterFilterRequest.filterId);
+            const filterIndex = customMineFilter.findIndex(elem => elem.filterId === oppdaterFilterRequest.filterId);
             customMineFilter[filterIndex] = {...oppdaterFilterRequest, aktiv: true};
             return HttpResponse.json(customMineFilter[filterIndex]);
         })
