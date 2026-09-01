@@ -9,7 +9,7 @@ export const Systemmeldinger = () => {
     return (
         <>
             {systemmeldinger.map(systemmelding => (
-                <InfoCard data-color="info">
+                <InfoCard data-color="warning">
                     <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
                         <PortableText value={systemmelding.beskrivelse} />
                     </InfoCard.Message>
