@@ -1,7 +1,6 @@
 import {InfoCard} from '@navikt/ds-react';
 import {useSystemmeldingerSelector} from '../../hooks/redux/use-systemmeldinger';
 import '../modal/feilmelding-brukere.css';
-import {PortableText} from '@portabletext/react';
 import {InformationSquareIcon} from '@navikt/aksel-icons';
 
 export const Systemmeldinger = () => {
@@ -9,9 +8,9 @@ export const Systemmeldinger = () => {
     return (
         <>
             {systemmeldinger.map(systemmelding => (
-                <InfoCard data-color="warning">
+                <InfoCard data-color="warning" size={'small'}>
                     <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
-                        <PortableText value={systemmelding.beskrivelse} />
+                        {systemmelding.beskrivelse}
                     </InfoCard.Message>
                 </InfoCard>
             ))}
