@@ -142,20 +142,4 @@ describe('Veiledergrupper', () => {
             cy.get('@veiledergrupper').should('have.length', veiledergrupperForSletting.length - 1);
         });
     });
-
-    /*    Kommenterer ut denne til vi avklarer om filterCleanup fortsatt er nødvendig å ha.
-        it('Veileder har byttet enhet', () => {
-        // Vel ei veiledergruppe, få opp modal med ein gong fordi det er noko i lista brukaren må ta stilling til
-        cy.getByTestId(`veiledergruppe-rad_${kebabCase(eksisterendeGruppenavn)}`).click({force: true});
-        cy.get('.veiledergruppe_modal_rediger-veiledergruppe').should('be.visible');
-
-        // Vi kan sjå feilmelding
-        cy.getByTestId('veiledergruppe_modal_alertstripe')
-            .should('be.visible')
-            .contains('En eller flere veiledere i gruppen har ikke tilgang lenger, og gruppen er nå lik');
-
-        // Vi avbryt redigering, modalen lukkar seg
-        cy.getByTestId('veiledergruppe_modal_avbryt-knapp').click();
-        cy.get('.veiledergruppe_modal_rediger-veiledergruppe').should('not.exist');
-    });*/
 });

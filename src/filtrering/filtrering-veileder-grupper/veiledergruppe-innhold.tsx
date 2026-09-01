@@ -130,8 +130,7 @@ export function VeiledergruppeInnhold({filtervalg, lagretFilter, oversiktType}: 
                     initialVerdi={{
                         gruppeNavn: valgtGruppe.filterNavn,
                         filterValg: valgtGruppe.filterValg,
-                        filterId: valgtGruppe.filterId,
-                        filterCleanup: valgtGruppe.filterCleanup
+                        filterId: valgtGruppe.filterId
                     }}
                     onSubmit={submitEndringer}
                     onSlett={sletteKnapp}

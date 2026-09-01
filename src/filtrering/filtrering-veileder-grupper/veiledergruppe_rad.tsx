@@ -1,13 +1,9 @@
-import {useMemo} from 'react';
-import {useSelector} from 'react-redux';
 import {Radio} from '@navikt/ds-react';
 import {RedigerKnapp} from '../../components/rediger-knapp/rediger-knapp';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/valgte-kolonner';
-import {AppState} from '../../reducer';
 import {markerValgtVeiledergruppe} from '../../ducks/lagret-filter-ui-state';
-import {veilederlisterErLik} from '../../components/modal/mine-filter';
 import {kebabCase} from '../../utils/utils';
 import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
@@ -29,18 +25,6 @@ export function VeiledergruppeRad({
 }: VeiledergruppeRadProps) {
     const dispatch = useAppDispatch();
 
-    const veiledergrupper = useSelector((state: AppState) => state.veiledergrupper.data);
-    const lagredeGrupper = useMemo(
-        () => veiledergrupper.filter(v => v.filterId !== veilederGruppe.filterId),
-        [veiledergrupper, veilederGruppe.filterId]
-    );
-
-    const erDetLikGruppe = () => {
-        return lagredeGrupper.find(lagredeGruppe =>
-            veilederlisterErLik(lagredeGruppe.filterValg.veiledere, veilederGruppe.filterValg.veiledere)
-        );
-    };
-
     function velgGruppe() {
         dispatch(endreFiltervalg(Filtervalg.veiledere, veilederGruppe.filterValg.veiledere, oversiktType));
         dispatch(markerValgtVeiledergruppe(veilederGruppe, oversiktType));
@@ -49,10 +33,6 @@ export function VeiledergruppeRad({
             {...filtervalg, veiledere: veilederGruppe.filterValg.veiledere},
             oversiktType
         );
-
-        if (veilederGruppe.filterCleanup && erDetLikGruppe() !== undefined) {
-            onClickRedigerKnapp();
-        }
     }
 
     return (

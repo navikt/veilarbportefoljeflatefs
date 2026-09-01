@@ -14,10 +14,7 @@ export const mineFilter = (): LagretFilterDTO[] => {
                 tiltakstyper: ['UTDYRK']
             },
             aktiveFilterValg: '{"alder": ["20-24"], "ferdigfilterListe": ["MOTER_IDAG"], "tiltakstyper": ["UTDYRK"]}',
-            filterCleanup: false,
-            sortOrder: null,
-            aktiv: true,
-            note: ''
+            sortOrder: null
         },
         {
             filterNavn: 'TiltaksFilter',
@@ -30,30 +27,21 @@ export const mineFilter = (): LagretFilterDTO[] => {
             },
             aktiveFilterValg:
                 '{"innsatsgruppeGjeldendeVedtak14a": ["SPESIELT_TILPASSET_INNSATS"], "formidlingsgruppe": ["ARBS"], "tiltakstyper": ["TULLETOES", "UTDYRK"]}',
-            filterCleanup: false,
-            sortOrder: null,
-            aktiv: true,
-            note: 'delete filter'
+            sortOrder: null
         },
         {
             filterNavn: 'Denne brukes til test la stå',
             filterId: 3,
             filterValg: {...initialState, kjonn: 'K', formidlingsgruppe: ['ARBS']},
             aktiveFilterValg: '{"kjonn": "K", "formidlingsgruppe": ["ARBS"]}',
-            filterCleanup: false,
-            sortOrder: null,
-            aktiv: true,
-            note: ''
+            sortOrder: null
         },
         {
             filterNavn: 'Kvinner',
             filterId: 6,
             filterValg: {...initialState, kjonn: 'K'},
             aktiveFilterValg: '{"kjonn": "K"}',
-            filterCleanup: false,
-            sortOrder: null,
-            aktiv: true,
-            note: ''
+            sortOrder: null
         },
         {
             filterNavn: 'Nye brukere',
@@ -63,20 +51,14 @@ export const mineFilter = (): LagretFilterDTO[] => {
                 ferdigfilterListe: ['NYE_BRUKERE_FOR_VEILEDER']
             },
             aktiveFilterValg: '{"ferdigfilterListe": ["NYE_BRUKERE_FOR_VEILEDER"]}',
-            filterCleanup: false,
-            sortOrder: null,
-            aktiv: true,
-            note: ''
+            sortOrder: null
         },
         {
             filterNavn: 'UfordelteBrukere',
             filterId: 11,
             filterValg: {...initialState, ferdigfilterListe: ['UFORDELTE_BRUKERE']},
             aktiveFilterValg: '{"ferdigfilterListe": ["UFORDELTE_BRUKERE"]}',
-            filterCleanup: false,
-            sortOrder: 1,
-            aktiv: true,
-            note: ''
+            sortOrder: 1
         },
         {
             filterNavn: 'Permitterte filter',
@@ -86,10 +68,7 @@ export const mineFilter = (): LagretFilterDTO[] => {
                 ferdigfilterListe: ['ER_SYKMELDT_MED_ARBEIDSGIVER', 'NYE_BRUKERE_FOR_VEILEDER']
             },
             aktiveFilterValg: '{"ferdigfilterListe": ["ER_SYKMELDT_MED_ARBEIDSGIVER", "NYE_BRUKERE_FOR_VEILEDER"]}',
-            filterCleanup: false,
-            sortOrder: null,
-            aktiv: false,
-            note: 'Alle utenom permitterte etter 09.03.2020'
+            sortOrder: null
         }
     ];
 };

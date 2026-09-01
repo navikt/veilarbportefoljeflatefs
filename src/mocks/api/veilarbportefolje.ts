@@ -334,8 +334,7 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
             const nyttFilter: LagretFilterPortefolje = {
                 ...opprettFilterRequest,
                 filterId,
-                sortOrder: 0,
-                aktiv: true
+                sortOrder: 0
             };
             customMineFilter = [...customMineFilter, nyttFilter];
 
