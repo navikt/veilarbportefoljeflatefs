@@ -15,6 +15,7 @@ export const LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG =
 export const BRUK_TILTAKSAKTIVITET_FRA_AKTIVITETSPLAN = 'veilarbportefolje.bruk_tiltaksaktivitet_fra_aktivitetsplan';
 export const BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE = 'veilarbportefolje.bruk_lagrede_filter_fra_veilarbportefolje';
 export const VIS_FILTER_KANDIDATER_FOR_AVSLUTNING = 'veilarbportefoljeflatefs.vis_filter_kandidater_for_avslutning';
+export const SKJUL_ISERV_FILTRE = 'veilarbportefoljeflatefs.skjul_iserv_filtre';
 
 //HUSK Å LEGG TIL FEATURE-TOGGLE HER OGSÅ!!!!!!!!!
 export const PORTEFOLJE_FEATURES = [
@@ -23,5 +24,6 @@ export const PORTEFOLJE_FEATURES = [
     LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG,
     BRUK_TILTAKSAKTIVITET_FRA_AKTIVITETSPLAN,
     BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE,
-    VIS_FILTER_KANDIDATER_FOR_AVSLUTNING
+    VIS_FILTER_KANDIDATER_FOR_AVSLUTNING,
+    SKJUL_ISERV_FILTRE
 ];
