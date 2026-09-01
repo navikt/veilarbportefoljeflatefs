@@ -30,6 +30,7 @@ import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {
+    SKJUL_ISERV_FILTRE,
     VIS_FILTER_KANDIDATER_FOR_AVSLUTNING,
     VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING
 } from '../../konstanter';
@@ -62,6 +63,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         (statustallUtenBrukerinnsyn.ufordelteBrukere > 0 || statustallUtenBrukerinnsyn.venterPaSvarFraNAV > 0);
 
     const visFilterForKandidatForUtmelding = useFeatureSelector()(VIS_FILTER_KANDIDATER_FOR_AVSLUTNING);
+    const skjulIservFiltre = useFeatureSelector()(SKJUL_ISERV_FILTRE);
     const dispatch = useAppDispatch();
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
@@ -215,12 +217,14 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                     />
                 </div>
                 <div className="forste-barlabel-i-gruppe">
-                    <BarInputRadio
-                        filterVerdi={INAKTIVE_BRUKERE}
-                        handleChange={handleRadioButtonChange}
-                        labelTekst={ferdigfilterListeLabelTekst[INAKTIVE_BRUKERE]}
-                        statustall={statustallMedBrukerinnsyn.inaktiveBrukere}
-                    />
+                    {!skjulIservFiltre && (
+                        <BarInputRadio
+                            filterVerdi={INAKTIVE_BRUKERE}
+                            handleChange={handleRadioButtonChange}
+                            labelTekst={ferdigfilterListeLabelTekst[INAKTIVE_BRUKERE]}
+                            statustall={statustallMedBrukerinnsyn.inaktiveBrukere}
+                        />
+                    )}
                     {visFilterForKandidatForUtmelding && (
                         <BarInputRadio
                             filterVerdi={KANDIDAT_FOR_UTMELDING}
