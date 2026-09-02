@@ -8,8 +8,8 @@ export const Systemmeldinger = () => {
     const systemmeldinger = useSystemmeldingerSelector();
     return (
         <>
-            {systemmeldinger.map(systemmelding => (
-                <InfoCard data-color="warning" size={'small'}>
+            {systemmeldinger.map((systemmelding, index) => (
+                <InfoCard key={`infocard_${index}`} data-color="warning" size={'small'}>
                     <InfoCard.Message icon={<ExclamationmarkTriangleIcon aria-hidden />}>
                         {toPlainText(systemmelding.beskrivelse)}
                     </InfoCard.Message>
