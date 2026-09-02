@@ -2,17 +2,13 @@ import {FargekategoriDataModell} from '../model-interfaces';
 import {InnloggetVeilederModell, VeilederePaEnhetModell} from '../typer/enhet-og-veiledere-modeller';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {
-    LagreNyttFilterPortefolje,
-    LagreNyVeiledergruppePortefolje,
-    LagretFilterDTO,
-    LagretFilterPortefolje,
-    LagretVeiledergruppePortefolje,
-    NyttLagretFilter,
-    RedigerLagretFilter,
-    RedigerLagretFilterPortefolje,
-    RedigerVeiledergruppePortefolje,
-    SorteringOgId,
-    SortOrderPortefolje
+    LagreNyttFilterRequest,
+    LagreNyVeiledergruppeRequest,
+    LagreSortOrderRequest,
+    LagretFilterDto,
+    LagretVeiledergruppeDto,
+    RedigerLagretFilterRequest,
+    RedigerVeiledergruppeRequest
 } from '../ducks/lagret-filter';
 import {erDev, loginUrl} from '../utils/url-utils';
 import {FrontendEvent} from '../utils/frontend-logger';
@@ -56,7 +52,6 @@ export interface SessionMeta {
 export const VEILARBVEILEDER_URL = '/veilarbveileder';
 export const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
 export const VEILARBOPPFOLGING_URL = '/veilarboppfolging';
-export const VEILARBFILTER_URL = '/veilarbfilter/api';
 export const FEATURE_URL = '/feature';
 
 function buildUrl(baseUrl: string, queryParams?: {}): string {
@@ -162,58 +157,24 @@ export function hentAktivBruker(): Promise<InnloggetVeilederModell> {
     return fetchToJson(`${VEILARBVEILEDER_URL}/api/veileder/v2/me`, MED_CREDENTIALS);
 }
 
-// Lagrede filter - Mine filtre
-export function hentMineFilter(): Promise<LagretFilterDTO[]> {
-    const url = `${VEILARBFILTER_URL}/minelagredefilter`;
-    return fetchToJson(url, MED_CREDENTIALS);
-}
-
-export function redigerMineFilter(endringer: RedigerLagretFilter): Promise<LagretFilterDTO> {
-    const url = `${VEILARBFILTER_URL}/minelagredefilter`;
-    const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(endringer)};
-    return fetchToJson(url, config);
-}
-
-export function nyttMineFilter(nyttFilter: NyttLagretFilter): Promise<LagretFilterDTO> {
-    const url = `${VEILARBFILTER_URL}/minelagredefilter`;
-    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(nyttFilter)};
-    return fetchToJson(url, config);
-}
-
-export function slettMineFilter(filterId: number): Promise<number> {
-    const url = `${VEILARBFILTER_URL}/minelagredefilter/${filterId}`;
-    const config = {...MED_CREDENTIALS, method: 'delete'};
-    return fetch(url, config)
-        .then(sjekkStatuskode)
-        .then(_ => Promise.resolve(filterId));
-}
-
-export function lagreSorteringFiltere(sorteringOgIder: SorteringOgId[]): Promise<number> {
-    const url = `${VEILARBFILTER_URL}/minelagredefilter/lagresortering`;
-    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(sorteringOgIder)};
-    return fetchToJson(url, config);
-}
-
-export function hentMineFilterPortefolje(): Promise<LagretFilterPortefolje[]> {
+export function hentMineFilter(): Promise<LagretFilterDto[]> {
     const url = `${VEILARBPORTEFOLJE_URL}/lagredefilter/minefilter`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function redigerMineFilterPortefolje(
-    redigertFilter: RedigerLagretFilterPortefolje
-): Promise<LagretFilterPortefolje> {
+export function redigerMineFilter(redigertFilter: RedigerLagretFilterRequest): Promise<LagretFilterDto> {
     const url = `${VEILARBPORTEFOLJE_URL}/lagredefilter/minefilter`;
     const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(redigertFilter)};
     return fetchToJson(url, config);
 }
 
-export function lagreNyttMineFilterPortefolje(nyttFilter: LagreNyttFilterPortefolje): Promise<LagretFilterPortefolje> {
+export function lagreNyttMineFilter(nyttFilter: LagreNyttFilterRequest): Promise<LagretFilterDto> {
     const url = `${VEILARBPORTEFOLJE_URL}/lagredefilter/minefilter`;
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(nyttFilter)};
     return fetchToJson(url, config);
 }
 
-export function slettMineFilterPortefolje(filterId: number): Promise<number> {
+export function slettMineFilter(filterId: number): Promise<number> {
     const url = `${VEILARBPORTEFOLJE_URL}/lagredefilter/minefilter/${filterId}`;
     const config = {...MED_CREDENTIALS, method: 'delete'};
     return fetch(url, config)
@@ -221,62 +182,36 @@ export function slettMineFilterPortefolje(filterId: number): Promise<number> {
         .then(_ => Promise.resolve(filterId));
 }
 
-export function lagreSorteringMineFilterePortefolje(sortOrderForFilter: SortOrderPortefolje[]): Promise<number> {
+export function lagreSorteringMineFilter(sortOrderForFilter: LagreSortOrderRequest[]): Promise<number> {
     const url = `${VEILARBPORTEFOLJE_URL}/lagredefilter/minefilter/lagresortering`;
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(sortOrderForFilter)};
     return fetchToJson(url, config);
 }
 
-// Lagrede filter - Veiledergrupper
-export function hentEnhetsFilterGrupper(enhetId): Promise<LagretFilterDTO[]> {
-    const url = `${VEILARBFILTER_URL}/enhet/${enhetId}`;
-    return fetchToJson(url, MED_CREDENTIALS);
-}
-
-export function redigerVeiledergruppe(endringer: RedigerLagretFilter, enhetId: string): Promise<LagretFilterDTO> {
-    const url = `${VEILARBFILTER_URL}/enhet/${enhetId}`;
-    const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(endringer)};
-    return fetchToJson(url, config);
-}
-
-export function nyVeiledergruppe(endringer: NyttLagretFilter, enhetId: string): Promise<LagretFilterDTO> {
-    const url = `${VEILARBFILTER_URL}/enhet/${enhetId}`;
-    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(endringer)};
-    return fetchToJson(url, config);
-}
-
-export function slettVeiledergruppe(enhetId: string | undefined | null, filterId: number): Promise<number> {
-    const url = `${VEILARBFILTER_URL}/enhet/${enhetId}/filter/${filterId}`;
-    const config = {...MED_CREDENTIALS, method: 'delete'};
-    return fetch(url, config)
-        .then(sjekkStatuskode)
-        .then(_ => Promise.resolve(filterId));
-}
-
-export function hentVeiledergrupperForEnhetPortefolje(enhetId): Promise<LagretVeiledergruppePortefolje[]> {
+export function hentVeiledergrupperForEnhet(enhetId): Promise<LagretVeiledergruppeDto[]> {
     const url = `${VEILARBPORTEFOLJE_URL}/lagredefilter/veiledergruppe/${enhetId}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function redigerVeiledergruppePortefolje(
-    endringer: RedigerVeiledergruppePortefolje,
+export function redigerVeiledergruppeForEnhet(
+    endringer: RedigerVeiledergruppeRequest,
     enhetId: string
-): Promise<LagretVeiledergruppePortefolje> {
+): Promise<LagretVeiledergruppeDto> {
     const url = `${VEILARBPORTEFOLJE_URL}/lagredefilter/veiledergruppe/${enhetId}`;
     const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(endringer)};
     return fetchToJson(url, config);
 }
 
-export function lagreNyVeiledergruppePortefolje(
-    endringer: LagreNyVeiledergruppePortefolje,
+export function lagreNyVeiledergruppeForEnhet(
+    endringer: LagreNyVeiledergruppeRequest,
     enhetId: string
-): Promise<LagretVeiledergruppePortefolje> {
+): Promise<LagretVeiledergruppeDto> {
     const url = `${VEILARBPORTEFOLJE_URL}/lagredefilter/veiledergruppe/${enhetId}`;
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(endringer)};
     return fetchToJson(url, config);
 }
 
-export function slettVeiledergruppePortefolje(enhetId: string | undefined | null, filterId: number): Promise<number> {
+export function slettVeiledergruppeForEnhet(enhetId: string | undefined | null, filterId: number): Promise<number> {
     const url = `${VEILARBPORTEFOLJE_URL}/lagredefilter/veiledergruppe/${enhetId}/filter/${filterId}`;
     const config = {...MED_CREDENTIALS, method: 'delete'};
     return fetch(url, config)

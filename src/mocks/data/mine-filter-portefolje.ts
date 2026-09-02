@@ -1,8 +1,8 @@
 import {initialState} from '../../ducks/filtrering';
-import {LagretFilterPortefolje} from '../../ducks/lagret-filter';
+import {LagretFilterDto} from '../../ducks/lagret-filter';
 import {InnsatsgruppeGjeldendeVedtak14a} from '../../typer/bruker-modell';
 
-export const mineFilterPortefolje = (): LagretFilterPortefolje[] => {
+export const mineFilterPortefolje = (): LagretFilterDto[] => {
     return [
         {
             filterNavn: '1. Unge arbeidsledige møter idag',
