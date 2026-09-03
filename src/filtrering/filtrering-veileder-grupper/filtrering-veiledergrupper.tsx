@@ -6,14 +6,13 @@ import {AppState} from '../../reducer';
 import {VeiledergruppeModal} from '../../components/modal/veiledergruppe/veiledergruppe-modal';
 import {endreFiltervalg, initialState} from '../../ducks/filtrering';
 import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
-import {lageNyGruppe} from '../../ducks/veiledergrupper_filter';
+import {lageNyVeiledergruppe} from '../../ducks/veiledergrupper_filter';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {STATUS} from '../../ducks/utils';
 import {VeiledergruppeInnhold} from './veiledergruppe-innhold';
 
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
-import {mapFiltermodellTilAktiveValgOgStringify} from '../../components/modal/mine-filter/mine-filter-mapper';
 
 interface FilteringVeiledergruppeProps {
     oversiktType: OversiktType;
@@ -33,11 +32,10 @@ export function FilteringVeiledergrupper({oversiktType, filtervalg}: FilteringVe
     const submitEndringer = (gruppeNavn: string, filterValg: FiltervalgModell) => {
         enhet &&
             dispatch(
-                lageNyGruppe(
+                lageNyVeiledergruppe(
                     {
                         filterNavn: gruppeNavn,
-                        filterValg: filterValg,
-                        aktiveFilterValg: mapFiltermodellTilAktiveValgOgStringify(filterValg)
+                        veiledere: filterValg[Filtervalg.veiledere]
                     },
                     enhet
                 )

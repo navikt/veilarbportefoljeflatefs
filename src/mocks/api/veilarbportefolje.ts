@@ -15,11 +15,11 @@ import {EndreHuskelapp, LagreHuskelapp} from '../../ducks/huskelapp';
 import {rnd} from '../utils';
 import {tiltakstyper} from '../data/tiltakstyper';
 import {
-    LagreNyVeiledergruppePortefolje,
-    LagretFilterPortefolje,
-    LagretVeiledergruppePortefolje,
-    RedigerVeiledergruppePortefolje,
-    SorteringOgId
+    LagreNyVeiledergruppeRequest,
+    LagreSortOrderRequest,
+    LagretFilterDto,
+    LagretVeiledergruppeDto,
+    RedigerVeiledergruppeRequest
 } from '../../ducks/lagret-filter';
 import {veiledergrupperPortefolje} from '../data/veiledergrupper-portefolje';
 import {mineFilterPortefolje} from '../data/mine-filter-portefolje';
@@ -262,9 +262,9 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
     http.put(
         '/veilarbportefolje/api/lagredefilter/veiledergruppe/:enhetId',
         withAuth(async ({request}) => {
-            const oppdaterFilterRequest = (await request.json()) as RedigerVeiledergruppePortefolje;
+            const oppdaterFilterRequest = (await request.json()) as RedigerVeiledergruppeRequest;
 
-            let oppdatertGruppe: LagretVeiledergruppePortefolje | undefined;
+            let oppdatertGruppe: LagretVeiledergruppeDto | undefined;
             customVeiledergrupper = customVeiledergrupper.map(v => {
                 if (v.filterId === oppdaterFilterRequest.filterId) {
                     oppdatertGruppe = {
@@ -283,9 +283,9 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
     http.post(
         '/veilarbportefolje/api/lagredefilter/veiledergruppe/:enhetId',
         withAuth(async ({request}) => {
-            const opprettFilterRequest = (await request.json()) as LagreNyVeiledergruppePortefolje;
+            const opprettFilterRequest = (await request.json()) as LagreNyVeiledergruppeRequest;
             const filterId = Math.floor(Math.random() * 100) + 500;
-            const nyGruppe: LagretVeiledergruppePortefolje = {
+            const nyGruppe: LagretVeiledergruppeDto = {
                 ...opprettFilterRequest,
                 filterId,
                 veiledere: opprettFilterRequest.veiledere
@@ -316,7 +316,7 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
     http.put(
         '/veilarbportefolje/api/lagredefilter/minefilter',
         withAuth(async ({request}) => {
-            const oppdaterFilterRequest = (await request.json()) as LagretFilterPortefolje;
+            const oppdaterFilterRequest = (await request.json()) as LagretFilterDto;
 
             const filterIndex = customMineFilter.findIndex(elem => elem.filterId === oppdaterFilterRequest.filterId);
             customMineFilter[filterIndex] = {
@@ -329,9 +329,9 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
     http.post(
         '/veilarbportefolje/api/lagredefilter/minefilter',
         withAuth(async ({request}) => {
-            const opprettFilterRequest = (await request.json()) as LagretFilterPortefolje;
+            const opprettFilterRequest = (await request.json()) as LagretFilterDto;
             const filterId = Math.floor(Math.random() * 100) + 500;
-            const nyttFilter: LagretFilterPortefolje = {
+            const nyttFilter: LagretFilterDto = {
                 ...opprettFilterRequest,
                 filterId,
                 sortOrder: 0
@@ -357,7 +357,7 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
     http.post(
         '/veilarbportefolje/api/lagredefilter/minefilter/lagresortering',
         withAuth(async ({request}) => {
-            const sorteringer = (await request.json()) as SorteringOgId[];
+            const sorteringer = (await request.json()) as LagreSortOrderRequest[];
             sorteringer.forEach(elem => {
                 const customMineFilterElem = customMineFilter.find(filter => elem.filterId === filter.filterId);
                 if (customMineFilterElem) {

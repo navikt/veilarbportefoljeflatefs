@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {RadioGroup} from '@navikt/ds-react';
 import {endreFiltervalg} from '../../ducks/filtrering';
-import {lagreEndringer, slettGruppe} from '../../ducks/veiledergrupper_filter';
+import {lagreEndringerForVeiledergruppe, slettVeiledergruppe} from '../../ducks/veiledergrupper_filter';
 import {AppState} from '../../reducer';
 import {harGjortEndringer} from '../../components/modal/veiledergruppe/veileder-gruppe-utils';
 import {VeiledergruppeModal} from '../../components/modal/veiledergruppe/veiledergruppe-modal';
@@ -18,7 +18,6 @@ import '../../components/sidebar/sidebar.css';
 import './veiledergruppe.css';
 import '../filtrering-filter/filterform/filterform.css';
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
-import {mapFiltermodellTilAktiveValgOgStringify} from '../../components/modal/mine-filter/mine-filter-mapper';
 
 interface VeiledergruppeInnholdProps {
     filtervalg: FiltervalgModell;
@@ -60,12 +59,11 @@ export function VeiledergruppeInnhold({filtervalg, lagretFilter, oversiktType}: 
             )
         ) {
             dispatch(
-                lagreEndringer(
+                lagreEndringerForVeiledergruppe(
                     {
                         filterId: valgtGruppe.filterId,
                         filterNavn: gruppeNavn,
-                        filterValg: filterValg,
-                        aktiveFilterValg: mapFiltermodellTilAktiveValgOgStringify(filterValg)
+                        veiledere: filterValg[Filtervalg.veiledere]
                     },
                     enhet
                 )
@@ -85,7 +83,7 @@ export function VeiledergruppeInnhold({filtervalg, lagretFilter, oversiktType}: 
     const sletteKnapp = () => {
         valgtGruppe &&
             enhet &&
-            dispatch(slettGruppe(enhet, valgtGruppe.filterId)).then(() => {
+            dispatch(slettVeiledergruppe(enhet, valgtGruppe.filterId)).then(() => {
                 dispatch(endreFiltervalg(Filtervalg.veiledere, [], OversiktType.enhetensOversikt));
                 dispatch(hentMineFilterForVeileder());
                 oppdaterKolonneAlternativer(

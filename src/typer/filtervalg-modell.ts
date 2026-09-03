@@ -68,11 +68,10 @@ export const erGyldigFiltervalg = (filtervalg: string): filtervalg is Filtervalg
 
 /**
  * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * *
- * Om FiltervalgModell får endringar må ein også oppdatere Portefoljefilter i veilarbfilter.       *
- * Begge repoa må deployast samstundes, elles knekk ein Mine filter i prod.                        *
- *                                                                                                 *
- * Relevant fil: https://github.com/navikt/veilarbfilter/blob/dev/src/main/java/no/nav/pto/veilarbfilter/domene/PortefoljeFilter.java (2024-11-05)
- * Eksempel-PR frå huskelapp: https://github.com/navikt/veilarbfilter/pull/283                     *
+ * Om FiltervalgModell får endringer må man samkjøre med Filtermodellen i veilarbportefolje.       *
+ * Begge repoene må deployes samtidig, og evt mapping fra lagrede filtre må fikses i backenden så  *
+ * ting ikke brekker.                                                                              *
+ * Eventuelle lagrede filtre med verdier som har endra seg må så migreres i databasen               *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 export interface FiltervalgModell {
     [Filtervalg.ferdigfilterListe]: string[];
@@ -121,9 +120,8 @@ export interface FiltervalgModell {
 
 /**
  * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * *
- * Om FiltervalgModell får endringar må ein også oppdatere Portefoljefilter i veilarbfilter.       *
- * Begge repoa må deployast samstundes, elles knekk ein Mine filter i prod.                        *
- *                                                                                                 *
- * Relevant fil: https://github.com/navikt/veilarbfilter/blob/dev/src/main/java/no/nav/pto/veilarbfilter/domene/PortefoljeFilter.java (2024-11-05)
- * Eksempel-PR frå huskelapp: https://github.com/navikt/veilarbfilter/pull/283                     *
+ * Om FiltervalgModell får endringer må man samkjøre med Filtermodellen i veilarbportefolje.       *
+ * Begge repoene må deployes samtidig, og evt mapping fra lagrede filtre må fikses i backenden så  *
+ * ting ikke brekker.                                                                              *
+ * Eventuelle lagrede filtre med verdier som har endra seg må så migreres i databasen               *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
