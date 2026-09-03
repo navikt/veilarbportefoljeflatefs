@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@cypress/react": "9.0.2",
-    "@eslint/js": "9.39.5",
+    "@eslint/js": "10.0.1",
     "@faker-js/faker": "10.6.0",
     "@types/jest": "30.0.0",
     "@types/lodash.throttle": "4.1.9",
