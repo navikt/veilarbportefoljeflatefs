@@ -235,6 +235,7 @@ const lagHendelse = (): HendelseInnhold | null => {
         return {
             beskrivelse: 'Bruker har et utgått varsel',
             dato: today.subtract(4, 'day').format('YYYY-MM-DD'),
+            datoFrist: today.add(3, 'day').format('YYYY-MM-DD'),
             lenke: 'https://veilarbpersonflate.intern.dev.nav.no/aktivitetsplan'
         };
     }
@@ -242,6 +243,15 @@ const lagHendelse = (): HendelseInnhold | null => {
         return {
             beskrivelse: 'Bruker har et udelt samtalereferat',
             dato: today.subtract(7, 'day').format('YYYY-MM-DD'),
+            datoFrist: null,
+            lenke: 'https://veilarbpersonflate.intern.dev.nav.no/aktivitetsplan'
+        };
+    }
+    if (maybeHendelse < 0.75) {
+        return {
+            beskrivelse: 'Arbeidssøkerperiode avsluttet av bruker',
+            dato: today.subtract(7, 'day').format('YYYY-MM-DD'),
+            datoFrist: today.add(7, 'day').format('YYYY-MM-DD'),
             lenke: 'https://veilarbpersonflate.intern.dev.nav.no/aktivitetsplan'
         };
     }
@@ -355,7 +365,8 @@ const lagEtiketter = (): Etiketter => {
         trengerOppfolgingsvedtak: false,
         harBehovForArbeidsevneVurdering: false,
         diskresjonskodeFortrolig: null,
-        profileringResultat: null
+        profileringResultat: null,
+        kandidatForUtmelding: false
     };
 };
 

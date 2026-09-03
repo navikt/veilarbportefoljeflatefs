@@ -44,6 +44,8 @@ import './filterform/filterform.css';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import {trackLenkeKlikketEvent} from '../../umami/umami-events';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {SKJUL_ISERV_FILTRE} from '../../konstanter';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -53,6 +55,10 @@ interface FiltreringFilterProps {
 }
 
 export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
+    const skjulIservFiltre = useFeatureSelector()(SKJUL_ISERV_FILTRE);
+    const formidlingsgruppeValg = skjulIservFiltre
+        ? Object.fromEntries(Object.entries(formidlingsgruppe).filter(([key]) => key !== 'ISERV'))
+        : formidlingsgruppe;
     return (
         <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
             <div className="filtrering-filter__kolonne">
@@ -341,7 +347,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                             filterformOgValgListe={[
                                 {
                                     form: Filtervalg.formidlingsgruppe,
-                                    checkboxValg: formidlingsgruppe
+                                    checkboxValg: formidlingsgruppeValg
                                 }
                             ]}
                             filtervalg={filtervalg}

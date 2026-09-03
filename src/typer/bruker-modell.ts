@@ -46,6 +46,7 @@ export interface Etiketter {
     harSikkerhetstiltak: boolean;
     diskresjonskodeFortrolig: string | null;
     profileringResultat: Profileringsresultat | null;
+    kandidatForUtmelding: boolean;
 }
 
 export interface MoteMedNavIDag {
@@ -196,6 +197,7 @@ export enum Hovedmal {
 export interface HendelseInnhold {
     beskrivelse: string;
     dato: string;
+    datoFrist: string | null;
     lenke: string;
 }
 

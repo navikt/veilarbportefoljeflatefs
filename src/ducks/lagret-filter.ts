@@ -5,44 +5,12 @@ export interface LagretFilter {
     filterId: number;
     filterValg: FiltervalgModell;
     sortOrder: number | null;
-    filterCleanup: boolean;
-    aktiv?: boolean;
-    note?: string;
-}
-
-export interface LagretFilterDTO {
-    filterNavn: string;
-    filterId: number;
-    filterValg: FiltervalgModell;
-    aktiveFilterValg: string;
-    sortOrder: number | null;
-    filterCleanup: boolean;
-    aktiv?: boolean;
-    note?: string;
 }
 
 export interface LagretFilterState {
     status: string;
     data: LagretFilter[];
     handlingType: HandlingsType | null;
-}
-
-export interface RedigerLagretFilter {
-    filterNavn: string;
-    filterValg: FiltervalgModell;
-    aktiveFilterValg: string;
-    filterId: number;
-}
-
-export interface NyttLagretFilter {
-    filterNavn: string;
-    filterValg: FiltervalgModell;
-    aktiveFilterValg: string;
-}
-
-export interface SorteringOgId {
-    sortOrder: number;
-    filterId: number;
 }
 
 export enum HandlingsType {
@@ -53,44 +21,41 @@ export enum HandlingsType {
     SORTERING
 }
 
-// Nye klasser som går til veilarbportefolje:
-export interface LagretFilterPortefolje {
+export interface LagretFilterDto {
     filterNavn: string;
     filterId: number;
     filterValg: FiltervalgModell;
     sortOrder: number;
-    aktiv: boolean;
-    ikke_aktiv_beskrivelse: string;
 }
 
-export interface LagreNyttFilterPortefolje {
+export interface LagreNyttFilterRequest {
     filterNavn: string;
     filterValg: FiltervalgModell;
 }
 
-export interface RedigerLagretFilterPortefolje {
+export interface RedigerLagretFilterRequest {
     filterNavn: string;
     filterId: number;
     filterValg: FiltervalgModell;
 }
 
-export interface SortOrderPortefolje {
+export interface LagreSortOrderRequest {
     sortOrder: number;
     filterId: number;
 }
 
-export interface LagretVeiledergruppePortefolje {
+export interface LagretVeiledergruppeDto {
     filterNavn: string;
     filterId: number;
     veiledere: string[];
 }
 
-export interface LagreNyVeiledergruppePortefolje {
+export interface LagreNyVeiledergruppeRequest {
     filterNavn: string;
     veiledere: string[];
 }
 
-export interface RedigerVeiledergruppePortefolje {
+export interface RedigerVeiledergruppeRequest {
     filterNavn: string;
     filterId: number;
     veiledere: string[];

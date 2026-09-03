@@ -78,6 +78,7 @@ export function HendelserFilterform({
                     <div className="hendelser-filterform__checkbox-gruppe">
                         <CheckboxGroup hideLegend legend="">
                             <Checkbox
+                                size="small"
                                 id={kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}
                                 value="ULESTE_ENDRINGER"
                                 checked={checkboxValg === 'ULESTE_ENDRINGER'}

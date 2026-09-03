@@ -1,30 +1,17 @@
 import {
-    hentEnhetsFilterGrupper,
-    hentVeiledergrupperForEnhetPortefolje,
-    lagreNyVeiledergruppePortefolje,
-    nyVeiledergruppe,
-    redigerVeiledergruppe,
-    redigerVeiledergruppePortefolje,
-    slettVeiledergruppe,
-    slettVeiledergruppePortefolje
+    hentVeiledergrupperForEnhet,
+    lagreNyVeiledergruppeForEnhet,
+    redigerVeiledergruppeForEnhet,
+    slettVeiledergruppeForEnhet
 } from '../middleware/api';
 import {doThenDispatch, STATUS} from './utils';
 import {
-    LagreNyVeiledergruppePortefolje,
-    LagretFilterDTO,
+    LagreNyVeiledergruppeRequest,
     LagretFilterState,
-    LagretVeiledergruppePortefolje,
-    NyttLagretFilter,
-    RedigerLagretFilter,
-    RedigerVeiledergruppePortefolje
+    LagretVeiledergruppeDto,
+    RedigerVeiledergruppeRequest
 } from './lagret-filter';
-import {
-    mapLagretFilterFraDTO,
-    mapVeiledergrupperTilLagretFilter
-} from '../components/modal/mine-filter/mine-filter-mapper';
-import {BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE} from '../konstanter';
-import {sjekkFeature} from './features';
-import {Filtervalg} from '../typer/filtervalg-modell';
+import {mapVeiledergrupperDtoTilLagretFilter} from '../components/modal/mine-filter/mine-filter-mapper';
 
 // Actions
 export const HENT_VEILEDERGRUPPER_OK = 'veiledergrupper/OK';
@@ -98,20 +85,12 @@ export function veiledergrupperLagretFilterReducer(state: LagretFilterState = in
 }
 
 // Action Creators
-export function hentLagretFilterForEnhet(enhetId: string) {
+export function hentLagretVeiledergrupper(enhetId: string) {
     return doThenDispatch(
-        (_dispatch, getState) => {
-            const brukFilterFraPortefolje = sjekkFeature(getState(), BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE);
-            if (brukFilterFraPortefolje) {
-                return hentVeiledergrupperForEnhetPortefolje(enhetId).then((dtoer: LagretVeiledergruppePortefolje[]) =>
-                    dtoer.map(dto => mapVeiledergrupperTilLagretFilter(dto))
-                );
-            } else {
-                return hentEnhetsFilterGrupper(enhetId).then((dtoer: LagretFilterDTO[]) =>
-                    dtoer.map(dto => mapLagretFilterFraDTO(dto))
-                );
-            }
-        },
+        () =>
+            hentVeiledergrupperForEnhet(enhetId).then((dtoer: LagretVeiledergruppeDto[]) =>
+                dtoer.map(dto => mapVeiledergrupperDtoTilLagretFilter(dto))
+            ),
         {
             OK: HENT_VEILEDERGRUPPER_OK,
             FEILET: HENT_VEILEDERGRUPPER_FEILET,
@@ -121,23 +100,12 @@ export function hentLagretFilterForEnhet(enhetId: string) {
 }
 
 // Action Creators
-export function lagreEndringer(endringer: RedigerLagretFilter, enhetId: string) {
+export function lagreEndringerForVeiledergruppe(redigerVeiledergruppe: RedigerVeiledergruppeRequest, enhetId: string) {
     return doThenDispatch(
-        (_dispatch, getState) => {
-            const brukFilterFraPortefolje = sjekkFeature(getState(), BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE);
-            if (brukFilterFraPortefolje) {
-                const redigerVeiledergruppe: RedigerVeiledergruppePortefolje = {
-                    filterNavn: endringer.filterNavn,
-                    filterId: endringer.filterId,
-                    veiledere: endringer.filterValg[Filtervalg.veiledere]
-                };
-                return redigerVeiledergruppePortefolje(redigerVeiledergruppe, enhetId).then(dto =>
-                    mapVeiledergrupperTilLagretFilter(dto)
-                );
-            } else {
-                return redigerVeiledergruppe(endringer, enhetId).then(dto => mapLagretFilterFraDTO(dto));
-            }
-        },
+        () =>
+            redigerVeiledergruppeForEnhet(redigerVeiledergruppe, enhetId).then(dto =>
+                mapVeiledergrupperDtoTilLagretFilter(dto)
+            ),
         {
             OK: REDIGER_VEILEDERGRUPPER_OK,
             FEILET: REDIGER_VEILEDERGRUPPER_FEILET,
@@ -147,22 +115,12 @@ export function lagreEndringer(endringer: RedigerLagretFilter, enhetId: string) 
 }
 
 // Action Creators
-export function lageNyGruppe(endringer: NyttLagretFilter, enhetId: string) {
+export function lageNyVeiledergruppe(nyVeiledergruppe: LagreNyVeiledergruppeRequest, enhetId: string) {
     return doThenDispatch(
-        (_dispatch, getState) => {
-            const brukFilterFraPortefolje = sjekkFeature(getState(), BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE);
-            if (brukFilterFraPortefolje) {
-                const nyVeiledergruppe: LagreNyVeiledergruppePortefolje = {
-                    filterNavn: endringer.filterNavn,
-                    veiledere: endringer.filterValg[Filtervalg.veiledere]
-                };
-                return lagreNyVeiledergruppePortefolje(nyVeiledergruppe, enhetId).then(dto =>
-                    mapVeiledergrupperTilLagretFilter(dto)
-                );
-            } else {
-                return nyVeiledergruppe(endringer, enhetId).then(dto => mapLagretFilterFraDTO(dto));
-            }
-        },
+        () =>
+            lagreNyVeiledergruppeForEnhet(nyVeiledergruppe, enhetId).then(dto =>
+                mapVeiledergrupperDtoTilLagretFilter(dto)
+            ),
         {
             OK: NY_VEILEDERGRUPPER_OK,
             FEILET: NY_VEILEDERGRUPPER_FEILET,
@@ -172,20 +130,10 @@ export function lageNyGruppe(endringer: NyttLagretFilter, enhetId: string) {
 }
 
 // Action Creators
-export function slettGruppe(enhetId: string, filterId: number) {
-    return doThenDispatch(
-        (_dispatch, getState) => {
-            const brukFilterFraPortefolje = sjekkFeature(getState(), BRUK_LAGREDE_FILTER_FRA_VEILARBPORTEFOLJE);
-            if (brukFilterFraPortefolje) {
-                return slettVeiledergruppePortefolje(enhetId, filterId);
-            } else {
-                return slettVeiledergruppe(enhetId, filterId);
-            }
-        },
-        {
-            OK: SLETT_VEILEDERGRUPPER_OK,
-            FEILET: SLETT_VEILEDERGRUPPER_FEILET,
-            PENDING: SLETT_VEILEDERGRUPPER_PENDING
-        }
-    );
+export function slettVeiledergruppe(enhetId: string, filterId: number) {
+    return doThenDispatch(() => slettVeiledergruppeForEnhet(enhetId, filterId), {
+        OK: SLETT_VEILEDERGRUPPER_OK,
+        FEILET: SLETT_VEILEDERGRUPPER_FEILET,
+        PENDING: SLETT_VEILEDERGRUPPER_PENDING
+    });
 }

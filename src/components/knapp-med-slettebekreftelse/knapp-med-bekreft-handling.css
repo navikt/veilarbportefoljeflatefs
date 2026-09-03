@@ -18,8 +18,3 @@
     display: flex;
     gap: 0.5rem;
 }
-
-.veilarbportefoljeflatefs .knapp-med-bekreft-handling .bekreft-handling .bekreft-handling__knapper > button {
-    /* Motverkar margin:auto frå designsystemet for knappar i modalfooter  */
-    margin: 0;
-}
