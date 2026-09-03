@@ -13,13 +13,10 @@ concurrency:
   group: pto_frontend_container_dev
   cancel-in-progress: true
 
-env:
-  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY_GCP }}
-
 jobs:
   deploy-dev:
     permissions:
-      contents: read
+      id-token: write
     runs-on: ubuntu-latest
 
     steps:
