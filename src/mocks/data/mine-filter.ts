@@ -4,12 +4,12 @@ import {InnsatsgruppeGjeldendeVedtak14a} from '../../typer/bruker-modell';
 
 export const mineFilterMedAntallSomFeilet = (): LagretFilterMedAntallSomFeiletDto => {
     return {
-        filtre: mineFilterPortefolje(),
-        antallFiltreSomFeilet: 2
+        filtre: mineFilter(),
+        antallFiltreSomFeilet: 0
     };
 };
 
-export const mineFilterPortefolje = (): LagretFilterDto[] => {
+export const mineFilter = (): LagretFilterDto[] => {
     return [
         {
             filterNavn: '1. Unge arbeidsledige møter idag',

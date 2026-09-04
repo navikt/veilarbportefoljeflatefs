@@ -21,11 +21,11 @@ import {
     LagretVeiledergruppeDto,
     RedigerVeiledergruppeRequest
 } from '../../ducks/lagret-filter';
-import {veiledergrupperPortefolje} from '../data/veiledergrupper-portefolje';
-import {mineFilterMedAntallSomFeilet, mineFilterPortefolje} from '../data/mine-filter-portefolje';
+import {veiledergrupper} from '../data/veiledergrupper';
+import {mineFilter, mineFilterMedAntallSomFeilet} from '../data/mine-filter';
 
-let customVeiledergrupper = veiledergrupperPortefolje();
-let customMineFilter = mineFilterPortefolje();
+let customVeiledergrupper = veiledergrupper();
+let customMineFilter = mineFilter();
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, innloggetVeileder.enheter[0].enhetId, alleBrukere);
