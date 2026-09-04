@@ -11,6 +11,7 @@ export interface LagretFilterState {
     status: string;
     data: LagretFilter[];
     handlingType: HandlingsType | null;
+    antallFiltreSomFeilet: number;
 }
 
 export enum HandlingsType {
@@ -21,6 +22,10 @@ export enum HandlingsType {
     SORTERING
 }
 
+export interface LagretFilterMedAntallSomFeiletDto {
+    filtre: LagretFilterDto[];
+    antallFiltreSomFeilet: number;
+}
 export interface LagretFilterDto {
     filterNavn: string;
     filterId: number;

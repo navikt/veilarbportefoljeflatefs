@@ -1,6 +1,13 @@
 import {initialState} from '../../ducks/filtrering';
-import {LagretFilterDto} from '../../ducks/lagret-filter';
+import {LagretFilterDto, LagretFilterMedAntallSomFeiletDto} from '../../ducks/lagret-filter';
 import {InnsatsgruppeGjeldendeVedtak14a} from '../../typer/bruker-modell';
+
+export const mineFilterMedAntallSomFeilet = (): LagretFilterMedAntallSomFeiletDto => {
+    return {
+        filtre: mineFilterPortefolje(),
+        antallFiltreSomFeilet: 2
+    };
+};
 
 export const mineFilterPortefolje = (): LagretFilterDto[] => {
     return [

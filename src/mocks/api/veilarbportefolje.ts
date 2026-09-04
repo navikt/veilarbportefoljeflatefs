@@ -22,7 +22,7 @@ import {
     RedigerVeiledergruppeRequest
 } from '../../ducks/lagret-filter';
 import {veiledergrupperPortefolje} from '../data/veiledergrupper-portefolje';
-import {mineFilterPortefolje} from '../data/mine-filter-portefolje';
+import {mineFilterMedAntallSomFeilet, mineFilterPortefolje} from '../data/mine-filter-portefolje';
 
 let customVeiledergrupper = veiledergrupperPortefolje();
 let customMineFilter = mineFilterPortefolje();
@@ -310,7 +310,7 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
     http.get(
         '/veilarbportefolje/api/lagredefilter/minefilter',
         withAuth(async () => {
-            return HttpResponse.json(customMineFilter);
+            return HttpResponse.json(mineFilterMedAntallSomFeilet());
         })
     ),
     http.put(
