@@ -19,7 +19,7 @@ export function FiltreringMineFilter({...mineFilterInnholdProps}: LagredeFilterI
 
     return (
         <>
-            {mineFilterState.antallFiltreSomFeilet > 0 && (
+            {mineFilterState?.antallFiltreSomFeilet && mineFilterState.antallFiltreSomFeilet > 0 && (
                 <Alert variant="warning" size="small" className={'mine-filter-alert'}>
                     {mineFilterState.antallFiltreSomFeilet} av filtrene dine kunne ikke lastes inn. Prøv igjen senere.
                 </Alert>
