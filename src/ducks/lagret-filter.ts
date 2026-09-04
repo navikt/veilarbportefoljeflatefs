@@ -11,7 +11,7 @@ export interface LagretFilterState {
     status: string;
     data: LagretFilter[];
     handlingType: HandlingsType | null;
-    antallFiltreSomFeilet: number;
+    antallFiltreSomFeilet?: number;
 }
 
 export enum HandlingsType {
