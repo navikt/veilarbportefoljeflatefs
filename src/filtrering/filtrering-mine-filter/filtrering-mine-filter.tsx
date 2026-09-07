@@ -12,7 +12,8 @@ export function FiltreringMineFilter({...mineFilterInnholdProps}: LagredeFilterI
     if (mineFilterState.handlingType === HandlingsType.HENTE && mineFilterState.status === STATUS.ERROR) {
         return (
             <Alert variant="error" size="small" className={'mine-filter-alert'}>
-                Det oppsto en feil, og mine filter kunne ikke hentes fram. Prøv igjen senere.
+                Det oppsto en feil, og mine filter kunne ikke hentes fram. Hvis feilen vedvarer, opprett en sak i
+                Porten.
             </Alert>
         );
     }
@@ -21,7 +22,8 @@ export function FiltreringMineFilter({...mineFilterInnholdProps}: LagredeFilterI
         <>
             {mineFilterState?.antallFiltreSomFeilet != undefined && mineFilterState.antallFiltreSomFeilet > 0 && (
                 <Alert variant="warning" size="small" className={'mine-filter-alert'}>
-                    {mineFilterState.antallFiltreSomFeilet} av filtrene dine kunne ikke lastes inn. Prøv igjen senere.
+                    {mineFilterState.antallFiltreSomFeilet} av filtrene dine kunne ikke lastes inn. Hvis feilen
+                    vedvarer, opprett en sak i Porten.
                 </Alert>
             )}
             <MineFilterInnhold {...mineFilterInnholdProps} />
