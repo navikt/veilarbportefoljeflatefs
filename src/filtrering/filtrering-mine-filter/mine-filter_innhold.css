@@ -23,3 +23,6 @@
     display: flex;
     justify-content: space-between;
 }
+.veilarbportefoljeflatefs .mine-filter-alert {
+    margin: 1rem;
+}
