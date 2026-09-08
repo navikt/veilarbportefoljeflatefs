@@ -1,15 +1,11 @@
-import {Kolonne} from '../../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../../ducks/ui/valgte-kolonner';
 import {DataCellProps} from '../DataCellProps';
 import {DatoDataCellType} from '../../dataCellTypes/DatoDataCellType';
 
 export const AvtaltAktivitetStartdatoAktivitetData = ({bruker, valgteKolonner}: DataCellProps) => (
     <DatoDataCellType
         className="col col-xs-2"
-        dato={
-            bruker.aktiviteterAvtaltMedNav.aktivitetStart
-                ? new Date(bruker.aktiviteterAvtaltMedNav.aktivitetStart)
-                : null
-        }
+        dato={bruker.aktiviteterAvtaltMedNav.aktivitetStart ? bruker.aktiviteterAvtaltMedNav.aktivitetStart : null}
         skalVises={valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)}
     />
 );

@@ -1,5 +1,5 @@
 import {BrukerModell} from '../../../typer/bruker-modell';
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {FiltervalgModell} from '../../../typer/filtervalg-modell';
 
 export interface DataCellProps {

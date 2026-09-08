@@ -1,10 +1,10 @@
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {DataCellProps} from './DataCellProps';
 import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
 
 export const UtlopteAktiviteterData = ({bruker, valgteKolonner}: DataCellProps) => {
     const nyesteUtlopteAktivitet = bruker.aktiviteterAvtaltMedNav.nyesteUtlopteAktivitet
-        ? new Date(bruker.aktiviteterAvtaltMedNav.nyesteUtlopteAktivitet)
+        ? bruker.aktiviteterAvtaltMedNav.nyesteUtlopteAktivitet
         : null;
 
     return (

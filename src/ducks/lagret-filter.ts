@@ -4,33 +4,14 @@ export interface LagretFilter {
     filterNavn: string;
     filterId: number;
     filterValg: FiltervalgModell;
-    opprettetDato: Date;
     sortOrder: number | null;
-    filterCleanup: boolean;
-    aktiv: boolean;
-    note: string;
 }
 
 export interface LagretFilterState {
     status: string;
     data: LagretFilter[];
     handlingType: HandlingsType | null;
-}
-
-export interface RedigerLagretFilter {
-    filterNavn: string;
-    filterValg: FiltervalgModell;
-    filterId: number;
-}
-
-export interface NyttLagretFilter {
-    filterNavn: string;
-    filterValg: FiltervalgModell;
-}
-
-export interface SorteringOgId {
-    sortOrder: number;
-    filterId: number;
+    antallFiltreSomFeilet?: number;
 }
 
 export enum HandlingsType {
@@ -39,4 +20,48 @@ export enum HandlingsType {
     SLETTE,
     HENTE,
     SORTERING
+}
+
+export interface LagretFilterMedAntallSomFeiletDto {
+    filtre: LagretFilterDto[];
+    antallFiltreSomFeilet: number;
+}
+export interface LagretFilterDto {
+    filterNavn: string;
+    filterId: number;
+    filterValg: FiltervalgModell;
+    sortOrder: number;
+}
+
+export interface LagreNyttFilterRequest {
+    filterNavn: string;
+    filterValg: FiltervalgModell;
+}
+
+export interface RedigerLagretFilterRequest {
+    filterNavn: string;
+    filterId: number;
+    filterValg: FiltervalgModell;
+}
+
+export interface LagreSortOrderRequest {
+    sortOrder: number;
+    filterId: number;
+}
+
+export interface LagretVeiledergruppeDto {
+    filterNavn: string;
+    filterId: number;
+    veiledere: string[];
+}
+
+export interface LagreNyVeiledergruppeRequest {
+    filterNavn: string;
+    veiledere: string[];
+}
+
+export interface RedigerVeiledergruppeRequest {
+    filterNavn: string;
+    filterId: number;
+    veiledere: string[];
 }

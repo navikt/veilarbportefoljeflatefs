@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import {Link} from 'react-router';
 import {BodyShort, Table} from '@navikt/ds-react';
 import {VeilederMedPortefoljestorrelse} from './veilederoversikt-sidevisning';
 
@@ -10,8 +10,12 @@ export const VeilederoversiktTabellrad = ({veileder}: Props) => {
     return (
         <Table.Row key={veileder.ident}>
             <Table.HeaderCell>
-                <Link to={`../portefolje/${veileder.ident}`} data-testid="veilederoversikt_navn_lenke">
-                    <BodyShort size="small">{`${veileder.navn}`}</BodyShort>
+                <Link
+                    to={`../portefolje/${veileder.ident}`}
+                    data-testid="veilederoversikt_navn_lenke"
+                    className="veilederoversikt_navn_lenke"
+                >
+                    <BodyShort size="small">{`${veileder.etternavn}, ${veileder.fornavn}`}</BodyShort>
                 </Link>
             </Table.HeaderCell>
             <Table.DataCell>

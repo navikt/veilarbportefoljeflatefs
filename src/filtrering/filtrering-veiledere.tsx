@@ -51,7 +51,7 @@ export function FiltreringVeiledere({endreFiltervalg, filtervalg}: FiltreringVei
     };
 
     return (
-        <div className="filtrering-veiledere" ref={wrapperRef}>
+        <div ref={wrapperRef}>
             <TextField
                 label="Søk veileder"
                 placeholder="Navn eller Nav-ident"

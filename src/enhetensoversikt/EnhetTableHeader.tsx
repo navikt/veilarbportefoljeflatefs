@@ -1,4 +1,4 @@
-import {OversiktType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/valgte-kolonner';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {NavnHeader} from '../components/tabell/headerCells/NavnHeader';
 import {FnrHeader} from '../components/tabell/headerCells/FnrHeader';
@@ -19,7 +19,7 @@ import {GjeldendeVedtak14aInnsatsgruppeHeader} from '../components/tabell/header
 import {GjeldendeVedtak14aHovedmalHeader} from '../components/tabell/headerCells/GjeldendeVedtak14aHovedmalHeader';
 import {GjeldendeVedtak14aVedtaksdatoHeader} from '../components/tabell/headerCells/GjeldendeVedtak14aVedtaksdatoHeader';
 import {FilterhendelseLenkeHeader} from '../components/tabell/headerCells/FilterhendelseLenkeHeader';
-import {FilterhendelseDatoOpprettetHeaderHeader} from '../components/tabell/headerCells/FilterhendelseDatoOpprettetHeaderHeader';
+import {FilterhendelseDatoOpprettetHeader} from '../components/tabell/headerCells/FilterhendelseDatoOpprettetHeader';
 import {TiltakshendelseDatoOpprettetHeader} from '../components/tabell/headerCells/TiltakshendelseDatoOpprettetHeader';
 import {TiltakshendelseLenkeHeader} from '../components/tabell/headerCells/TiltakshendelseLenkeHeader';
 import {EnsligeForsorgereOmBarnetHeader} from '../components/tabell/headerCells/EnsligeForsorgereOmBarnetHeader';
@@ -38,10 +38,15 @@ import {MoteIDagAvtaltHeader} from '../components/tabell/headerCells/MoteIDagAvt
 import {Utkast14aVedtaksstatusHeader} from '../components/tabell/headerCells/Utkast14aVedtaksstatusHeader';
 import {Utkast14aVedtaksstatusEndretHeader} from '../components/tabell/headerCells/Utkast14aVedtaksstatusEndretHeader';
 import {Utkast14aAnsvarligVeilederHeader} from '../components/tabell/headerCells/Utkast14aAnsvarligVeilederHeader';
+import {FargekategoriHeader} from '../components/tabell/headerCells/min-oversikt/FargekategoriHeader';
 import {VeilederNavidentHeader} from '../components/tabell/headerCells/enhetens-oversikt/VeilederNavidentHeader';
 import {VeilederNavnHeader} from '../components/tabell/headerCells/enhetens-oversikt/VeilederNavnHeader';
 import {AapKelvinVedtakTilOgMedDatoHeaderHeader} from '../components/tabell/headerCells/AapKelvinVedtakTilOgMedDatoHeaderHeader';
 import {AapKelvinRettighetHeader} from '../components/tabell/headerCells/AapKelvinRettighetHeader';
+import {UngdomsprogramStartdatoHeader} from '../components/tabell/headerCells/UngdomsprogramStartdatoHeader';
+import {UngdomsprogramMaksdatoHeader} from '../components/tabell/headerCells/UngdomsprogramMaksdatoHeader';
+import {UngdomsprogramSluttdatoHeader} from '../components/tabell/headerCells/UngdomsprogramSluttdatoHeader';
+import {UngdomsprogramRettighetHeader} from '../components/tabell/headerCells/UngdomsprogramRettighetHeader';
 import {TildeltTidspunktHeader} from '../components/tabell/headerCells/TildeltTidspunktHeader';
 import {TiltakspengerVedtakTilOgMedDatoHeader} from '../components/tabell/headerCells/TiltakspengerVedtakTilOgMedDatoHeader';
 import {TiltakspengerRettighetHeader} from '../components/tabell/headerCells/TiltakspengerRettighetHeader';
@@ -54,17 +59,23 @@ import {AapArenaRettighetsperiodeHeader} from '../components/tabell/headerCells/
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering';
 import {AktivitetNesteUtlopsdatoValgtAktivitetHeader} from '../components/tabell/headerCells/AktivitetNesteUtlopsdatoValgtAktivitetHeader';
+import {skalViseFargekategoriKolonne} from '../ducks/ui/valgte-kolonner-selectors';
 import './enhetensoversikt.css';
 import './brukerliste.css';
 import {DagpengerRettighetHeader} from '../components/tabell/headerCells/DagpengerRettighetHeader';
 import {DagpengerResterendeDagerHeader} from '../components/tabell/headerCells/DagpengerResterendeDagerHeader';
 import {DagpengerStansDatoHeader} from '../components/tabell/headerCells/DagpengerStansDatoHeader';
+import {AapKelvinVedtakMaksdatoHeader} from '../components/tabell/headerCells/AapKelvinVedtakMaksdatoHeader';
+import {FilterhendelseDatoFristHeader} from '../components/tabell/headerCells/FilterhendelseDatoFristHeader';
 
 export function EnhetTableHeader() {
-    const {filtervalg, sorteringsrekkefolge, sorteringsfelt, listevisning} = usePortefoljeSelector(
-        OversiktType.enhetensOversikt
-    );
-    const valgteKolonner = listevisning.valgte;
+    const {
+        filtervalg,
+        sorteringsrekkefolge,
+        sorteringsfelt,
+        valgteKolonner: valgteKolonnerState
+    } = usePortefoljeSelector(OversiktType.enhetensOversikt);
+    const valgteKolonner = valgteKolonnerState.valgte;
     const settSorteringOgHentPortefolje = useSetPortefoljeSortering(OversiktType.enhetensOversikt);
 
     const sorteringTilHeaderCell = {
@@ -73,10 +84,12 @@ export function EnhetTableHeader() {
         rekkefolge: sorteringsrekkefolge,
         onClick: settSorteringOgHentPortefolje
     };
+    const visFargekategoriKolonne = skalViseFargekategoriKolonne(filtervalg, OversiktType.enhetensOversikt);
 
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
             <VelgalleCheckboks />
+            {visFargekategoriKolonne && <FargekategoriHeader {...sorteringTilHeaderCell} />}
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
                 <NavnHeader {...sorteringTilHeaderCell} />
                 <FnrHeader {...sorteringTilHeaderCell} />
@@ -111,8 +124,9 @@ export function EnhetTableHeader() {
                 <VenterPaSvarFraNavHeader {...sorteringTilHeaderCell} />
                 <VenterPaSvarFraBrukerHeader {...sorteringTilHeaderCell} />
 
-                <FilterhendelseLenkeHeader {...sorteringTilHeaderCell} />
-                <FilterhendelseDatoOpprettetHeaderHeader {...sorteringTilHeaderCell} />
+                <FilterhendelseLenkeHeader {...sorteringTilHeaderCell} filtervalg={filtervalg} />
+                <FilterhendelseDatoOpprettetHeader {...sorteringTilHeaderCell} filtervalg={filtervalg} />
+                <FilterhendelseDatoFristHeader {...sorteringTilHeaderCell} filtervalg={filtervalg} />
 
                 <TiltakshendelseLenkeHeader {...sorteringTilHeaderCell} />
                 <TiltakshendelseDatoOpprettetHeader {...sorteringTilHeaderCell} />
@@ -149,6 +163,7 @@ export function EnhetTableHeader() {
                 <UtdanningOgSituasjonSistEndretHeader {...sorteringTilHeaderCell} />
 
                 <AapKelvinVedtakTilOgMedDatoHeaderHeader {...sorteringTilHeaderCell} />
+                <AapKelvinVedtakMaksdatoHeader {...sorteringTilHeaderCell} />
                 <AapKelvinRettighetHeader {...sorteringTilHeaderCell} />
 
                 <TiltakspengerVedtakTilOgMedDatoHeader {...sorteringTilHeaderCell} />
@@ -157,6 +172,11 @@ export function EnhetTableHeader() {
                 <DagpengerResterendeDagerHeader {...sorteringTilHeaderCell} />
                 <DagpengerRettighetHeader {...sorteringTilHeaderCell} />
                 <DagpengerStansDatoHeader {...sorteringTilHeaderCell} />
+
+                <UngdomsprogramStartdatoHeader {...sorteringTilHeaderCell} />
+                <UngdomsprogramMaksdatoHeader {...sorteringTilHeaderCell} />
+                <UngdomsprogramSluttdatoHeader {...sorteringTilHeaderCell} />
+                <UngdomsprogramRettighetHeader {...sorteringTilHeaderCell} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

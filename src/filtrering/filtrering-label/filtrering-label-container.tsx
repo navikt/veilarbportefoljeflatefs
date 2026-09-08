@@ -4,14 +4,14 @@ import {FiltreringLabel} from './filtrering-label';
 import {alleFargekategoriFilterAlternativer, MINE_FARGEKATEGORIER} from '../filter-konstanter';
 import {EnhetModell} from '../../typer/enhet-og-veiledere-modeller';
 import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
-import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {hentMineFilterForVeileder} from '../../ducks/mine-filter';
 import {clearFiltervalg, endreFiltervalg, fjern, initialState, slettEnkeltFilter} from '../../ducks/filtrering';
 import {pagineringSetup} from '../../ducks/paginering';
 import {avmarkerValgtMineFilter} from '../../ducks/lagret-filter-ui-state';
 import {LagLabelForFiltervalg} from './LagLabelForFiltervalg';
-
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
+import {Chips} from '@navikt/ds-react';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -47,7 +47,7 @@ function FiltreringLabelContainer({
         .reduce((acc, l) => [...acc, ...l], []);
 
     return (
-        <div className={className} data-testid="filtrering_label-container">
+        <Chips className={className} data-testid="filtrering_label-container">
             {filterLabels}
             {filterLabels.length > 0 && (
                 <FiltreringLabel
@@ -55,9 +55,10 @@ function FiltreringLabelContainer({
                     label="Nullstill filtervalg"
                     slettFilter={slettAlle}
                     skalHaKryssIkon={false}
+                    dataColor="neutral"
                 />
             )}
-        </div>
+        </Chips>
     );
 }
 

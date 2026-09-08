@@ -1,16 +1,11 @@
 .endringslogg {
     width: fit-content;
     position: relative;
-    --endringslogg-popover-header-background-color: var(--a-surface-inverted);
+    --endringslogg-popover-header-background-color: var(--ax-bg-neutral-strong-pressed);
 }
 
 .endringslogg .endringslogg-popover {
     width: 27rem;
-}
-
-/* Overskriv styling frå Aksel for å få pila til popover-boksen same farge som bakgrunnen på overskrifta. */
-.endringslogg .endringslogg-popover .navds-popover__arrow {
-    background-color: var(--endringslogg-popover-header-background-color);
 }
 
 .endringslogg .endringslogg-popover .endringslogg-popover-content {
@@ -19,13 +14,9 @@
 }
 
 .endringslogg .endringslogg-overskrift {
+    border-radius: var(--ax-radius-12) var(--ax-radius-12) 0 0;
     background-color: var(--endringslogg-popover-header-background-color);
-    color: var(--a-text-on-inverted);
-    padding: 1rem;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    min-height: fit-content;
-    text-align: center;
+    padding: 1rem 0;
 }
 
 .endringslogg .endringslogg-popover .endringslogg-popover-content .innhold-container {
@@ -36,7 +27,7 @@
 /* Styling for innhald/postar i endringsloggen */
 
 .endringslogg-info-nye-notifikasjoner {
-    background-color: var(--a-surface-action);
+    background-color: var(--ax-bg-accent-strong);
     border-radius: 50%;
     display: inline-block;
 }
@@ -98,13 +89,13 @@
 .uleste-endringer-varsel-prikk {
     width: 0.875rem;
     height: 0.875rem;
-    background-color: var(--a-surface-action);
+    background-color: var(--ax-bg-accent-strong);
     border-radius: 50%;
     position: absolute;
 }
 
 .uleste-endringer-varsel-ringring {
-    border: 3px solid var(--a-surface-action);
+    border: 3px solid var(--ax-bg-accent-strong);
     -webkit-border-radius: 30px;
     height: 25px;
     width: 25px;

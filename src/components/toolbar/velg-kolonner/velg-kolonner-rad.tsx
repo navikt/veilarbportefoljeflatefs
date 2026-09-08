@@ -1,22 +1,20 @@
 import {ChangeEvent} from 'react';
 import {Checkbox} from '@navikt/ds-react';
-import {Kolonne} from '../../../ducks/ui/listevisning';
-import {alternativerConfig} from './velg-kolonner-config';
+import {Kolonne, OversiktType} from '../../../ducks/ui/valgte-kolonner';
+import {useAlternativerConfig} from './velg-kolonner-config';
 
-interface ListevisningRadProps {
+interface ValgteKolonnerRadProps {
     kolonne: Kolonne;
     disabled: boolean;
     valgt: boolean;
     onChange: (name: Kolonne, checked: boolean) => void;
+    oversiktType: OversiktType;
 }
 
-export function VelgKolonnerRad({kolonne, disabled, valgt, onChange}: ListevisningRadProps) {
-    const alternativ = alternativerConfig.get(kolonne);
+export function VelgKolonnerRad({kolonne, disabled, valgt, onChange, oversiktType}: ValgteKolonnerRadProps) {
     const kolonneoverskrift = kolonne.toString();
-
-    if (alternativ == null) {
-        return null;
-    }
+    const alternativerConfig = useAlternativerConfig(oversiktType);
+    const label = alternativerConfig.get(kolonne)?.tekstlabel ?? kolonne.toString();
 
     return (
         <li>
@@ -28,7 +26,7 @@ export function VelgKolonnerRad({kolonne, disabled, valgt, onChange}: Listevisni
                 size="small"
                 value={kolonneoverskrift}
             >
-                {alternativ.tekstlabel}
+                {label}
             </Checkbox>
         </li>
     );

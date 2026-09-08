@@ -5,13 +5,13 @@
 }
 
 .veilarbportefoljeflatefs .brukerliste li.brukerliste_rad:nth-child(odd) {
-    background-color: #fff;
+    background-color: var(--ax-bg-default);
 }
 
 .veilarbportefoljeflatefs .brukerliste li.brukerliste_rad {
-    border-left: 1px solid #6a6a6a;
-    border-right: 1px solid #6a6a6a;
-    border-top: 1px solid #a0a0a0;
+    border-left: 1px solid var(--ax-border-neutral-strong);
+    border-right: 1px solid var(--ax-border-neutral-strong);
+    border-top: 1px solid var(--ax-border-default);
 }
 
 .veilarbportefoljeflatefs .brukerliste li.brukerliste_rad:first-child {
@@ -19,8 +19,8 @@
 }
 
 .veilarbportefoljeflatefs .brukerliste li.brukerliste_rad:last-child {
-    border-bottom: 1px solid #a0a0a0;
-    border-radius: 0 0 var(--a-border-radius-medium) var(--a-border-radius-medium);
+    border-bottom: 1px solid var(--ax-border-default);
+    border-radius: 0 0 var(--ax-radius-4) var(--ax-radius-4);
 }
 
 .veilarbportefoljeflatefs .brukerliste__element {
@@ -29,32 +29,20 @@
     padding: 0.5rem 0;
 }
 
+.veilarbportefoljeflatefs .brukerliste li.brukerliste_rad:hover button,
+.veilarbportefoljeflatefs .brukerliste li.brukerliste_rad:hover [role='button'] {
+    border-radius: 2px;
+}
+
 .veilarbportefoljeflatefs .velgalle-checkboks {
     margin-right: 0.5rem;
     margin-left: calc(1rem + 1px);
 }
 
-.veilarbportefoljeflatefs .brukerliste--borders {
-    border-top: 1px solid #a0a0a0;
-    border-bottom: 1px solid #a0a0a0;
-}
-
-.veilarbportefoljeflatefs .brukerliste--border-bottom {
-    border-bottom: 2px solid #a0a0a0;
-}
-
 .veilarbportefoljeflatefs .brukerliste--forrigeBruker {
     box-shadow:
-        inset -1px 0 0 2px #6a6a6a,
-        inset 1px 0 0 2px #a0a0a0;
-}
-
-.veilarbportefoljeflatefs .brukerliste__overskriftheader {
-    display: flex;
-    font-weight: bold;
-    font-size: 1rem;
-    min-height: 2rem;
-    padding: 5px 0;
+        inset -1px 0 0 2px var(--ax-border-neutral-strong),
+        inset 1px 0 0 2px var(--ax-border-default);
 }
 
 .veilarbportefoljeflatefs .brukerliste__sorteringheader {
@@ -68,6 +56,16 @@
     width: 70%;
     display: flex;
     align-items: center;
+}
+
+.veilarbportefoljeflatefs .fargekategori-tabellrad-knapp {
+    margin-right: 1rem;
+}
+
+.veilarbportefoljeflatefs .fargekategori-tabellrad-knapp-readonly {
+    display: flex;
+    padding-left: 0.25rem;
+    min-width: 3rem;
 }
 
 .veilarbportefoljeflatefs .brukerliste__innhold .knapp-uten-padding {
@@ -94,8 +92,8 @@
 }
 
 .veilarbportefoljeflatefs .enhet-tabell {
-    background-color: var(--a-bg-subtle);
-    border-top-color: #fff;
+    background-color: var(--ax-bg-neutral-soft);
+    border-top-color: var(--ax-bg-default);
     border-bottom: none;
     border-radius: 0 0 4px 4px;
     margin-bottom: 0;

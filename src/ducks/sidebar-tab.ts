@@ -1,5 +1,5 @@
 import {SidebarTabs} from '../store/sidebar/sidebar-view-store';
-import {OversiktType} from './ui/listevisning';
+import {OversiktType} from './ui/valgte-kolonner';
 
 export interface SidebarStateType {
     selectedTab: SidebarTabs;

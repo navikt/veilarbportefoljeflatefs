@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {HelpText} from '@navikt/ds-react';
 import {SidebarTab} from './sidebar-tab';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {ToggleSwitch} from '../../filtrering/filtrering-mine-filter/toggle-switch/toggle-switch';
 import {FiltreringMineFilter} from '../../filtrering/filtrering-mine-filter/filtrering-mine-filter';
 import {AppState} from '../../reducer';
@@ -66,7 +66,7 @@ export const MineFilterTab = ({valgtFane, fanetittel, oversiktType, enhettiltak}
             oversiktType={oversiktType}
             headingChildren={
                 <>
-                    <HelpText placement="right" strategy="fixed">
+                    <HelpText placement="right" strategy="fixed" style={{fontSize: '1.4rem'}}>
                         {hjelpeTekst(oversiktType)}
                     </HelpText>
                     <ToggleSwitch

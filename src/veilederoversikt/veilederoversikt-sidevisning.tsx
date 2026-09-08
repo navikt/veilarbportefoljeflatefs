@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import {Toolbar} from '../components/toolbar/toolbar';
 import {VeilederoversiktTabell} from './veilederoversikt-tabell';
 import {selectFraIndex, selectSeFlere, selectSidestorrelse} from '../components/toolbar/paginering/paginering-selector';
-import {OversiktType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/valgte-kolonner';
 import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {AppState} from '../reducer';
 import {sorterVeilederoversikt} from './sortering';

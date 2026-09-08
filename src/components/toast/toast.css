@@ -13,7 +13,7 @@
     padding: 0.3rem 0.5rem;
 }
 .veilarbportefoljeflatefs .timed-toast__tekst {
-    color: black;
+    color: var(--ax-text-neutral);
     font-family: 'Source Sans Pro', Arial, sans-serif;
     display: flex;
     justify-content: space-between;

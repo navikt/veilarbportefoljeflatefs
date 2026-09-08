@@ -10,6 +10,7 @@ import {
     I_AVTALT_AKTIVITET,
     IKKE_I_AVTALT_AKTIVITET,
     INAKTIVE_BRUKERE,
+    KANDIDAT_FOR_UTMELDING,
     MINE_HUSKELAPPER,
     MOTER_IDAG,
     NYE_BRUKERE_FOR_VEILEDER,
@@ -23,15 +24,18 @@ import {
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
 } from '../filter-konstanter';
-import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {BarInputCheckbox} from '../../components/barinput/barinput-checkbox';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
+import {
+    SKJUL_ISERV_FILTRE,
+    VIS_FILTER_KANDIDATER_FOR_AVSLUTNING,
+    VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING
+} from '../../konstanter';
 import {FilterStatusMineFargekategorier} from './fargekategori';
 import {StatustallInnhold} from '../../ducks/statustall/statustall-typer';
-import './filtrering-status.css';
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 /** Denne typen tek i mot StatustallEnhet og StatustallVeileder på formatet til StatustallEnhet.
@@ -58,6 +62,8 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         statustallUtenBrukerinnsyn !== null &&
         (statustallUtenBrukerinnsyn.ufordelteBrukere > 0 || statustallUtenBrukerinnsyn.venterPaSvarFraNAV > 0);
 
+    const visFilterForKandidatForUtmelding = useFeatureSelector()(VIS_FILTER_KANDIDATER_FOR_AVSLUTNING);
+    const skjulIservFiltre = useFeatureSelector()(SKJUL_ISERV_FILTRE);
     const dispatch = useAppDispatch();
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
@@ -211,24 +217,34 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                     />
                 </div>
                 <div className="forste-barlabel-i-gruppe">
-                    <BarInputRadio
-                        filterVerdi={INAKTIVE_BRUKERE}
-                        handleChange={handleRadioButtonChange}
-                        labelTekst={ferdigfilterListeLabelTekst[INAKTIVE_BRUKERE]}
-                        statustall={statustallMedBrukerinnsyn.inaktiveBrukere}
-                    />
+                    {!skjulIservFiltre && (
+                        <BarInputRadio
+                            filterVerdi={INAKTIVE_BRUKERE}
+                            handleChange={handleRadioButtonChange}
+                            labelTekst={ferdigfilterListeLabelTekst[INAKTIVE_BRUKERE]}
+                            statustall={statustallMedBrukerinnsyn.inaktiveBrukere}
+                        />
+                    )}
+                    {visFilterForKandidatForUtmelding && (
+                        <BarInputRadio
+                            filterVerdi={KANDIDAT_FOR_UTMELDING}
+                            handleChange={handleRadioButtonChange}
+                            labelTekst={ferdigfilterListeLabelTekst[KANDIDAT_FOR_UTMELDING]}
+                            statustall={statustallMedBrukerinnsyn.kandidatForUtmelding}
+                        />
+                    )}
                 </div>
-                {oversiktType === OversiktType.minOversikt && (
-                    <div className="forste-barlabel-i-gruppe">
+                <div className="forste-barlabel-i-gruppe">
+                    {oversiktType === OversiktType.minOversikt && (
                         <BarInputRadio
                             filterVerdi={MINE_HUSKELAPPER}
                             handleChange={handleRadioButtonChange}
                             labelTekst={ferdigfilterListeLabelTekst[MINE_HUSKELAPPER]}
                             statustall={statustallMedBrukerinnsyn.mineHuskelapper}
                         />
-                        <FilterStatusMineFargekategorier />
-                    </div>
-                )}
+                    )}
+                    <FilterStatusMineFargekategorier oversiktType={oversiktType} />
+                </div>
             </RadioGroup>
         </div>
     );

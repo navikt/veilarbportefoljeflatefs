@@ -1,4 +1,4 @@
-import {OversiktType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/valgte-kolonner';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {NavnHeader} from '../components/tabell/headerCells/NavnHeader';
 import {FnrHeader} from '../components/tabell/headerCells/FnrHeader';
@@ -21,7 +21,7 @@ import {GjeldendeVedtak14aInnsatsgruppeHeader} from '../components/tabell/header
 import {GjeldendeVedtak14aHovedmalHeader} from '../components/tabell/headerCells/GjeldendeVedtak14aHovedmalHeader';
 import {GjeldendeVedtak14aVedtaksdatoHeader} from '../components/tabell/headerCells/GjeldendeVedtak14aVedtaksdatoHeader';
 import {FilterhendelseLenkeHeader} from '../components/tabell/headerCells/FilterhendelseLenkeHeader';
-import {FilterhendelseDatoOpprettetHeaderHeader} from '../components/tabell/headerCells/FilterhendelseDatoOpprettetHeaderHeader';
+import {FilterhendelseDatoOpprettetHeader} from '../components/tabell/headerCells/FilterhendelseDatoOpprettetHeader';
 import {TiltakshendelseDatoOpprettetHeader} from '../components/tabell/headerCells/TiltakshendelseDatoOpprettetHeader';
 import {TiltakshendelseLenkeHeader} from '../components/tabell/headerCells/TiltakshendelseLenkeHeader';
 import {EnsligeForsorgereOmBarnetHeader} from '../components/tabell/headerCells/EnsligeForsorgereOmBarnetHeader';
@@ -45,6 +45,10 @@ import {HuskelappHeader} from '../components/tabell/headerCells/min-oversikt/Hus
 import {HuskelappSistEndretHeader} from '../components/tabell/headerCells/min-oversikt/HuskelappSistEndretHeader';
 import {AapKelvinVedtakTilOgMedDatoHeaderHeader} from '../components/tabell/headerCells/AapKelvinVedtakTilOgMedDatoHeaderHeader';
 import {AapKelvinRettighetHeader} from '../components/tabell/headerCells/AapKelvinRettighetHeader';
+import {UngdomsprogramStartdatoHeader} from '../components/tabell/headerCells/UngdomsprogramStartdatoHeader';
+import {UngdomsprogramMaksdatoHeader} from '../components/tabell/headerCells/UngdomsprogramMaksdatoHeader';
+import {UngdomsprogramSluttdatoHeader} from '../components/tabell/headerCells/UngdomsprogramSluttdatoHeader';
+import {UngdomsprogramRettighetHeader} from '../components/tabell/headerCells/UngdomsprogramRettighetHeader';
 import {TildeltTidspunktHeader} from '../components/tabell/headerCells/TildeltTidspunktHeader';
 import {TiltakspengerVedtakTilOgMedDatoHeader} from '../components/tabell/headerCells/TiltakspengerVedtakTilOgMedDatoHeader';
 import {TiltakspengerRettighetHeader} from '../components/tabell/headerCells/TiltakspengerRettighetHeader';
@@ -64,12 +68,17 @@ import './minoversikt.css';
 import {DagpengerRettighetHeader} from '../components/tabell/headerCells/DagpengerRettighetHeader';
 import {DagpengerStansDatoHeader} from '../components/tabell/headerCells/DagpengerStansDatoHeader';
 import {DagpengerResterendeDagerHeader} from '../components/tabell/headerCells/DagpengerResterendeDagerHeader';
+import {AapKelvinVedtakMaksdatoHeader} from '../components/tabell/headerCells/AapKelvinVedtakMaksdatoHeader';
+import {FilterhendelseDatoFristHeader} from '../components/tabell/headerCells/FilterhendelseDatoFristHeader';
 
 export function MinoversiktTableHeader() {
-    const {filtervalg, sorteringsrekkefolge, listevisning, sorteringsfelt} = usePortefoljeSelector(
-        OversiktType.minOversikt
-    );
-    const valgteKolonner = listevisning.valgte;
+    const {
+        filtervalg,
+        sorteringsrekkefolge,
+        valgteKolonner: valgteKolonnerState,
+        sorteringsfelt
+    } = usePortefoljeSelector(OversiktType.minOversikt);
+    const valgteKolonner = valgteKolonnerState.valgte;
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(OversiktType.minOversikt);
 
     const sorteringTilHeaderCell = {
@@ -119,8 +128,9 @@ export function MinoversiktTableHeader() {
                 <VenterPaSvarFraNavHeader {...sorteringTilHeaderCell} />
                 <VenterPaSvarFraBrukerHeader {...sorteringTilHeaderCell} />
 
-                <FilterhendelseLenkeHeader {...sorteringTilHeaderCell} />
-                <FilterhendelseDatoOpprettetHeaderHeader {...sorteringTilHeaderCell} />
+                <FilterhendelseLenkeHeader {...sorteringTilHeaderCell} filtervalg={filtervalg} />
+                <FilterhendelseDatoOpprettetHeader {...sorteringTilHeaderCell} filtervalg={filtervalg} />
+                <FilterhendelseDatoFristHeader {...sorteringTilHeaderCell} filtervalg={filtervalg} />
 
                 <TiltakshendelseLenkeHeader {...sorteringTilHeaderCell} />
                 <TiltakshendelseDatoOpprettetHeader {...sorteringTilHeaderCell} />
@@ -165,6 +175,7 @@ export function MinoversiktTableHeader() {
                 <HuskelappSistEndretHeader {...sorteringTilHeaderCell} />
 
                 <AapKelvinVedtakTilOgMedDatoHeaderHeader {...sorteringTilHeaderCell} />
+                <AapKelvinVedtakMaksdatoHeader {...sorteringTilHeaderCell} />
                 <AapKelvinRettighetHeader {...sorteringTilHeaderCell} />
 
                 <TiltakspengerVedtakTilOgMedDatoHeader {...sorteringTilHeaderCell} />
@@ -173,6 +184,11 @@ export function MinoversiktTableHeader() {
                 <DagpengerResterendeDagerHeader {...sorteringTilHeaderCell} />
                 <DagpengerRettighetHeader {...sorteringTilHeaderCell} />
                 <DagpengerStansDatoHeader {...sorteringTilHeaderCell} />
+
+                <UngdomsprogramStartdatoHeader {...sorteringTilHeaderCell} />
+                <UngdomsprogramMaksdatoHeader {...sorteringTilHeaderCell} />
+                <UngdomsprogramSluttdatoHeader {...sorteringTilHeaderCell} />
+                <UngdomsprogramRettighetHeader {...sorteringTilHeaderCell} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

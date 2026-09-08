@@ -1,15 +1,7 @@
-import classNames from 'classnames';
-import {Button, Table} from '@navikt/ds-react';
-import {ArrowDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
+import {Table} from '@navikt/ds-react';
 import {VeilederoversiktTabellrad} from './veilederoversikt-tabellrad';
-import {
-    sortBy,
-    SorteringsrekkefolgeVeilederoversikt,
-    VeilederoversiktSortering,
-    VeilederoversiktSorteringsfelt
-} from '../ducks/sortering';
+import {sortBy, VeilederoversiktSortering, VeilederoversiktSorteringsfelt} from '../ducks/sortering';
 import {VeilederMedPortefoljestorrelse} from './veilederoversikt-sidevisning';
-import './veilederoversikt-tabell.css';
 
 import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
 
@@ -20,80 +12,43 @@ interface VeiledereTabellProps {
 
 export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereTabellProps) {
     const dispatch = useAppDispatch();
-    const sorterPaaEtternavn = () => dispatch(sortBy(VeilederoversiktSorteringsfelt.ETTERNAVN));
-    const sorterPaaPortefoljestorrelse = () => dispatch(sortBy(VeilederoversiktSorteringsfelt.PORTEFOLJESTORRELSE));
 
-    const gjeldendeSorteringErEtternavn = currentSortering.property === VeilederoversiktSorteringsfelt.ETTERNAVN;
-    const gjeldendeSorteringErPortefoljestorrelse =
-        currentSortering.property === VeilederoversiktSorteringsfelt.PORTEFOLJESTORRELSE;
+    const sortering = {
+        orderBy: currentSortering.property,
+        direction: currentSortering.direction as 'ascending' | 'descending'
+    };
 
-    const sorteringspil = sorterPaa => {
-        const className = 'tabellheader__pil';
-        if (sorterPaa) {
-            if (currentSortering.direction === SorteringsrekkefolgeVeilederoversikt.STIGENDE) {
-                return (
-                    <ArrowUpIcon title="Sortert stigende" className={className} data-testid="sorteringspil_stigende" />
-                );
-            } else if (currentSortering.direction === SorteringsrekkefolgeVeilederoversikt.SYNKENDE) {
-                return (
-                    <ArrowDownIcon
-                        title="Sortert synkende"
-                        className={className}
-                        data-testid="sorteringspil_synkende"
-                    />
-                );
-            }
+    const handleSortChange = (sortKey?: string) => {
+        if (sortKey) {
+            dispatch(sortBy(sortKey));
         }
-        return null;
     };
 
     return (
-        <Table className="veileder-tabell" zebraStripes={true} data-testid="veilederoversikt-tabell">
-            <Table.Header className="sticky-tabelloverskrift">
+        <Table
+            zebraStripes={true}
+            data-testid="veilederoversikt-tabell"
+            style={{backgroundColor: 'var(--ax-bg-default)'}}
+            sort={sortering}
+            onSortChange={handleSortChange}
+        >
+            <Table.Header>
                 <Table.Row>
-                    <Table.HeaderCell>
-                        <div className="veiledertabell__sorteringskolonne navnkolonne">
-                            Fornavn
-                            <Button
-                                size="xsmall"
-                                variant="tertiary"
-                                onClick={sorterPaaEtternavn}
-                                className={classNames({'valgt-sortering': gjeldendeSorteringErEtternavn})}
-                                aria-pressed={gjeldendeSorteringErEtternavn}
-                                aria-label={
-                                    gjeldendeSorteringErEtternavn
-                                        ? `Etternavn, ${currentSortering.direction} rekkefølge`
-                                        : 'Etternavn, ingen sortering'
-                                }
-                            >
-                                Etternavn
-                            </Button>
-                            {sorteringspil(gjeldendeSorteringErEtternavn)}
-                        </div>
-                    </Table.HeaderCell>
+                    <Table.ColumnHeader
+                        sortable
+                        sortKey={VeilederoversiktSorteringsfelt.ETTERNAVN}
+                        data-testid="veiledertabell__etternavn-overskrift"
+                    >
+                        Etternavn, Fornavn
+                    </Table.ColumnHeader>
                     <Table.HeaderCell>Nav-ident</Table.HeaderCell>
-                    <Table.HeaderCell data-testid="veiledertabell__antall-brukere-overskrift">
-                        <div
-                            className="veiledertabell__sorteringskolonne"
-                            data-testid="veilederoversikt_sortering_antall-brukere"
-                        >
-                            <Button
-                                size="xsmall"
-                                variant="tertiary"
-                                onClick={sorterPaaPortefoljestorrelse}
-                                className={classNames({'valgt-sortering': gjeldendeSorteringErPortefoljestorrelse})}
-                                aria-pressed={gjeldendeSorteringErPortefoljestorrelse}
-                                aria-label={
-                                    gjeldendeSorteringErPortefoljestorrelse
-                                        ? `Antall brukere, ${currentSortering.direction} rekkefølge`
-                                        : 'Antall brukere, ingen sortering'
-                                }
-                            >
-                                Antall brukere
-                            </Button>
-                            {sorteringspil(gjeldendeSorteringErPortefoljestorrelse)}
-                        </div>
-                    </Table.HeaderCell>
+                    <Table.ColumnHeader
+                        sortable
+                        sortKey={VeilederoversiktSorteringsfelt.PORTEFOLJESTORRELSE}
+                        data-testid="veiledertabell__antall-brukere-overskrift"
+                    >
+                        Antall brukere
+                    </Table.ColumnHeader>
                 </Table.Row>
             </Table.Header>
             <Table.Body data-testid="veilederoversikt_veilederliste_tbody">

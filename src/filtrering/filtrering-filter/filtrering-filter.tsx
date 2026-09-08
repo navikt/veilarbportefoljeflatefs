@@ -22,6 +22,7 @@ import {
     stillingFraNavFilter,
     tiltakspengerFilter,
     tiltakspengerFilterArena,
+    ungdomsprogramytelseFilter,
     utdanning,
     utdanningBestatt,
     utdanningGodkjent
@@ -30,7 +31,7 @@ import {Dropdown} from '../../components/dropdown/dropdown';
 import {FodselsdatoFilterform} from './filterform/fodselsdato-filterform';
 import {AlderFilterform} from './filterform/alder-filterform';
 import {RadioFilterform} from './filterform/radio-filterform';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {AktivitetFilterformController} from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
 import {GeografiskBostedFilterform} from './filterform/geografiskbosted-filterform';
@@ -39,11 +40,12 @@ import {TolkebehovFilterform} from './filterform/tolkebehov-filterform';
 import {BarnUnder18FilterForm} from './filterform/barn-under-18-filterform';
 import {CheckboxFilterform} from './filterform/checkbox-filterform';
 import '../../components/sidebar/sidebar.css';
-import '../filtrering-skjema.css';
 import './filterform/filterform.css';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import {trackLenkeKlikketEvent} from '../../umami/umami-events';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {SKJUL_ISERV_FILTRE} from '../../konstanter';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -53,10 +55,16 @@ interface FiltreringFilterProps {
 }
 
 export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
+    const skjulIservFiltre = useFeatureSelector()(SKJUL_ISERV_FILTRE);
+    const formidlingsgruppeValg = skjulIservFiltre
+        ? Object.fromEntries(Object.entries(formidlingsgruppe).filter(([key]) => key !== 'ISERV'))
+        : formidlingsgruppe;
     return (
         <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
             <div className="filtrering-filter__kolonne">
-                <Label size="small">Om personen</Label>
+                <Label size="small" as="h4" spacing>
+                    Om personen
+                </Label>
                 <Dropdown
                     name="Alder"
                     id="alder"
@@ -91,7 +99,6 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                             endreFiltervalg={endreFiltervalg}
                             filtervalg={filtervalg}
                             form={Filtervalg.kjonn}
-                            gridColumns={2}
                         />
                     )}
                 />
@@ -152,7 +159,9 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <Label size="small">Hendelser</Label>
+                <Label size="small" as="h4" spacing>
+                    Hendelser
+                </Label>
                 <Dropdown
                     name="Siste endring av bruker"
                     id="sisteEndringKategori"
@@ -168,7 +177,9 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <Label>Siste svar fra registrering i Arbeidssøkerregisteret</Label>
+                <Label size="small" as="h4" spacing>
+                    Siste svar fra registrering i Arbeidssøkerregisteret
+                </Label>
                 <Dropdown
                     name="Situasjon"
                     id="situasjon"
@@ -260,7 +271,9 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <Label size="small">Oppfølgingsvedtak § 14 a</Label>
+                <Label size="small" as="h4" spacing>
+                    Oppfølgingsvedtak § 14 a
+                </Label>
                 <Dropdown
                     name="Gjeldende vedtak § 14 a"
                     id="gjeldende-vedtak-14a"
@@ -311,7 +324,9 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <Label size="small">Status og brukergrupper</Label>
+                <Label size="small" as="h4" spacing>
+                    Status og brukergrupper
+                </Label>
                 <Dropdown
                     name="CV og jobbønsker"
                     id="cv-og-jobbprofil"
@@ -332,7 +347,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                             filterformOgValgListe={[
                                 {
                                     form: Filtervalg.formidlingsgruppe,
-                                    checkboxValg: formidlingsgruppe
+                                    checkboxValg: formidlingsgruppeValg
                                 }
                             ]}
                             filtervalg={filtervalg}
@@ -374,7 +389,9 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <Label size="small">Ytelse</Label>
+                <Label size="small" as="h4" spacing>
+                    Ytelse
+                </Label>
                 <Dropdown
                     name="Dagpenger"
                     id="ytelser-dappenger-alle"
@@ -452,6 +469,22 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     )}
                 />
                 <Dropdown
+                    name="Ungdomsprogramytelse"
+                    id="ytelser-ungdomsprogram"
+                    render={() => (
+                        <CheckboxFilterform
+                            filterformOgValgListe={[
+                                {
+                                    form: Filtervalg.ytelseUngdomsprogram,
+                                    checkboxValg: ungdomsprogramytelseFilter
+                                }
+                            ]}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                        />
+                    )}
+                />
+                <Dropdown
                     name="Rettighetsgruppe (Arena)"
                     id="rettighetsgruppe"
                     render={() => (
@@ -469,7 +502,9 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <Label size="small">Aktivitet</Label>
+                <Label size="small" as="h4" spacing>
+                    Aktivitet
+                </Label>
                 <Dropdown
                     name="Aktivitet (avtalt med Nav)"
                     id="aktivitet"

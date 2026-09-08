@@ -3,7 +3,7 @@ import {BodyShort, Tag} from '@navikt/ds-react';
 import {VeilederModell} from '../../../../typer/enhet-og-veiledere-modeller';
 import {BrukerModell} from '../../../../typer/bruker-modell';
 import {AppState} from '../../../../reducer';
-import {Kolonne} from '../../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../../ducks/ui/valgte-kolonner';
 import {DataCellProps} from '../DataCellProps';
 
 export function VeilederNavnData({bruker, valgteKolonner}: DataCellProps) {
@@ -18,7 +18,13 @@ export function VeilederNavnData({bruker, valgteKolonner}: DataCellProps) {
     const veilederNavn = brukersVeileder ? `${brukersVeileder.etternavn}, ${brukersVeileder.fornavn}` : '';
 
     const ufordeltBrukerEtikett = (
-        <Tag className="tabell-etikett" size="small" variant="info" hidden={!bruker.etiketter.nyForEnhet}>
+        <Tag
+            data-color="info"
+            className="tabell-etikett"
+            size="small"
+            variant="outline"
+            hidden={!bruker.etiketter.nyForEnhet}
+        >
             Ufordelt bruker
         </Tag>
     );

@@ -13,19 +13,16 @@ concurrency:
   group: pto_frontend_container_dev
   cancel-in-progress: true
 
-env:
-  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY_GCP }}
-
 jobs:
   deploy-dev:
     permissions:
-      contents: read
+      id-token: write
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # ratchet:actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # ratchet:actions/checkout@v7.0.1
       - name: deploy gcp dev
-        uses: nais/deploy/actions/deploy@fa754451577294aae42872a69b888b3470478ec1 # ratchet:nais/deploy/actions/deploy@v2
+        uses: nais/deploy/actions/deploy@849e900e3cfa7faf7ad1532bb3a3e6499c932199 # ratchet:nais/deploy/actions/deploy@v2
         env:
           CLUSTER: dev-gcp
           RESOURCE: .nais/obo-nais-dev.yaml

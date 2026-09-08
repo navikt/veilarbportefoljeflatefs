@@ -1,11 +1,13 @@
 import {AppState} from '../../reducer';
-import {Kolonne, ListevisningState, OversiktType} from './listevisning';
+import {Kolonne, OversiktType, ValgteKolonnerState} from './valgte-kolonner';
 import {
     AAPFilterKelvin,
     AktiviteterFilternokler,
     AktiviteterValg,
     HAR_14A_VEDTAK,
     I_AVTALT_AKTIVITET,
+    KANDIDAT_FOR_UTMELDING,
+    MINE_FARGEKATEGORIER,
     MINE_HUSKELAPPER,
     MOTER_IDAG,
     TILTAKSHENDELSER,
@@ -13,6 +15,7 @@ import {
     TiltakspengerFilterArena,
     UDELT_SAMTALEREFERAT,
     UNDER_VURDERING,
+    UngdomsprogramytelseFilter,
     UTGATTE_VARSEL,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
@@ -28,23 +31,23 @@ import {
 
 export function selectMuligeAlternativer(state: AppState, oversiktType: OversiktType): Kolonne[] {
     if (oversiktType === OversiktType.minOversikt) {
-        return state.ui.listevisningMinOversikt.mulige;
+        return state.ui.valgteKolonnerMinOversikt.mulige;
     }
-    return state.ui.listevisningEnhetensOversikt.mulige;
+    return state.ui.valgteKolonnerEnhetensOversikt.mulige;
 }
 
 export function selectValgteAlternativer(state: AppState, oversiktType: OversiktType): Kolonne[] {
     if (oversiktType === OversiktType.minOversikt) {
-        return state.ui.listevisningMinOversikt.valgte;
+        return state.ui.valgteKolonnerMinOversikt.valgte;
     }
-    return state.ui.listevisningEnhetensOversikt.valgte;
+    return state.ui.valgteKolonnerEnhetensOversikt.valgte;
 }
 
-export function selectListeVisning(state: AppState, oversiktType: OversiktType): ListevisningState {
+export function selectValgteKolonner(state: AppState, oversiktType: OversiktType): ValgteKolonnerState {
     if (oversiktType === OversiktType.minOversikt) {
-        return state.ui.listevisningMinOversikt;
+        return state.ui.valgteKolonnerMinOversikt;
     }
-    return state.ui.listevisningEnhetensOversikt;
+    return state.ui.valgteKolonnerEnhetensOversikt;
 }
 
 function addHvis(kolonne: Kolonne, add: boolean): Kolonne[] {
@@ -64,6 +67,14 @@ export function getFiltreringState(state: AppState, oversiktType: OversiktType):
         case OversiktType.veilederOversikt:
             return state.filtreringVeilederoversikt;
     }
+}
+
+export function skalViseFargekategoriKolonne(filtervalg: FiltervalgModell, oversiktType: OversiktType): boolean {
+    return (
+        oversiktType === OversiktType.enhetensOversikt &&
+        filtervalg.ferdigfilterListe.includes(MINE_FARGEKATEGORIER) &&
+        filtervalg.fargekategorier.length > 0
+    );
 }
 
 export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: OversiktType): Kolonne[] {
@@ -102,6 +113,9 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtertPaAapIKelvin = filtervalg.ytelseAapKelvin.includes(AAPFilterKelvin.HAR_AAP_I_KELVIN);
     const filtrertPaTiltakspenger = filtervalg.ytelseTiltakspenger.includes(TiltakspengerFilter.HAR_TILTAKSPENGER);
+    const filtrertPaUngdomsprogramytelse = filtervalg.ytelseUngdomsprogram.includes(
+        UngdomsprogramytelseFilter.HAR_UNGDOMSPROGRAMYTELSE
+    );
 
     /* Hjelpeverdiar for AAP-filter Arena */
     const ordinarAapArena = filtrertPaOrdinarAapFilterArena(filtervalg);
@@ -145,9 +159,10 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaTiltakshendelse = filtervalg.ferdigfilterListe.includes(TILTAKSHENDELSER);
 
-    const filtrertPaHendelse = [UTGATTE_VARSEL, UDELT_SAMTALEREFERAT].some(f =>
+    const filtrertPaHendelse = [UTGATTE_VARSEL, UDELT_SAMTALEREFERAT, KANDIDAT_FOR_UTMELDING].some(f =>
         filtervalg.ferdigfilterListe.includes(f)
     );
+    const filtrertPaKandidatForUtmelding = filtervalg.ferdigfilterListe.includes(KANDIDAT_FOR_UTMELDING);
 
     const filtrertPaGjeldendeVedtak14a = filtervalg.gjeldendeVedtak14a.includes(HAR_14A_VEDTAK);
     const filtrertPaInnsatsgruppeGjeldendeVedtak14a = filtervalg.innsatsgruppeGjeldendeVedtak14a.length > 0;
@@ -181,6 +196,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET, filtrertPaTiltakshendelse))
         .concat(addHvis(Kolonne.FILTERHENDELSE_LENKE, filtrertPaHendelse))
         .concat(addHvis(Kolonne.FILTERHENDELSE_DATO_OPPRETTET, filtrertPaHendelse))
+        .concat(addHvis(Kolonne.FILTERHENDELSE_DATO_FRIST, filtrertPaKandidatForUtmelding))
         .concat(addHvis(Kolonne.VEDTAKSTATUS, filtrertPaUnderVurdering))
         .concat(addHvis(Kolonne.VEDTAKSTATUS_ENDRET, filtrertPaUnderVurdering))
         .concat(addHvis(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK, filtrertPaUnderVurdering))
@@ -198,7 +214,12 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.YTELSE_ARENA_VEDTAKSPERIODE_AAP, filtrertPaAAPMedVedtaksperiode))
         .concat(addHvis(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP, filtrertPaAAPMedRettighetsperiode))
         .concat(addHvis(Kolonne.AAP_KELVIN_TOM_VEDTAKSDATO, filtertPaAapIKelvin))
+        .concat(addHvis(Kolonne.AAP_KELVIN_MAKSDATO, filtertPaAapIKelvin))
         .concat(addHvis(Kolonne.AAP_KELVIN_RETTIGHET, filtertPaAapIKelvin))
+        .concat(addHvis(Kolonne.UNGDOMSPROGRAM_STARTDATO, filtrertPaUngdomsprogramytelse))
+        .concat(addHvis(Kolonne.UNGDOMSPROGRAM_MAKSDATO, filtrertPaUngdomsprogramytelse))
+        .concat(addHvis(Kolonne.UNGDOMSPROGRAM_SLUTTDATO, filtrertPaUngdomsprogramytelse))
+        .concat(addHvis(Kolonne.UNGDOMSPROGRAM_RETTIGHET, filtrertPaUngdomsprogramytelse))
         .concat(addHvis(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP, filtrertPaBeggeAapArenaOgAapKelvin))
         .concat(addHvis(Kolonne.TILTAKSPENGER_VEDTAKSDATO_TOM, filtrertPaTiltakspenger))
         .concat(addHvis(Kolonne.TILTAKSPENGER_RETTIGHET, filtrertPaTiltakspenger))

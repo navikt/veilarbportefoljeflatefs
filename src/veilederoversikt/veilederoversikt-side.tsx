@@ -7,6 +7,7 @@ import {FiltreringVeiledere} from '../filtrering/filtrering-veiledere';
 import FiltreringLabelContainer from '../filtrering/filtrering-label/filtrering-label-container';
 import {lagLablerTilVeiledereMedIdenter} from '../filtrering/filtrering-label/lagLablerTilVeiledereMedIdenter';
 import {endreFiltervalg, fjern, slettEnkeltFilter} from '../ducks/filtrering';
+import {resetSort} from '../ducks/sortering';
 import {ToppMeny} from '../topp-meny/topp-meny';
 import {useOnMount} from '../hooks/use-on-mount';
 import {getSideFromUrl, getSidestorrelseFromUrl} from '../utils/url-utils';
@@ -16,8 +17,7 @@ import {useSetEnhetIUrl} from '../hooks/portefolje/use-set-enhet-i-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import {FilteringVeiledergrupper} from '../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 import {useFetchStatustallForVeileder} from '../hooks/portefolje/use-fetch-statustall';
-import {VeiledergruppePanel} from './veiledergruppe-panel';
-import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/valgte-kolonner';
 import {LagredeFilterUIController} from '../filtrering/lagrede-filter-controller';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
@@ -53,6 +53,7 @@ export function VeilederoversiktSide() {
         const side = getSideFromUrl();
         const sidestorrelse = getSidestorrelseFromUrl();
         dispatch(pagineringSetup({side, sidestorrelse}));
+        dispatch(resetSort());
     });
 
     useSetLocalStorageOnUnmount();
@@ -75,12 +76,15 @@ export function VeilederoversiktSide() {
             <Innholdslaster avhengigheter={[statustall]}>
                 <div className="oversikt-sideinnhold-veilederside" role="tabpanel" id={`oversikt-sideinnhold_${id}`}>
                     <div className="status-filter-kolonne">
-                        <Box className="sok-veileder" role="search">
+                        <Box className="filtrering-veiledere" padding="space-16" borderWidth="1" borderRadius="12">
                             <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} filtervalg={filtervalg} />
                         </Box>
-                        <VeiledergruppePanel tittel="Veiledergrupper">
-                            <FilteringVeiledergrupper oversiktType={OversiktType.veilederOversikt} />
-                        </VeiledergruppePanel>
+                        <Box className="filtrering-veiledere" padding="space-16" borderWidth="1" borderRadius="12">
+                            <FilteringVeiledergrupper
+                                oversiktType={OversiktType.veilederOversikt}
+                                filtervalg={filtervalg}
+                            />
+                        </Box>
                     </div>
                     <div className="liste-kolonne">
                         <FiltreringLabelContainer
@@ -92,7 +96,7 @@ export function VeilederoversiktSide() {
                                 )
                             }}
                             oversiktType={OversiktType.veilederOversikt}
-                            className="filtrering-label-container"
+                            className="filtreringlabel-container"
                             role="listitem"
                         />
                         <VeilederoversiktSidevisning

@@ -3,7 +3,7 @@ import {Button} from '@navikt/ds-react';
 import {TableIcon} from '@navikt/aksel-icons';
 import {useFocus} from '../../hooks/use-focus';
 import {VelgKolonnerListe} from './velg-kolonner/velg-kolonner-liste';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/valgte-kolonner';
 import './toolbar.css';
 
 interface VelgKolonnerProps {

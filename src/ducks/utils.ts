@@ -1,4 +1,4 @@
-import {OversiktType} from './ui/listevisning';
+import {OversiktType} from './ui/valgte-kolonner';
 
 export const STATUS = {
     NOT_STARTED: 'NOT_STARTED',
@@ -21,12 +21,10 @@ export function handterFeil(dispatch, action) {
     return error => {
         if (error.response) {
             error.response.text().then(data => {
-                // eslint-disable-next-line no-console
                 console.error(error, error.stack, data);
                 dispatch({type: action, data: {response: error.response, data}});
             });
         } else {
-            // eslint-disable-next-line no-console
             console.error(error, error.stack);
             dispatch({type: action, data: error.toString()});
         }

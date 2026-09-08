@@ -21,7 +21,6 @@ export function TildelVeilederRenderer({data, ident, onChange, btnOnClick}: Tild
                         name="veileder"
                         size="small"
                         value={veileder.ident}
-                        className={'navds-radio'}
                     >{`${veileder.etternavn}, ${veileder.fornavn}`}</Radio>
                 ))}
             </RadioGroup>

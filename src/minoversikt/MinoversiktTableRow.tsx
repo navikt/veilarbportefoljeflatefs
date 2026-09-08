@@ -7,7 +7,7 @@ import {Etiketter} from '../components/tabell/etiketter';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {MinoversiktTableDataCells} from './MinoversiktTableDataCells';
-import {Kolonne} from '../ducks/ui/listevisning';
+import {Kolonne} from '../ducks/ui/valgte-kolonner';
 import {hentHuskelappForBruker} from '../ducks/portefolje';
 import {FargekategoriTabellradKnapp} from '../components/fargekategori/fargekategori-tabellrad-knapp';
 import {HuskelappIkonInngang} from './huskelapp/HuskelappIkonInngang';
@@ -114,7 +114,7 @@ export function MinoversiktTableRow({
                     <div className="brukerliste__etiketter">
                         <Etiketter bruker={bruker} />
                         {bruker.etiketter.nyForVeileder && (
-                            <Tag className="tabell-etikett" variant="info" size="small">
+                            <Tag data-color="info" className="tabell-etikett" variant="outline" size="small">
                                 Ny bruker
                             </Tag>
                         )}

@@ -2,7 +2,7 @@ import {useSelector} from 'react-redux';
 import {EnhetTableRow} from './EnhetTableRow';
 import {settBrukerSomMarkert} from '../ducks/portefolje';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
-import {OversiktType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/valgte-kolonner';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
 import {AppState} from '../reducer';
 import {STATUS} from '../ducks/utils';
@@ -18,7 +18,7 @@ interface Props {
 
 export function EnhetTableBody({classNameWrapper}: Props) {
     const forrigeBruker = useBrukerIKontekstSelector();
-    const {brukere, filtervalg, enhetId, listevisning, portefolje} = usePortefoljeSelector(
+    const {brukere, filtervalg, enhetId, valgteKolonner, portefolje} = usePortefoljeSelector(
         OversiktType.enhetensOversikt
     );
     const veiledere = useSelector((state: AppState) => state.veiledere);
@@ -42,7 +42,7 @@ export function EnhetTableBody({classNameWrapper}: Props) {
                                     enhetId={enhetId}
                                     settMarkert={settMarkert}
                                     filtervalg={filtervalg}
-                                    valgteKolonner={listevisning.valgte}
+                                    valgteKolonner={valgteKolonner.valgte}
                                     forrigeBruker={forrigeBruker}
                                 />
                             ))}

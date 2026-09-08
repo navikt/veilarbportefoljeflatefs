@@ -1,5 +1,5 @@
 import {DataCellProps} from './DataCellProps';
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 
 export const AapKelvinRettighetData = ({bruker, valgteKolonner}: DataCellProps) => {

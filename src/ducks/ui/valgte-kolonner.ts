@@ -1,13 +1,13 @@
 import {Dispatch} from 'redux';
-import {getMuligeKolonner} from './listevisning-selectors';
+import {getMuligeKolonner} from './valgte-kolonner-selectors';
 import {FiltervalgModell} from '../../typer/filtervalg-modell';
 
 export enum ActionTypeKeys {
-    VELG_ALTERNATIV = 'listevisning/velg_alternativ',
-    AVVELG_ALTERNATIV = 'listevisning/avvelg_alternativ',
-    OPPDATER_VALGTE_ALTERNATIV = 'listevisning/oppdater_valgte_alternativ',
-    OPPDATER_MULIGE_ALTERNATIV = 'listevisning/oppdater_mulige_alternativ',
-    LUKK_INFOPANEL = 'listevisning/lukk_infopanel',
+    VELG_ALTERNATIV = 'valgteKolonner/velg_alternativ',
+    AVVELG_ALTERNATIV = 'valgteKolonner/avvelg_alternativ',
+    OPPDATER_VALGTE_ALTERNATIV = 'valgteKolonner/oppdater_valgte_alternativ',
+    OPPDATER_MULIGE_ALTERNATIV = 'valgteKolonner/oppdater_mulige_alternativ',
+    LUKK_INFOPANEL = 'valgteKolonner/lukk_infopanel',
     OTHER_ACTION = '__OTHER_ACTION__'
 }
 
@@ -65,13 +65,19 @@ export enum Kolonne {
     TILTAKSHENDELSE_DATO_OPPRETTET = 'tiltakshendelse_dato_opprettet',
     FILTERHENDELSE_LENKE = 'filterhendelse_lenke',
     FILTERHENDELSE_DATO_OPPRETTET = 'filterhendelse_dato_opprettet',
+    FILTERHENDELSE_DATO_FRIST = 'filterhendelse_dato_frist',
     AAP_KELVIN_TOM_VEDTAKSDATO = 'aap_kelvin_tom_vedtaksdato',
+    AAP_KELVIN_MAKSDATO = 'aap_kelvin_maksdato',
     AAP_KELVIN_RETTIGHET = 'aap_kelvin_rettighetstype',
     TILTAKSPENGER_VEDTAKSDATO_TOM = 'tiltakspenger_vedtaksdato_tom',
     TILTAKSPENGER_RETTIGHET = 'tiltakspenger_rettighet',
     DAGPENGER_STANS = 'dagpenger_stans',
     DAGPENGER_ANTALL_RESTERENDE_DAGER = 'dagpenger_antall_resterende_dager',
-    DAGPENGER_RETTIGHETSTYPE = 'dagpenger_rettighetstype'
+    DAGPENGER_RETTIGHETSTYPE = 'dagpenger_rettighetstype',
+    UNGDOMSPROGRAM_STARTDATO = 'ungdomsprogram_startdato',
+    UNGDOMSPROGRAM_MAKSDATO = 'ungdomsprogram_maksdato',
+    UNGDOMSPROGRAM_SLUTTDATO = 'ungdomsprogram_sluttdato',
+    UNGDOMSPROGRAM_RETTIGHET = 'ungdomsprogram_rettighet'
 }
 
 export enum OversiktType {
@@ -80,12 +86,12 @@ export enum OversiktType {
     veilederOversikt = 'veilederOversikt'
 }
 
-interface ListevisningAction {
+interface ValgteKolonnerAction {
     type: ActionTypeKeys.VELG_ALTERNATIV | ActionTypeKeys.AVVELG_ALTERNATIV;
     kolonne: Kolonne;
 }
 
-interface OppdaterListevisningAction {
+interface OppdaterValgteKolonnerAction {
     type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV | ActionTypeKeys.OPPDATER_MULIGE_ALTERNATIV;
     kolonner: Kolonne[];
 }
@@ -98,21 +104,21 @@ interface OtherAction {
     type: ActionTypeKeys.OTHER_ACTION;
 }
 
-type ListevisningActions = ListevisningAction | OppdaterListevisningAction | LukkInfopanelAction | OtherAction;
+type ValgteKolonnerActions = ValgteKolonnerAction | OppdaterValgteKolonnerAction | LukkInfopanelAction | OtherAction;
 
-export interface ListevisningState {
+export interface ValgteKolonnerState {
     valgte: Kolonne[];
     mulige: Kolonne[];
     lukketInfopanel: boolean;
 }
 
-export const initialStateEnhetensOversikt: ListevisningState = {
+export const initialStateEnhetensOversikt: ValgteKolonnerState = {
     valgte: [],
     mulige: [],
     lukketInfopanel: false
 };
 
-export const initialStateMinOversikt: ListevisningState = {
+export const initialStateMinOversikt: ValgteKolonnerState = {
     valgte: [],
     mulige: [],
     lukketInfopanel: false
@@ -125,7 +131,7 @@ function addIfNotExists(kolonne: Kolonne, kolonner: Kolonne[]): Kolonne[] {
     return [...kolonner, kolonne];
 }
 
-export function listevisningReducer(state = initialStateMinOversikt, action: ListevisningActions) {
+export function valgteKolonnerReducer(state = initialStateMinOversikt, action: ValgteKolonnerActions) {
     switch (action.type) {
         case ActionTypeKeys.VELG_ALTERNATIV:
             return {...state, valgte: addIfNotExists(action.kolonne, state.valgte)};
@@ -158,7 +164,7 @@ export const lukkInfopanel = (oversiktType: OversiktType) => ({
 });
 
 export const oppdaterKolonneAlternativer = (
-    dispatch: Dispatch<OppdaterListevisningAction>,
+    dispatch: Dispatch<OppdaterValgteKolonnerAction>,
     filterValg: FiltervalgModell,
     oversiktType: OversiktType
 ) => {

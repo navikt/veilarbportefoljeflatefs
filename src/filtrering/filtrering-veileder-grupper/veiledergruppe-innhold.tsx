@@ -2,14 +2,14 @@ import {useEffect, useRef, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {RadioGroup} from '@navikt/ds-react';
 import {endreFiltervalg} from '../../ducks/filtrering';
-import {lagreEndringer, slettGruppe} from '../../ducks/veiledergrupper_filter';
+import {lagreEndringerForVeiledergruppe, slettVeiledergruppe} from '../../ducks/veiledergrupper_filter';
 import {AppState} from '../../reducer';
 import {harGjortEndringer} from '../../components/modal/veiledergruppe/veileder-gruppe-utils';
 import {VeiledergruppeModal} from '../../components/modal/veiledergruppe/veiledergruppe-modal';
 import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {visIngenEndringerToast} from '../../store/toast/actions';
-import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {VeiledergruppeRad} from './veiledergruppe_rad';
 import {kebabCase} from '../../utils/utils';
@@ -17,10 +17,10 @@ import {hentMineFilterForVeileder} from '../../ducks/mine-filter';
 import '../../components/sidebar/sidebar.css';
 import './veiledergruppe.css';
 import '../filtrering-filter/filterform/filterform.css';
-
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface VeiledergruppeInnholdProps {
+    filtervalg: FiltervalgModell;
     lagretFilter: LagretFilter[];
     oversiktType: OversiktType;
 }
@@ -29,7 +29,7 @@ function isOverflown(element) {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
 }
 
-export function VeiledergruppeInnhold({lagretFilter, oversiktType}: VeiledergruppeInnholdProps) {
+export function VeiledergruppeInnhold({filtervalg, lagretFilter, oversiktType}: VeiledergruppeInnholdProps) {
     const [visEndreGruppeModal, setVisEndreGruppeModal] = useState(false);
     const valgtGruppeEnhetensOversikt = useSelector(
         (state: AppState) => state.mineFilterEnhetensOversikt.valgtVeiledergruppe
@@ -59,11 +59,11 @@ export function VeiledergruppeInnhold({lagretFilter, oversiktType}: Veiledergrup
             )
         ) {
             dispatch(
-                lagreEndringer(
+                lagreEndringerForVeiledergruppe(
                     {
                         filterId: valgtGruppe.filterId,
                         filterNavn: gruppeNavn,
-                        filterValg
+                        veiledere: filterValg[Filtervalg.veiledere]
                     },
                     enhet
                 )
@@ -83,7 +83,7 @@ export function VeiledergruppeInnhold({lagretFilter, oversiktType}: Veiledergrup
     const sletteKnapp = () => {
         valgtGruppe &&
             enhet &&
-            dispatch(slettGruppe(enhet, valgtGruppe.filterId)).then(() => {
+            dispatch(slettVeiledergruppe(enhet, valgtGruppe.filterId)).then(() => {
                 dispatch(endreFiltervalg(Filtervalg.veiledere, [], OversiktType.enhetensOversikt));
                 dispatch(hentMineFilterForVeileder());
                 oppdaterKolonneAlternativer(
@@ -118,6 +118,7 @@ export function VeiledergruppeInnhold({lagretFilter, oversiktType}: Veiledergrup
                             onClickRedigerKnapp={() => setVisEndreGruppeModal(true)}
                             oversiktType={oversiktType}
                             erValgt={veilederGruppe.filterId === valgtGruppe?.filterId}
+                            filtervalg={filtervalg}
                         />
                     );
                 })}
@@ -127,8 +128,7 @@ export function VeiledergruppeInnhold({lagretFilter, oversiktType}: Veiledergrup
                     initialVerdi={{
                         gruppeNavn: valgtGruppe.filterNavn,
                         filterValg: valgtGruppe.filterValg,
-                        filterId: valgtGruppe.filterId,
-                        filterCleanup: valgtGruppe.filterCleanup
+                        filterId: valgtGruppe.filterId
                     }}
                     onSubmit={submitEndringer}
                     onSlett={sletteKnapp}

@@ -11,35 +11,21 @@
     padding: 0.5rem;
     max-height: 40vh;
 }
-.veiledersok__wrapper {
-    margin-top: 1rem;
-    width: 25%;
-    margin-right: 75%;
-}
-.veiledersok__wrapper .veiledere__soketabell a {
-    border-bottom: none;
-    color: #0067c5;
-    text-decoration: none;
-}
-.tildelveileder_wrapper {
-    min-height: 3rem;
-}
-.veileder__hide {
-    display: none;
-}
 
-.status-filter-kolonne .sok-veileder {
+.status-filter-kolonne .filtrering-veiledere {
     margin: 0.5rem 0 1rem;
-    border: 1px solid var(--a-border-default);
-    border-radius: var(--a-border-radius-small);
-    background: var(--a-surface-default);
-    padding: var(--a-spacing-4);
+    background-color: var(--ax-bg-default);
 }
 
 .status-filter-kolonne {
     height: fit-content;
     position: sticky;
     top: 0.5rem;
+}
+
+/* Denne overstyringen bør fjernes når vi oppgraderer dekoratøren */
+.veilederoversikt_navn_lenke {
+    color: var(--ax-text-accent-decoration);
 }
 
 @media (max-width: 900px) {

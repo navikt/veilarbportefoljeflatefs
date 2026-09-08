@@ -1,10 +1,10 @@
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {DataCellProps} from './DataCellProps';
 import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
 
 export const VenterPaSvarFraNavData = ({bruker, valgteKolonner}: DataCellProps) => {
     const venterPaSvarFraNAV = bruker.meldingerVenterPaSvar.datoMeldingVenterPaNav
-        ? new Date(bruker.meldingerVenterPaSvar.datoMeldingVenterPaNav)
+        ? bruker.meldingerVenterPaSvar.datoMeldingVenterPaNav
         : null;
 
     return (

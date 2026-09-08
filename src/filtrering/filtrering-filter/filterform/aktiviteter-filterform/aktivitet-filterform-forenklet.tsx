@@ -32,7 +32,10 @@ export function AktivitetFilterformForenklet({
     };
 
     return (
-        <form className="skjema aktivitetfilterform-forenklet" data-testid="aktivitet-filterform-forenklet">
+        <form
+            className="skjema checkbox-filterform aktivitetfilterform-forenklet"
+            data-testid="aktivitet-filterform-forenklet"
+        >
             <CheckboxGroup
                 hideLegend
                 legend=""

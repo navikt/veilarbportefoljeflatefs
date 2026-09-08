@@ -2,7 +2,7 @@ import {NavnData} from '../components/tabell/dataCells/NavnData';
 import {FnrData} from '../components/tabell/dataCells/FnrData';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
-import {Kolonne} from '../ducks/ui/listevisning';
+import {Kolonne} from '../ducks/ui/valgte-kolonner';
 import {SisteEndringData} from '../components/tabell/dataCells/SisteEndringData';
 import {FodelandData} from '../components/tabell/dataCells/FodelandData';
 import {StatsborgerskapData} from '../components/tabell/dataCells/StatsborgerskapData';
@@ -44,6 +44,10 @@ import {HuskelappFristData} from '../components/tabell/dataCells/min-oversikt/Hu
 import {HuskelappSistEndretData} from '../components/tabell/dataCells/min-oversikt/HuskelappSistEndretData';
 import {AapKelvinVedtakTilOgMedDatoData} from '../components/tabell/dataCells/AapKelvinVedtakTilOgMedDatoData';
 import {AapKelvinRettighetData} from '../components/tabell/dataCells/AapKelvinRettighetData';
+import {UngdomsprogramStartdatoData} from '../components/tabell/dataCells/UngdomsprogramStartdatoData';
+import {UngdomsprogramMaksdatoData} from '../components/tabell/dataCells/UngdomsprogramMaksdatoData';
+import {UngdomsprogramSluttdatoData} from '../components/tabell/dataCells/UngdomsprogramSluttdatoData';
+import {UngdomsprogramRettighetData} from '../components/tabell/dataCells/UngdomsprogramRettighetData';
 import {TildeltTidspunktData} from '../components/tabell/dataCells/TildeltTidspunktData';
 import {AapArenaYtelsestypeData} from '../components/tabell/dataCells/AapArenaYtelsestypeData';
 import {AapArenaVurderingsfristData} from '../components/tabell/dataCells/AapArenaVurderingsfristData';
@@ -61,6 +65,8 @@ import './minoversikt.css';
 import {DagpengerRettighetData} from '../components/tabell/dataCells/DagpengerRettighetData';
 import {DagpengerStansDatoData} from '../components/tabell/dataCells/DagpengerStansDatoData';
 import {DagpengerResterendeDagerData} from '../components/tabell/dataCells/DagpengerResterendeDagerData';
+import {AapKelvinMaksdatoData} from '../components/tabell/dataCells/AapKelvinMaksdatoData';
+import {FilterhendelseDatoFristData} from '../components/tabell/dataCells/FilterhendelseDatoFristData';
 
 interface Props {
     bruker: BrukerModell;
@@ -108,6 +114,7 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
 
             <FilterhendelseLenkeData bruker={bruker} valgteKolonner={valgteKolonner} enhetId={enhetId} />
             <FilterhendelseDatoOpprettetData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <FilterhendelseDatoFristData bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <TiltakshendelseLenkeData bruker={bruker} valgteKolonner={valgteKolonner} enhetId={enhetId} />
             <TiltakshendelseDatoOpprettetData bruker={bruker} valgteKolonner={valgteKolonner} />
@@ -152,6 +159,7 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
             <HuskelappSistEndretData bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <AapKelvinVedtakTilOgMedDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <AapKelvinMaksdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
             <AapKelvinRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <TiltakspengerVedtakTilOgMedDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
@@ -160,6 +168,11 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
             <DagpengerResterendeDagerData bruker={bruker} valgteKolonner={valgteKolonner} />
             <DagpengerRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
             <DagpengerStansDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <UngdomsprogramStartdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <UngdomsprogramMaksdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <UngdomsprogramSluttdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <UngdomsprogramRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
         </div>
     );
 }

@@ -1,12 +1,20 @@
 import {doThenDispatch, handterFeil, sendResultatTilDispatch, STATUS} from './utils';
 import {
     hentMineFilter,
-    lagreSorteringFiltere,
-    nyttMineFilter,
+    lagreNyttMineFilter,
+    lagreSorteringMineFilter,
     redigerMineFilter,
     slettMineFilter
 } from '../middleware/api';
-import {HandlingsType, LagretFilterState, NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from './lagret-filter';
+import {
+    HandlingsType,
+    LagreNyttFilterRequest,
+    LagreSortOrderRequest,
+    LagretFilterMedAntallSomFeiletDto,
+    LagretFilterState,
+    RedigerLagretFilterRequest
+} from './lagret-filter';
+import {mapLagretFilterDtoTilLagretFilter} from '../components/modal/mine-filter/mine-filter-mapper';
 
 // Actions
 export const HENT_MINEFILTER_OK = 'lagredefilter/OK';
@@ -31,7 +39,8 @@ export const SORTER_MINEFILTER_FEILET = 'lagredefilter_sortering/FEILET';
 const initialState = {
     status: STATUS.NOT_STARTED,
     data: [],
-    handlingType: null
+    handlingType: null,
+    antallFiltreSomFeilet: 0
 };
 
 //  Reducer
@@ -89,7 +98,8 @@ export function mineFilterReducer(state: LagretFilterState = initialState, actio
             return {
                 ...state,
                 status: STATUS.OK,
-                data: action.data,
+                data: action.data.filtre,
+                antallFiltreSomFeilet: action.data.antallFiltreSomFeilet,
                 handlingType: HandlingsType.HENTE
             };
         case NY_MINEFILTER_OK:
@@ -138,23 +148,26 @@ export function mineFilterReducer(state: LagretFilterState = initialState, actio
 }
 
 export function hentMineFilterForVeileder() {
-    return doThenDispatch(() => hentMineFilter(), {
-        OK: HENT_MINEFILTER_OK,
-        FEILET: HENT_MINEFILTER_FEILET,
-        PENDING: HENT_MINEFILTER_PENDING
-    });
+    return doThenDispatch(
+        () =>
+            hentMineFilter().then((dto: LagretFilterMedAntallSomFeiletDto) => ({
+                filtre: dto.filtre.map(f => mapLagretFilterDtoTilLagretFilter(f)),
+                antallFiltreSomFeilet: dto.antallFiltreSomFeilet
+            })),
+        {OK: HENT_MINEFILTER_OK, FEILET: HENT_MINEFILTER_FEILET, PENDING: HENT_MINEFILTER_PENDING}
+    );
 }
 
-export function lagreEndringer(endringer: RedigerLagretFilter) {
-    return doThenDispatch(() => redigerMineFilter(endringer), {
+export function lagreEndringerForFilter(redigerLagretFilter: RedigerLagretFilterRequest) {
+    return doThenDispatch(() => redigerMineFilter(redigerLagretFilter).then(mapLagretFilterDtoTilLagretFilter), {
         OK: REDIGER_MINEFILTER_OK,
         FEILET: REDIGER_MINEFILTER_FEILET,
         PENDING: REDIGER_MINEFILTER_PENDING
     });
 }
 
-export function lagreNyttFilter(nyttFilter: NyttLagretFilter) {
-    return doThenDispatch(() => nyttMineFilter(nyttFilter), {
+export function lagreNyttFilter(nyttFilter: LagreNyttFilterRequest) {
+    return doThenDispatch(() => lagreNyttMineFilter(nyttFilter).then(dto => mapLagretFilterDtoTilLagretFilter(dto)), {
         OK: NY_MINEFILTER_OK,
         FEILET: NY_MINEFILTER_FEILET,
         PENDING: NY_MINEFILTER_PENDING
@@ -169,9 +182,9 @@ export function slettFilter(filterId: number) {
     });
 }
 
-export function lagreSorteringForFilter(sorteringOgIder: SorteringOgId[]) {
+export function lagreSorteringForFilter(sorteringOgIder: LagreSortOrderRequest[]) {
     return dispatch => {
-        return lagreSorteringFiltere(sorteringOgIder)
+        return lagreSorteringMineFilter(sorteringOgIder)
             .then(data => sendResultatTilDispatch(dispatch, SORTER_MINEFILTER_OK)(data))
             .catch(handterFeil(dispatch, SORTER_MINEFILTER_FEILET));
     };

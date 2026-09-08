@@ -6,7 +6,8 @@ import {
     DagpengerFilter,
     DagpengerFilterArena,
     TiltakspengerFilter,
-    TiltakspengerFilterArena
+    TiltakspengerFilterArena,
+    UngdomsprogramytelseFilter
 } from '../filtrering/filter-konstanter';
 
 /* Vi bruker nøklane i FiltervalgModell til å knyte saman
@@ -57,7 +58,8 @@ export enum Filtervalg {
     ytelseTiltakspengerArena = 'ytelseTiltakspengerArena',
     ytelseTiltakspenger = 'ytelseTiltakspenger',
     ytelseDagpengerArena = 'ytelseDagpengerArena',
-    ytelseDagpenger = 'ytelseDagpenger'
+    ytelseDagpenger = 'ytelseDagpenger',
+    ytelseUngdomsprogram = 'ytelseUngdomsprogram'
 }
 
 export const erGyldigFiltervalg = (filtervalg: string): filtervalg is Filtervalg => {
@@ -66,29 +68,28 @@ export const erGyldigFiltervalg = (filtervalg: string): filtervalg is Filtervalg
 
 /**
  * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * *
- * Om FiltervalgModell får endringar må ein også oppdatere Portefoljefilter i veilarbfilter.       *
- * Begge repoa må deployast samstundes, elles knekk ein Mine filter i prod.                        *
- *                                                                                                 *
- * Relevant fil: https://github.com/navikt/veilarbfilter/blob/dev/src/main/java/no/nav/pto/veilarbfilter/domene/PortefoljeFilter.java (2024-11-05)
- * Eksempel-PR frå huskelapp: https://github.com/navikt/veilarbfilter/pull/283                     *
+ * Om FiltervalgModell får endringer må man samkjøre med Filtermodellen i veilarbportefolje.       *
+ * Begge repoene må deployes samtidig, og evt mapping fra lagrede filtre må fikses i backenden så  *
+ * ting ikke brekker.                                                                              *
+ * Eventuelle lagrede filtre med verdier som har endra seg må så migreres i databasen               *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 export interface FiltervalgModell {
     [Filtervalg.ferdigfilterListe]: string[];
-    [Filtervalg.alder]?: string[];
-    [Filtervalg.kjonn]?: null | string;
+    [Filtervalg.alder]: string[];
+    [Filtervalg.kjonn]: null | string;
     [Filtervalg.landgruppe]: string[];
     [Filtervalg.foedeland]: string[];
     [Filtervalg.fodselsdagIMnd]?: string[];
     [Filtervalg.formidlingsgruppe]?: string[];
     [Filtervalg.servicegruppe]?: string[];
     [Filtervalg.veiledere]: string[];
-    [Filtervalg.aktiviteter]?: AktiviteterFilternokler;
+    [Filtervalg.aktiviteter]: AktiviteterFilternokler;
     [Filtervalg.aktiviteterForenklet]: string[];
     [Filtervalg.tiltakstyper]: string[];
     [Filtervalg.navnEllerFnrQuery]: string;
     [Filtervalg.rettighetsgruppe]?: string[];
     [Filtervalg.manuellBrukerStatus]?: string[];
-    [Filtervalg.veilederNavnQuery]: string; // Dette filteret finst i veilarbfilter, men ikkje i Filtervalg-klassen hos veilarbportefolje
+    [Filtervalg.veilederNavnQuery]: string; // Dette filteret finst kun i frontend for å søke i en liste med veilederidenter
     [Filtervalg.registreringstype]: string[];
     [Filtervalg.cvJobbprofil]: null | string;
     [Filtervalg.utdanning]: string[];
@@ -100,7 +101,7 @@ export interface FiltervalgModell {
     [Filtervalg.tolkBehovSpraak]: string[];
     [Filtervalg.stillingFraNavFilter]: string[];
     [Filtervalg.geografiskBosted]: string[];
-    [Filtervalg.visGeografiskBosted]: string[]; // Dette filteret finst i veilarbfilter, men ikkje i Filtervalg-klassen hos veilarbportefolje
+    [Filtervalg.visGeografiskBosted]: string[]; // Dette filteret brukes kun til å styre visning av bosted-kolonner i frontend
     [Filtervalg.ensligeForsorgere]: string[];
     [Filtervalg.barnUnder18Aar]: string[];
     [Filtervalg.barnUnder18AarAlder]: string[];
@@ -114,13 +115,13 @@ export interface FiltervalgModell {
     [Filtervalg.ytelseTiltakspenger]: TiltakspengerFilter[];
     [Filtervalg.ytelseDagpengerArena]: DagpengerFilterArena[];
     [Filtervalg.ytelseDagpenger]: DagpengerFilter[];
+    [Filtervalg.ytelseUngdomsprogram]: UngdomsprogramytelseFilter[];
 }
 
 /**
  * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * *
- * Om FiltervalgModell får endringar må ein også oppdatere Portefoljefilter i veilarbfilter.       *
- * Begge repoa må deployast samstundes, elles knekk ein Mine filter i prod.                        *
- *                                                                                                 *
- * Relevant fil: https://github.com/navikt/veilarbfilter/blob/dev/src/main/java/no/nav/pto/veilarbfilter/domene/PortefoljeFilter.java (2024-11-05)
- * Eksempel-PR frå huskelapp: https://github.com/navikt/veilarbfilter/pull/283                     *
+ * Om FiltervalgModell får endringer må man samkjøre med Filtermodellen i veilarbportefolje.       *
+ * Begge repoene må deployes samtidig, og evt mapping fra lagrede filtre må fikses i backenden så  *
+ * ting ikke brekker.                                                                              *
+ * Eventuelle lagrede filtre med verdier som har endra seg må så migreres i databasen               *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

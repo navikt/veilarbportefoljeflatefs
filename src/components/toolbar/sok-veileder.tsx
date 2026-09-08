@@ -6,7 +6,7 @@ import {nameToStateSliceMap} from '../../ducks/utils';
 import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
 import {VeiledereState} from '../../ducks/veiledere';
 import {SokVeiledere} from '../sok-veiledere/sok-veiledere';
-import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/valgte-kolonner';
 import './toolbar.css';
 
 interface SokVeilederProps {

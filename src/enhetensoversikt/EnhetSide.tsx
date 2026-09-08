@@ -1,7 +1,7 @@
 import {ReactNode, useCallback, useEffect, useMemo, useState} from 'react';
 import {useSelector} from 'react-redux';
 import classNames from 'classnames';
-import {Alert} from '@navikt/ds-react';
+import {InfoCard} from '@navikt/ds-react';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
 import {TabellOverskrift} from '../components/tabell/tabell-overskrift';
 import {ModalEnhetSideController} from '../components/modal/modal-enhet-side-controller';
@@ -9,7 +9,7 @@ import {EnhetTableBody} from './EnhetTableBody';
 import {EnhetTableHeader} from './EnhetTableHeader';
 import {ToppMeny} from '../topp-meny/topp-meny';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
-import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/valgte-kolonner';
 import {useSetStateFromUrl} from '../hooks/portefolje/use-set-state-from-url';
 import {useFetchPortefolje} from '../hooks/portefolje/use-fetch-portefolje';
 import FiltreringLabelContainer from '../filtrering/filtrering-label/filtrering-label-container';
@@ -41,8 +41,8 @@ import '../style.css';
 import './enhetensoversikt.css';
 import './brukerliste.css';
 import {Filtervalg} from '../typer/filtervalg-modell';
-
 import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
+import {InformationSquareIcon} from '@navikt/aksel-icons';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -74,7 +74,7 @@ const oversiktType = OversiktType.enhetensOversikt;
 const id = 'enhetens-oversikt';
 
 export function EnhetSide() {
-    const {portefolje, filtervalg, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak, listevisning} =
+    const {portefolje, filtervalg, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak, valgteKolonner} =
         usePortefoljeSelector(oversiktType);
     const statustallFetchStatus: StatustallEnhetState = useFetchStatustallForEnhet(enhetId);
     const statustall: StatustallEnhet = useStatustallEnhetSelector();
@@ -173,8 +173,8 @@ export function EnhetSide() {
                         }}
                         oversiktType={oversiktType}
                         enhettiltak={enhettiltak.data.tiltak}
-                        listevisning={listevisning}
-                        className="filtrering-label-container"
+                        valgteKolonner={valgteKolonner}
+                        className="filtreringlabel-container"
                     />
                     {harFilter ? (
                         <div className="oversikt__container">
@@ -212,17 +212,16 @@ export function EnhetSide() {
                             <EnhetTableBody classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : ''} />
                         </div>
                     ) : (
-                        <Alert
-                            variant="info"
-                            className=" alertstripe__filtrering"
-                            aria-live="assertive"
-                            role="alert"
-                            aria-atomic="true"
+                        <InfoCard
+                            size="small"
+                            data-color="info"
                             data-testid="alertstripe_filtrering"
-                            size="medium"
+                            className="alertstripe__filtrering"
                         >
-                            Du må gjøre en filtrering for å se brukere i listen.
-                        </Alert>
+                            <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
+                                Du må gjøre en filtrering for å se brukere i listen.
+                            </InfoCard.Message>
+                        </InfoCard>
                     )}
                 </div>
             </Innholdslaster>

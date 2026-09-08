@@ -1,6 +1,6 @@
 import {BodyShort} from '@navikt/ds-react';
 import {DataCellProps} from '../DataCellProps';
-import {Kolonne} from '../../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../../ducks/ui/valgte-kolonner';
 
 export function VeilederNavidentData({bruker, valgteKolonner}: DataCellProps) {
     if (!valgteKolonner.includes(Kolonne.NAVIDENT)) {

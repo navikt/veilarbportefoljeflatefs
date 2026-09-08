@@ -1,10 +1,9 @@
-import {Radio, RadioGroup} from '@navikt/ds-react';
-import {kebabCase} from '../../../utils/utils';
+import {Radio, RadioGroup, Stack} from '@navikt/ds-react';
 import {FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {OrNothing} from '../../../utils/types/types';
-import {Grid} from '../../../components/grid/grid';
 import './filterform.css';
+import {kebabCase} from '../../../utils/utils';
 
 interface ValgType {
     [key: string]: {label: string; className?: string};
@@ -15,10 +14,9 @@ interface RadioFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: OrNothing<string>) => void;
     valg: ValgType;
     filtervalg: FiltervalgModell;
-    gridColumns?: number;
 }
 
-export function RadioFilterform({form, endreFiltervalg, valg, filtervalg, gridColumns = 1}: RadioFilterformProps) {
+export function RadioFilterform({form, endreFiltervalg, valg, filtervalg}: RadioFilterformProps) {
     const valgtFilterValg = filtervalg[form];
 
     const nullstillValg = () => {
@@ -33,7 +31,7 @@ export function RadioFilterform({form, endreFiltervalg, valg, filtervalg, gridCo
     return (
         <form className="skjema radio-filterform" data-testid="radio-filterform">
             <RadioGroup hideLegend legend="" value={valgtFilterValg} size="small">
-                <Grid columns={gridColumns} className="radio-filterform__valg">
+                <Stack gap="space-0 space-24" direction={{xs: 'column', sm: 'row'}} wrap={true}>
                     {Object.keys(valg).map(key => (
                         <Radio
                             key={key}
@@ -46,7 +44,7 @@ export function RadioFilterform({form, endreFiltervalg, valg, filtervalg, gridCo
                             {valg[key].label}
                         </Radio>
                     ))}
-                </Grid>
+                </Stack>
             </RadioGroup>
             <NullstillKnapp
                 dataTestId="radio-filterform"

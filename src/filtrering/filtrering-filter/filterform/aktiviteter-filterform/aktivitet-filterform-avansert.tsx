@@ -1,5 +1,5 @@
-import {ReactNode} from 'react';
-import {BodyShort, Button, Label, Radio, RadioGroup} from '@navikt/ds-react';
+import {Fragment, ReactNode} from 'react';
+import {BodyShort, Button, Label, Radio, RadioGroup, HStack} from '@navikt/ds-react';
 import {NullstillKnapp} from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Dictionary} from '../../../../utils/types/types';
 import {Filtervalg, FiltervalgModell} from '../../../../typer/filtervalg-modell';
@@ -39,37 +39,42 @@ export function AktivitetFilterformAvansert({
     return (
         <form className="aktivitetfilterform-avansert" data-testid="aktivitet-filterform">
             <div className="aktivitetfilterform-avansert__valg">
-                <div className="aktivitetvalg__header">
-                    <Label className="aktivitetvalg__header--first" size="small">
-                        Ja
-                    </Label>
+                <div className="aktivitetvalg-header">
+                    <Label size="small">Ja</Label>
                     <Label size="small">Nei</Label>
                 </div>
-                {Object.entries(valg).map(([kode, verdi]) => [
-                    <div key={kode} className="aktivitetvalg">
-                        <BodyShort size="small">{verdi as string}</BodyShort>
+                {Object.entries(valg).map(([kode, verdi]) => (
+                    <Fragment key={kode}>
+                        <BodyShort size="small">{verdi}</BodyShort>
                         <RadioGroup
                             legend=""
                             hideLegend
                             onChange={(verdi: string) => handleChange(kode, verdi)}
                             value={valgteAvanserteAktiviteter[kode]}
                         >
-                            <Radio data-testid={`aktivitet-filterform-${kode}-ja`} name={kode} size="small" value="JA">
-                                {/* Radio har (per 18.08.22) ikke støtte for å skjule label - gjør derfor dette manuelt */}
-                                <span className="navds-sr-only">Ja, {verdi}</span>
-                            </Radio>
-                            <Radio
-                                data-testid={`aktivitet-filterform-${kode}-nei`}
-                                name={kode}
-                                size="small"
-                                value="NEI"
-                            >
-                                {/* Radio har (per 18.08.22) ikke støtte for å skjule label - gjør derfor dette manuelt */}
-                                <span className="navds-sr-only">Nei, {verdi}</span>
-                            </Radio>
+                            <HStack gap="space-4">
+                                <Radio
+                                    id={`aktivitet-${kode}-ja`}
+                                    data-testid={`aktivitet-filterform-${kode}-ja`}
+                                    name={kode}
+                                    size="small"
+                                    value="JA"
+                                >
+                                    <span className="aksel-sr-only">Ja, {verdi}</span>
+                                </Radio>
+                                <Radio
+                                    id={`aktivitet-${kode}-nei`}
+                                    data-testid={`aktivitet-filterform-${kode}-nei`}
+                                    name={kode}
+                                    size="small"
+                                    value="NEI"
+                                >
+                                    <span className="aksel-sr-only">Nei, {verdi}</span>
+                                </Radio>
+                            </HStack>
                         </RadioGroup>
-                    </div>
-                ])}
+                    </Fragment>
+                ))}
             </div>
             <div className="aktivitet-filterform__knappegruppe">
                 <Button

@@ -1,4 +1,4 @@
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {DataCellProps} from './DataCellProps';
 import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
 
@@ -6,7 +6,7 @@ export const AvtaltAktivitetNesteUtlopsdatoData = ({bruker, valgteKolonner}: Dat
     <DatoDataCellType
         dato={
             bruker.aktiviteterAvtaltMedNav.nesteUtlopsdatoForAlleAktiviteter
-                ? new Date(bruker.aktiviteterAvtaltMedNav.nesteUtlopsdatoForAlleAktiviteter)
+                ? bruker.aktiviteterAvtaltMedNav.nesteUtlopsdatoForAlleAktiviteter
                 : null
         }
         skalVises={valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}

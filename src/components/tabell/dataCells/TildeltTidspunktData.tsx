@@ -1,9 +1,9 @@
 import {DataCellProps} from './DataCellProps';
 import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 
 export const TildeltTidspunktData = ({bruker, valgteKolonner}: DataCellProps) => {
-    const tildelingstidspunkt = bruker.tildeltTidspunkt ? new Date(bruker.tildeltTidspunkt) : null;
+    const tildelingstidspunkt = bruker.tildeltTidspunkt ? bruker.tildeltTidspunkt : null;
 
     return (
         <DatoDataCellType

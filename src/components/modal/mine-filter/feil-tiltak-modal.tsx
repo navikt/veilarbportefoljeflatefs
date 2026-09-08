@@ -8,7 +8,7 @@ import {slettFilter} from '../../../ducks/mine-filter';
 import {useRequestHandler} from '../../../hooks/use-request-handler';
 import {avmarkerSisteValgtMineFilter} from '../../../ducks/lagret-filter-ui-state';
 import {EgenModal} from '../egenModal';
-import {OversiktType} from '../../../ducks/ui/listevisning';
+import {OversiktType} from '../../../ducks/ui/valgte-kolonner';
 import './mine-filter.css';
 
 import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';

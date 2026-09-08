@@ -1,4 +1,4 @@
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 import {DataCellMedInnholdBasertPaFiltervalgProps} from './DataCellProps';
 import {FiltervalgModell} from '../../../typer/filtervalg-modell';

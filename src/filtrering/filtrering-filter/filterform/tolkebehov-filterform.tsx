@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react';
 import classNames from 'classnames';
 import {Checkbox, CheckboxGroup, UNSAFE_Combobox} from '@navikt/ds-react';
 import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
-import {Grid} from '../../../components/grid/grid';
 import {tolkebehov} from '../../filter-konstanter';
 import {TolkebehovSpraakOptions} from '../../../ducks/tolkebehov';
 import {useTolkbehovSelector} from '../../../hooks/redux/use-tolkbehovspraak-selector';
@@ -11,10 +10,9 @@ import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill
 interface TolkebehovFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
-    gridColumns?: number;
 }
 
-export function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: TolkebehovFilterformProps) {
+export function TolkebehovFilterform({endreFiltervalg, filtervalg}: TolkebehovFilterformProps) {
     const [tolkebehovValg, setTolkebehovValg] = useState<string[]>(filtervalg.tolkebehov);
     const [selectedTolkbehovSpraak, setSelectedTolkbehovSpraak] = useState<TolkebehovSpraakOptions[]>([]);
     const [tolkbehovSpraakSelectOptions, setTolkbehovSpraakSelectOptions] = useState<TolkebehovSpraakOptions[]>([]);
@@ -79,21 +77,19 @@ export function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns =
             <form className="skjema checkbox-filterform" data-testid="checkbox-filterform">
                 {harValg && (
                     <div className={classNames('checkbox-filterform__valg', 'tolkbehov')}>
-                        <Grid columns={gridColumns}>
-                            <CheckboxGroup
-                                hideLegend
-                                legend=""
-                                onChange={(filtre: string[]) => endreFiltervalg(Filtervalg.tolkebehov, filtre)}
-                                size="small"
-                                value={tolkebehovValg}
-                            >
-                                {Object.entries(tolkebehov).map(([filterKey, filterValue]) => (
-                                    <Checkbox key={filterKey} value={filterKey} data-testid={`filter_${filterKey}`}>
-                                        {filterValue}
-                                    </Checkbox>
-                                ))}
-                            </CheckboxGroup>
-                        </Grid>
+                        <CheckboxGroup
+                            hideLegend
+                            legend=""
+                            onChange={(filtre: string[]) => endreFiltervalg(Filtervalg.tolkebehov, filtre)}
+                            size="small"
+                            value={tolkebehovValg}
+                        >
+                            {Object.entries(tolkebehov).map(([filterKey, filterValue]) => (
+                                <Checkbox key={filterKey} value={filterKey} data-testid={`filter_${filterKey}`}>
+                                    {filterValue}
+                                </Checkbox>
+                            ))}
+                        </CheckboxGroup>
                     </div>
                 )}
                 <hr />

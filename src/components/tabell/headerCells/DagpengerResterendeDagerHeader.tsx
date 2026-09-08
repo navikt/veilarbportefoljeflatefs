@@ -1,6 +1,6 @@
 import {HeaderCellProps} from './HeaderCellProps';
 import {SorteringHeader} from '../sortering-header';
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 
 export const DagpengerResterendeDagerHeader = ({
@@ -15,7 +15,7 @@ export const DagpengerResterendeDagerHeader = ({
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.DAGPENGER_ANTALL_RESTERENDE_DAGER}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Gjenstående dager dagpenger siste beregning"
+        tekst="Gjenstående dager dagpenger siste beregning (DPSAK)"
         title="Gjenstående dager rettighet dagpenger v/siste beregning (DPSAK)"
         className="col col-xs-2"
     />

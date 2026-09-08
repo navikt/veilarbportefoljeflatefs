@@ -5,8 +5,7 @@ export enum VeilederoversiktSorteringsfelt {
 
 export enum SorteringsrekkefolgeVeilederoversikt {
     STIGENDE = 'ascending',
-    SYNKENDE = 'decending',
-    NA = 'none'
+    SYNKENDE = 'descending'
 }
 
 export interface VeilederoversiktSortering {

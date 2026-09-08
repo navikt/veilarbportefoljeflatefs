@@ -15,6 +15,8 @@ import {
     registreringstypeEtiketter,
     tiltakspengerFilter,
     TiltakspengerFilter,
+    ungdomsprogramytelseFilter,
+    UngdomsprogramytelseFilter,
     utdanningBestatt,
     utdanningEtiketter,
     utdanningGodkjent
@@ -251,6 +253,16 @@ export const LagLabelForFiltervalg = ({
                 <FiltreringLabel
                     key={`${valgtFilter}--${valgtAlternativ}`}
                     label={dagpengerFilter[valgtAlternativ]}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
+                />
+            );
+        });
+    } else if (valgtFilter === Filtervalg.ytelseUngdomsprogram) {
+        return valgteFilteralternativer.map((valgtAlternativ: UngdomsprogramytelseFilter) => {
+            return (
+                <FiltreringLabel
+                    key={`${valgtFilter}--${valgtAlternativ}`}
+                    label={ungdomsprogramytelseFilter[valgtAlternativ]}
                     slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                 />
             );

@@ -99,7 +99,7 @@
     padding: 0.2rem 0.4rem;
 }
 .flytt-knapp:hover {
-    background: var(--a-surface-hover);
+    background: var(--ax-bg-neutral-moderate-hoverA);
 }
 .drag-and-drop-row #Symbols {
     visibility: hidden;
@@ -121,10 +121,10 @@
     margin-right: 0.5rem;
 }
 .drag-and-drop-knapp-lagre {
-    transform: translateY(0) !important;
-    margin-right: 0.5rem !important;
+    transform: translateY(0);
+    margin-right: 0.5rem;
 }
 .drag-and-drop-knapp-nullstill {
     width: 5.5rem;
-    margin-left: auto !important;
+    margin-left: auto;
 }

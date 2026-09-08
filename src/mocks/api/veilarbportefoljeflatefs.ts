@@ -4,7 +4,7 @@ import {withAuth} from './auth';
 
 export const veilarbportefoljeflatefsHandlers: RequestHandler[] = [
     http.get(
-        '/api/feature',
+        '/veilarbportefoljeflatefs/api/feature',
         withAuth(async () => {
             return HttpResponse.json(mockFeatureToggles);
         })

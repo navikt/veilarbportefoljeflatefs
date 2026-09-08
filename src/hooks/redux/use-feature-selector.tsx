@@ -1,8 +1,10 @@
 import {useSelector} from 'react-redux';
+import {createSelector} from 'reselect';
 import {AppState} from '../../reducer';
-import {sjekkFeature} from '../../ducks/features';
+import {FeaturesState} from '../../ducks/features';
 
-const selectHarFeature = (state: AppState) => (feature: string) => sjekkFeature(state, feature);
+const selectFeatures = (state: AppState): FeaturesState => state.features;
+const selectHarFeature = createSelector([selectFeatures], features => (feature: string) => !!features[feature]);
 
 export function useFeatureSelector() {
     const harFeature: (feature: string) => boolean = useSelector(selectHarFeature);

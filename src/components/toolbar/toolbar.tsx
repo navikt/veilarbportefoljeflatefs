@@ -1,9 +1,10 @@
+import {useMemo} from 'react';
 import {useSelector} from 'react-redux';
 import classNames from 'classnames';
 import {Alert, Heading} from '@navikt/ds-react';
 import {MagnifyingGlassIcon, PersonPlusIcon} from '@navikt/aksel-icons';
 import {Paginering} from './paginering/paginering';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {AppState} from '../../reducer';
 import {ToolbarKnapp} from './toolbar-knapp';
 import {useWindowWidth} from '../../hooks/use-window-width';
@@ -33,12 +34,14 @@ export function Toolbar({
     scrolling = false,
     isSidebarHidden = false
 }: ToolbarProps) {
-    const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
-    const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
-    const aktiv = valgteBrukere.length > 0;
+    const aktiv = useSelector((state: AppState) => state.portefolje.data.brukere.some(bruker => bruker.markert));
     const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
     const feilmelding = brukerfeilMelding.message;
-    const valgteBrukereFnrs = valgteBrukere.map(bruker => bruker.fnr);
+    const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
+    const valgteBrukereFnrs = useMemo(
+        () => brukere.filter(bruker => bruker.markert).map(bruker => bruker.fnr),
+        [brukere]
+    );
 
     const oversikt = side => {
         switch (side) {

@@ -1,7 +1,7 @@
 import {Radio} from '@navikt/ds-react';
 import {apneMineFilterModal} from '../../ducks/lagret-filter-ui-state';
 import {RedigerKnapp} from '../../components/rediger-knapp/rediger-knapp';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {kebabCase} from '../../utils/utils';
 import './mine-filter_innhold.css';

@@ -46,6 +46,7 @@ export interface Etiketter {
     harSikkerhetstiltak: boolean;
     diskresjonskodeFortrolig: string | null;
     profileringResultat: Profileringsresultat | null;
+    kandidatForUtmelding: boolean;
 }
 
 export interface MoteMedNavIDag {
@@ -73,6 +74,7 @@ export interface Ytelser {
     tiltakspenger: TiltakspengerData | null;
     dagpenger: DagpengerData | null;
     ensligeForsorgereOvergangsstonad: EnsligeForsorgereOvergangsstonad | null;
+    ungdomsprogram: UngdomsprogramData | null;
 }
 
 export interface YtelserArena {
@@ -109,7 +111,7 @@ export enum Innsatsgruppe {
 
 export interface TiltakshendelseModell {
     id: string;
-    opprettet: Date;
+    opprettet: string;
     tekst: string;
     lenke: string;
     tiltakstype: string | null;
@@ -132,7 +134,7 @@ export interface Vedtak14a {
 export interface GjeldendeVedtak14aModell {
     innsatsgruppe: InnsatsgruppeGjeldendeVedtak14a;
     hovedmal: Hovedmal | null;
-    fattetDato: Date;
+    fattetDato: string;
 }
 
 export interface Utkast14a {
@@ -149,8 +151,8 @@ export interface Statsborgerskap {
 export interface EnsligeForsorgereOvergangsstonad {
     vedtaksPeriodetype: string;
     harAktivitetsplikt?: boolean;
-    utlopsDato: Date;
-    yngsteBarnsFodselsdato: Date;
+    utlopsDato: string;
+    yngsteBarnsFodselsdato: string;
 }
 
 export interface BarnUnder18AarModell {
@@ -169,9 +171,9 @@ export enum FargekategoriModell {
 
 export interface HuskelappModell {
     huskelappId: string | null;
-    frist?: Date | null;
+    frist?: string | null;
     kommentar?: string | null;
-    endretDato: Date | null;
+    endretDato: string | null;
     endretAv: string | null;
     enhetId: string | null;
 }
@@ -195,18 +197,20 @@ export enum Hovedmal {
 export interface HendelseInnhold {
     beskrivelse: string;
     dato: string;
+    datoFrist: string | null;
     lenke: string;
 }
 
 export interface Tolkebehov {
     talespraaktolk: string;
     tegnspraaktolk: string;
-    sistOppdatert: string | null; // LocalDate i backend
+    sistOppdatert: string | null;
 }
 
 export interface AapKelvinData {
     vedtaksdatoTilOgMed: string | null;
     rettighetstype: string | null;
+    maksdato: string | null;
 }
 
 export interface TiltakspengerData {
@@ -218,4 +222,11 @@ export interface DagpengerData {
     rettighetstype: string;
     datoStans: string | null;
     resterendeDager: string | null;
+}
+
+export interface UngdomsprogramData {
+    startdato: string;
+    maksdato: string;
+    rettighet: string;
+    sluttdato: string | null;
 }

@@ -5,7 +5,7 @@ import {StarIcon} from '@navikt/aksel-icons';
 import {erObjektValuesTomt, lagretFilterValgModellErLik} from '../components/modal/mine-filter/mine-filter-utils';
 import {AppState} from '../reducer';
 import {apneMineFilterModal} from '../ducks/lagret-filter-ui-state';
-import {OversiktType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/valgte-kolonner';
 
 import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
 

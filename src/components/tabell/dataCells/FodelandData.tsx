@@ -1,5 +1,5 @@
 import {capitalize} from '../../../utils/utils';
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 import {DataCellProps} from './DataCellProps';
 

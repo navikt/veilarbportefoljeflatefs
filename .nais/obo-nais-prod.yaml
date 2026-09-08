@@ -6,7 +6,7 @@ metadata:
   labels:
     team: obo
 spec:
-  image: europe-north1-docker.pkg.dev/nais-management-233d/poao/poao-frontend:2026.02.18_13.06-66e04fd8f3ba
+  image: europe-north1-docker.pkg.dev/nais-management-233d/poao/poao-frontend:2026.09.03_07.44-039af48aaf99
   port: 8080
   ingresses:
     - https://veilarbportefoljeflate.intern.nav.no
@@ -51,8 +51,6 @@ spec:
       rules:
         - application: obo-unleash
           namespace: obo
-        - application: veilarbfilter
-          namespace: obo
         - application: endringslogg
           namespace: pto
         - application: modiacontextholder
@@ -88,11 +86,6 @@ spec:
           },
           "redirects": [
             {
-              "fromPath": "/internarbeidsflatedecorator/*",
-              "toUrl": "https://cdn.nav.no/personoversikt/internarbeidsflate-decorator-v3/prod",
-              "preserveFromPath": false
-            },
-            {
               "fromPath": "/veilarbpersonflatefs/*",
               "toUrl": "https://veilarbpersonflate.intern.nav.no",
               "preserveFromPath": false
@@ -105,16 +98,6 @@ spec:
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbportefolje",
-                "namespace": "obo",
-                "cluster": "prod-gcp"
-              }
-            },
-            {
-              "fromPath": "/veilarbfilter",
-              "toUrl": "http://veilarbfilter.obo",
-              "preserveFromPath": true,
-              "toApp": {
-                "name": "veilarbfilter",
                 "namespace": "obo",
                 "cluster": "prod-gcp"
               }

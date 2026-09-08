@@ -1,5 +1,5 @@
 import {OrNothing} from '../../../utils/types/types';
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../../../typer/kolonnesortering';
 import {FiltervalgModell} from '../../../typer/filtervalg-modell';
 

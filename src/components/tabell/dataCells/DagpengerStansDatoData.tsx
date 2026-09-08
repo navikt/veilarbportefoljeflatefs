@@ -1,12 +1,10 @@
 import {DataCellProps} from './DataCellProps';
 import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 
 export const DagpengerStansDatoData = ({bruker, valgteKolonner}: DataCellProps) => {
-    const tilOgMedVedtaksdato = bruker.ytelser.dagpenger?.datoStans
-        ? new Date(bruker.ytelser.dagpenger?.datoStans)
-        : null;
+    const tilOgMedVedtaksdato = bruker.ytelser.dagpenger?.datoStans ? bruker.ytelser.dagpenger?.datoStans : null;
 
     const harDagpengerMenIngenDato = bruker.ytelser.dagpenger !== null && !tilOgMedVedtaksdato;
 

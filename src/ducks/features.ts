@@ -1,6 +1,13 @@
 import {AppState} from '../reducer';
 import {hentFeatures} from '../middleware/api';
-import {DARKMODE, LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG, PORTEFOLJE_FEATURES} from '../konstanter';
+import {
+    BRUK_TILTAKSAKTIVITET_FRA_AKTIVITETSPLAN,
+    DARKMODE,
+    LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG,
+    PORTEFOLJE_FEATURES,
+    SKJUL_ISERV_FILTRE,
+    VIS_FILTER_KANDIDATER_FOR_AVSLUTNING
+} from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
 
@@ -10,7 +17,10 @@ export interface FeaturesState {
 
 const initalState: FeaturesState = {
     [DARKMODE]: false,
-    [LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG]: false
+    [LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG]: false,
+    [BRUK_TILTAKSAKTIVITET_FRA_AKTIVITETSPLAN]: false,
+    [VIS_FILTER_KANDIDATER_FOR_AVSLUTNING]: false,
+    [SKJUL_ISERV_FILTRE]: false
 };
 
 // Reducer

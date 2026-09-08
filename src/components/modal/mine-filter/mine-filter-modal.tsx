@@ -7,7 +7,7 @@ import {OrNothing} from '../../../utils/types/types';
 import {Meny} from './mine-filter-meny';
 import {MineFilterFnrFeil} from './mine-filter-fnr-feil';
 import {lukkMineFilterModal} from '../../../ducks/lagret-filter-ui-state';
-import {OversiktType} from '../../../ducks/ui/listevisning';
+import {OversiktType} from '../../../ducks/ui/valgte-kolonner';
 import {EgenModal} from '../egenModal';
 import {LasterModal} from '../lastermodal/laster-modal';
 import {STATUS} from '../../../ducks/utils';

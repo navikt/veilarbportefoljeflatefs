@@ -1,9 +1,9 @@
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {DataCellProps} from './DataCellProps';
 import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
 
 export const FilterhendelseDatoOpprettetData = ({bruker, valgteKolonner}: DataCellProps) => {
-    const dato = bruker.hendelse?.dato ? new Date(bruker.hendelse?.dato) : null;
+    const dato = bruker.hendelse?.dato ? bruker.hendelse?.dato : null;
 
     return (
         <DatoDataCellType

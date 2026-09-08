@@ -1,40 +1,64 @@
+import {useMemo} from 'react';
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {createSelector} from 'reselect';
-import {getFiltreringState, selectListeVisning} from '../../ducks/ui/listevisning-selectors';
-import {ListevisningState, OversiktType} from '../../ducks/ui/listevisning';
+import {
+    getFiltreringState,
+    skalViseFargekategoriKolonne,
+    selectValgteKolonner
+} from '../../ducks/ui/valgte-kolonner-selectors';
+import {ValgteKolonnerState, OversiktType} from '../../ducks/ui/valgte-kolonner';
 import {BrukerModell} from '../../typer/bruker-modell';
 import {FiltervalgModell} from '../../typer/filtervalg-modell';
 import {OrNothing} from '../../utils/types/types';
 import {PortefoljeState} from '../../ducks/portefolje';
 import {EnhettiltakState} from '../../ducks/enhettiltak';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../../typer/kolonnesortering';
+import {INGEN_KATEGORI} from '../../filtrering/filter-konstanter';
 
 const selectValgtEnhetId = (state: AppState) => state.valgtEnhet.data.enhetId;
-const selectSorteringsrekkefolge = (state: AppState) => state.portefolje.sorteringsrekkefolge;
-const selectBrukere = (state: AppState) => state.portefolje.data.brukere;
-const selectSorteringsFeldt = (state: AppState) => state.portefolje.sorteringsfelt;
 const selectPortefolje = (state: AppState) => state.portefolje;
 const selectEnhetTiltak = (state: AppState) => state.enhettiltak;
+const selectFiltervalgForValgteKolonner = (state: AppState, valgteKolonnerType: OversiktType): FiltervalgModell =>
+    getFiltreringState(state, valgteKolonnerType);
+const selectValgteKolonnerForType = (state: AppState, valgteKolonnerType: OversiktType): ValgteKolonnerState =>
+    selectValgteKolonner(state, valgteKolonnerType);
+
+function filtrerBrukerePaValgtFargekategori(
+    brukere: BrukerModell[],
+    filtervalg: FiltervalgModell,
+    oversiktType: OversiktType
+): BrukerModell[] {
+    const valgteFargekategorier = filtervalg.fargekategorier;
+
+    if (!skalViseFargekategoriKolonne(filtervalg, oversiktType)) {
+        return brukere;
+    }
+
+    return brukere.filter(bruker => {
+        if (bruker.fargekategori === null) {
+            return valgteFargekategorier.includes(INGEN_KATEGORI);
+        }
+
+        return valgteFargekategorier.includes(bruker.fargekategori);
+    });
+}
 
 const selectPortefoljeTabell = createSelector(
     selectEnhetTiltak,
     selectPortefolje,
     selectValgtEnhetId,
-    selectSorteringsrekkefolge,
-    selectBrukere,
-    (state, listevisningType) => getFiltreringState(state, listevisningType),
-    (state, listevisningType) => selectListeVisning(state, listevisningType),
-    selectSorteringsFeldt,
-    (enhettiltak, portefolje, enhetId, sorteringsrekkefolge, brukere, filtervalg, listevisning, sorteringsfelt) => ({
+    selectFiltervalgForValgteKolonner,
+    selectValgteKolonnerForType,
+    (enhettiltak, portefolje, enhetId, filtervalg, valgteKolonner) => ({
         enhettiltak,
         portefolje,
         enhetId,
-        sorteringsrekkefolge,
-        brukere,
+        sorteringsrekkefolge: portefolje.sorteringsrekkefolge,
+        brukere: portefolje.data.brukere,
         filtervalg,
-        listevisning,
-        sorteringsfelt
+        valgteKolonner,
+        sorteringsfelt: portefolje.sorteringsfelt
     })
 );
 
@@ -45,10 +69,18 @@ interface UsePortefoljeSelector {
     sorteringsrekkefolge: OrNothing<Sorteringsrekkefolge>;
     brukere: BrukerModell[];
     filtervalg: FiltervalgModell;
-    listevisning: ListevisningState;
+    valgteKolonner: ValgteKolonnerState;
     sorteringsfelt: OrNothing<Sorteringsfelt>;
 }
 
-export function usePortefoljeSelector(listevisningType: OversiktType): UsePortefoljeSelector {
-    return useSelector((state: AppState) => selectPortefoljeTabell(state, listevisningType));
+export function usePortefoljeSelector(valgteKolonnerType: OversiktType): UsePortefoljeSelector {
+    const result = useSelector((state: AppState) => selectPortefoljeTabell(state, valgteKolonnerType));
+
+    return useMemo(
+        () => ({
+            ...result,
+            brukere: filtrerBrukerePaValgtFargekategori(result.brukere, result.filtervalg, valgteKolonnerType)
+        }),
+        [result, valgteKolonnerType]
+    );
 }

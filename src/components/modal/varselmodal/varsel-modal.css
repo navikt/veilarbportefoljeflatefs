@@ -8,7 +8,7 @@
     justify-content: center;
 
     /* Breidda av lukk-knappen (margin-left, padding i knapp x2, breidd på svg)*/
-    padding-left: calc(var(--a-spacing-4) + var(--a-spacing-1) + 1em + var(--a-spacing-1));
+    padding-left: calc(var(--ax-space-16) + var(--ax-space-4) + 1em + var(--ax-space-4));
 
     margin-top: -0.75rem; /* Trekk ikonet litt høgare opp i modalen for å spare plass */
     margin-bottom: 1rem;
@@ -18,13 +18,13 @@
     height: auto;
 }
 .varsel-modal__ikon .warning-icon {
-    color: var(--a-surface-warning);
+    color: var(--ax-bg-warning-strong);
 }
 .varsel-modal__ikon .error-icon {
-    color: var(--a-surface-danger);
+    color: var(--ax-bg-danger-strong);
 }
 .varsel-modal__ikon .success-icon {
-    color: var(--a-surface-success);
+    color: var(--ax-bg-success-strong);
 }
 .varsel-modal .bekreft-sletting-modal__tekstgruppe {
     margin-bottom: 1rem;

@@ -1,10 +1,10 @@
-import moment from 'moment';
 import {Table} from '@navikt/ds-react';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import {capitalize, oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
 import {AksjonKnappMedPopoverFeilmelding} from '../../components/aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
 import {MoteplanModell} from '../../typer/moteplan';
 import {formaterVarighetSomTimerOgMinutt} from '../../utils/dato-utils';
+import dayjs from 'dayjs';
 
 interface MoteKollonneProps {
     dato: Date;
@@ -13,7 +13,7 @@ interface MoteKollonneProps {
 }
 
 export function MoteDataRow({dato, mote, enhetId}: MoteKollonneProps) {
-    const moteDato = new Date(mote.dato);
+    const moteDato = dayjs(mote.dato);
 
     const handterKlikk = () =>
         oppdaterBrukerIKontekstOgNavigerTilLenke(
@@ -21,14 +21,12 @@ export function MoteDataRow({dato, mote, enhetId}: MoteKollonneProps) {
             getVeilarbpersonflateUrl('#visAktivitetsplanen', enhetId)
         );
 
-    if (!moment(dato).isSame(moteDato, 'day')) {
+    if (!dayjs(dato).isSame(moteDato, 'day')) {
         return <></>;
     }
     return (
         <Table.Row>
-            <Table.DataCell className="moteplan_tabell_klokkeslett">
-                {moteDato.getHours().toString().padStart(2, '0')}:{moteDato.getMinutes().toString().padStart(2, '0')}
-            </Table.DataCell>
+            <Table.DataCell className="moteplan_tabell_klokkeslett">{moteDato.format('HH:mm')}</Table.DataCell>
             <Table.DataCell className="moteplan_tabell_varighet">
                 {formaterVarighetSomTimerOgMinutt(mote.varighetMinutter)}
             </Table.DataCell>

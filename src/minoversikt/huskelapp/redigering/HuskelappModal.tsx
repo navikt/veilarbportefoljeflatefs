@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {BodyShort, Button, CopyButton, Heading, Modal} from '@navikt/ds-react';
 import {BrukerModell, HuskelappModell} from '../../../typer/bruker-modell';
 import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selector';
-import {OversiktType} from '../../../ducks/ui/listevisning';
+import {OversiktType} from '../../../ducks/ui/valgte-kolonner';
 import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
 import {lagreHuskelapp} from './lagreHuskelapp';
 import {endreHuskelapp} from './endreHuskelapp';

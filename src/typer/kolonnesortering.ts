@@ -14,7 +14,6 @@ export enum Sorteringsfelt {
     UTLOPSDATO_AAP_OG_TILTAKSPENGER_ARENA = 'utlopsdato',
 
     NAVIDENT = 'veileder_id',
-    VEILEDER = 'veileder_navn',
 
     DAGPENGER_UTLOP_UKE = 'dagputlopuke',
     DAGPENGER_PERM_UTLOP_UKE = 'permutlopuke',
@@ -25,6 +24,7 @@ export enum Sorteringsfelt {
     AAP_ARENA_UNNTAK_UKER_IGJEN = 'aapunntakukerigjen',
 
     AAP_KEVLIN_VEDTAK_TOM_DATO = 'aap_kelvin_vedtak_tom_dato',
+    AAP_KELVIN_MAKSDATO = 'aap_kelvin_maksdato',
     AAP_KELVIN_RETTIGHET = 'aap_kelvin_rettighetstype',
 
     TILTAKSPENGER_VEDTAKSDATO_TOM = 'tiltakspenger_vedtaksdato_tom',
@@ -33,6 +33,11 @@ export enum Sorteringsfelt {
     DAGPENGER_STANS = 'dagpenger_stans',
     DAGPENGER_ANTALL_RESTERENDE_DAGER = 'dagpenger_antall_resterende_dager',
     DAGPENGER_RETTIGHETSTYPE = 'dagpenger_rettighetstype',
+
+    UNGDOMSPROGRAM_STARTDATO = 'ungdomsprogram_startdato',
+    UNGDOMSPROGRAM_MAKSDATO = 'ungdomsprogram_maksdato',
+    UNGDOMSPROGRAM_RETTIGHET = 'ungdomsprogram_rettighet',
+    UNGDOMSPROGRAM_SLUTTDATO = 'ungdomsprogram_sluttdato',
 
     VENTER_PA_SVAR_FRA_NAV = 'venterpasvarfranav',
     VENTER_PA_SVAR_FRA_BRUKER = 'venterpasvarfrabruker',
@@ -56,7 +61,6 @@ export enum Sorteringsfelt {
     UTKAST_14A_STATUS_ENDRET = 'utkast_14a_status_endret',
     UTKAST_14A_ANSVARLIG_VEILEDER = 'utkast_14a_ansvarlig_veileder',
 
-    SISTE_ENDRING = 'siste_endring_kategori',
     SISTE_ENDRING_DATO = 'siste_endring_tidspunkt',
 
     FODELAND = 'fodeland',
@@ -67,7 +71,6 @@ export enum Sorteringsfelt {
     BOSTED_BYDEL = 'bydelsnummer',
     BOSTED_SIST_OPPDATERT = 'bostedSistOppdatert',
 
-    TOLKEBEHOV = 'tolkebehov',
     TOLKESPRAK = 'tolkespraak',
     TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sistoppdatert',
 
@@ -92,5 +95,7 @@ export enum Sorteringsfelt {
     TILTAKSHENDELSE_TEKST = 'tiltakshendelse_tekst',
     TILTAKSHENDELSE_DATO_OPPRETTET = 'tiltakshendelse_dato_opprettet',
 
-    FILTERHENDELSE_DATO_OPPRETTET = 'filterhendelse_dato_opprettet'
+    FILTERHENDELSE_DATO_OPPRETTET = 'filterhendelse_dato_opprettet',
+    FILTERHENDELSE_DATO_FRIST = 'filterhendelse_dato_frist',
+    FILTERHENDELSE_BESKRIVELSE_ENUM = 'filterhendelse_beskrivelse_enum'
 }

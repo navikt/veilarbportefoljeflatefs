@@ -9,6 +9,7 @@ export interface StatustallInnhold {
     tiltakshendelser: number;
     utgatteVarsel: number;
     udelteSamtalereferat: number;
+    kandidatForUtmelding: number;
     utlopteAktiviteter: number;
     ikkeIavtaltAktivitet: number;
     iavtaltAktivitet: number;
@@ -17,6 +18,13 @@ export interface StatustallInnhold {
     nyeBrukereForVeileder: number;
     underVurdering: number;
     mineHuskelapper: number;
+    fargekategoriA?: number;
+    fargekategoriB?: number;
+    fargekategoriC?: number;
+    fargekategoriD?: number;
+    fargekategoriE?: number;
+    fargekategoriF?: number;
+    fargekategoriIngenKategori?: number;
 }
 
 /** Statustall for veileder.

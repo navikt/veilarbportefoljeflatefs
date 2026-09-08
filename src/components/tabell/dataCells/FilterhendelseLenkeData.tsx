@@ -1,4 +1,4 @@
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {LenkeDataCellType} from '../dataCellTypes/LenkeDataCellType';
 import {DataCellMedLenkeProps} from './DataCellProps';
 
@@ -10,6 +10,6 @@ export const FilterhendelseLenkeData = ({bruker, valgteKolonner, enhetId}: DataC
         erAbsoluttLenke={true}
         enhetId={enhetId}
         skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_LENKE)}
-        className="col col-xs-2-5"
+        className="col col-xs-2-5 ord-brekk"
     />
 );

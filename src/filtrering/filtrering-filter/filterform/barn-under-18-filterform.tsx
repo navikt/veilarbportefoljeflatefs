@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import {BodyShort, Button, Checkbox, CheckboxGroup, TextField} from '@navikt/ds-react';
 import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {Dictionary} from '../../../utils/types/types';
-import {Grid} from '../../../components/grid/grid';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import './filterform.css';
 
@@ -135,18 +134,16 @@ export function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, fil
                 <>
                     <div className={classNames('checkbox-filterform__valg', className)}>
                         <CheckboxGroup hideLegend legend="" value={checkBoxValg} onChange={submitCheckBoxValg}>
-                            <Grid columns={1}>
-                                {Object.entries(valg).map(([filterKey, filterValue]) => (
-                                    <Checkbox
-                                        data-testid={`filter_${filterKey}`}
-                                        key={filterKey}
-                                        size="small"
-                                        value={filterKey}
-                                    >
-                                        {filterValue}
-                                    </Checkbox>
-                                ))}
-                            </Grid>
+                            {Object.entries(valg).map(([filterKey, filterValue]) => (
+                                <Checkbox
+                                    data-testid={`filter_${filterKey}`}
+                                    key={filterKey}
+                                    size="small"
+                                    value={filterKey}
+                                >
+                                    {filterValue}
+                                </Checkbox>
+                            ))}
                         </CheckboxGroup>
                     </div>
 

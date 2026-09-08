@@ -49,3 +49,11 @@ export function hentEnhetTiltak(enhet) {
         PENDING
     });
 }
+
+export function hentTiltakstyperForEnhet(enhet) {
+    return doThenDispatch(() => Api.hentTiltakstyper(enhet), {
+        OK,
+        FEILET,
+        PENDING
+    });
+}

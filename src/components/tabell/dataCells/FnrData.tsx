@@ -23,6 +23,7 @@ export function FnrData({bruker}: Props) {
                     />
                 </Tooltip>
             )}
+            {!bruker.fnr && 'Ikke tilgang'}
         </BodyShort>
     );
 }
