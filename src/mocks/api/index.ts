@@ -3,7 +3,6 @@ import {authHandlers} from './auth';
 import {modiacontextholderHandlers} from './modiacontextholder';
 import {poaoEndringsloggHandlers} from './poao-endringslogg';
 import {poaoSanityHandlers} from './poao-sanity';
-import {veilarbfilterHandlers} from './veilarbfilter';
 import {veilarboppfolgingHandlers} from './veilarboppfolging';
 import {veilarbportefoljeHandlers} from './veilarbportefolje';
 import {veilarbportefoljeflatefsHandlers} from './veilarbportefoljeflatefs';
@@ -14,7 +13,6 @@ export const allHandlers: RequestHandler[] = [
     ...modiacontextholderHandlers,
     ...poaoEndringsloggHandlers,
     ...poaoSanityHandlers,
-    ...veilarbfilterHandlers,
     ...veilarboppfolgingHandlers,
     ...veilarbportefoljeHandlers,
     ...veilarbportefoljeflatefsHandlers,

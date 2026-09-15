@@ -66,6 +66,7 @@ import {DagpengerRettighetData} from '../components/tabell/dataCells/DagpengerRe
 import {DagpengerStansDatoData} from '../components/tabell/dataCells/DagpengerStansDatoData';
 import {DagpengerResterendeDagerData} from '../components/tabell/dataCells/DagpengerResterendeDagerData';
 import {AapKelvinMaksdatoData} from '../components/tabell/dataCells/AapKelvinMaksdatoData';
+import {FilterhendelseDatoFristData} from '../components/tabell/dataCells/FilterhendelseDatoFristData';
 
 interface Props {
     bruker: BrukerModell;
@@ -113,6 +114,7 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
 
             <FilterhendelseLenkeData bruker={bruker} valgteKolonner={valgteKolonner} enhetId={enhetId} />
             <FilterhendelseDatoOpprettetData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <FilterhendelseDatoFristData bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <TiltakshendelseLenkeData bruker={bruker} valgteKolonner={valgteKolonner} enhetId={enhetId} />
             <TiltakshendelseDatoOpprettetData bruker={bruker} valgteKolonner={valgteKolonner} />

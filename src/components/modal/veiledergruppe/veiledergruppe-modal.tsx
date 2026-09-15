@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {useSelector} from 'react-redux';
 import classNames from 'classnames';
 import {Alert, Button, Heading, Modal} from '@navikt/ds-react';
@@ -11,7 +11,6 @@ import {AppState} from '../../../reducer';
 import {OrNothing} from '../../../utils/types/types';
 import {VeiledergruppeForm} from './veiledergruppe-form';
 import {initialState} from '../../../ducks/filtrering';
-import {erTomtObjekt} from '../mine-filter/mine-filter-utils';
 import {STATUS} from '../../../ducks/utils';
 import {LasterModal} from '../lastermodal/laster-modal';
 import './veiledergruppe-modal.css';
@@ -21,7 +20,6 @@ interface VeilederModalProps {
         gruppeNavn: string;
         filterValg: FiltervalgModell;
         filterId: number;
-        filterCleanup?: boolean;
     };
     onSubmit: (gruppeNavn: string, filterValg: FiltervalgModell) => void;
     onSlett?: () => void;
@@ -138,8 +136,10 @@ export function VeiledergruppeModal({
         onRequestClose();
     }
 
-    const lagredeGrupper = useSelector((state: AppState) =>
-        state.veiledergrupper.data.filter(v => v.filterId !== initialVerdi.filterId)
+    const veiledergrupper = useSelector((state: AppState) => state.veiledergrupper.data);
+    const lagredeGrupper = useMemo(
+        () => veiledergrupper.filter(v => v.filterId !== initialVerdi.filterId),
+        [veiledergrupper, initialVerdi.filterId]
     );
 
     const lagredeGruppeNavn = lagredeGrupper
@@ -151,19 +151,6 @@ export function VeiledergruppeModal({
         veiledere: v.filterValg.veiledere,
         gruppeNavn: v.filterNavn
     }));
-
-    useEffect(() => {
-        if (lagredeGrupper.length > 0 && erTomtObjekt(errors) && isOpen && initialVerdi.filterCleanup) {
-            const finnLikVeiledergruppe = lagredeGrupper.find(v =>
-                veilederlisterErLik(v.filterValg.veiledere, initialVerdi.filterValg.veiledere)
-            );
-            if (finnLikVeiledergruppe !== undefined) {
-                const errorTekst = `En eller flere veiledere i gruppen har ikke tilgang lenger, og gruppen er nå lik '${finnLikVeiledergruppe.filterNavn}'. Du må legge til/fjerne veiledere eller slette gruppen.`;
-                setAlertTekst(errorTekst);
-                setErrors({filterValg: errorTekst} as VeiledergruppeErrors);
-            }
-        }
-    }, [lagredeGrupper, initialVerdi, isOpen, errors]);
 
     const validate = (gruppeNavn, filterValg) => {
         let errors: any = {};

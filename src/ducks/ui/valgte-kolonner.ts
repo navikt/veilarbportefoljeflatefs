@@ -65,6 +65,7 @@ export enum Kolonne {
     TILTAKSHENDELSE_DATO_OPPRETTET = 'tiltakshendelse_dato_opprettet',
     FILTERHENDELSE_LENKE = 'filterhendelse_lenke',
     FILTERHENDELSE_DATO_OPPRETTET = 'filterhendelse_dato_opprettet',
+    FILTERHENDELSE_DATO_FRIST = 'filterhendelse_dato_frist',
     AAP_KELVIN_TOM_VEDTAKSDATO = 'aap_kelvin_tom_vedtaksdato',
     AAP_KELVIN_MAKSDATO = 'aap_kelvin_maksdato',
     AAP_KELVIN_RETTIGHET = 'aap_kelvin_rettighetstype',

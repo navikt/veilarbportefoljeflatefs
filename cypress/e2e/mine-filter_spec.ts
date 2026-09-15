@@ -167,25 +167,6 @@ describe('Mine filter', () => {
         });
     });
 
-    it('Verifiser fjernet permittert-filter i Min oversikt', () => {
-        // Gå til Mine filter
-        cy.gaTilOversikt('min-oversikt');
-        cy.klikkTab('MINE_FILTER');
-
-        // Sjekk at vi får eit varsel om at filter er fjerna. Lukk varselet.
-        cy.getByTestId('mine-filter_alertstripe')
-            .should('be.visible')
-            .within(() => {
-                cy.contains(
-                    "'Permitterte filter' er slettet fordi filteret 'Alle utenom permitterte etter 09.03.2020' er fjernet."
-                );
-                cy.get('button').should('be.visible').click();
-            });
-
-        // Varselet er borte etter lukking
-        cy.getByTestId('mine-filter_alertstripe').should('not.exist');
-    });
-
     it('Drag and drop - Validering av åpning/lukking av redigering (hengelåsen)', () => {
         // Gå til enhetens oversikt
         cy.gaTilOversikt('enhetens-oversikt');

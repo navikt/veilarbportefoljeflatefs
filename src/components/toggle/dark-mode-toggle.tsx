@@ -28,7 +28,7 @@ export function DarkModeToggle() {
     }, [darkmode]);
 
     return (
-        <Switch size="medium" onChange={() => setDarkmode(!darkmode)} checked={darkmode}>
+        <Switch size="small" onChange={() => setDarkmode(!darkmode)} checked={darkmode}>
             Slå {darkmode ? ' av ' : ' på '} mørk modus
         </Switch>
     );

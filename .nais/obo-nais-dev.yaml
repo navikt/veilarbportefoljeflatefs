@@ -54,8 +54,6 @@ spec:
       rules:
         - application: obo-unleash
           namespace: obo
-        - application: veilarbfilter
-          namespace: obo
         - application: veilarbveileder
           namespace: obo
         - application: endringslogg
@@ -103,16 +101,6 @@ spec:
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbportefolje",
-                "namespace": "obo",
-                "cluster": "dev-gcp"
-              }
-            },
-            {
-              "fromPath": "/veilarbfilter",
-              "toUrl": "http://veilarbfilter.obo",
-              "preserveFromPath": true,
-              "toApp": {
-                "name": "veilarbfilter",
                 "namespace": "obo",
                 "cluster": "dev-gcp"
               }

@@ -1,4 +1,4 @@
-import {BrowserRouter} from 'react-router-dom';
+import {BrowserRouter} from 'react-router';
 import {Routing} from './routing';
 import {Provider} from 'react-redux';
 import {Decorator} from './decorator';

@@ -1,3 +1,4 @@
+import {useMemo} from 'react';
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {createSelector} from 'reselect';
@@ -73,12 +74,13 @@ interface UsePortefoljeSelector {
 }
 
 export function usePortefoljeSelector(valgteKolonnerType: OversiktType): UsePortefoljeSelector {
-    return useSelector((state: AppState) => {
-        const result = selectPortefoljeTabell(state, valgteKolonnerType);
+    const result = useSelector((state: AppState) => selectPortefoljeTabell(state, valgteKolonnerType));
 
-        return {
+    return useMemo(
+        () => ({
             ...result,
             brukere: filtrerBrukerePaValgtFargekategori(result.brukere, result.filtervalg, valgteKolonnerType)
-        };
-    });
+        }),
+        [result, valgteKolonnerType]
+    );
 }

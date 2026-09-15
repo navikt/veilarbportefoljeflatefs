@@ -7,6 +7,10 @@
     word-wrap: break-word;
 }
 
+.veilarbportefoljeflatefs .huskelapp__endret-av {
+    color: #202733;
+}
+
 .huskelapp-visning__kommentar {
     white-space: pre-wrap;
 }
@@ -14,11 +18,6 @@
 .huskelapp__postit {
     position: relative;
     background-color: #f9fccc;
-}
-
-.huskelapp__postit p.aksel-detail,
-.huskelapp__postit p.navds-detail {
-    color: #23262a;
 }
 
 .huskelapp__postit::before {

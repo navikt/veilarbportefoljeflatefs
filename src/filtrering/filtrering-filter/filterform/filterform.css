@@ -41,9 +41,6 @@
 .veilarbportefoljeflatefs .aktivitet-filterform__knappegruppe .nullstill__knapp {
     margin: 0.5rem;
 }
-.veilarbportefoljeflatefs .aktivitetfilterform-forenklet .aktivitetvalg {
-    margin: 0.5rem;
-}
 .veilarbportefoljeflatefs .alder-input {
     display: grid;
     grid-template-columns: auto auto auto;
@@ -221,12 +218,13 @@
     margin-left: 0.5rem;
 }
 .veilarbportefoljeflatefs .hendelser-filterform__checkbox-gruppe {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.5rem;
     margin-bottom: 1rem;
     margin-right: 0.5rem;
     border-bottom: 1px solid var(--ax-border-neutral-strong);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 }
 .veilarbportefoljeflatefs .hendelser-filterform .nullstill__knapp {
     margin: 0.5rem;

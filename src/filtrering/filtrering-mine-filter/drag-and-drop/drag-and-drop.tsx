@@ -5,7 +5,7 @@ import {lagreSorteringForFilter} from '../../../ducks/mine-filter';
 import {DragAndDropContainer} from './drag-and-drop-container';
 import {MineFilterRad} from '../mine-filter-rad';
 import {useOnlyOnUnmount} from './use-only-onUnmount-hook';
-import {LagretFilter} from '../../../ducks/lagret-filter';
+import {LagreSortOrderRequest, LagretFilter} from '../../../ducks/lagret-filter';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../../ducks/ui/valgte-kolonner';
 import {OrNothing} from '../../../utils/types/types';
 import {Tiltak} from '../../../ducks/enhettiltak';
@@ -43,12 +43,12 @@ export function DragAndDrop({
     );
 
     const lagreRekkefolge = useCallback(() => {
-        const idAndPriorities = dragAndDropOrder.map((filter, idx) => ({
+        const sortOrderForFiltre: LagreSortOrderRequest[] = dragAndDropOrder.map((filter, idx) => ({
             sortOrder: idx,
             filterId: filter.filterId
         }));
         if (harEndretRekkefolge(dragAndDropOrder, stateFilterOrder)) {
-            dispatch(lagreSorteringForFilter(idAndPriorities));
+            dispatch(lagreSorteringForFilter(sortOrderForFiltre));
         }
         setisDraggable(false);
     }, [dragAndDropOrder, stateFilterOrder, setisDraggable, dispatch]);

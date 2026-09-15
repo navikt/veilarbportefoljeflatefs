@@ -51,8 +51,6 @@ spec:
       rules:
         - application: obo-unleash
           namespace: obo
-        - application: veilarbfilter
-          namespace: obo
         - application: endringslogg
           namespace: pto
         - application: modiacontextholder
@@ -100,16 +98,6 @@ spec:
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbportefolje",
-                "namespace": "obo",
-                "cluster": "prod-gcp"
-              }
-            },
-            {
-              "fromPath": "/veilarbfilter",
-              "toUrl": "http://veilarbfilter.obo",
-              "preserveFromPath": true,
-              "toApp": {
-                "name": "veilarbfilter",
                 "namespace": "obo",
                 "cluster": "prod-gcp"
               }

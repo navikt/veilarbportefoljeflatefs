@@ -50,6 +50,7 @@ export function VelgKolonnerListe({oversiktType}: ValgteKolonnerProps) {
                     valgt={erValgt(kolonne)}
                     disabled={harLovTilAVelgeFlereKolonner && !erValgt(kolonne)}
                     onChange={handleChange}
+                    oversiktType={oversiktType}
                 />
             ))}
         </ul>

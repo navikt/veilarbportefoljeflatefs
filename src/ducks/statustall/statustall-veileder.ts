@@ -26,6 +26,7 @@ export const initalStatusState: StatustallVeilederState = {
         tiltakshendelser: 0,
         utgatteVarsel: 0,
         udelteSamtalereferat: 0,
+        kandidatForUtmelding: 0,
         utlopteAktiviteter: 0,
         ikkeIavtaltAktivitet: 0,
         iavtaltAktivitet: 0,
