@@ -11,7 +11,8 @@ import {pagineringSetup} from '../../ducks/paginering';
 import {avmarkerValgtMineFilter} from '../../ducks/lagret-filter-ui-state';
 import {LagLabelForFiltervalg} from './LagLabelForFiltervalg';
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
-import {Chips} from '@navikt/ds-react';
+import {Chips, VStack} from '@navikt/ds-react';
+import {FiltreringAlert} from './filtrering-alert';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -21,13 +22,15 @@ interface FiltreringLabelContainerProps {
     };
     filtervalg: FiltervalgModell;
     className: string;
+    oversiktType: OversiktType;
 }
 
 function FiltreringLabelContainer({
     filtervalg,
     enhettiltak,
     actions: {slettAlle, slettEnkelt},
-    className
+    className,
+    oversiktType
 }: FiltreringLabelContainerProps) {
     const dispatch = useAppDispatch();
 
@@ -47,18 +50,21 @@ function FiltreringLabelContainer({
         .reduce((acc, l) => [...acc, ...l], []);
 
     return (
-        <Chips className={className} data-testid="filtrering_label-container">
-            {filterLabels}
-            {filterLabels.length > 0 && (
-                <FiltreringLabel
-                    key="slett-alle"
-                    label="Nullstill filtervalg"
-                    slettFilter={slettAlle}
-                    skalHaKryssIkon={false}
-                    dataColor="neutral"
-                />
-            )}
-        </Chips>
+        <VStack gap="space-16" className={className}>
+            <FiltreringAlert oversiktType={oversiktType} />
+            <Chips data-testid="filtrering_label-container">
+                {filterLabels}
+                {filterLabels.length > 0 && (
+                    <FiltreringLabel
+                        key="slett-alle"
+                        label="Nullstill filtervalg"
+                        slettFilter={slettAlle}
+                        skalHaKryssIkon={false}
+                        dataColor="neutral"
+                    />
+                )}
+            </Chips>
+        </VStack>
     );
 }
 

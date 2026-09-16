@@ -7,6 +7,15 @@
     grid-column-start: 1;
 }
 
+.veilarbportefoljeflatefs .filtreringlabel-infoboks__liste {
+    font-size: 0.875rem;
+    margin-bottom: var(--ax-space-2);
+}
+
+.veilarbportefoljeflatefs .filtreringlabel-infoboks__knapp {
+    margin-top: 1rem;
+}
+
 .veilarbportefoljeflatefs .filtreringlabel__med-ikon {
     display: flex;
     align-items: center;

@@ -5,6 +5,7 @@ export interface LagretFilter {
     filterId: number;
     filterValg: FiltervalgModell;
     sortOrder: number | null;
+    infoOmSlettetFiltervalg: string[] | null;
 }
 
 export interface LagretFilterState {
@@ -31,6 +32,7 @@ export interface LagretFilterDto {
     filterId: number;
     filterValg: FiltervalgModell;
     sortOrder: number;
+    infoOmSlettetFiltervalg: string[] | null;
 }
 
 export interface LagreNyttFilterRequest {
