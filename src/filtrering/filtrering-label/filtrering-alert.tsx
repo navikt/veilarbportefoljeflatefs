@@ -36,7 +36,9 @@ export const FiltreringAlert = ({oversiktType}: FiltreringLabelContainerProps) =
                                 </List.Item>
                             ))}
                         </List>
-                        <BodyShort size="small">Endre filteret eller slett og lag nytt.</BodyShort>
+                        <BodyShort size="small">
+                            Du kan beholde filteret slik det er nå, endre filteret, eller lage nytt.
+                        </BodyShort>
                         <HStack gap="space-8">
                             <Button
                                 className={'filtreringlabel-infoboks__knapp'}
