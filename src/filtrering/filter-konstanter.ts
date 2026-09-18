@@ -25,7 +25,6 @@ export const UDELT_SAMTALEREFERAT = 'UDELT_SAMTALEREFERAT';
 export const KANDIDAT_FOR_UTMELDING = 'KANDIDAT_FOR_UTMELDING';
 export const IKKE_I_AVTALT_AKTIVITET = 'IKKE_I_AVTALT_AKTIVITET';
 export const I_AVTALT_AKTIVITET = 'I_AVTALT_AKTIVITET';
-export const INAKTIVE_BRUKERE = 'INAKTIVE_BRUKERE';
 export const UNDER_VURDERING = 'UNDER_VURDERING';
 export const HAR_14A_VEDTAK = 'HAR_14A_VEDTAK';
 export const HAR_IKKE_14A_VEDTAK = 'HAR_IKKE_14A_VEDTAK';
@@ -85,7 +84,6 @@ export const ferdigfilterListeLabelTekst = {
     [UTLOPTE_AKTIVITETER]: 'Utløpte aktiviteter',
     [IKKE_I_AVTALT_AKTIVITET]: 'Ikke i avtalt aktivitet',
     [I_AVTALT_AKTIVITET]: 'I avtalt aktivitet',
-    [INAKTIVE_BRUKERE]: 'Ikke servicebehov',
     [MINE_HUSKELAPPER]: 'Huskelapper',
     [MINE_FARGEKATEGORIER]: 'Kategorier'
 };
@@ -123,8 +121,7 @@ export const barnUnder18Aar = {
 
 export const formidlingsgruppe = {
     ARBS: {label: 'Arbeidssøker'},
-    IARBS: {label: 'Ikke arbeidssøker'},
-    ISERV: {label: 'Ikke servicebehov'}
+    IARBS: {label: 'Ikke arbeidssøker'}
 };
 
 export const servicegruppe = {

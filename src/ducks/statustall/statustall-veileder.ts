@@ -19,7 +19,6 @@ export const initalStatusState: StatustallVeilederState = {
     data: {
         totalt: 0,
         ufordelteBrukere: 0,
-        inaktiveBrukere: 0,
         venterPaSvarFraNAV: 0,
         venterPaSvarFraBruker: 0,
         moterMedNAVIdag: 0,

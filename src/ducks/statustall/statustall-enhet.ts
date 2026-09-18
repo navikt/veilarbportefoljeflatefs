@@ -19,7 +19,6 @@ export const initalStatusState: StatustallEnhetState = {
         medBrukerinnsyn: {
             totalt: 0,
             ufordelteBrukere: 0,
-            inaktiveBrukere: 0,
             venterPaSvarFraNAV: 0,
             venterPaSvarFraBruker: 0,
             moterMedNAVIdag: 0,
@@ -46,7 +45,6 @@ export const initalStatusState: StatustallEnhetState = {
         utenBrukerinnsyn: {
             totalt: 0,
             ufordelteBrukere: 0,
-            inaktiveBrukere: 0,
             venterPaSvarFraNAV: 0,
             venterPaSvarFraBruker: 0,
             moterMedNAVIdag: 0,
