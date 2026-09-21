@@ -6,7 +6,7 @@ import {AppState} from '../reducer';
 export function useRequestHandler(
     statusSelector: (state: AppState) => string,
     lukkModal: () => void,
-    httpStatusSelector?: (state: AppState) => number | null
+    httpStatusSelector?: (state: AppState) => number | null | undefined
 ) {
     const [saveRequestSent, setSaveRequestSent] = useState(false);
     const [errorModalErApen, setErrorModalErApen] = useState<boolean>(false);

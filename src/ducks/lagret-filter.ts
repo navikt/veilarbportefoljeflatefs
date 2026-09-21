@@ -10,7 +10,7 @@ export interface LagretFilter {
 
 export interface LagretFilterState {
     status: string;
-    errorHttpStatus: number | null;
+    errorHttpStatus?: number | null;
     data: LagretFilter[];
     handlingType: HandlingsType | null;
     antallFiltreSomFeilet?: number;
