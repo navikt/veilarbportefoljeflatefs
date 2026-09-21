@@ -20,7 +20,7 @@ export function FiltreringMineFilter({...mineFilterInnholdProps}: LagredeFilterI
 
     return (
         <>
-            {mineFilterState?.stoppLagringAvFilterVedMigrering == true && (
+            {mineFilterState?.stoppLagringAvFilterVedMigrering && (
                 <Alert variant="warning" size="small" className={'mine-filter-alert'}>
                     Vi jobber med teknisk vedlikehold av lagrede filter, og det er derfor ikke mulig å lagre nye eller
                     endre filter akkurat nå.
