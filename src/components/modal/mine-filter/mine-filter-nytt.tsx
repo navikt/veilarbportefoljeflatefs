@@ -13,6 +13,7 @@ import {endreValgtSidebarTab} from '../../sidebar/sidebar';
 import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
 import {velgMineFilter} from '../../../ducks/filtrering';
 import {markerMineFilter} from '../../../ducks/lagret-filter-ui-state';
+import {visSidebar} from '../../../ducks/sidebar-tab';
 
 interface LagreNyttMineFilterProps {
     oversiktType: OversiktType;
@@ -53,6 +54,7 @@ export function LagreNyttMineFilter({lukkModal, oversiktType}: LagreNyttMineFilt
                     requestedTab: SidebarTabs.MINE_FILTER,
                     currentOversiktType: oversiktType
                 });
+                dispatch(visSidebar(oversiktType));
             });
         }
     };
