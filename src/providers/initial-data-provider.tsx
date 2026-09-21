@@ -17,11 +17,17 @@ export function InitialDataProvider({children}: PropsWithChildren<{}>) {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(hentFeaturesFraUnleash());
         dispatch(hentInnloggetVeileder());
         dispatch(hentSystemmeldinger());
         dispatch(hentBrukerIKontekst());
         dispatch(hentEnhetIKontekst());
+    }, [dispatch]);
+
+    // Hent features fra Unleash ved mount og deretter hvert 5. minutt - rerender kun ved endringer
+    useEffect(() => {
+        dispatch(hentFeaturesFraUnleash());
+        const id = setInterval(() => dispatch(hentFeaturesFraUnleash()), 5 * 60 * 1000);
+        return () => clearInterval(id);
     }, [dispatch]);
 
     return (

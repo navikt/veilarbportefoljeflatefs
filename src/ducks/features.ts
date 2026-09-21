@@ -22,11 +22,11 @@ const initalState: FeaturesState = {
 // Reducer
 export function featuresReducer(state: FeaturesState = initalState, action): FeaturesState {
     switch (action.type) {
-        case ADD_FEATURE:
-            return {
-                ...state,
-                ...action.features
-            };
+        case ADD_FEATURE: {
+            const next = {...state, ...action.features};
+            const changed = Object.keys(next).some(k => next[k] !== state[k]);
+            return changed ? next : state;
+        }
         default:
             return state;
     }
