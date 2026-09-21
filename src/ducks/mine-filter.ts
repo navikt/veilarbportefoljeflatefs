@@ -80,13 +80,15 @@ export function mineFilterReducer(state: LagretFilterState = initialState, actio
             return {
                 ...state,
                 status: STATUS.ERROR,
-                handlingType: HandlingsType.NYTT
+                handlingType: HandlingsType.NYTT,
+                errorHttpStatus: action.data?.response?.status ?? null
             };
         case REDIGER_MINEFILTER_FEILET:
             return {
                 ...state,
                 status: STATUS.ERROR,
-                handlingType: HandlingsType.REDIGERE
+                handlingType: HandlingsType.REDIGERE,
+                errorHttpStatus: action.data?.response?.status ?? null
             };
         case SLETT_MINEFILTER_FEILET:
             return {

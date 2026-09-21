@@ -27,8 +27,11 @@ export function LagreNyttMineFilter({lukkModal, oversiktType}: LagreNyttMineFilt
     const [feilmelding, setFeilmelding] = useState({} as LagretFilterValideringsError);
 
     const dispatch = useAppDispatch();
-    const requestHandler = useRequestHandler((state: AppState) => state.mineFilter.status, lukkModal);
-
+    const requestHandler = useRequestHandler(
+        (state: AppState) => state.mineFilter.status,
+        lukkModal,
+        (state: AppState) => state.mineFilter.errorHttpStatus
+    );
     const doLagreNyttFilter = event => {
         event.preventDefault();
         const feilValideringResponse = feilValidering(filterNavn, filterValg, data);
@@ -78,7 +81,9 @@ export function LagreNyttMineFilter({lukkModal, oversiktType}: LagreNyttMineFilt
                 filterNavn={filterNavn}
                 erApen={requestHandler.errorModalErApen}
                 setErrorModalErApen={requestHandler.setErrorModalErApen}
-                modalType={ErrorModalType.LAGRE}
+                modalType={
+                    requestHandler.errorHttpStatus === 503 ? ErrorModalType.SERVICE_UTILGJENGELIG : ErrorModalType.LAGRE
+                }
             />
         </>
     );
