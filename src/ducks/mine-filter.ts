@@ -100,6 +100,7 @@ export function mineFilterReducer(state: LagretFilterState = initialState, actio
                 status: STATUS.OK,
                 data: action.data.filtre,
                 antallFiltreSomFeilet: action.data.antallFiltreSomFeilet,
+                stoppLagringAvFilterVedMigrering: action.data.stoppLagringAvFilterVedMigrering,
                 handlingType: HandlingsType.HENTE
             };
         case NY_MINEFILTER_OK:
@@ -152,7 +153,8 @@ export function hentMineFilterForVeileder() {
         () =>
             hentMineFilter().then((dto: LagretFilterMedAntallSomFeiletDto) => ({
                 filtre: dto.filtre.map(f => mapLagretFilterDtoTilLagretFilter(f)),
-                antallFiltreSomFeilet: dto.antallFiltreSomFeilet
+                antallFiltreSomFeilet: dto.antallFiltreSomFeilet,
+                stoppLagringAvFilterVedMigrering: dto.stoppLagringAvFilterVedMigrering
             })),
         {OK: HENT_MINEFILTER_OK, FEILET: HENT_MINEFILTER_FEILET, PENDING: HENT_MINEFILTER_PENDING}
     );
