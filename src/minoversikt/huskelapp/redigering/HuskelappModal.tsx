@@ -9,6 +9,7 @@ import {endreHuskelapp} from './endreHuskelapp';
 import HuskelappIkon from '../../../components/ikoner/huskelapp/Huskelappikon_bakgrunnsfarge.svg?react';
 import {NyHuskelapp} from './NyHuskelapp';
 import {SlettHuskelappKnapp} from './SlettHuskelappKnapp';
+import {useRegistrerRedigering} from '../../../hooks/use-registrer-redigering';
 import './rediger-huskelapp.css';
 
 import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
@@ -24,6 +25,8 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker}: P
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
     const [huskelappEndret, setHuskelappEndret] = useState<boolean>(false);
     const dispatch = useAppDispatch();
+
+    useRegistrerRedigering(isModalOpen);
 
     const harHuskelapp = !!huskelapp?.huskelappId;
 

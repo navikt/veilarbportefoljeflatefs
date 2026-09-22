@@ -6,6 +6,7 @@ import {
     LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG,
     PORTEFOLJE_FEATURES
 } from '../konstanter';
+import {erRedigeringAktiv} from '../utils/redigering-registry';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
 
@@ -36,12 +37,15 @@ export function featuresReducer(state: FeaturesState = initalState, action): Fea
 export function hentFeaturesFraUnleash() {
     const featureQueryString = PORTEFOLJE_FEATURES.map(feature => `feature=${feature}`).join('&');
     return dispatch => {
-        hentFeatures(featureQueryString).then(json =>
+        hentFeatures(featureQueryString).then(json => {
+            if (erRedigeringAktiv()) {
+                return;
+            }
             dispatch({
                 type: ADD_FEATURE,
                 features: json
-            })
-        );
+            });
+        });
     };
 }
 
