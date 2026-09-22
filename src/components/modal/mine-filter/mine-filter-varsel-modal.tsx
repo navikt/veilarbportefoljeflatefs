@@ -47,8 +47,8 @@ export function MineFilterVarselModal({filterNavn, modalType, erApen, setErrorMo
             )}
             {modalType === ErrorModalType.SERVICE_UTILGJENGELIG && (
                 <BodyShort size="small">
-                    Vi jobber med teknisk vedlikehold av lagrede filter, og det er derfor ikke mulig å lagre nye eller
-                    endre eksisterende filter akkurat nå. Prøv igjen senere.
+                    Vi jobber med teknisk vedlikehold av lagrede filter. Det er ikke mulig å lagre nye eller endre
+                    eksisterende filter akkurat nå. Prøv igjen senere.
                 </BodyShort>
             )}
             <Button size="small" onClick={() => setErrorModalErApen(false)}>
