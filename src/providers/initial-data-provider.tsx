@@ -26,7 +26,7 @@ export function InitialDataProvider({children}: PropsWithChildren<{}>) {
     // Hent features fra Unleash ved mount og deretter hvert 5. minutt - rerender kun ved endringer
     useEffect(() => {
         dispatch(hentFeaturesFraUnleash());
-        const id = setInterval(() => dispatch(hentFeaturesFraUnleash()),  60 * 1000);
+        const id = setInterval(() => dispatch(hentFeaturesFraUnleash()), 60 * 1000);
         return () => clearInterval(id);
     }, [dispatch]);
 
