@@ -39,8 +39,6 @@ export function hentFeaturesFraUnleash() {
     return dispatch => {
         hentFeatures(featureQueryString).then(json => {
             if (erRedigeringAktiv()) {
-                // eslint-disable-next-line no-console
-                console.log('Redigering er aktiv, oppdaterer ikke features');
                 return;
             }
             dispatch({
