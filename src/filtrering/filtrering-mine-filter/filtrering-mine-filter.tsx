@@ -20,6 +20,13 @@ export function FiltreringMineFilter({...mineFilterInnholdProps}: LagredeFilterI
 
     return (
         <>
+            {mineFilterState?.stoppLagringAvFilterVedMigrering && (
+                <Alert variant="warning" size="small" className={'mine-filter-alert'}>
+                    Vi jobber med teknisk vedlikehold av lagrede filter. Det er ikke mulig å lagre nye eller endre
+                    eksisterende filter akkurat nå.
+                </Alert>
+            )}
+
             {mineFilterState?.antallFiltreSomFeilet != undefined && mineFilterState.antallFiltreSomFeilet > 0 && (
                 <Alert variant="warning" size="small" className={'mine-filter-alert'}>
                     {mineFilterState.antallFiltreSomFeilet} av filtrene dine kunne ikke lastes inn. Hvis feilen

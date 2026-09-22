@@ -5,7 +5,8 @@ import {InnsatsgruppeGjeldendeVedtak14a} from '../../typer/bruker-modell';
 export const mineFilterMedAntallSomFeilet = (): LagretFilterMedAntallSomFeiletDto => {
     return {
         filtre: mineFilter(),
-        antallFiltreSomFeilet: 0
+        antallFiltreSomFeilet: 0,
+        stoppLagringAvFilterVedMigrering: false
     };
 };
 

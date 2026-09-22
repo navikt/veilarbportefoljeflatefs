@@ -80,13 +80,15 @@ export function mineFilterReducer(state: LagretFilterState = initialState, actio
             return {
                 ...state,
                 status: STATUS.ERROR,
-                handlingType: HandlingsType.NYTT
+                handlingType: HandlingsType.NYTT,
+                errorHttpStatus: action.data?.response?.status ?? null
             };
         case REDIGER_MINEFILTER_FEILET:
             return {
                 ...state,
                 status: STATUS.ERROR,
-                handlingType: HandlingsType.REDIGERE
+                handlingType: HandlingsType.REDIGERE,
+                errorHttpStatus: action.data?.response?.status ?? null
             };
         case SLETT_MINEFILTER_FEILET:
             return {
@@ -100,6 +102,7 @@ export function mineFilterReducer(state: LagretFilterState = initialState, actio
                 status: STATUS.OK,
                 data: action.data.filtre,
                 antallFiltreSomFeilet: action.data.antallFiltreSomFeilet,
+                stoppLagringAvFilterVedMigrering: action.data.stoppLagringAvFilterVedMigrering,
                 handlingType: HandlingsType.HENTE
             };
         case NY_MINEFILTER_OK:
@@ -152,7 +155,8 @@ export function hentMineFilterForVeileder() {
         () =>
             hentMineFilter().then((dto: LagretFilterMedAntallSomFeiletDto) => ({
                 filtre: dto.filtre.map(f => mapLagretFilterDtoTilLagretFilter(f)),
-                antallFiltreSomFeilet: dto.antallFiltreSomFeilet
+                antallFiltreSomFeilet: dto.antallFiltreSomFeilet,
+                stoppLagringAvFilterVedMigrering: dto.stoppLagringAvFilterVedMigrering
             })),
         {OK: HENT_MINEFILTER_OK, FEILET: HENT_MINEFILTER_FEILET, PENDING: HENT_MINEFILTER_PENDING}
     );

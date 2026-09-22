@@ -33,7 +33,11 @@ export function OppdaterMineFilter({gammeltFilterNavn, filterId, lukkModal, over
 
     const [feilmelding, setFeilmelding] = useState<LagretFilterValideringsError>({} as LagretFilterValideringsError);
 
-    const requestHandlerOppdater = useRequestHandler((state: AppState) => state.mineFilter.status, lukkModal);
+    const requestHandlerOppdater = useRequestHandler(
+        (state: AppState) => state.mineFilter.status,
+        lukkModal,
+        (state: AppState) => state.mineFilter.errorHttpStatus
+    );
     const requestHandlerSlette = useRequestHandler((state: AppState) => state.mineFilter.status, lukkModal);
 
     const doLagreEndringer = event => {
@@ -111,7 +115,11 @@ export function OppdaterMineFilter({gammeltFilterNavn, filterId, lukkModal, over
             <MineFilterVarselModal
                 filterNavn={nyttFilterNavn}
                 erApen={requestHandlerOppdater.errorModalErApen}
-                modalType={ErrorModalType.OPPDATERE}
+                modalType={
+                    requestHandlerOppdater.errorHttpStatus === 503
+                        ? ErrorModalType.SERVICE_UTILGJENGELIG
+                        : ErrorModalType.OPPDATERE
+                }
                 setErrorModalErApen={requestHandlerOppdater.setErrorModalErApen}
             />
             <MineFilterVarselModal

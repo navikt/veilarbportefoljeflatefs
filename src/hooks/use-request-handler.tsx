@@ -3,7 +3,11 @@ import {useSelector} from 'react-redux';
 import {STATUS} from '../ducks/utils';
 import {AppState} from '../reducer';
 
-export function useRequestHandler(statusSelector: (state: AppState) => string, lukkModal: () => void) {
+export function useRequestHandler(
+    statusSelector: (state: AppState) => string,
+    lukkModal: () => void,
+    httpStatusSelector?: (state: AppState) => number | null | undefined
+) {
     const [saveRequestSent, setSaveRequestSent] = useState(false);
     const [errorModalErApen, setErrorModalErApen] = useState<boolean>(false);
     const status = useSelector(statusSelector);
@@ -21,5 +25,6 @@ export function useRequestHandler(statusSelector: (state: AppState) => string, l
         }
     }, [status, saveRequestSent, setErrorModalErApen, setSaveRequestSent, lukkModal]);
 
-    return {errorModalErApen, setErrorModalErApen, setSaveRequestSent};
+    const errorHttpStatus = useSelector(httpStatusSelector ?? (() => null));
+    return {errorModalErApen, setErrorModalErApen, setSaveRequestSent, errorHttpStatus};
 }

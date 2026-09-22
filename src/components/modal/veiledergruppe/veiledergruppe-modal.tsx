@@ -13,6 +13,7 @@ import {VeiledergruppeForm} from './veiledergruppe-form';
 import {initialState} from '../../../ducks/filtrering';
 import {STATUS} from '../../../ducks/utils';
 import {LasterModal} from '../lastermodal/laster-modal';
+import {useRegistrerRedigering} from '../../../hooks/use-registrer-redigering';
 import './veiledergruppe-modal.css';
 
 interface VeilederModalProps {
@@ -56,6 +57,8 @@ export function VeiledergruppeModal({
 
     const [visSletteVeiledergruppeModal, setVisSletteVeiledergruppeModal] = useState(false);
     const [visEndringerIkkeLagretModal, setVisEndringerIkkeLagretModal] = useState(false);
+
+    useRegistrerRedigering(isOpen);
 
     useEffect(() => {
         setFilterValg(initialVerdi.filterValg);
