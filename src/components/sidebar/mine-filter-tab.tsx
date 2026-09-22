@@ -11,18 +11,9 @@ import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
 import {trackKnappKlikketEvent} from '../../umami/umami-events';
-
-function sortMineFilter(a: LagretFilter, b: LagretFilter) {
-    if (a.sortOrder !== null) {
-        if (b.sortOrder !== null) {
-            return a.sortOrder - b.sortOrder;
-        }
-        return -1;
-    }
-    if (b.sortOrder !== null) {
-        return 1;
-    }
-    return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true});
+function sortMineFilter(a, b) {
+    if (a.sortOrder !== b.sortOrder) return a.sortOrder - b.sortOrder;
+    return a.filterNavn.localeCompare(b.filterNavn, 'nb', {numeric: true, sensitivity: 'base'});
 }
 
 interface Props {
