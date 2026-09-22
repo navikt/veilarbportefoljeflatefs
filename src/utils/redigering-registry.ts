@@ -4,18 +4,18 @@
  * av feature-toggles som hentes jevnlig.
  */
 
-let antallAktiveRedigeringar = 0;
+let antallAktiveRedigeringer = 0;
 
 export function startRedigering(): void {
-    antallAktiveRedigeringar++;
+    antallAktiveRedigeringer++;
 }
 
 export function avsluttRedigering(): void {
-    if (antallAktiveRedigeringar > 0) {
-        antallAktiveRedigeringar--;
+    if (antallAktiveRedigeringer > 0) {
+        antallAktiveRedigeringer--;
     }
 }
 
 export function erRedigeringAktiv(): boolean {
-    return antallAktiveRedigeringar > 0;
+    return antallAktiveRedigeringer > 0;
 }

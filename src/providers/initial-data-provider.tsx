@@ -23,7 +23,7 @@ export function InitialDataProvider({children}: PropsWithChildren<{}>) {
         dispatch(hentEnhetIKontekst());
     }, [dispatch]);
 
-    // Hent features fra Unleash ved mount og deretter hvert 5. minutt - rerender kun ved endringer
+    // Hent features fra Unleash ved mount og deretter hvert 5. minutt - rerender kun ved endringer og man ikke er i redigerings-modus
     useEffect(() => {
         dispatch(hentFeaturesFraUnleash());
         const id = setInterval(() => dispatch(hentFeaturesFraUnleash()), 5 * 60 * 1000);
