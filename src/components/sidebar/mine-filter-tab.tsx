@@ -14,7 +14,7 @@ import {trackKnappKlikketEvent} from '../../umami/umami-events';
 
 function sortMineFilter(a, b) {
     if (a.sortOrder !== b.sortOrder) return a.sortOrder - b.sortOrder;
-    return b.filterId - a.filterId;
+    return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true});
 }
 
 interface Props {
