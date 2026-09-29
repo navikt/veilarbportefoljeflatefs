@@ -22,6 +22,7 @@ import {
     stillingFraNavFilter,
     tiltakspengerFilter,
     tiltakspengerFilterArena,
+    uforetrygdFilter,
     ungdomsprogramytelseFilter,
     utdanning,
     utdanningBestatt,
@@ -471,6 +472,22 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                 {
                                     form: Filtervalg.ytelseUngdomsprogram,
                                     checkboxValg: ungdomsprogramytelseFilter
+                                }
+                            ]}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="Uføretrygd"
+                    id="ytelser-uforetrygd"
+                    render={() => (
+                        <CheckboxFilterform
+                            filterformOgValgListe={[
+                                {
+                                    form: Filtervalg.ytelseUforetrygd,
+                                    checkboxValg: uforetrygdFilter
                                 }
                             ]}
                             filtervalg={filtervalg}
