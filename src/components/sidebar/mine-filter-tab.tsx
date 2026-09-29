@@ -11,18 +11,10 @@ import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
 import {trackKnappKlikketEvent} from '../../umami/umami-events';
-
-function sortMineFilter(a: LagretFilter, b: LagretFilter) {
-    if (a.sortOrder !== null) {
-        if (b.sortOrder !== null) {
-            return a.sortOrder - b.sortOrder;
-        }
-        return -1;
-    }
-    if (b.sortOrder !== null) {
-        return 1;
-    }
-    return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true});
+import {useRegistrerRedigering} from '../../hooks/use-registrer-redigering';
+function sortMineFilter(a, b) {
+    if (a.sortOrder !== b.sortOrder) return a.sortOrder - b.sortOrder;
+    return a.filterNavn.localeCompare(b.filterNavn, 'nb', {numeric: true, sensitivity: 'base'});
 }
 
 interface Props {
@@ -39,6 +31,8 @@ export const MineFilterTab = ({valgtFane, fanetittel, oversiktType, enhettiltak}
     const erPaMinOversikt = oversiktType === OversiktType.minOversikt;
     const erPaEnhetensOversikt = oversiktType === OversiktType.enhetensOversikt;
 
+    useRegistrerRedigering(isMinefiltereDraggable);
+
     const fjernUtilgjengeligeFilter = (elem: LagretFilter) => {
         const nyeBrukere = elem.filterValg.ferdigfilterListe.includes('NYE_BRUKERE_FOR_VEILEDER');
 
@@ -48,7 +42,7 @@ export const MineFilterTab = ({valgtFane, fanetittel, oversiktType, enhettiltak}
         return !((erPaEnhetensOversikt && nyeBrukere) || (erPaMinOversikt && (veiledergrupper || ufordelteBrukere)));
     };
 
-    const hjelpeTekst = oversiktType => {
+    const hjelpeTekst = (oversiktType: OversiktType) => {
         switch (oversiktType) {
             case OversiktType.minOversikt:
                 return 'Filter som inneholder Veiledergrupper eller Ufordelte brukere er ikke tilgjengelig i Min oversikt.';

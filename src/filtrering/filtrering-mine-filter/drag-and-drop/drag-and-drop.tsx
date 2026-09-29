@@ -44,7 +44,7 @@ export function DragAndDrop({
 
     const lagreRekkefolge = useCallback(() => {
         const sortOrderForFiltre: LagreSortOrderRequest[] = dragAndDropOrder.map((filter, idx) => ({
-            sortOrder: idx,
+            sortOrder: idx + 1,
             filterId: filter.filterId
         }));
         if (harEndretRekkefolge(dragAndDropOrder, stateFilterOrder)) {

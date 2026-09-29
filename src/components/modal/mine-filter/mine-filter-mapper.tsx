@@ -7,7 +7,8 @@ export function mapVeiledergrupperDtoTilLagretFilter(dto: LagretVeiledergruppeDt
         filterNavn: dto.filterNavn,
         filterId: dto.filterId,
         filterValg: {...filtervalgInitialState, [Filtervalg.veiledere]: dto.veiledere ?? []},
-        sortOrder: null
+        sortOrder: null,
+        infoOmSlettetFiltervalg: null
     };
 }
 
@@ -16,6 +17,7 @@ export function mapLagretFilterDtoTilLagretFilter(dto: LagretFilterDto): LagretF
         filterNavn: dto.filterNavn,
         filterId: dto.filterId,
         filterValg: {...dto.filterValg, veilederNavnQuery: initialState[Filtervalg.veilederNavnQuery]},
-        sortOrder: dto.sortOrder
+        sortOrder: dto.sortOrder,
+        infoOmSlettetFiltervalg: dto.infoOmSlettetFiltervalg
     };
 }

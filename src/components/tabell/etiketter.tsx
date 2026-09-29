@@ -1,8 +1,6 @@
 import {Tag} from '@navikt/ds-react';
 import {BrukerModell, Profileringsresultat} from '../../typer/bruker-modell';
 import {hentSkjermetInfo} from '../../utils/dato-utils';
-import {VIS_FILTER_KANDIDATER_FOR_AVSLUTNING} from '../../konstanter';
-import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 
 interface EtiketterProps {
     bruker: BrukerModell;
@@ -10,7 +8,6 @@ interface EtiketterProps {
 
 export const Etiketter = ({bruker}: EtiketterProps) => {
     const skjermetInfo = hentSkjermetInfo(bruker.egenAnsatt, bruker.skjermetTil);
-    const visKandidatForUtmelding = useFeatureSelector()(VIS_FILTER_KANDIDATER_FOR_AVSLUTNING);
 
     return (
         <>
@@ -67,7 +64,7 @@ export const Etiketter = ({bruker}: EtiketterProps) => {
                     Sykmeldt
                 </Tag>
             )}
-            {bruker.etiketter.kandidatForUtmelding && visKandidatForUtmelding && (
+            {bruker.etiketter.kandidatForUtmelding && (
                 <Tag data-color="warning" variant="outline" size="small" className="tabell-etikett">
                     Kandidat for avslutning
                 </Tag>

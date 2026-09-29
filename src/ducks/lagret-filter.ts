@@ -5,13 +5,16 @@ export interface LagretFilter {
     filterId: number;
     filterValg: FiltervalgModell;
     sortOrder: number | null;
+    infoOmSlettetFiltervalg: string[] | null;
 }
 
 export interface LagretFilterState {
     status: string;
+    errorHttpStatus?: number | null;
     data: LagretFilter[];
     handlingType: HandlingsType | null;
     antallFiltreSomFeilet?: number;
+    stoppLagringAvFilterVedMigrering?: boolean;
 }
 
 export enum HandlingsType {
@@ -25,12 +28,15 @@ export enum HandlingsType {
 export interface LagretFilterMedAntallSomFeiletDto {
     filtre: LagretFilterDto[];
     antallFiltreSomFeilet: number;
+    stoppLagringAvFilterVedMigrering: boolean;
 }
+
 export interface LagretFilterDto {
     filterNavn: string;
     filterId: number;
     filterValg: FiltervalgModell;
     sortOrder: number;
+    infoOmSlettetFiltervalg: string[] | null;
 }
 
 export interface LagreNyttFilterRequest {

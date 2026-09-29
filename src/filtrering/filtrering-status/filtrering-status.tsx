@@ -9,7 +9,6 @@ import {
     ferdigfilterListeLabelTekst,
     I_AVTALT_AKTIVITET,
     IKKE_I_AVTALT_AKTIVITET,
-    INAKTIVE_BRUKERE,
     KANDIDAT_FOR_UTMELDING,
     MINE_HUSKELAPPER,
     MOTER_IDAG,
@@ -29,11 +28,7 @@ import {BarInputCheckbox} from '../../components/barinput/barinput-checkbox';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {
-    SKJUL_ISERV_FILTRE,
-    VIS_FILTER_KANDIDATER_FOR_AVSLUTNING,
-    VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING
-} from '../../konstanter';
+import {VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
 import {FilterStatusMineFargekategorier} from './fargekategori';
 import {StatustallInnhold} from '../../ducks/statustall/statustall-typer';
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
@@ -62,8 +57,6 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         statustallUtenBrukerinnsyn !== null &&
         (statustallUtenBrukerinnsyn.ufordelteBrukere > 0 || statustallUtenBrukerinnsyn.venterPaSvarFraNAV > 0);
 
-    const visFilterForKandidatForUtmelding = useFeatureSelector()(VIS_FILTER_KANDIDATER_FOR_AVSLUTNING);
-    const skjulIservFiltre = useFeatureSelector()(SKJUL_ISERV_FILTRE);
     const dispatch = useAppDispatch();
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
@@ -217,22 +210,12 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                     />
                 </div>
                 <div className="forste-barlabel-i-gruppe">
-                    {!skjulIservFiltre && (
-                        <BarInputRadio
-                            filterVerdi={INAKTIVE_BRUKERE}
-                            handleChange={handleRadioButtonChange}
-                            labelTekst={ferdigfilterListeLabelTekst[INAKTIVE_BRUKERE]}
-                            statustall={statustallMedBrukerinnsyn.inaktiveBrukere}
-                        />
-                    )}
-                    {visFilterForKandidatForUtmelding && (
-                        <BarInputRadio
-                            filterVerdi={KANDIDAT_FOR_UTMELDING}
-                            handleChange={handleRadioButtonChange}
-                            labelTekst={ferdigfilterListeLabelTekst[KANDIDAT_FOR_UTMELDING]}
-                            statustall={statustallMedBrukerinnsyn.kandidatForUtmelding}
-                        />
-                    )}
+                    <BarInputRadio
+                        filterVerdi={KANDIDAT_FOR_UTMELDING}
+                        handleChange={handleRadioButtonChange}
+                        labelTekst={ferdigfilterListeLabelTekst[KANDIDAT_FOR_UTMELDING]}
+                        statustall={statustallMedBrukerinnsyn.kandidatForUtmelding}
+                    />
                 </div>
                 <div className="forste-barlabel-i-gruppe">
                     {oversiktType === OversiktType.minOversikt && (
