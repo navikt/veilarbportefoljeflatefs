@@ -29,8 +29,6 @@ import {EnhetModell} from '../../typer/enhet-og-veiledere-modeller';
 import {useFoedelandSelector} from '../../hooks/redux/use-foedeland-selector';
 import {useTolkbehovSelector} from '../../hooks/redux/use-tolkbehovspraak-selector';
 import {useGeografiskbostedSelector} from '../../hooks/redux/use-geografiskbosted-selector';
-import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {VIS_FILTER_FOR_UFORETRYGD} from '../../konstanter';
 
 interface Props {
     valgtFilter: string;
@@ -48,7 +46,6 @@ export const LagLabelForFiltervalg = ({
     const foedelandListData = useFoedelandSelector();
     const tolkbehovSpraakListData = useTolkbehovSelector();
     const geografiskBostedListData = useGeografiskbostedSelector();
-    const visUforetrygdFilter = useFeatureSelector()(VIS_FILTER_FOR_UFORETRYGD);
 
     if (!erGyldigFiltervalg(valgtFilter)) {
         throw new Error('Klarer ikke lage filtrering-etikett for filter. valgtFilter: ' + valgtFilter);
@@ -272,7 +269,7 @@ export const LagLabelForFiltervalg = ({
                 />
             );
         });
-    } else if (valgtFilter === Filtervalg.ytelseUforetrygd && visUforetrygdFilter) {
+    } else if (valgtFilter === Filtervalg.ytelseUforetrygd) {
         return valgteFilteralternativer.map((valgtAlternativ: UforetrygdFilter) => {
             return (
                 <FiltreringLabel
