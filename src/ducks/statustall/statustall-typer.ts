@@ -2,7 +2,6 @@
 export interface StatustallInnhold {
     totalt: number;
     ufordelteBrukere: number;
-    inaktiveBrukere: number;
     venterPaSvarFraNAV: number;
     venterPaSvarFraBruker: number;
     moterMedNAVIdag: number;

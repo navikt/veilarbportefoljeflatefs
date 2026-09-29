@@ -68,10 +68,10 @@ export const erGyldigFiltervalg = (filtervalg: string): filtervalg is Filtervalg
 
 /**
  * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * *
- * Om FiltervalgModell får endringer må man samkjøre med Filtermodellen i veilarbportefolje.       *
- * Begge repoene må deployes samtidig, og evt mapping fra lagrede filtre må fikses i backenden så  *
- * ting ikke brekker.                                                                              *
- * Eventuelle lagrede filtre med verdier som har endra seg må så migreres i databasen               *
+ * Om FiltervalgModell får nye filtervalg eller endringer må man samkjøre med Filtermodellen i     *
+ * veilarbportefolje. Begge repoene må deployes samtidig. Om man i tillegg har endret på           *
+ * eksisterende filter må man migrere lagrede filtre i gcp så filterne ikke feiler ved uthenting   *
+ * (se migreringsguide i backenden).                                                                *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 export interface FiltervalgModell {
     [Filtervalg.ferdigfilterListe]: string[];
@@ -120,8 +120,8 @@ export interface FiltervalgModell {
 
 /**
  * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * *
- * Om FiltervalgModell får endringer må man samkjøre med Filtermodellen i veilarbportefolje.       *
- * Begge repoene må deployes samtidig, og evt mapping fra lagrede filtre må fikses i backenden så  *
- * ting ikke brekker.                                                                              *
- * Eventuelle lagrede filtre med verdier som har endra seg må så migreres i databasen               *
+ * Om FiltervalgModell får nye filtervalg eller endringer må man samkjøre med Filtermodellen i     *
+ * veilarbportefolje. Begge repoene må deployes samtidig. Om man i tillegg har endret på           *
+ * eksisterende filter må man migrere lagrede filtre i gcp så filterne ikke feiler ved uthenting   *
+ * (se migreringsguide i backenden).                                                                *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

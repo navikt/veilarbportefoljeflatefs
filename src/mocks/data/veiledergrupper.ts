@@ -1,7 +1,7 @@
 import {veiledere} from './veiledere';
 import {LagretVeiledergruppeDto} from '../../ducks/lagret-filter';
 
-export const veiledergrupperPortefolje = (): LagretVeiledergruppeDto[] => {
+export const veiledergrupper = (): LagretVeiledergruppeDto[] => {
     const veilederGruppe1 = veiledere.slice(0, 4).map(v => v.ident);
     const veilederGruppe2 = veiledere.slice(5, 10).map(v => v.ident);
     const veilederGruppe3 = veiledere.slice(11, 15).map(v => v.ident);

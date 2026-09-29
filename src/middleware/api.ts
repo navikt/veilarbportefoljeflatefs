@@ -6,6 +6,7 @@ import {
     LagreNyVeiledergruppeRequest,
     LagreSortOrderRequest,
     LagretFilterDto,
+    LagretFilterMedAntallSomFeiletDto,
     LagretVeiledergruppeDto,
     RedigerLagretFilterRequest,
     RedigerVeiledergruppeRequest
@@ -157,7 +158,7 @@ export function hentAktivBruker(): Promise<InnloggetVeilederModell> {
     return fetchToJson(`${VEILARBVEILEDER_URL}/api/veileder/v2/me`, MED_CREDENTIALS);
 }
 
-export function hentMineFilter(): Promise<LagretFilterDto[]> {
+export function hentMineFilter(): Promise<LagretFilterMedAntallSomFeiletDto> {
     const url = `${VEILARBPORTEFOLJE_URL}/lagredefilter/minefilter`;
     return fetchToJson(url, MED_CREDENTIALS);
 }

@@ -1,8 +1,16 @@
 import {initialState} from '../../ducks/filtrering';
-import {LagretFilterDto} from '../../ducks/lagret-filter';
+import {LagretFilterDto, LagretFilterMedAntallSomFeiletDto} from '../../ducks/lagret-filter';
 import {InnsatsgruppeGjeldendeVedtak14a} from '../../typer/bruker-modell';
 
-export const mineFilterPortefolje = (): LagretFilterDto[] => {
+export const mineFilterMedAntallSomFeilet = (): LagretFilterMedAntallSomFeiletDto => {
+    return {
+        filtre: mineFilter(),
+        antallFiltreSomFeilet: 0,
+        stoppLagringAvFilterVedMigrering: false
+    };
+};
+
+export const mineFilter = (): LagretFilterDto[] => {
     return [
         {
             filterNavn: '1. Unge arbeidsledige møter idag',
@@ -13,7 +21,8 @@ export const mineFilterPortefolje = (): LagretFilterDto[] => {
                 ferdigfilterListe: ['MOTER_IDAG'],
                 tiltakstyper: ['UTDYRK']
             },
-            sortOrder: 0
+            sortOrder: 0,
+            infoOmSlettetFiltervalg: null
         },
         {
             filterNavn: 'TiltaksFilter',
@@ -24,19 +33,22 @@ export const mineFilterPortefolje = (): LagretFilterDto[] => {
                 formidlingsgruppe: ['ARBS'],
                 tiltakstyper: ['TULLETOES', 'UTDYRK']
             },
-            sortOrder: 0
+            sortOrder: 0,
+            infoOmSlettetFiltervalg: null
         },
         {
             filterNavn: 'Denne brukes til test la stå',
             filterId: 3,
             filterValg: {...initialState, kjonn: 'K', formidlingsgruppe: ['ARBS']},
-            sortOrder: 0
+            sortOrder: 0,
+            infoOmSlettetFiltervalg: null
         },
         {
             filterNavn: 'Kvinner',
             filterId: 6,
             filterValg: {...initialState, kjonn: 'K'},
-            sortOrder: 0
+            sortOrder: 0,
+            infoOmSlettetFiltervalg: ['AAP (Arena)', 'Verdien ISERV i filter for Formidlingsgruppe']
         },
         {
             filterNavn: 'Nye brukere',
@@ -45,13 +57,15 @@ export const mineFilterPortefolje = (): LagretFilterDto[] => {
                 ...initialState,
                 ferdigfilterListe: ['NYE_BRUKERE_FOR_VEILEDER']
             },
-            sortOrder: 0
+            sortOrder: 0,
+            infoOmSlettetFiltervalg: null
         },
         {
             filterNavn: 'UfordelteBrukere',
             filterId: 11,
             filterValg: {...initialState, ferdigfilterListe: ['UFORDELTE_BRUKERE']},
-            sortOrder: 1
+            sortOrder: 1,
+            infoOmSlettetFiltervalg: null
         },
         {
             filterNavn: 'Permitterte filter',
@@ -60,7 +74,8 @@ export const mineFilterPortefolje = (): LagretFilterDto[] => {
                 ...initialState,
                 ferdigfilterListe: ['ER_SYKMELDT_MED_ARBEIDSGIVER', 'NYE_BRUKERE_FOR_VEILEDER']
             },
-            sortOrder: 0
+            sortOrder: 0,
+            infoOmSlettetFiltervalg: null
         }
     ];
 };

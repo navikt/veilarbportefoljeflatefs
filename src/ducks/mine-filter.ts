@@ -10,7 +10,7 @@ import {
     HandlingsType,
     LagreNyttFilterRequest,
     LagreSortOrderRequest,
-    LagretFilterDto,
+    LagretFilterMedAntallSomFeiletDto,
     LagretFilterState,
     RedigerLagretFilterRequest
 } from './lagret-filter';
@@ -39,7 +39,8 @@ export const SORTER_MINEFILTER_FEILET = 'lagredefilter_sortering/FEILET';
 const initialState = {
     status: STATUS.NOT_STARTED,
     data: [],
-    handlingType: null
+    handlingType: null,
+    antallFiltreSomFeilet: 0
 };
 
 //  Reducer
@@ -79,13 +80,15 @@ export function mineFilterReducer(state: LagretFilterState = initialState, actio
             return {
                 ...state,
                 status: STATUS.ERROR,
-                handlingType: HandlingsType.NYTT
+                handlingType: HandlingsType.NYTT,
+                errorHttpStatus: action.data?.response?.status ?? null
             };
         case REDIGER_MINEFILTER_FEILET:
             return {
                 ...state,
                 status: STATUS.ERROR,
-                handlingType: HandlingsType.REDIGERE
+                handlingType: HandlingsType.REDIGERE,
+                errorHttpStatus: action.data?.response?.status ?? null
             };
         case SLETT_MINEFILTER_FEILET:
             return {
@@ -97,7 +100,9 @@ export function mineFilterReducer(state: LagretFilterState = initialState, actio
             return {
                 ...state,
                 status: STATUS.OK,
-                data: action.data,
+                data: action.data.filtre,
+                antallFiltreSomFeilet: action.data.antallFiltreSomFeilet,
+                stoppLagringAvFilterVedMigrering: action.data.stoppLagringAvFilterVedMigrering,
                 handlingType: HandlingsType.HENTE
             };
         case NY_MINEFILTER_OK:
@@ -148,9 +153,11 @@ export function mineFilterReducer(state: LagretFilterState = initialState, actio
 export function hentMineFilterForVeileder() {
     return doThenDispatch(
         () =>
-            hentMineFilter().then((dtoer: LagretFilterDto[]) =>
-                dtoer.map(dto => mapLagretFilterDtoTilLagretFilter(dto))
-            ),
+            hentMineFilter().then((dto: LagretFilterMedAntallSomFeiletDto) => ({
+                filtre: dto.filtre.map(f => mapLagretFilterDtoTilLagretFilter(f)),
+                antallFiltreSomFeilet: dto.antallFiltreSomFeilet,
+                stoppLagringAvFilterVedMigrering: dto.stoppLagringAvFilterVedMigrering
+            })),
         {OK: HENT_MINEFILTER_OK, FEILET: HENT_MINEFILTER_FEILET, PENDING: HENT_MINEFILTER_PENDING}
     );
 }

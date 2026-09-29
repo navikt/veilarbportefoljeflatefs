@@ -11,6 +11,7 @@ import {OversiktType} from '../../../ducks/ui/valgte-kolonner';
 import {EgenModal} from '../egenModal';
 import {LasterModal} from '../lastermodal/laster-modal';
 import {STATUS} from '../../../ducks/utils';
+import {useRegistrerRedigering} from '../../../hooks/use-registrer-redigering';
 import './mine-filter.css';
 
 import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
@@ -53,6 +54,8 @@ export function MineFilterModal({oversiktType}: Props) {
     const [valgtVisningstype, setValgtVisningstype] = useState<Visningstype>(Visningstype.MENY);
 
     const dispatch = useAppDispatch();
+
+    useRegistrerRedigering(erModalApen);
 
     const lukkModal = () => {
         dispatch(lukkMineFilterModal(oversiktType));
