@@ -15,8 +15,8 @@ export const UforetrygdVirkningsdatoHeader = ({
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.UFORETRYGD_VIRKNINGSDATO}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Uføretrygd virkningsdato"
-        title="Virkningsdato for uføretrygd"
+        tekst="Første virkningsdato uføretrygd"
+        title="Første virkningsdato uføretrygd"
         className="col col-xs-2"
     />
 );

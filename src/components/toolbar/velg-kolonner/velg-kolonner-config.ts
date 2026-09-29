@@ -114,7 +114,7 @@ export function useAlternativerConfig(oversiktType: OversiktType) {
         alternativerConfig.set(Kolonne.UNGDOMSPROGRAM_MAKSDATO, {tekstlabel: 'Ungdomsprogram-ytelse maksdato'});
         alternativerConfig.set(Kolonne.UNGDOMSPROGRAM_SLUTTDATO, {tekstlabel: 'Ungdomsprogram-ytelse sluttdato'});
         alternativerConfig.set(Kolonne.UNGDOMSPROGRAM_RETTIGHET, {tekstlabel: 'Ungdomsprogram-ytelse rettighet'});
-        alternativerConfig.set(Kolonne.UFORETRYGD_VIRKNINGSDATO, {tekstlabel: 'Uføretrygd virkningsdato'});
+        alternativerConfig.set(Kolonne.UFORETRYGD_VIRKNINGSDATO, {tekstlabel: 'Første virkningsdato uføretrygd'});
         alternativerConfig.set(Kolonne.UFORETRYGD_UFOREGRAD, {tekstlabel: 'Uføregrad'});
 
         return alternativerConfig;
