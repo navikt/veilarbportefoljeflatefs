@@ -26,6 +26,7 @@ import {
     TiltakspengerFilter,
     TiltakspengerFilterArena,
     tolkebehov,
+    UforetrygdFilter,
     ulesteEndringer,
     UngdomsprogramytelseFilter,
     utdanning,
@@ -117,5 +118,6 @@ export const filtervalgValidators: Partial<Record<Filtervalg, Validator>> = {
     [Filtervalg.ytelseTiltakspenger]: enumArray(Object.values(TiltakspengerFilter)),
     [Filtervalg.ytelseDagpengerArena]: enumArray(Object.values(DagpengerFilterArena)),
     [Filtervalg.ytelseDagpenger]: enumArray(Object.values(DagpengerFilter)),
-    [Filtervalg.ytelseUngdomsprogram]: enumArray(Object.values(UngdomsprogramytelseFilter))
+    [Filtervalg.ytelseUngdomsprogram]: enumArray(Object.values(UngdomsprogramytelseFilter)),
+    [Filtervalg.ytelseUforetrygd]: enumArray(Object.values(UforetrygdFilter))
 };

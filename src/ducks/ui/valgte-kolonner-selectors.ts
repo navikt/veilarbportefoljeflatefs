@@ -14,6 +14,7 @@ import {
     TiltakspengerFilter,
     TiltakspengerFilterArena,
     UDELT_SAMTALEREFERAT,
+    UforetrygdFilter,
     UNDER_VURDERING,
     UngdomsprogramytelseFilter,
     UTGATTE_VARSEL,
@@ -116,6 +117,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
     const filtrertPaUngdomsprogramytelse = filtervalg.ytelseUngdomsprogram.includes(
         UngdomsprogramytelseFilter.HAR_UNGDOMSPROGRAMYTELSE
     );
+    const filtrertPaUforetrygd = filtervalg.ytelseUforetrygd.includes(UforetrygdFilter.HAR_UFORETRYGD);
 
     /* Hjelpeverdiar for AAP-filter Arena */
     const ordinarAapArena = filtrertPaOrdinarAapFilterArena(filtervalg);
@@ -220,6 +222,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.UNGDOMSPROGRAM_MAKSDATO, filtrertPaUngdomsprogramytelse))
         .concat(addHvis(Kolonne.UNGDOMSPROGRAM_SLUTTDATO, filtrertPaUngdomsprogramytelse))
         .concat(addHvis(Kolonne.UNGDOMSPROGRAM_RETTIGHET, filtrertPaUngdomsprogramytelse))
+        .concat(addHvis(Kolonne.UFORETRYGD_VIRKNINGSDATO, filtrertPaUforetrygd))
+        .concat(addHvis(Kolonne.UFORETRYGD_UFOREGRAD, filtrertPaUforetrygd))
         .concat(addHvis(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP, filtrertPaBeggeAapArenaOgAapKelvin))
         .concat(addHvis(Kolonne.TILTAKSPENGER_VEDTAKSDATO_TOM, filtrertPaTiltakspenger))
         .concat(addHvis(Kolonne.TILTAKSPENGER_RETTIGHET, filtrertPaTiltakspenger))
