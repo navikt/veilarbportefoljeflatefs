@@ -7,6 +7,7 @@ import {
     DagpengerFilterArena,
     TiltakspengerFilter,
     TiltakspengerFilterArena,
+    UforetrygdFilter,
     UngdomsprogramytelseFilter
 } from '../filtrering/filter-konstanter';
 
@@ -59,7 +60,8 @@ export enum Filtervalg {
     ytelseTiltakspenger = 'ytelseTiltakspenger',
     ytelseDagpengerArena = 'ytelseDagpengerArena',
     ytelseDagpenger = 'ytelseDagpenger',
-    ytelseUngdomsprogram = 'ytelseUngdomsprogram'
+    ytelseUngdomsprogram = 'ytelseUngdomsprogram',
+    ytelseUforetrygd = 'ytelseUforetrygd'
 }
 
 export const erGyldigFiltervalg = (filtervalg: string): filtervalg is Filtervalg => {
@@ -116,6 +118,7 @@ export interface FiltervalgModell {
     [Filtervalg.ytelseDagpengerArena]: DagpengerFilterArena[];
     [Filtervalg.ytelseDagpenger]: DagpengerFilter[];
     [Filtervalg.ytelseUngdomsprogram]: UngdomsprogramytelseFilter[];
+    [Filtervalg.ytelseUforetrygd]: UforetrygdFilter[];
 }
 
 /**

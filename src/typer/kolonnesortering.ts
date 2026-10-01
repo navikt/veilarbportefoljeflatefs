@@ -39,6 +39,9 @@ export enum Sorteringsfelt {
     UNGDOMSPROGRAM_RETTIGHET = 'ungdomsprogram_rettighet',
     UNGDOMSPROGRAM_SLUTTDATO = 'ungdomsprogram_sluttdato',
 
+    UFORETRYGD_VIRKNINGSDATO = 'uforetrygd_virkningsdato',
+    UFORETRYGD_UFOREGRAD = 'uforetrygd_uforegrad',
+
     VENTER_PA_SVAR_FRA_NAV = 'venterpasvarfranav',
     VENTER_PA_SVAR_FRA_BRUKER = 'venterpasvarfrabruker',
 

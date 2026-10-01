@@ -64,6 +64,8 @@ import {DagpengerStansDatoData} from '../components/tabell/dataCells/DagpengerSt
 import {DagpengerResterendeDagerData} from '../components/tabell/dataCells/DagpengerResterendeDagerData';
 import {AapKelvinMaksdatoData} from '../components/tabell/dataCells/AapKelvinMaksdatoData';
 import {FilterhendelseDatoFristData} from '../components/tabell/dataCells/FilterhendelseDatoFristData';
+import {UforetrygdVirkningsdatoData} from '../components/tabell/dataCells/UforetrygdVirkningsdatoData';
+import {UforetrygdUforegradData} from '../components/tabell/dataCells/UforetrygdUforegradData';
 
 interface Props {
     className?: string;
@@ -166,6 +168,9 @@ export function EnhetTableDataCells({className, bruker, enhetId, filtervalg, val
             <UngdomsprogramMaksdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
             <UngdomsprogramSluttdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
             <UngdomsprogramRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <UforetrygdVirkningsdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <UforetrygdUforegradData bruker={bruker} valgteKolonner={valgteKolonner} />
         </div>
     );
 }
