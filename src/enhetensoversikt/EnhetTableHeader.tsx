@@ -67,6 +67,8 @@ import {DagpengerResterendeDagerHeader} from '../components/tabell/headerCells/D
 import {DagpengerStansDatoHeader} from '../components/tabell/headerCells/DagpengerStansDatoHeader';
 import {AapKelvinVedtakMaksdatoHeader} from '../components/tabell/headerCells/AapKelvinVedtakMaksdatoHeader';
 import {FilterhendelseDatoFristHeader} from '../components/tabell/headerCells/FilterhendelseDatoFristHeader';
+import {UforetrygdVirkningsdatoHeader} from '../components/tabell/headerCells/UforetrygdVirkningsdatoHeader';
+import {UforetrygdUforegradHeader} from '../components/tabell/headerCells/UforetrygdUforegradHeader';
 
 export function EnhetTableHeader() {
     const {
@@ -177,6 +179,9 @@ export function EnhetTableHeader() {
                 <UngdomsprogramMaksdatoHeader {...sorteringTilHeaderCell} />
                 <UngdomsprogramSluttdatoHeader {...sorteringTilHeaderCell} />
                 <UngdomsprogramRettighetHeader {...sorteringTilHeaderCell} />
+
+                <UforetrygdVirkningsdatoHeader {...sorteringTilHeaderCell} />
+                <UforetrygdUforegradHeader {...sorteringTilHeaderCell} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

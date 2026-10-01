@@ -85,7 +85,8 @@ describe('Mine filter utils', () => {
                 ytelseTiltakspenger: [],
                 ytelseDagpengerArena: [],
                 ytelseDagpenger: [],
-                ytelseUngdomsprogram: []
+                ytelseUngdomsprogram: [],
+                ytelseUforetrygd: []
             };
 
             expect(
