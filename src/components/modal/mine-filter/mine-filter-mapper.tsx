@@ -1,6 +1,6 @@
 import {LagretFilter, LagretFilterDto, LagretVeiledergruppeDto} from '../../../ducks/lagret-filter';
-import {initialState, initialState as filtervalgInitialState} from '../../../ducks/filtrering';
-import {Filtervalg} from '../../../typer/filtervalg-modell';
+import {initialState as filtervalgInitialState} from '../../../ducks/filtrering';
+import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
 
 export function mapVeiledergrupperDtoTilLagretFilter(dto: LagretVeiledergruppeDto): LagretFilter {
     return {
@@ -12,11 +12,20 @@ export function mapVeiledergrupperDtoTilLagretFilter(dto: LagretVeiledergruppeDt
     };
 }
 
+function beholdKjenteFiltervalg(filterValg: FiltervalgModell): FiltervalgModell {
+    return Object.fromEntries(
+        Object.keys(filtervalgInitialState).map(key => [key, filterValg[key] ?? filtervalgInitialState[key]])
+    ) as FiltervalgModell;
+}
+
 export function mapLagretFilterDtoTilLagretFilter(dto: LagretFilterDto): LagretFilter {
     return {
         filterNavn: dto.filterNavn,
         filterId: dto.filterId,
-        filterValg: {...dto.filterValg, veilederNavnQuery: initialState[Filtervalg.veilederNavnQuery]},
+        filterValg: {
+            ...beholdKjenteFiltervalg(dto.filterValg),
+            veilederNavnQuery: filtervalgInitialState[Filtervalg.veilederNavnQuery]
+        },
         sortOrder: dto.sortOrder,
         infoOmSlettetFiltervalg: dto.infoOmSlettetFiltervalg
     };

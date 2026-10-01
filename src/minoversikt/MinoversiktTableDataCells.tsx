@@ -67,6 +67,8 @@ import {DagpengerStansDatoData} from '../components/tabell/dataCells/DagpengerSt
 import {DagpengerResterendeDagerData} from '../components/tabell/dataCells/DagpengerResterendeDagerData';
 import {AapKelvinMaksdatoData} from '../components/tabell/dataCells/AapKelvinMaksdatoData';
 import {FilterhendelseDatoFristData} from '../components/tabell/dataCells/FilterhendelseDatoFristData';
+import {UforetrygdVirkningsdatoData} from '../components/tabell/dataCells/UforetrygdVirkningsdatoData';
+import {UforetrygdUforegradData} from '../components/tabell/dataCells/UforetrygdUforegradData';
 
 interface Props {
     bruker: BrukerModell;
@@ -173,6 +175,9 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
             <UngdomsprogramMaksdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
             <UngdomsprogramSluttdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
             <UngdomsprogramRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <UforetrygdVirkningsdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <UforetrygdUforegradData bruker={bruker} valgteKolonner={valgteKolonner} />
         </div>
     );
 }
