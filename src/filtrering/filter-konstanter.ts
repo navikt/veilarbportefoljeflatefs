@@ -368,6 +368,14 @@ export const ungdomsprogramytelseFilter = {
     [UngdomsprogramytelseFilter.HAR_UNGDOMSPROGRAMYTELSE]: {label: 'Ungdomsprogramytelse (UNG-SAK)'}
 };
 
+export enum UforetrygdFilter {
+    HAR_UFORETRYGD = 'HAR_UFORETRYGD'
+}
+
+export const uforetrygdFilter = {
+    [UforetrygdFilter.HAR_UFORETRYGD]: {label: 'Uføretrygd'}
+};
+
 export enum DagpengerFilterArena {
     HAR_DAGPENGER_ORDINAR_ARENA = 'HAR_DAGPENGER_ORDINAER',
     HAR_DAGPENGER_MED_PERMITTERING_ARENA = 'HAR_DAGPENGER_MED_PERMITTERING',
@@ -455,5 +463,6 @@ export const filterKonstanter = {
     ytelseTiltakspenger: tiltakspengerFilter,
     ytelseDagpengerArena: dagpengerArenaFilter,
     ytelseDagpenger: dagpengerFilter,
-    ytelseUngdomsprogram: ungdomsprogramytelseFilter
+    ytelseUngdomsprogram: ungdomsprogramytelseFilter,
+    ytelseUforetrygd: uforetrygdFilter
 };
