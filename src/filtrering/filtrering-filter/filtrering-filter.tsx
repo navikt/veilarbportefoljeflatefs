@@ -22,6 +22,7 @@ import {
     stillingFraNavFilter,
     tiltakspengerFilter,
     tiltakspengerFilterArena,
+    uforetrygdFilter,
     ungdomsprogramytelseFilter,
     utdanning,
     utdanningBestatt,
@@ -44,6 +45,8 @@ import './filterform/filterform.css';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import {trackLenkeKlikketEvent} from '../../umami/umami-events';
+import {VIS_FILTER_FOR_UFORETRYGD} from '../../konstanter';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -53,6 +56,7 @@ interface FiltreringFilterProps {
 }
 
 export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
+    const visUforetrygdFilter = useFeatureSelector()(VIS_FILTER_FOR_UFORETRYGD);
     return (
         <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
             <div className="filtrering-filter__kolonne">
@@ -478,6 +482,24 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         />
                     )}
                 />
+                {visUforetrygdFilter && (
+                    <Dropdown
+                        name="Uføretrygd"
+                        id="ytelser-uforetrygd"
+                        render={() => (
+                            <CheckboxFilterform
+                                filterformOgValgListe={[
+                                    {
+                                        form: Filtervalg.ytelseUforetrygd,
+                                        checkboxValg: uforetrygdFilter
+                                    }
+                                ]}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        )}
+                    />
+                )}
                 <Dropdown
                     name="Rettighetsgruppe (Arena)"
                     id="rettighetsgruppe"

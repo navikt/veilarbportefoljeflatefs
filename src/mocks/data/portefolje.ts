@@ -23,6 +23,7 @@ import {
     TiltakshendelseModell,
     TiltakspengerData,
     Tolkebehov,
+    UforetrygdData,
     Utkast14a,
     Vedtak14a,
     Ytelser,
@@ -321,6 +322,19 @@ const lagUngdomsprogramData = () => {
     };
 };
 
+const lagUforetrygdData = (): UforetrygdData | null => {
+    const harUforetrygd = Math.random() > 0.5;
+
+    if (!harUforetrygd) {
+        return null;
+    }
+
+    return {
+        virkningsdato: randomDate({past: true}),
+        uforegrad: rnd(0, 100).toString()
+    };
+};
+
 const lagYtelser = (): Ytelser => {
     return {
         ytelserArena: lagArenaYtelse(),
@@ -328,6 +342,7 @@ const lagYtelser = (): Ytelser => {
         tiltakspenger: lagTiltakspengerData(),
         dagpenger: lagDagpengerData(),
         ungdomsprogram: lagUngdomsprogramData(),
+        uforetrygd: lagUforetrygdData(),
         ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger()
     };
 };
