@@ -42,7 +42,6 @@ export interface Etiketter {
     trengerOppfolgingsvedtak: boolean;
     nyForVeileder: boolean;
     nyForEnhet: boolean;
-    harBehovForArbeidsevneVurdering: boolean;
     harSikkerhetstiltak: boolean;
     diskresjonskodeFortrolig: string | null;
     profileringResultat: Profileringsresultat | null;
