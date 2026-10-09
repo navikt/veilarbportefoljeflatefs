@@ -4,8 +4,7 @@ import {
     BRUK_TILTAKSAKTIVITET_FRA_AKTIVITETSPLAN,
     DARKMODE,
     LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG,
-    PORTEFOLJE_FEATURES,
-    VIS_FILTER_FOR_UFORETRYGD
+    PORTEFOLJE_FEATURES
 } from '../konstanter';
 import {erRedigeringAktiv} from '../utils/redigering-registry';
 
@@ -18,8 +17,7 @@ export interface FeaturesState {
 const initalState: FeaturesState = {
     [DARKMODE]: false,
     [LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG]: false,
-    [BRUK_TILTAKSAKTIVITET_FRA_AKTIVITETSPLAN]: false,
-    [VIS_FILTER_FOR_UFORETRYGD]: false
+    [BRUK_TILTAKSAKTIVITET_FRA_AKTIVITETSPLAN]: false
 };
 
 // Reducer
