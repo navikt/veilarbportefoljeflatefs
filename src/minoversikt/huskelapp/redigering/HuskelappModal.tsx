@@ -24,6 +24,7 @@ interface Props {
 export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker}: Props) => {
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
     const [huskelappEndret, setHuskelappEndret] = useState<boolean>(false);
+    const [isLagrer, setIsLagrer] = useState<boolean>(false);
     const dispatch = useAppDispatch();
 
     useRegistrerRedigering(isModalOpen);
@@ -53,6 +54,7 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker}: P
                 kommentar: 'Du må legge til enten frist eller kommentar for å kunne lagre huskelappen'
             });
         }
+        setIsLagrer(true);
         try {
             if (huskelapp?.huskelappId) {
                 await endreHuskelapp(dispatch, values, bruker, enhetId!, onModalClose, huskelapp.huskelappId);
@@ -61,6 +63,8 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker}: P
             }
         } catch (error) {
             dispatch(visServerfeilModal());
+        } finally {
+            setIsLagrer(false);
         }
     }
 
@@ -105,7 +109,7 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker}: P
                 />
             </Modal.Body>
             <Modal.Footer className="rediger-huskelapp-modal__footer">
-                <Button variant="primary" size="small" type="submit" form="rediger-huskelapp-skjema">
+                <Button variant="primary" size="small" type="submit" form="rediger-huskelapp-skjema" loading={isLagrer}>
                     Lagre
                 </Button>
                 <Button size="small" variant="secondary" type="button" onClick={handleOnAvbryt}>
