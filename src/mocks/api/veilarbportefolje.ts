@@ -7,7 +7,6 @@ import {geografiskBostedListMockData} from '../data/geografiskBosted';
 import {statustallEnhet, statustallVeileder} from '../data/statustall';
 import {brukere, hentHuskelappForBruker, hentMockPlan} from '../data/portefolje';
 import {lagPortefoljestorrelserForVeiledere} from '../data/portefoljestorrelser';
-import {tiltak} from '../data/tiltak';
 import {FargekategoriModell} from '../../typer/bruker-modell';
 import {withAuth} from './auth';
 import {DEFAULT_DELAY_MILLISECONDS} from '../constants';
@@ -126,12 +125,6 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
             await delay(DEFAULT_DELAY_MILLISECONDS);
 
             return HttpResponse.json(statustallVeileder);
-        })
-    ),
-    http.get(
-        '/veilarbportefolje/api/enhet/:enhetId/tiltak',
-        withAuth(async () => {
-            return HttpResponse.json(tiltak);
         })
     ),
     http.get(

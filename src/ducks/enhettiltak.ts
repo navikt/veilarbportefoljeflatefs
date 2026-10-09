@@ -41,15 +41,6 @@ export function enhetTiltakReducer(state: EnhettiltakState = initalState, action
     }
 }
 
-// Action Creators
-export function hentEnhetTiltak(enhet) {
-    return doThenDispatch(() => Api.hentEnhetTiltak(enhet), {
-        OK,
-        FEILET,
-        PENDING
-    });
-}
-
 export function hentTiltakstyperForEnhet(enhet) {
     return doThenDispatch(() => Api.hentTiltakstyper(enhet), {
         OK,

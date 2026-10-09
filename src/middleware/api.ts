@@ -271,11 +271,6 @@ export function slettHuskelapp(huskelappId: string) {
     return fetchToJson(url, config);
 }
 
-export function hentEnhetTiltak(enhetId) {
-    const url = `${VEILARBPORTEFOLJE_URL}/enhet/${enhetId}/tiltak`;
-    return fetchToJson(url, MED_CREDENTIALS);
-}
-
 export function hentTiltakstyper(enhetId) {
     const url = `${VEILARBPORTEFOLJE_URL}/enhet/${enhetId}/tiltakstyper`;
     return fetchToJson(url, MED_CREDENTIALS);
