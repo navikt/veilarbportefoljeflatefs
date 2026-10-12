@@ -15,6 +15,7 @@ import {
     formidlingsgruppe,
     gjeldendeVedtak14a as gjeldendeVedtak14aKonst,
     hendelserEtikett,
+    IngenYtelserFilter,
     initialStateAktiviteterFiltervalg,
     kjonn,
     landgruppe,
@@ -119,5 +120,6 @@ export const filtervalgValidators: Partial<Record<Filtervalg, Validator>> = {
     [Filtervalg.ytelseDagpengerArena]: enumArray(Object.values(DagpengerFilterArena)),
     [Filtervalg.ytelseDagpenger]: enumArray(Object.values(DagpengerFilter)),
     [Filtervalg.ytelseUngdomsprogram]: enumArray(Object.values(UngdomsprogramytelseFilter)),
-    [Filtervalg.ytelseUforetrygd]: enumArray(Object.values(UforetrygdFilter))
+    [Filtervalg.ytelseUforetrygd]: enumArray(Object.values(UforetrygdFilter)),
+    [Filtervalg.ingenYtelser]: enumArray(Object.values(IngenYtelserFilter))
 };

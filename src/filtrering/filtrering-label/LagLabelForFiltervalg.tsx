@@ -12,6 +12,8 @@ import {
     filterKonstanter,
     hendelserEtikett,
     hendelserLabels,
+    IngenYtelserFilter,
+    ingenYtelserFilter,
     registreringstypeEtiketter,
     tiltakspengerFilter,
     TiltakspengerFilter,
@@ -275,6 +277,16 @@ export const LagLabelForFiltervalg = ({
                 <FiltreringLabel
                     key={`${valgtFilter}--${valgtAlternativ}`}
                     label={uforetrygdFilter[valgtAlternativ]}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
+                />
+            );
+        });
+    } else if (valgtFilter === Filtervalg.ingenYtelser) {
+        return valgteFilteralternativer.map((valgtAlternativ: IngenYtelserFilter) => {
+            return (
+                <FiltreringLabel
+                    key={`${valgtFilter}--${valgtAlternativ}`}
+                    label={ingenYtelserFilter[valgtAlternativ]}
                     slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                 />
             );
