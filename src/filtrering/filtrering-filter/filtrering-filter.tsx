@@ -497,22 +497,6 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     )}
                 />
                 <Dropdown
-                    name="Rettighetsgruppe (Arena)"
-                    id="rettighetsgruppe"
-                    render={() => (
-                        <CheckboxFilterform
-                            filterformOgValgListe={[
-                                {
-                                    form: Filtervalg.rettighetsgruppe,
-                                    checkboxValg: rettighetsgruppeArena
-                                }
-                            ]}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                        />
-                    )}
-                />
-                <Dropdown
                     name="Ingen livsoppholdsytelser"
                     id="ingen-livsoppholdsytelser"
                     render={() => (
@@ -532,6 +516,22 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                 endreFiltervalg={endreFiltervalg}
                             />
                         </>
+                    )}
+                />
+                <Dropdown
+                    name="Rettighetsgruppe (Arena)"
+                    id="rettighetsgruppe"
+                    render={() => (
+                        <CheckboxFilterform
+                            filterformOgValgListe={[
+                                {
+                                    form: Filtervalg.rettighetsgruppe,
+                                    checkboxValg: rettighetsgruppeArena
+                                }
+                            ]}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                        />
                     )}
                 />
             </div>

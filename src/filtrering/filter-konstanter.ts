@@ -136,8 +136,7 @@ export const manuellBrukerStatus = {
 export const rettighetsgruppeArena = {
     AAP: {label: 'Arbeidsavklaringspenger (Arena)'},
     DAGP: {label: 'Dagpenger (Arena)'},
-    INDS: {label: 'Tiltakspenger (Arena)'},
-    IYT: {label: 'Ingen livsoppholdsytelser (Arena)'}
+    INDS: {label: 'Tiltakspenger (Arena)'}
 };
 
 export const ensligeForsorgere = {
