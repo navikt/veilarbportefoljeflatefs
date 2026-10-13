@@ -502,7 +502,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Filteret viser brukere som ikke har noen av livsoppholdsytelsene: AAP, dagpenger,
+                                Filteret viser personer som ikke har noen av livsoppholdsytelsene: AAP, dagpenger,
                                 tiltakspenger, overgangsstønad, ungdomsprogramytelse eller uføretrygd.
                             </Alert>
                             <CheckboxFilterform
