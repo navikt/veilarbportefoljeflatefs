@@ -52,7 +52,7 @@ export const alleFargekategoriFilterAlternativer = [
  * Til dømes "samlefilter" som vel alle avhukingsboksar innanfor eit tema. */
 export const filterSomIkkeSkalSendesTilBackend = [MINE_FARGEKATEGORIER];
 
-export function lagConfig(data: any): any {
+export function lagConfig(data: string | {label: string}): any {
     if (typeof data === 'string') {
         return {label: data};
     }
@@ -125,10 +125,6 @@ export const formidlingsgruppe = {
 };
 
 export const servicegruppe = {
-    BKART: {label: 'Behov for arbeidsevnevurdering'},
-    IVURD: {label: 'Ikke vurdert'},
-    OPPFI: {label: 'Helserelatert arbeidsrettet oppfølging i Nav'},
-    VURDI: {label: 'Sykmeldt oppfølging på arbeidsplassen'},
     VURDU: {label: 'Sykmeldt uten arbeidsgiver'}
 };
 

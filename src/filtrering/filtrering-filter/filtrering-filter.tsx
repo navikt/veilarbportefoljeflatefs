@@ -352,7 +352,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     )}
                 />
                 <Dropdown
-                    name="Servicegruppe"
+                    name="Servicegruppe (Arena)"
                     id="servicegruppe"
                     render={() => (
                         <CheckboxFilterform
