@@ -136,8 +136,7 @@ export const manuellBrukerStatus = {
 export const rettighetsgruppeArena = {
     AAP: {label: 'Arbeidsavklaringspenger (Arena)'},
     DAGP: {label: 'Dagpenger (Arena)'},
-    INDS: {label: 'Tiltakspenger (Arena)'},
-    IYT: {label: 'Ingen livsoppholdsytelser (Arena)'}
+    INDS: {label: 'Tiltakspenger (Arena)'}
 };
 
 export const ensligeForsorgere = {
@@ -402,6 +401,15 @@ export const dagpengerFilter = {
     }
 };
 
+export enum IngenYtelserFilter {
+    HAR_INGEN_YTELSER = 'HAR_INGEN_YTELSER'
+}
+export const ingenYtelserFilter = {
+    [IngenYtelserFilter.HAR_INGEN_YTELSER]: {
+        label: 'Ingen livsoppholdsytelser'
+    }
+};
+
 /** Lange namn på innsatsgrupper.
  * Brukt i nedtrekksmeny for filtervalg + filtertags. */
 export const innsatsgruppeGjeldendeVedtak14a: {[key in InnsatsgruppeGjeldendeVedtak14a]: string} = {
@@ -460,5 +468,6 @@ export const filterKonstanter = {
     ytelseDagpengerArena: dagpengerArenaFilter,
     ytelseDagpenger: dagpengerFilter,
     ytelseUngdomsprogram: ungdomsprogramytelseFilter,
-    ytelseUforetrygd: uforetrygdFilter
+    ytelseUforetrygd: uforetrygdFilter,
+    ingenYtelser: ingenYtelserFilter
 };

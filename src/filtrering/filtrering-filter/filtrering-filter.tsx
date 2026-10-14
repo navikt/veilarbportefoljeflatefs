@@ -13,6 +13,7 @@ import {
     formidlingsgruppe,
     gjeldendeVedtak14a,
     hovedmalGjeldendeVedtak14a,
+    ingenYtelserFilter,
     innsatsgruppeGjeldendeVedtak14a,
     kjonn,
     manuellBrukerStatus,
@@ -33,7 +34,6 @@ import {FodselsdatoFilterform} from './filterform/fodselsdato-filterform';
 import {AlderFilterform} from './filterform/alder-filterform';
 import {RadioFilterform} from './filterform/radio-filterform';
 import {OversiktType} from '../../ducks/ui/valgte-kolonner';
-import {AktivitetFilterformController} from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
 import {GeografiskBostedFilterform} from './filterform/geografiskbosted-filterform';
 import {FoedelandFilterform} from './filterform/foedeland-filterform';
@@ -45,6 +45,7 @@ import './filterform/filterform.css';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import {trackLenkeKlikketEvent} from '../../umami/umami-events';
+import {AktivitetFilterformController} from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -493,6 +494,28 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                         />
+                    )}
+                />
+                <Dropdown
+                    name="Ingen livsoppholdsytelser"
+                    id="ingen-livsoppholdsytelser"
+                    render={() => (
+                        <>
+                            <Alert variant="info" size="small" className="registrering-alert">
+                                Filteret viser personer som ikke har noen av livsoppholdsytelsene: AAP, dagpenger,
+                                tiltakspenger, overgangsstønad, ungdomsprogramytelse eller uføretrygd.
+                            </Alert>
+                            <CheckboxFilterform
+                                filterformOgValgListe={[
+                                    {
+                                        form: Filtervalg.ingenYtelser,
+                                        checkboxValg: ingenYtelserFilter
+                                    }
+                                ]}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        </>
                     )}
                 />
                 <Dropdown
