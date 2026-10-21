@@ -119,7 +119,9 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         UngdomsprogramytelseFilter.HAR_UNGDOMSPROGRAMYTELSE
     );
     const filtrertPaUforetrygd = filtervalg.ytelseUforetrygd.includes(UforetrygdFilter.HAR_UFORETRYGD);
-    const filtrertPaSykmeldt = filtervalg.sykmeldt.includes(SykmeldtFilter.ER_SYKMELDT);
+    const filtrertPaSykmeldt =
+        filtervalg.sykmeldt.includes(SykmeldtFilter.ER_SYKMELDT_MED_ARBEIDSGIVER) ||
+        filtervalg.sykmeldt.includes(SykmeldtFilter.ER_SYKMELDT_UTEN_ARBEIDSGIVER);
 
     /* Hjelpeverdiar for AAP-filter Arena */
     const ordinarAapArena = filtrertPaOrdinarAapFilterArena(filtervalg);

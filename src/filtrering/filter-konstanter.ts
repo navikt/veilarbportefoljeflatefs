@@ -372,11 +372,13 @@ export const uforetrygdFilter = {
 };
 
 export enum SykmeldtFilter {
-    ER_SYKMELDT = 'ER_SYKMELDT'
+    ER_SYKMELDT_MED_ARBEIDSGIVER = 'ER_SYKMELDT_MED_ARBEIDSGIVER',
+    ER_SYKMELDT_UTEN_ARBEIDSGIVER = 'ER_SYKMELDT_UTEN_ARBEIDSGIVER'
 }
 
 export const sykmeldtFilter = {
-    [SykmeldtFilter.ER_SYKMELDT]: {label: 'Sykmeldt'}
+    [SykmeldtFilter.ER_SYKMELDT_MED_ARBEIDSGIVER]: {label: 'Sykmeldt med arbeidsgiver'},
+    [SykmeldtFilter.ER_SYKMELDT_UTEN_ARBEIDSGIVER]: {label: 'Sykmeldt uten arbeidsgiver'}
 };
 
 export enum DagpengerFilterArena {
