@@ -1,6 +1,7 @@
 import {createRoot} from 'react-dom/client';
 import {initializeFaro, WebVitalsInstrumentation} from '@grafana/faro-web-sdk';
 import Application from './application';
+import {ErrorBoundary} from './components/error-boundary/error-boundary';
 import {EnvType, getEnv} from './utils/url-utils';
 import env from './utils/environment';
 import './style.css';
@@ -12,7 +13,12 @@ if (window.localStorage.getItem('filterVersjon') !== 'v1') {
     localStorage.removeItem('enhetsState');
 }
 
-const renderApp = () => createRoot(document.getElementById('mainapp') as HTMLElement).render(<Application />);
+const renderApp = () =>
+    createRoot(document.getElementById('mainapp') as HTMLElement).render(
+        <ErrorBoundary>
+            <Application />
+        </ErrorBoundary>
+    );
 
 if (env.isDemo) {
     // eslint-disable-next-line no-console
