@@ -30,6 +30,7 @@ export interface BrukerModell {
     nesteSvarfristCvStillingFraNav: string | null;
     ytelser: Ytelser;
     vedtak14a: Vedtak14a;
+    sykmeldt: SykmeldtData | null;
 
     fargekategori: FargekategoriModell | null;
     fargekategoriEnhetId: string | null;
@@ -234,4 +235,10 @@ export interface UngdomsprogramData {
 export interface UforetrygdData {
     virkningsdato: string;
     uforegrad: string;
+}
+
+export interface SykmeldtData {
+    startdato: string;
+    sluttdato: string;
+    harArbeidsgiver: string;
 }

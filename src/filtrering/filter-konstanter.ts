@@ -371,6 +371,14 @@ export const uforetrygdFilter = {
     [UforetrygdFilter.HAR_UFORETRYGD]: {label: 'Uføretrygd'}
 };
 
+export enum SykmeldtFilter {
+    ER_SYKMELDT = 'ER_SYKMELDT'
+}
+
+export const sykmeldtFilter = {
+    [SykmeldtFilter.ER_SYKMELDT]: {label: 'Sykmeldt'}
+};
+
 export enum DagpengerFilterArena {
     HAR_DAGPENGER_ORDINAR_ARENA = 'HAR_DAGPENGER_ORDINAER',
     HAR_DAGPENGER_MED_PERMITTERING_ARENA = 'HAR_DAGPENGER_MED_PERMITTERING',
@@ -469,5 +477,6 @@ export const filterKonstanter = {
     ytelseDagpenger: dagpengerFilter,
     ytelseUngdomsprogram: ungdomsprogramytelseFilter,
     ytelseUforetrygd: uforetrygdFilter,
-    ingenYtelser: ingenYtelserFilter
+    ingenYtelser: ingenYtelserFilter,
+    sykmeldt: sykmeldtFilter
 };

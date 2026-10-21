@@ -42,6 +42,10 @@ export enum Sorteringsfelt {
     UFORETRYGD_VIRKNINGSDATO = 'uforetrygd_virkningsdato',
     UFORETRYGD_UFOREGRAD = 'uforetrygd_uforegrad',
 
+    SYKMELDT_STARTDATO = 'sykmeldt_startdato',
+    SYKMELDT_SLUTTDATO = 'sykmeldt_sluttdato',
+    SYKMELDT_HAR_ARBEIDSGIVER = 'sykmeldt_har_arbeidsgiver',
+
     VENTER_PA_SVAR_FRA_NAV = 'venterpasvarfranav',
     VENTER_PA_SVAR_FRA_BRUKER = 'venterpasvarfrabruker',
 

@@ -79,7 +79,10 @@ export enum Kolonne {
     UNGDOMSPROGRAM_SLUTTDATO = 'ungdomsprogram_sluttdato',
     UNGDOMSPROGRAM_RETTIGHET = 'ungdomsprogram_rettighet',
     UFORETRYGD_VIRKNINGSDATO = 'uforetrygd_virkningsdato',
-    UFORETRYGD_UFOREGRAD = 'uforetrygd_uforegrad'
+    UFORETRYGD_UFOREGRAD = 'uforetrygd_uforegrad',
+    SYKMELDT_STARTDATO = 'sykmeldt_startdato',
+    SYKMELDT_SLUTTDATO = 'sykmeldt_sluttdato',
+    SYKMELDT_HAR_ARBEIDSGIVER = 'sykmeldt_har_arbeidsgiver'
 }
 
 export enum OversiktType {

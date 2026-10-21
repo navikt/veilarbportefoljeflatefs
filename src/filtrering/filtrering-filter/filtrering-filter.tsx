@@ -21,6 +21,7 @@ import {
     rettighetsgruppeArena,
     servicegruppe,
     stillingFraNavFilter,
+    sykmeldtFilter,
     tiltakspengerFilter,
     tiltakspengerFilterArena,
     uforetrygdFilter,
@@ -376,6 +377,22 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                 {
                                     form: Filtervalg.manuellBrukerStatus,
                                     checkboxValg: manuellBrukerStatus
+                                }
+                            ]}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="Sykmeldt"
+                    id="sykmeldt"
+                    render={() => (
+                        <CheckboxFilterform
+                            filterformOgValgListe={[
+                                {
+                                    form: Filtervalg.sykmeldt,
+                                    checkboxValg: sykmeldtFilter
                                 }
                             ]}
                             filtervalg={filtervalg}
