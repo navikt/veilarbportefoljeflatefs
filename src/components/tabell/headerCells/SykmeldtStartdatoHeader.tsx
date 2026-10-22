@@ -15,8 +15,8 @@ export const SykmeldtStartdatoHeader = ({
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.SYKMELDT_STARTDATO}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Startdato sykmelding"
-        title="Startdato sykmelding"
+        tekst="Første sykefraværsdato"
+        title="Første sykefraværsdato"
         className="col col-xs-2"
     />
 );
