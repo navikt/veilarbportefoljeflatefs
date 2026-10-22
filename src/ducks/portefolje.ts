@@ -20,6 +20,7 @@ import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
 const OK = 'veilarbportefolje/portefolje/OK';
 const FEILET = 'veilarbportefolje/portefolje/FEILET';
 const PENDING = 'veilarbportefolje/portefolje/PENDING';
+const RELOADING = 'veilarbportefolje/portefolje/RELOADING';
 export const SETT_SORTERING = 'veilarbportefolje/portefolje/SETT_SORTERING';
 const SETT_MARKERT_BRUKER = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER';
 export const SETT_MARKERT_BRUKER_ALLE = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER_ALLE';
@@ -128,10 +129,12 @@ function updateFargekategoriForBrukere(brukere, fargekategoridata) {
 export function portefoljeReducer(state = initialState, action): PortefoljeState {
     switch (action.type) {
         case PENDING:
+            return {...state, status: STATUS.PENDING};
+        case RELOADING:
             if (state.status === STATUS.OK) {
                 return {...state, status: STATUS.RELOADING};
             }
-            return {...state, status: STATUS.PENDING};
+            return state;
         case FEILET:
             return {...state, status: STATUS.ERROR, data: {...action.data, brukere: []}};
         case OK:
@@ -289,7 +292,7 @@ export function markerAlleBrukere(markert) {
 export function tildelVeileder(tilordninger, tilVeileder, oversiktType, veilederIdent) {
     return (dispatch, getState: () => AppState) => {
         dispatch({type: TILDEL_VEILEDER_RELOAD});
-        dispatch({type: PENDING});
+        dispatch({type: RELOADING});
         Api.tilordneVeileder(tilordninger)
             .then(toJson)
             .then(res => {

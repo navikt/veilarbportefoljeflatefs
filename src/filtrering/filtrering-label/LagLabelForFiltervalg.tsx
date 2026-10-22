@@ -15,6 +15,8 @@ import {
     IngenYtelserFilter,
     ingenYtelserFilter,
     registreringstypeEtiketter,
+    sykmeldtFilter,
+    SykmeldtFilter,
     tiltakspengerFilter,
     TiltakspengerFilter,
     uforetrygdFilter,
@@ -287,6 +289,16 @@ export const LagLabelForFiltervalg = ({
                 <FiltreringLabel
                     key={`${valgtFilter}--${valgtAlternativ}`}
                     label={ingenYtelserFilter[valgtAlternativ]}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
+                />
+            );
+        });
+    } else if (valgtFilter === Filtervalg.sykmeldt) {
+        return valgteFilteralternativer.map((valgtAlternativ: SykmeldtFilter) => {
+            return (
+                <FiltreringLabel
+                    key={`${valgtFilter}--${valgtAlternativ}`}
+                    label={sykmeldtFilter[valgtAlternativ]}
                     slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                 />
             );

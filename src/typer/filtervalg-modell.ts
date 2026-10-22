@@ -6,6 +6,7 @@ import {
     DagpengerFilter,
     DagpengerFilterArena,
     IngenYtelserFilter,
+    SykmeldtFilter,
     TiltakspengerFilter,
     TiltakspengerFilterArena,
     UforetrygdFilter,
@@ -63,7 +64,8 @@ export enum Filtervalg {
     ytelseDagpenger = 'ytelseDagpenger',
     ytelseUngdomsprogram = 'ytelseUngdomsprogram',
     ytelseUforetrygd = 'ytelseUforetrygd',
-    ingenYtelser = 'ingenYtelser'
+    ingenYtelser = 'ingenYtelser',
+    sykmeldt = 'sykmeldt'
 }
 
 export const erGyldigFiltervalg = (filtervalg: string): filtervalg is Filtervalg => {
@@ -122,6 +124,7 @@ export interface FiltervalgModell {
     [Filtervalg.ytelseUngdomsprogram]: UngdomsprogramytelseFilter[];
     [Filtervalg.ytelseUforetrygd]: UforetrygdFilter[];
     [Filtervalg.ingenYtelser]: IngenYtelserFilter[];
+    [Filtervalg.sykmeldt]: SykmeldtFilter[];
 }
 
 /**

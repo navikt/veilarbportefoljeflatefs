@@ -10,6 +10,7 @@ import {
     MINE_FARGEKATEGORIER,
     MINE_HUSKELAPPER,
     MOTER_IDAG,
+    SykmeldtFilter,
     TILTAKSHENDELSER,
     TiltakspengerFilter,
     TiltakspengerFilterArena,
@@ -118,6 +119,9 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         UngdomsprogramytelseFilter.HAR_UNGDOMSPROGRAMYTELSE
     );
     const filtrertPaUforetrygd = filtervalg.ytelseUforetrygd.includes(UforetrygdFilter.HAR_UFORETRYGD);
+    const filtrertPaSykmeldt =
+        filtervalg.sykmeldt.includes(SykmeldtFilter.ER_SYKMELDT_MED_ARBEIDSGIVER) ||
+        filtervalg.sykmeldt.includes(SykmeldtFilter.ER_SYKMELDT_UTEN_ARBEIDSGIVER);
 
     /* Hjelpeverdiar for AAP-filter Arena */
     const ordinarAapArena = filtrertPaOrdinarAapFilterArena(filtervalg);
@@ -224,6 +228,9 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.UNGDOMSPROGRAM_RETTIGHET, filtrertPaUngdomsprogramytelse))
         .concat(addHvis(Kolonne.UFORETRYGD_VIRKNINGSDATO, filtrertPaUforetrygd))
         .concat(addHvis(Kolonne.UFORETRYGD_UFOREGRAD, filtrertPaUforetrygd))
+        .concat(addHvis(Kolonne.SYKMELDT_STARTDATO, filtrertPaSykmeldt))
+        .concat(addHvis(Kolonne.SYKMELDT_SLUTTDATO, filtrertPaSykmeldt))
+        .concat(addHvis(Kolonne.SYKMELDT_HAR_ARBEIDSGIVER, filtrertPaSykmeldt))
         .concat(addHvis(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP, filtrertPaBeggeAapArenaOgAapKelvin))
         .concat(addHvis(Kolonne.TILTAKSPENGER_VEDTAKSDATO_TOM, filtrertPaTiltakspenger))
         .concat(addHvis(Kolonne.TILTAKSPENGER_RETTIGHET, filtrertPaTiltakspenger))

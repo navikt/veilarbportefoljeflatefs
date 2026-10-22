@@ -72,6 +72,9 @@ import {AapKelvinVedtakMaksdatoHeader} from '../components/tabell/headerCells/Aa
 import {FilterhendelseDatoFristHeader} from '../components/tabell/headerCells/FilterhendelseDatoFristHeader';
 import {UforetrygdVirkningsdatoHeader} from '../components/tabell/headerCells/UforetrygdVirkningsdatoHeader';
 import {UforetrygdUforegradHeader} from '../components/tabell/headerCells/UforetrygdUforegradHeader';
+import {SykmeldtStartdatoHeader} from '../components/tabell/headerCells/SykmeldtStartdatoHeader';
+import {SykmeldtSluttdatoHeader} from '../components/tabell/headerCells/SykmeldtSluttdatoHeader';
+import {SykmeldtHarArbeidsgiverHeader} from '../components/tabell/headerCells/SykmeldtHarArbeidsgiverHeader';
 
 export function MinoversiktTableHeader() {
     const {
@@ -194,6 +197,9 @@ export function MinoversiktTableHeader() {
 
                 <UforetrygdVirkningsdatoHeader {...sorteringTilHeaderCell} />
                 <UforetrygdUforegradHeader {...sorteringTilHeaderCell} />
+                <SykmeldtStartdatoHeader {...sorteringTilHeaderCell} />
+                <SykmeldtSluttdatoHeader {...sorteringTilHeaderCell} />
+                <SykmeldtHarArbeidsgiverHeader {...sorteringTilHeaderCell} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>
