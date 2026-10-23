@@ -1,6 +1,8 @@
 import {Tag} from '@navikt/ds-react';
 import {BrukerModell, Profileringsresultat} from '../../typer/bruker-modell';
 import {hentSkjermetInfo} from '../../utils/dato-utils';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {VIS_FILTER_FOR_SYKMELDTE} from '../../konstanter';
 
 interface EtiketterProps {
     bruker: BrukerModell;
@@ -8,6 +10,7 @@ interface EtiketterProps {
 
 export const Etiketter = ({bruker}: EtiketterProps) => {
     const skjermetInfo = hentSkjermetInfo(bruker.egenAnsatt, bruker.skjermetTil);
+    const visSykmeldtEtiketter = useFeatureSelector()(VIS_FILTER_FOR_SYKMELDTE);
 
     return (
         <>
@@ -54,9 +57,19 @@ export const Etiketter = ({bruker}: EtiketterProps) => {
                         Antatt behov for veiledning
                     </Tag>
                 )}
-            {bruker.etiketter.erSykmeldtMedArbeidsgiver && (
+            {!visSykmeldtEtiketter && bruker.etiketter.erSykmeldtMedArbeidsgiver && (
                 <Tag data-color="info" variant="outline" size="small" className="tabell-etikett">
                     Sykmeldt
+                </Tag>
+            )}
+            {visSykmeldtEtiketter && bruker.etiketter.sykmeldtMedArbeidsgiver && (
+                <Tag data-color="info" variant="outline" size="small" className="tabell-etikett">
+                    Sykmeldt med arbeidsgiver
+                </Tag>
+            )}
+            {visSykmeldtEtiketter && bruker.etiketter.sykmeldtUtenArbeidsgiver && (
+                <Tag data-color="info" variant="outline" size="small" className="tabell-etikett">
+                    Sykmeldt uten arbeidsgiver
                 </Tag>
             )}
             {bruker.etiketter.kandidatForUtmelding && (
