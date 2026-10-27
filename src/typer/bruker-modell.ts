@@ -47,6 +47,8 @@ export interface Etiketter {
     diskresjonskodeFortrolig: string | null;
     profileringResultat: Profileringsresultat | null;
     kandidatForUtmelding: boolean;
+    sykmeldtMedArbeidsgiver: boolean;
+    sykmeldtUtenArbeidsgiver: boolean;
 }
 
 export interface MoteMedNavIDag {
