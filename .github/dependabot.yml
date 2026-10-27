@@ -35,6 +35,8 @@ updates:
           - "@types/react"
           - "@types/react-dom"
       minor-and-patch:
+        patterns:
+          - "*"
         update-types:
           - "minor"
           - "patch"
