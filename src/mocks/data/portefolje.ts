@@ -20,6 +20,7 @@ import {
     MoteMedNavIDag,
     SisteEndringAvBruker,
     Statsborgerskap,
+    SykmeldtData,
     TiltakshendelseModell,
     TiltakspengerData,
     Tolkebehov,
@@ -335,6 +336,20 @@ const lagUforetrygdData = (): UforetrygdData | null => {
     };
 };
 
+const lagSykmeldtData = (): SykmeldtData | null => {
+    const erSykmeldt = Math.random() > 0.6;
+
+    if (!erSykmeldt) {
+        return null;
+    }
+
+    return {
+        startdato: randomDate({past: true}),
+        sluttdato: randomDate({past: false}),
+        harArbeidsgiver: Math.random() > 0.5 ? 'Ja' : 'Nei'
+    };
+};
+
 const lagYtelser = (): Ytelser => {
     return {
         ytelserArena: lagArenaYtelse(),
@@ -461,6 +476,7 @@ function lagBruker(): BrukerModell {
         nesteSvarfristCvStillingFraNav: '2023-06-12',
         ytelser: lagYtelser(),
         vedtak14a: lagVedtak14a(),
+        sykmeldt: lagSykmeldtData(),
         fargekategori: lagFargekategori(),
         fargekategoriEnhetId: '1234',
         huskelapp: lagHuskelapp()

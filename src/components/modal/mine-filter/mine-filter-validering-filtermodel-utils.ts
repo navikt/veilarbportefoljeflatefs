@@ -24,6 +24,7 @@ import {
     rettighetsgruppeArena,
     servicegruppe,
     stillingFraNavFilter,
+    SykmeldtFilter,
     TiltakspengerFilter,
     TiltakspengerFilterArena,
     tolkebehov,
@@ -121,5 +122,6 @@ export const filtervalgValidators: Partial<Record<Filtervalg, Validator>> = {
     [Filtervalg.ytelseDagpenger]: enumArray(Object.values(DagpengerFilter)),
     [Filtervalg.ytelseUngdomsprogram]: enumArray(Object.values(UngdomsprogramytelseFilter)),
     [Filtervalg.ytelseUforetrygd]: enumArray(Object.values(UforetrygdFilter)),
-    [Filtervalg.ingenYtelser]: enumArray(Object.values(IngenYtelserFilter))
+    [Filtervalg.ingenYtelser]: enumArray(Object.values(IngenYtelserFilter)),
+    [Filtervalg.sykmeldt]: enumArray(Object.values(SykmeldtFilter))
 };

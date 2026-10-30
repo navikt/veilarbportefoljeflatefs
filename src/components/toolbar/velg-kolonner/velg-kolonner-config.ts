@@ -116,6 +116,9 @@ export function useAlternativerConfig(oversiktType: OversiktType) {
         alternativerConfig.set(Kolonne.UNGDOMSPROGRAM_RETTIGHET, {tekstlabel: 'Ungdomsprogram-ytelse rettighet'});
         alternativerConfig.set(Kolonne.UFORETRYGD_VIRKNINGSDATO, {tekstlabel: 'Første virkningsdato uføretrygd'});
         alternativerConfig.set(Kolonne.UFORETRYGD_UFOREGRAD, {tekstlabel: 'Uføregrad'});
+        alternativerConfig.set(Kolonne.SYKMELDT_STARTDATO, {tekstlabel: 'Startdato sykmelding'});
+        alternativerConfig.set(Kolonne.SYKMELDT_SLUTTDATO, {tekstlabel: 'Sluttdato sykmelding'});
+        alternativerConfig.set(Kolonne.SYKMELDT_HAR_ARBEIDSGIVER, {tekstlabel: 'Sykmeldt har arbeidsgiver'});
 
         return alternativerConfig;
     }, [kandidatForUtmelding]);

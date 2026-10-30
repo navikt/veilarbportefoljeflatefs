@@ -66,7 +66,8 @@ export const initialState: FiltervalgModell = {
     ytelseDagpenger: [],
     ytelseUngdomsprogram: [],
     ytelseUforetrygd: [],
-    ingenYtelser: []
+    ingenYtelser: [],
+    sykmeldt: []
 };
 
 export function fjern(filterId, verdi, fjernVerdi) {

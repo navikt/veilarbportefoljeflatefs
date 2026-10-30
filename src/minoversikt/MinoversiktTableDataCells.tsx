@@ -69,6 +69,9 @@ import {AapKelvinMaksdatoData} from '../components/tabell/dataCells/AapKelvinMak
 import {FilterhendelseDatoFristData} from '../components/tabell/dataCells/FilterhendelseDatoFristData';
 import {UforetrygdVirkningsdatoData} from '../components/tabell/dataCells/UforetrygdVirkningsdatoData';
 import {UforetrygdUforegradData} from '../components/tabell/dataCells/UforetrygdUforegradData';
+import {SykmeldtStartdatoData} from '../components/tabell/dataCells/SykmeldtStartdatoData';
+import {SykmeldtSluttdatoData} from '../components/tabell/dataCells/SykmeldtSluttdatoData';
+import {SykmeldtHarArbeidsgiverData} from '../components/tabell/dataCells/SykmeldtHarArbeidsgiverData';
 
 interface Props {
     bruker: BrukerModell;
@@ -178,6 +181,9 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
 
             <UforetrygdVirkningsdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
             <UforetrygdUforegradData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <SykmeldtStartdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <SykmeldtSluttdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <SykmeldtHarArbeidsgiverData bruker={bruker} valgteKolonner={valgteKolonner} />
         </div>
     );
 }
