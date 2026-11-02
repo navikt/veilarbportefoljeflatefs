@@ -18,7 +18,6 @@ import {
     kjonn,
     manuellBrukerStatus,
     registreringstype,
-    rettighetsgruppeArena,
     servicegruppe,
     stillingFraNavFilter,
     sykmeldtFilter,
@@ -49,11 +48,12 @@ import {trackLenkeKlikketEvent} from '../../umami/umami-events';
 import {AktivitetFilterformController} from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {VIS_FILTER_FOR_SYKMELDTE} from '../../konstanter';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {EnhettiltakState} from '../../ducks/enhettiltak';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
     endreFiltervalg: (filterId: string, filterVerdi: ReactNode) => void;
-    enhettiltak: any;
+    enhettiltak: EnhettiltakState['data']['tiltak'];
     oversiktType: OversiktType;
 }
 
@@ -541,22 +541,6 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         </>
                     )}
                 />
-                <Dropdown
-                    name="Rettighetsgruppe (Arena)"
-                    id="rettighetsgruppe"
-                    render={() => (
-                        <CheckboxFilterform
-                            filterformOgValgListe={[
-                                {
-                                    form: Filtervalg.rettighetsgruppe,
-                                    checkboxValg: rettighetsgruppeArena
-                                }
-                            ]}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                        />
-                    )}
-                />
             </div>
             <div className="filtrering-filter__kolonne">
                 <Label size="small" as="h4" spacing>
@@ -574,7 +558,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="tiltakstype"
                     render={() => (
                         <CheckboxFilterform
-                            filterformOgValgListe={[{form: Filtervalg.tiltakstyper, checkboxValg: enhettiltak}]}
+                            filterformOgValgListe={[{form: Filtervalg.tiltakstyper, checkboxValg: enhettiltak ?? {}}]}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                             emptyCheckboxFilterFormMessage="Ingen tiltak funnet"

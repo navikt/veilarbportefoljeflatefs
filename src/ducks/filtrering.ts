@@ -36,7 +36,6 @@ export const initialState: FiltervalgModell = {
     aktiviteterForenklet: [],
     tiltakstyper: [],
     navnEllerFnrQuery: '',
-    rettighetsgruppe: [],
     manuellBrukerStatus: [],
     veilederNavnQuery: '',
     registreringstype: [],
@@ -76,7 +75,7 @@ export function fjern(filterId, verdi, fjernVerdi) {
     } else if (Array.isArray(verdi)) {
         return verdi.filter(enkeltVerdi => enkeltVerdi !== fjernVerdi);
     } else if (filterId === Filtervalg.aktiviteter) {
-        let tomtVerdi = {};
+        const tomtVerdi = {};
         tomtVerdi[fjernVerdi] = AktiviteterValg.NA;
         return Object.assign({}, verdi, tomtVerdi);
     } else if (fjernVerdi && typeof verdi === 'object') {
