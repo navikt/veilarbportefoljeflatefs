@@ -385,6 +385,7 @@ const lagEtiketter = (): Etiketter => {
     const nyForVeileder = maybeVeileder > 0 && Math.random() < 0.25;
     const nyForEnhet = Math.random() < 25 / 100;
     const erSykmeldtMedArbeidsgiver = Math.random() < 25 / 100;
+    const sykmeldtUtenArbeidsgiver = !erSykmeldtMedArbeidsgiver && Math.random() < 15 / 100;
 
     return {
         harSikkerhetstiltak: false,
@@ -395,7 +396,9 @@ const lagEtiketter = (): Etiketter => {
         trengerOppfolgingsvedtak: false,
         diskresjonskodeFortrolig: null,
         profileringResultat: null,
-        kandidatForUtmelding: false
+        kandidatForUtmelding: false,
+        sykmeldtMedArbeidsgiver: erSykmeldtMedArbeidsgiver,
+        sykmeldtUtenArbeidsgiver: sykmeldtUtenArbeidsgiver
     };
 };
 
