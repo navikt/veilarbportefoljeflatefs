@@ -28,7 +28,10 @@ import {BarInputCheckbox} from '../../components/barinput/barinput-checkbox';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
+import {
+    VIS_FILTER_FOR_SYKMELDTE,
+    VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING
+} from '../../konstanter';
 import {FilterStatusMineFargekategorier} from './fargekategori';
 import {StatustallInnhold} from '../../ducks/statustall/statustall-typer';
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
@@ -58,6 +61,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         (statustallUtenBrukerinnsyn.ufordelteBrukere > 0 || statustallUtenBrukerinnsyn.venterPaSvarFraNAV > 0);
 
     const dispatch = useAppDispatch();
+    const visSykmeldtFilter = useFeatureSelector()(VIS_FILTER_FOR_SYKMELDTE);
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
         dispatch(pagineringSetup({side: 1}));
@@ -142,12 +146,14 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         labelTekst={ferdigfilterListeLabelTekst[UNDER_VURDERING]}
                         statustall={statustallMedBrukerinnsyn.underVurdering}
                     />
-                    <BarInputRadio
-                        filterVerdi={ER_SYKMELDT_MED_ARBEIDSGIVER}
-                        handleChange={handleRadioButtonChange}
-                        labelTekst={ferdigfilterListeLabelTekst[ER_SYKMELDT_MED_ARBEIDSGIVER]}
-                        statustall={statustallMedBrukerinnsyn.erSykmeldtMedArbeidsgiver}
-                    />
+                    {!visSykmeldtFilter && (
+                        <BarInputRadio
+                            filterVerdi={ER_SYKMELDT_MED_ARBEIDSGIVER}
+                            handleChange={handleRadioButtonChange}
+                            labelTekst={ferdigfilterListeLabelTekst[ER_SYKMELDT_MED_ARBEIDSGIVER]}
+                            statustall={statustallMedBrukerinnsyn.erSykmeldtMedArbeidsgiver}
+                        />
+                    )}
                 </div>
                 <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio
