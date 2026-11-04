@@ -124,10 +124,6 @@ export const formidlingsgruppe = {
     IARBS: {label: 'Ikke arbeidssøker'}
 };
 
-export const servicegruppe = {
-    VURDU: {label: 'Sykmeldt uten arbeidsgiver'}
-};
-
 export const manuellBrukerStatus = {
     MANUELL: {label: 'Manuell oppfølging'},
     KRR: {label: 'Reservert i KRR'}
@@ -445,7 +441,6 @@ export const filterKonstanter = {
     kjonn,
     landgruppe,
     formidlingsgruppe,
-    servicegruppe,
     aktiviteter,
     manuellBrukerStatus,
     registreringstype,

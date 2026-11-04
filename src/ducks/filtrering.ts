@@ -30,7 +30,6 @@ export const initialState: FiltervalgModell = {
     foedeland: [],
     fodselsdagIMnd: [],
     formidlingsgruppe: [],
-    servicegruppe: [],
     veiledere: [],
     aktiviteter: initialStateAktiviteterFiltervalg,
     aktiviteterForenklet: [],

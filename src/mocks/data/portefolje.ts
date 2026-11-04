@@ -392,7 +392,6 @@ const lagEtiketter = (): Etiketter => {
         nyForVeileder: nyForVeileder,
         nyForEnhet: nyForEnhet,
         erDoed: erDoed,
-        erSykmeldtMedArbeidsgiver: erSykmeldtMedArbeidsgiver,
         trengerOppfolgingsvedtak: false,
         diskresjonskodeFortrolig: null,
         profileringResultat: null,

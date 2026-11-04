@@ -39,7 +39,6 @@ export interface BrukerModell {
 
 export interface Etiketter {
     erDoed: boolean;
-    erSykmeldtMedArbeidsgiver: boolean;
     trengerOppfolgingsvedtak: boolean;
     nyForVeileder: boolean;
     nyForEnhet: boolean;
