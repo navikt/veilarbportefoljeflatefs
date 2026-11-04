@@ -52,7 +52,7 @@ export const alleFargekategoriFilterAlternativer = [
  * Til dømes "samlefilter" som vel alle avhukingsboksar innanfor eit tema. */
 export const filterSomIkkeSkalSendesTilBackend = [MINE_FARGEKATEGORIER];
 
-export function lagConfig(data: string | {label: string}): any {
+export function lagConfig(data: string | CheckboxFilter): CheckboxFilter {
     if (typeof data === 'string') {
         return {label: data};
     }
@@ -131,12 +131,6 @@ export const servicegruppe = {
 export const manuellBrukerStatus = {
     MANUELL: {label: 'Manuell oppfølging'},
     KRR: {label: 'Reservert i KRR'}
-};
-
-export const rettighetsgruppeArena = {
-    AAP: {label: 'Arbeidsavklaringspenger (Arena)'},
-    DAGP: {label: 'Dagpenger (Arena)'},
-    INDS: {label: 'Tiltakspenger (Arena)'}
 };
 
 export const ensligeForsorgere = {
@@ -452,7 +446,6 @@ export const filterKonstanter = {
     landgruppe,
     formidlingsgruppe,
     servicegruppe,
-    rettighetsgruppe: rettighetsgruppeArena,
     aktiviteter,
     manuellBrukerStatus,
     registreringstype,

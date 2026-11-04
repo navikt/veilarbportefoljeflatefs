@@ -65,7 +65,6 @@ describe('Mine filter utils', () => {
                 manuellBrukerStatus: [],
                 navnEllerFnrQuery: '',
                 registreringstype: [],
-                rettighetsgruppe: [],
                 servicegruppe: [],
                 sisteEndringKategori: null,
                 stillingFraNavFilter: [],

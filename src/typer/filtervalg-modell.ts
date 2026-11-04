@@ -34,7 +34,6 @@ export enum Filtervalg {
     aktiviteterForenklet = 'aktiviteterForenklet',
     tiltakstyper = 'tiltakstyper',
     navnEllerFnrQuery = 'navnEllerFnrQuery',
-    rettighetsgruppe = 'rettighetsgruppe',
     manuellBrukerStatus = 'manuellBrukerStatus',
     veilederNavnQuery = 'veilederNavnQuery',
     registreringstype = 'registreringstype',
@@ -93,7 +92,6 @@ export interface FiltervalgModell {
     [Filtervalg.aktiviteterForenklet]: string[];
     [Filtervalg.tiltakstyper]: string[];
     [Filtervalg.navnEllerFnrQuery]: string;
-    [Filtervalg.rettighetsgruppe]?: string[];
     [Filtervalg.manuellBrukerStatus]?: string[];
     [Filtervalg.veilederNavnQuery]: string; // Dette filteret finst kun i frontend for å søke i en liste med veilederidenter
     [Filtervalg.registreringstype]: string[];
