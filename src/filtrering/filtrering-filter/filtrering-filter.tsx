@@ -158,6 +158,24 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         </>
                     )}
                 />
+                {visSykmeldtFilter && (
+                    <Dropdown
+                        name="Sykmeldt"
+                        id="sykmeldt"
+                        render={() => (
+                            <CheckboxFilterform
+                                filterformOgValgListe={[
+                                    {
+                                        form: Filtervalg.sykmeldt,
+                                        checkboxValg: sykmeldtFilter
+                                    }
+                                ]}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        )}
+                    />
+                )}
             </div>
             <div className="filtrering-filter__kolonne">
                 <Label size="small" as="h4" spacing>
@@ -356,22 +374,24 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         />
                     )}
                 />
-                <Dropdown
-                    name="Servicegruppe (Arena)"
-                    id="servicegruppe"
-                    render={() => (
-                        <CheckboxFilterform
-                            filterformOgValgListe={[
-                                {
-                                    form: Filtervalg.servicegruppe,
-                                    checkboxValg: servicegruppe
-                                }
-                            ]}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                        />
-                    )}
-                />
+                {!visSykmeldtFilter && (
+                    <Dropdown
+                        name="Servicegruppe (Arena)"
+                        id="servicegruppe"
+                        render={() => (
+                            <CheckboxFilterform
+                                filterformOgValgListe={[
+                                    {
+                                        form: Filtervalg.servicegruppe,
+                                        checkboxValg: servicegruppe
+                                    }
+                                ]}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        )}
+                    />
+                )}
                 <Dropdown
                     name="Manuell oppfølging"
                     id="manuell-oppfolging"
@@ -388,24 +408,6 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         />
                     )}
                 />
-                {visSykmeldtFilter && (
-                    <Dropdown
-                        name="Sykmeldt"
-                        id="sykmeldt"
-                        render={() => (
-                            <CheckboxFilterform
-                                filterformOgValgListe={[
-                                    {
-                                        form: Filtervalg.sykmeldt,
-                                        checkboxValg: sykmeldtFilter
-                                    }
-                                ]}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                            />
-                        )}
-                    />
-                )}
             </div>
             <div className="filtrering-filter__kolonne">
                 <Label size="small" as="h4" spacing>
