@@ -18,7 +18,6 @@ import {
     kjonn,
     manuellBrukerStatus,
     registreringstype,
-    servicegruppe,
     stillingFraNavFilter,
     sykmeldtFilter,
     tiltakspengerFilter,
@@ -374,24 +373,6 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         />
                     )}
                 />
-                {!visSykmeldtFilter && (
-                    <Dropdown
-                        name="Servicegruppe (Arena)"
-                        id="servicegruppe"
-                        render={() => (
-                            <CheckboxFilterform
-                                filterformOgValgListe={[
-                                    {
-                                        form: Filtervalg.servicegruppe,
-                                        checkboxValg: servicegruppe
-                                    }
-                                ]}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                            />
-                        )}
-                    />
-                )}
                 <Dropdown
                     name="Manuell oppfølging"
                     id="manuell-oppfolging"

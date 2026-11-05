@@ -57,11 +57,6 @@ export const Etiketter = ({bruker}: EtiketterProps) => {
                         Antatt behov for veiledning
                     </Tag>
                 )}
-            {!visSykmeldtEtiketter && bruker.etiketter.erSykmeldtMedArbeidsgiver && (
-                <Tag data-color="info" variant="outline" size="small" className="tabell-etikett">
-                    Sykmeldt
-                </Tag>
-            )}
             {visSykmeldtEtiketter && bruker.etiketter.sykmeldtMedArbeidsgiver && (
                 <Tag data-color="info" variant="outline" size="small" className="tabell-etikett">
                     Sykmeldt med arbeidsgiver

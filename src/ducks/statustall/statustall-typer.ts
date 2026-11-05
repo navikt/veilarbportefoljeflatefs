@@ -12,7 +12,6 @@ export interface StatustallInnhold {
     utlopteAktiviteter: number;
     ikkeIavtaltAktivitet: number;
     iavtaltAktivitet: number;
-    erSykmeldtMedArbeidsgiver: number;
     trengerOppfolgingsvedtak: number;
     nyeBrukereForVeileder: number;
     underVurdering: number;

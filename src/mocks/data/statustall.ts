@@ -16,7 +16,6 @@ export const statustallVeileder: {statustall: StatustallVeileder} = {
         utlopteAktiviteter: 123,
         ikkeIavtaltAktivitet: 1231,
         iavtaltAktivitet: 2323,
-        erSykmeldtMedArbeidsgiver: 20,
         trengerOppfolgingsvedtak: 84,
         underVurdering: 14,
         mineHuskelapper: 16,
@@ -48,7 +47,6 @@ export const statustallEnhet: {
         utlopteAktiviteter: 123,
         ikkeIavtaltAktivitet: 1231,
         iavtaltAktivitet: 2323,
-        erSykmeldtMedArbeidsgiver: 20,
         trengerOppfolgingsvedtak: 84,
         underVurdering: 14,
         mineHuskelapper: 16
@@ -67,7 +65,6 @@ export const statustallEnhet: {
         utlopteAktiviteter: 2,
         ikkeIavtaltAktivitet: 2,
         iavtaltAktivitet: 2,
-        erSykmeldtMedArbeidsgiver: 2,
         trengerOppfolgingsvedtak: 4,
         underVurdering: 2,
         mineHuskelapper: 16
