@@ -29,7 +29,7 @@ jobs:
       - name: Install Cypress binary
         run: ./node_modules/.bin/cypress install --force
       - name: Cypress run
-        uses: cypress-io/github-action@c541a95ea92d9239347a2355f2e895cd4b3f8060 # ratchet:cypress-io/github-action@v7.4.6
+        uses: cypress-io/github-action@4ce68f262a3888d22cf3175d62010a145ba737ee # ratchet:cypress-io/github-action@v7.4.8
         with:
           install: false
           browser: chrome
