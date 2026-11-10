@@ -45,8 +45,6 @@ import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import {trackLenkeKlikketEvent} from '../../umami/umami-events';
 import {AktivitetFilterformController} from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
-import {VIS_FILTER_FOR_SYKMELDTE} from '../../konstanter';
-import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {EnhettiltakState} from '../../ducks/enhettiltak';
 
 interface FiltreringFilterProps {
@@ -57,8 +55,6 @@ interface FiltreringFilterProps {
 }
 
 export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
-    const visSykmeldtFilter = useFeatureSelector()(VIS_FILTER_FOR_SYKMELDTE);
-
     return (
         <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
             <div className="filtrering-filter__kolonne">
@@ -157,24 +153,22 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         </>
                     )}
                 />
-                {visSykmeldtFilter && (
-                    <Dropdown
-                        name="Sykmeldt"
-                        id="sykmeldt"
-                        render={() => (
-                            <CheckboxFilterform
-                                filterformOgValgListe={[
-                                    {
-                                        form: Filtervalg.sykmeldt,
-                                        checkboxValg: sykmeldtFilter
-                                    }
-                                ]}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                            />
-                        )}
-                    />
-                )}
+                <Dropdown
+                    name="Sykmeldt"
+                    id="sykmeldt"
+                    render={() => (
+                        <CheckboxFilterform
+                            filterformOgValgListe={[
+                                {
+                                    form: Filtervalg.sykmeldt,
+                                    checkboxValg: sykmeldtFilter
+                                }
+                            ]}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                        />
+                    )}
+                />
             </div>
             <div className="filtrering-filter__kolonne">
                 <Label size="small" as="h4" spacing>
