@@ -386,6 +386,8 @@ const lagEtiketter = (): Etiketter => {
     const nyForEnhet = Math.random() < 25 / 100;
     const erSykmeldtMedArbeidsgiver = Math.random() < 25 / 100;
     const sykmeldtUtenArbeidsgiver = !erSykmeldtMedArbeidsgiver && Math.random() < 15 / 100;
+    const random_egenAnsatt = erSkjermet();
+    const random_harSkjermetTil = erSkjermet();
 
     return {
         harSikkerhetstiltak: false,
@@ -393,7 +395,9 @@ const lagEtiketter = (): Etiketter => {
         nyForEnhet: nyForEnhet,
         erDoed: erDoed,
         trengerOppfolgingsvedtak: false,
-        diskresjonskodeFortrolig: null,
+        adressebeskyttelse: null,
+        egenAnsatt: random_egenAnsatt,
+        skjermetTil: random_harSkjermetTil ? randomDateInNearFuture() : '',
         profileringResultat: null,
         kandidatForUtmelding: false,
         sykmeldtMedArbeidsgiver: erSykmeldtMedArbeidsgiver,
@@ -449,8 +453,6 @@ function lagBruker(): BrukerModell {
 
     const maybeVeileder = rnd(0, veiledere.length * 2);
     const veilederId = maybeVeileder < veiledere.length ? veiledere[maybeVeileder].ident : null;
-    const random_egenAnsatt = erSkjermet();
-    const random_harSkjermetTil = erSkjermet();
 
     return {
         guid: '',
@@ -466,8 +468,6 @@ function lagBruker(): BrukerModell {
         oppfolgingStartdato: faker.date.between({from: new Date('2015-01-01'), to: new Date()}).toISOString(),
         tildeltTidspunkt: randomDate({past: true}),
         veilederId: veilederId,
-        egenAnsatt: random_egenAnsatt,
-        skjermetTil: random_harSkjermetTil ? randomDateInNearFuture() : '',
         tiltakshendelse: lagTiltakshendelse(),
         hendelse: lagHendelse(),
         meldingerVenterPaSvar: lagMeldingerVenterPaSvar(),

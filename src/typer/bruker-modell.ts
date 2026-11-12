@@ -16,8 +16,6 @@ export interface BrukerModell {
     oppfolgingStartdato: string;
     tildeltTidspunkt: string | null;
     veilederId: string | null;
-    egenAnsatt: boolean;
-    skjermetTil: string | null;
 
     tiltakshendelse: TiltakshendelseModell | null;
     hendelse: HendelseInnhold | null;
@@ -43,7 +41,9 @@ export interface Etiketter {
     nyForVeileder: boolean;
     nyForEnhet: boolean;
     harSikkerhetstiltak: boolean;
-    diskresjonskodeFortrolig: string | null;
+    adressebeskyttelse: string | null;
+    egenAnsatt: boolean;
+    skjermetTil: string | null;
     profileringResultat: Profileringsresultat | null;
     kandidatForUtmelding: boolean;
     sykmeldtMedArbeidsgiver: boolean;
