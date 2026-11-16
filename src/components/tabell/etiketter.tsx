@@ -7,7 +7,7 @@ interface EtiketterProps {
 }
 
 export const Etiketter = ({bruker}: EtiketterProps) => {
-    const skjermetInfo = hentSkjermetInfo(bruker.egenAnsatt, bruker.skjermetTil);
+    const skjermetInfo = hentSkjermetInfo(bruker.etiketter.egenAnsatt, bruker.etiketter.skjermetTil);
 
     return (
         <>
@@ -21,9 +21,9 @@ export const Etiketter = ({bruker}: EtiketterProps) => {
                     Sikkerhetstiltak
                 </Tag>
             )}
-            {bruker.etiketter.diskresjonskodeFortrolig && (
+            {bruker.etiketter.adressebeskyttelse && (
                 <Tag data-color="warning" variant="outline" size="small" className="tabell-etikett">
-                    {`Kode ${bruker.etiketter.diskresjonskodeFortrolig}`}
+                    {`${bruker.etiketter.adressebeskyttelse}`}
                 </Tag>
             )}
             {!skjermetInfo.hidden && (
