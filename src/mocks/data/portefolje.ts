@@ -396,10 +396,10 @@ const lagEtiketter = (): Etiketter => {
         erDoed: erDoed,
         trengerOppfolgingsvedtak: false,
         adressebeskyttelse: null,
-        egenAnsatt: random_egenAnsatt,
+        skjermet: random_egenAnsatt,
         skjermetTil: random_harSkjermetTil ? randomDateInNearFuture() : '',
         profileringResultat: null,
-        kandidatForUtmelding: false,
+        kandidatForAvslutning: false,
         sykmeldtMedArbeidsgiver: erSykmeldtMedArbeidsgiver,
         sykmeldtUtenArbeidsgiver: sykmeldtUtenArbeidsgiver
     };

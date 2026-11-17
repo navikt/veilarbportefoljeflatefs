@@ -7,7 +7,7 @@ interface EtiketterProps {
 }
 
 export const Etiketter = ({bruker}: EtiketterProps) => {
-    const skjermetInfo = hentSkjermetInfo(bruker.etiketter.egenAnsatt, bruker.etiketter.skjermetTil);
+    const skjermetInfo = hentSkjermetInfo(bruker.etiketter.skjermet, bruker.etiketter.skjermetTil);
 
     return (
         <>
@@ -64,7 +64,7 @@ export const Etiketter = ({bruker}: EtiketterProps) => {
                     Sykmeldt uten arbeidsgiver
                 </Tag>
             )}
-            {bruker.etiketter.kandidatForUtmelding && (
+            {bruker.etiketter.kandidatForAvslutning && (
                 <Tag data-color="warning" variant="outline" size="small" className="tabell-etikett">
                     Kandidat for avslutning
                 </Tag>
