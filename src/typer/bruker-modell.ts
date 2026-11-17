@@ -42,10 +42,10 @@ export interface Etiketter {
     nyForEnhet: boolean;
     harSikkerhetstiltak: boolean;
     adressebeskyttelse: string | null;
-    egenAnsatt: boolean;
+    skjermet: boolean;
     skjermetTil: string | null;
     profileringResultat: Profileringsresultat | null;
-    kandidatForUtmelding: boolean;
+    kandidatForAvslutning: boolean;
     sykmeldtMedArbeidsgiver: boolean;
     sykmeldtUtenArbeidsgiver: boolean;
 }
