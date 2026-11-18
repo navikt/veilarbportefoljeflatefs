@@ -10,7 +10,7 @@ updates:
     schedule:
       interval: "weekly"
     cooldown:
-      default-days: 7
+      default-days: 4
     groups:
       workflow-updates:
         patterns:
@@ -22,7 +22,7 @@ updates:
       interval: "weekly"
     open-pull-requests-limit: 10
     cooldown:
-      default-days: 7
+      default-days: 4
     groups:
       aksel-dependencies:
         patterns:
