@@ -361,7 +361,8 @@ const lagArbeidssoekerregisteretData = (): ArbeidssoekerregisteretData | null =>
     const erAvsluttet = Math.random() > 0.5;
     return {
         arbeidssoekerPeriodeStartdato: randomDate({past: true}),
-        arbeidssoekerPeriodeAvsluttetdato: erAvsluttet ? randomDate({past: true}) : null
+        arbeidssoekerPeriodeAvsluttetdato: erAvsluttet ? randomDate({past: true}) : null,
+        utdanningOgSituasjonSistEndret: randomDate({past: true})
     };
 };
 
