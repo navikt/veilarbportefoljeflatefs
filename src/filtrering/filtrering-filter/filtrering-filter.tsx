@@ -201,12 +201,9 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         <Label size="small" as="h4" spacing>
                             Arbeidssøkerregisteret
                         </Label>
-                        <Label size="small" as="h5" spacing>
-                            Arbeidssøkerperioder
-                        </Label>
                         <Dropdown
-                            name="Arbeidssøkerperioder"
-                            id="arbeidssøkerperioder"
+                            name="Aktiv arbeidssøkerperiode"
+                            id="arbeidssøkerperiode"
                             render={() => (
                                 <RadioFilterform
                                     valg={arbeidssoekerregisteretFilter}
@@ -216,9 +213,6 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                 />
                             )}
                         />
-                        <Label size="small" as="h5" spacing>
-                            Siste svar fra registrering i oppfølgingsperioden
-                        </Label>
                     </>
                 ) : (
                     <Label size="small" as="h4" spacing>
@@ -231,8 +225,8 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Siste svar bruker oppga via arbeidssøkerregistreringen. Det finnes ikke svar for alle,
-                                f.eks. sykmeldte.
+                                Siste registrering fra bruker i inneværende oppfølgingsperiode. Det finnes ikke svar for
+                                alle, f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
                                 filterformOgValgListe={[
@@ -254,7 +248,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Siste svar bruker oppga via arbeidssøkerregistreringen. Det finnes ikke svar for alle,
+                                Siste registrering fra bruker i inneværende oppfølgingsperiode. Det finnes ikke svar for alle,
                                 f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
@@ -276,7 +270,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Siste svar bruker oppga via arbeidssøkerregistreringen. Det finnes ikke svar for alle,
+                                Siste registrering fra bruker i inneværende oppfølgingsperiode. Det finnes ikke svar for alle,
                                 f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
@@ -298,7 +292,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Siste svar bruker oppga via arbeidssøkerregistreringen. Det finnes ikke svar for alle,
+                                Siste registrering fra bruker i inneværende oppfølgingsperiode. Det finnes ikke svar for alle,
                                 f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
