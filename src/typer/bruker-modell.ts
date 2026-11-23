@@ -248,4 +248,5 @@ export interface SykmeldtData {
 export interface ArbeidssoekerregisteretData {
     arbeidssoekerPeriodeStartdato: string;
     arbeidssoekerPeriodeAvsluttetdato: string | null;
+    utdanningOgSituasjonSistEndret: string | null;
 }
