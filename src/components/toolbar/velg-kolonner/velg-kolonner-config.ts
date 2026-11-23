@@ -119,6 +119,12 @@ export function useAlternativerConfig(oversiktType: OversiktType) {
         alternativerConfig.set(Kolonne.SYKMELDT_STARTDATO, {tekstlabel: 'Startdato sykmelding'});
         alternativerConfig.set(Kolonne.SYKMELDT_SLUTTDATO, {tekstlabel: 'Sluttdato sykmelding'});
         alternativerConfig.set(Kolonne.SYKMELDT_HAR_ARBEIDSGIVER, {tekstlabel: 'Sykmeldt har arbeidsgiver'});
+        alternativerConfig.set(Kolonne.HAR_AKTIV_PERIODE_I_ARBEIDSSOEKERREGISTERET, {
+            tekstlabel: 'Startdato arbeidssøkerperiode'
+        });
+        alternativerConfig.set(Kolonne.HAR_IKKE_AKTIV_PERIODE_I_ARBEIDSSOEKERREGISTERET, {
+            tekstlabel: 'Avsluttet dato arbeidssøkerperiode'
+        });
 
         return alternativerConfig;
     }, [kandidatForUtmelding]);

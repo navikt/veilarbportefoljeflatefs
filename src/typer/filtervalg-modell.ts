@@ -3,6 +3,7 @@ import {
     AAPFilterArena,
     AAPFilterKelvin,
     AktiviteterFilternokler,
+    ArbeidssokerregisteretFilter,
     DagpengerFilter,
     DagpengerFilterArena,
     IngenYtelserFilter,
@@ -63,7 +64,8 @@ export enum Filtervalg {
     ytelseUngdomsprogram = 'ytelseUngdomsprogram',
     ytelseUforetrygd = 'ytelseUforetrygd',
     ingenYtelser = 'ingenYtelser',
-    sykmeldt = 'sykmeldt'
+    sykmeldt = 'sykmeldt',
+    arbeidssoekerregisteret = 'arbeidssoekerregisteret'
 }
 
 export const erGyldigFiltervalg = (filtervalg: string): filtervalg is Filtervalg => {
@@ -121,6 +123,7 @@ export interface FiltervalgModell {
     [Filtervalg.ytelseUforetrygd]: UforetrygdFilter[];
     [Filtervalg.ingenYtelser]: IngenYtelserFilter[];
     [Filtervalg.sykmeldt]: SykmeldtFilter[];
+    [Filtervalg.arbeidssoekerregisteret]: null | ArbeidssokerregisteretFilter;
 }
 
 /**

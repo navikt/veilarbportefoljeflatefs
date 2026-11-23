@@ -4,6 +4,7 @@ import {
     aapIArenaFilter,
     aapIKelvinFilter,
     alder,
+    arbeidssoekerregisteretFilter,
     barnUnder18Aar,
     cvJobbprofil,
     dagpengerArenaFilter,
@@ -190,7 +191,25 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
             </div>
             <div className="filtrering-filter__kolonne">
                 <Label size="small" as="h4" spacing>
-                    Siste svar fra registrering i Arbeidssøkerregisteret
+                    Arbeidssøkerregisteret
+                </Label>
+                <Label size="small" as="h5" spacing>
+                    Arbeidssøkerperioder
+                </Label>
+                <Dropdown
+                    name="Arbeidssøkerperioder"
+                    id="arbeidssøkerperioder"
+                    render={() => (
+                        <RadioFilterform
+                            valg={arbeidssoekerregisteretFilter}
+                            endreFiltervalg={endreFiltervalg}
+                            filtervalg={filtervalg}
+                            form={Filtervalg.arbeidssoekerregisteret}
+                        />
+                    )}
+                />
+                <Label size="small" as="h5" spacing>
+                    Siste svar fra registrering i oppfølgingsperioden
                 </Label>
                 <Dropdown
                     name="Situasjon"

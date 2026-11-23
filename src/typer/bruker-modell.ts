@@ -23,6 +23,7 @@ export interface BrukerModell {
     aktiviteterAvtaltMedNav: AktiviteterAvtaltMedNav;
     moteMedNavIDag: MoteMedNavIDag | null;
 
+    arbeidssoekerregisteret: ArbeidssoekerregisteretData | null;
     sisteEndringAvBruker: SisteEndringAvBruker | null;
     utdanningOgSituasjonSistEndret: string | null; // dato
     nesteSvarfristCvStillingFraNav: string | null;
@@ -242,4 +243,9 @@ export interface SykmeldtData {
     startdato: string;
     sluttdato: string;
     harArbeidsgiver: string;
+}
+
+export interface ArbeidssoekerregisteretData {
+    arbeidssoekerPeriodeStartdato: string;
+    arbeidssoekerPeriodeAvsluttetdato: string | null;
 }

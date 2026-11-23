@@ -72,6 +72,8 @@ import {UforetrygdUforegradData} from '../components/tabell/dataCells/Uforetrygd
 import {SykmeldtStartdatoData} from '../components/tabell/dataCells/SykmeldtStartdatoData';
 import {SykmeldtSluttdatoData} from '../components/tabell/dataCells/SykmeldtSluttdatoData';
 import {SykmeldtHarArbeidsgiverData} from '../components/tabell/dataCells/SykmeldtHarArbeidsgiverData';
+import {ArbeidssoekerPeriodeStartdatoData} from '../components/tabell/dataCells/ArbeidssoekerPeriodeStartdatoData';
+import {ArbeidssoekerPeriodeAvsluttetdatoData} from '../components/tabell/dataCells/ArbeidssoekerPeriodeAvsluttetdatoData';
 
 interface Props {
     bruker: BrukerModell;
@@ -184,6 +186,8 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
             <SykmeldtStartdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
             <SykmeldtSluttdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
             <SykmeldtHarArbeidsgiverData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <ArbeidssoekerPeriodeStartdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <ArbeidssoekerPeriodeAvsluttetdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
         </div>
     );
 }

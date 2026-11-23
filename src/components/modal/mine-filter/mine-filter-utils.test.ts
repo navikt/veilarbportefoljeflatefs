@@ -86,7 +86,8 @@ describe('Mine filter utils', () => {
                 ytelseUngdomsprogram: [],
                 ytelseUforetrygd: [],
                 ingenYtelser: [],
-                sykmeldt: []
+                sykmeldt: [],
+                arbeidssoekerregisteret: null
             };
 
             expect(
