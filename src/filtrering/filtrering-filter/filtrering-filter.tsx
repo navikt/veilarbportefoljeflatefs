@@ -47,6 +47,8 @@ import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import {trackLenkeKlikketEvent} from '../../umami/umami-events';
 import {AktivitetFilterformController} from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {EnhettiltakState} from '../../ducks/enhettiltak';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {VIS_FILTER_FOR_AKTIV_PERIODE_I_ARBEIDSSOEKERREGISTERET} from '../../konstanter';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -56,6 +58,10 @@ interface FiltreringFilterProps {
 }
 
 export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
+    const visFilterForAktivPeriodeIArbeidssoekerregisteret = useFeatureSelector()(
+        VIS_FILTER_FOR_AKTIV_PERIODE_I_ARBEIDSSOEKERREGISTERET
+    );
+
     return (
         <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
             <div className="filtrering-filter__kolonne">
@@ -190,27 +196,35 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <Label size="small" as="h4" spacing>
-                    Arbeidssøkerregisteret
-                </Label>
-                <Label size="small" as="h5" spacing>
-                    Arbeidssøkerperioder
-                </Label>
-                <Dropdown
-                    name="Arbeidssøkerperioder"
-                    id="arbeidssøkerperioder"
-                    render={() => (
-                        <RadioFilterform
-                            valg={arbeidssoekerregisteretFilter}
-                            endreFiltervalg={endreFiltervalg}
-                            filtervalg={filtervalg}
-                            form={Filtervalg.arbeidssoekerregisteret}
+                {visFilterForAktivPeriodeIArbeidssoekerregisteret ? (
+                    <>
+                        <Label size="small" as="h4" spacing>
+                            Arbeidssøkerregisteret
+                        </Label>
+                        <Label size="small" as="h5" spacing>
+                            Arbeidssøkerperioder
+                        </Label>
+                        <Dropdown
+                            name="Arbeidssøkerperioder"
+                            id="arbeidssøkerperioder"
+                            render={() => (
+                                <RadioFilterform
+                                    valg={arbeidssoekerregisteretFilter}
+                                    endreFiltervalg={endreFiltervalg}
+                                    filtervalg={filtervalg}
+                                    form={Filtervalg.arbeidssoekerregisteret}
+                                />
+                            )}
                         />
-                    )}
-                />
-                <Label size="small" as="h5" spacing>
-                    Siste svar fra registrering i oppfølgingsperioden
-                </Label>
+                        <Label size="small" as="h5" spacing>
+                            Siste svar fra registrering i oppfølgingsperioden
+                        </Label>
+                    </>
+                ) : (
+                    <Label size="small" as="h4" spacing>
+                        Siste svar fra registrering i Arbeidssøkerregisteret
+                    </Label>
+                )}
                 <Dropdown
                     name="Situasjon"
                     id="situasjon"
