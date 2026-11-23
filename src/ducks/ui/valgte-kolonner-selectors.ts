@@ -4,6 +4,7 @@ import {
     AAPFilterKelvin,
     AktiviteterFilternokler,
     AktiviteterValg,
+    ArbeidssokerregisteretFilter,
     HAR_14A_VEDTAK,
     I_AVTALT_AKTIVITET,
     KANDIDAT_FOR_UTMELDING,
@@ -161,6 +162,12 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         filtervalg.utdanningGodkjent.length > 0 ||
         filtervalg.utdanningBestatt.length > 0;
 
+    const filtrertPaHarAktivPeriodeIArbeidssoekerregisteret =
+        filtervalg.arbeidssoekerregisteret === ArbeidssokerregisteretFilter.HAR_AKTIV_PERIODE_I_ARBEIDSSOEKERREGISTERET;
+    const filtrertPaHarIkkeAktivPeriodeIArbeidssoekerregisteret =
+        filtervalg.arbeidssoekerregisteret ===
+        ArbeidssokerregisteretFilter.HAR_IKKE_AKTIV_PERIODE_I_ARBEIDSSOEKERREGISTERET;
+
     const filtrertPaHuskelapp = filtervalg.ferdigfilterListe.includes(MINE_HUSKELAPPER);
 
     const filtrertPaTiltakshendelse = filtervalg.ferdigfilterListe.includes(TILTAKSHENDELSER);
@@ -250,6 +257,18 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.BOSTED_SIST_OPPDATERT, filtrertPaGeografiskBosted))
         .concat(addHvis(Kolonne.BARN_UNDER_18_AAR, filtrertPaBarnUnder18Ar))
         .concat(addHvis(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET, filtrertPaUtdanningEllerSituasjonSomKanHaEndring))
+        .concat(
+            addHvis(
+                Kolonne.HAR_AKTIV_PERIODE_I_ARBEIDSSOEKERREGISTERET,
+                filtrertPaHarAktivPeriodeIArbeidssoekerregisteret
+            )
+        )
+        .concat(
+            addHvis(
+                Kolonne.HAR_IKKE_AKTIV_PERIODE_I_ARBEIDSSOEKERREGISTERET,
+                filtrertPaHarIkkeAktivPeriodeIArbeidssoekerregisteret
+            )
+        )
         .concat(addHvis(Kolonne.HUSKELAPP_KOMMENTAR, filtrertPaHuskelapp))
         .concat(addHvis(Kolonne.HUSKELAPP_FRIST, filtrertPaHuskelapp))
         .concat(addHvis(Kolonne.HUSKELAPP_SIST_ENDRET, filtrertPaHuskelapp))

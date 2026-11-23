@@ -75,6 +75,8 @@ import {UforetrygdUforegradHeader} from '../components/tabell/headerCells/Uforet
 import {SykmeldtStartdatoHeader} from '../components/tabell/headerCells/SykmeldtStartdatoHeader';
 import {SykmeldtSluttdatoHeader} from '../components/tabell/headerCells/SykmeldtSluttdatoHeader';
 import {SykmeldtHarArbeidsgiverHeader} from '../components/tabell/headerCells/SykmeldtHarArbeidsgiverHeader';
+import {ArbeidssoekerPeriodeStartdatoHeader} from '../components/tabell/headerCells/ArbeidssoekerPeriodeStartdatoHeader';
+import {ArbeidssoekerPeriodeAvsluttetdatoHeader} from '../components/tabell/headerCells/ArbeidssoekerPeriodeAvsluttetdatoHeader';
 
 export function MinoversiktTableHeader() {
     const {
@@ -200,6 +202,8 @@ export function MinoversiktTableHeader() {
                 <SykmeldtStartdatoHeader {...sorteringTilHeaderCell} />
                 <SykmeldtSluttdatoHeader {...sorteringTilHeaderCell} />
                 <SykmeldtHarArbeidsgiverHeader {...sorteringTilHeaderCell} />
+                <ArbeidssoekerPeriodeStartdatoHeader {...sorteringTilHeaderCell} />
+                <ArbeidssoekerPeriodeAvsluttetdatoHeader {...sorteringTilHeaderCell} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

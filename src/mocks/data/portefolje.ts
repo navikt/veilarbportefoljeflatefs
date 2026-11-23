@@ -4,6 +4,7 @@ import {hendelserLabels} from '../../filtrering/filter-konstanter';
 import {
     AapKelvinData,
     AktiviteterAvtaltMedNav,
+    ArbeidssoekerregisteretData,
     BarnUnder18AarModell,
     BrukerModell,
     DagpengerData,
@@ -350,6 +351,20 @@ const lagSykmeldtData = (): SykmeldtData | null => {
     };
 };
 
+const lagArbeidssoekerregisteretData = (): ArbeidssoekerregisteretData | null => {
+    const harPeriode = Math.random() > 0.3;
+
+    if (!harPeriode) {
+        return null;
+    }
+
+    const erAvsluttet = Math.random() > 0.5;
+    return {
+        arbeidssoekerPeriodeStartdato: randomDate({past: true}),
+        arbeidssoekerPeriodeAvsluttetdato: erAvsluttet ? randomDate({past: true}) : null
+    };
+};
+
 const lagYtelser = (): Ytelser => {
     return {
         ytelserArena: lagArenaYtelse(),
@@ -479,6 +494,7 @@ function lagBruker(): BrukerModell {
         ytelser: lagYtelser(),
         vedtak14a: lagVedtak14a(),
         sykmeldt: lagSykmeldtData(),
+        arbeidssoekerregisteret: lagArbeidssoekerregisteretData(),
         fargekategori: lagFargekategori(),
         fargekategoriEnhetId: '1234',
         huskelapp: lagHuskelapp()

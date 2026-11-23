@@ -412,6 +412,19 @@ export const ingenYtelserFilter = {
     }
 };
 
+export enum ArbeidssokerregisteretFilter {
+    HAR_AKTIV_PERIODE_I_ARBEIDSSOEKERREGISTERET = 'HAR_AKTIV_PERIODE_I_ARBEIDSSOEKERREGISTERET',
+    HAR_IKKE_AKTIV_PERIODE_I_ARBEIDSSOEKERREGISTERET = 'HAR_IKKE_AKTIV_PERIODE_I_ARBEIDSSOEKERREGISTERET'
+}
+export const arbeidssoekerregisteretFilter = {
+    [ArbeidssokerregisteretFilter.HAR_AKTIV_PERIODE_I_ARBEIDSSOEKERREGISTERET]: {
+        label: 'Har aktiv arbeidssøkerperiode'
+    },
+    [ArbeidssokerregisteretFilter.HAR_IKKE_AKTIV_PERIODE_I_ARBEIDSSOEKERREGISTERET]: {
+        label: 'Har ikke aktiv arbeidssøkerperiode'
+    }
+};
+
 /** Lange namn på innsatsgrupper.
  * Brukt i nedtrekksmeny for filtervalg + filtertags. */
 export const innsatsgruppeGjeldendeVedtak14a: {[key in InnsatsgruppeGjeldendeVedtak14a]: string} = {
@@ -470,5 +483,6 @@ export const filterKonstanter = {
     ytelseUngdomsprogram: ungdomsprogramytelseFilter,
     ytelseUforetrygd: uforetrygdFilter,
     ingenYtelser: ingenYtelserFilter,
-    sykmeldt: sykmeldtFilter
+    sykmeldt: sykmeldtFilter,
+    arbeidssoekerregisteret: arbeidssoekerregisteretFilter
 };

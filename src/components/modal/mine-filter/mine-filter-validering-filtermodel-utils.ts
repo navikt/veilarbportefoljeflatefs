@@ -5,6 +5,7 @@ import {
     AktiviteterFilternokler,
     AktiviteterValg,
     alleFargekategoriFilterAlternativer,
+    ArbeidssokerregisteretFilter,
     barnUnder18Aar as barnUnder18AarKonst,
     cvJobbprofil,
     DagpengerFilter,
@@ -119,5 +120,6 @@ export const filtervalgValidators: Partial<Record<Filtervalg, Validator>> = {
     [Filtervalg.ytelseUngdomsprogram]: enumArray(Object.values(UngdomsprogramytelseFilter)),
     [Filtervalg.ytelseUforetrygd]: enumArray(Object.values(UforetrygdFilter)),
     [Filtervalg.ingenYtelser]: enumArray(Object.values(IngenYtelserFilter)),
-    [Filtervalg.sykmeldt]: enumArray(Object.values(SykmeldtFilter))
+    [Filtervalg.sykmeldt]: enumArray(Object.values(SykmeldtFilter)),
+    [Filtervalg.arbeidssoekerregisteret]: nullableEnum(Object.values(ArbeidssokerregisteretFilter))
 };

@@ -46,6 +46,9 @@ export enum Sorteringsfelt {
     SYKMELDT_SLUTTDATO = 'sykmeldt_sluttdato',
     SYKMELDT_HAR_ARBEIDSGIVER = 'sykmeldt_har_arbeidsgiver',
 
+    ARBEIDSSOEKERREGISTERET_PERIODE_STARTDATO = 'arbeidssoekerregisteret_periode_startdato',
+    ARBEIDSSOEKERREGISTERET_PERIODE_AVSLUTTETDATO = 'arbeidssoekerregisteret_periode_avsluttetdato',
+
     VENTER_PA_SVAR_FRA_NAV = 'venterpasvarfranav',
     VENTER_PA_SVAR_FRA_BRUKER = 'venterpasvarfrabruker',
 

@@ -82,7 +82,9 @@ export enum Kolonne {
     UFORETRYGD_UFOREGRAD = 'uforetrygd_uforegrad',
     SYKMELDT_STARTDATO = 'sykmeldt_startdato',
     SYKMELDT_SLUTTDATO = 'sykmeldt_sluttdato',
-    SYKMELDT_HAR_ARBEIDSGIVER = 'sykmeldt_har_arbeidsgiver'
+    SYKMELDT_HAR_ARBEIDSGIVER = 'sykmeldt_har_arbeidsgiver',
+    HAR_AKTIV_PERIODE_I_ARBEIDSSOEKERREGISTERET = 'har_aktiv_periode_i_arbeidssokerregisteret',
+    HAR_IKKE_AKTIV_PERIODE_I_ARBEIDSSOEKERREGISTERET = 'har_ikke_aktiv_periode_i_arbeidssokerregisteret'
 }
 
 export enum OversiktType {
