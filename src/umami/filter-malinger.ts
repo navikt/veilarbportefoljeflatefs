@@ -1,4 +1,3 @@
-import {formidlingsgruppe} from '../filtrering/filter-konstanter';
 import {Filtervalg} from '../typer/filtervalg-modell';
 import {trackFilterValgEvent} from './umami-events';
 
@@ -6,13 +5,6 @@ export type FilterFields = {sideNavn: string; filter: string; verdi: string; vei
 
 export const filtermalinger = (fields: FilterFields) => {
     switch (fields.filter) {
-        case Filtervalg.formidlingsgruppe:
-            trackFilterValgEvent({
-                sidenavn: fields.sideNavn,
-                filternavn: fields.filter,
-                kategori: formidlingsgruppe[fields.verdi]?.label
-            });
-            break;
         case Filtervalg.navnEllerFnrQuery:
         case Filtervalg.veiledere:
             break;

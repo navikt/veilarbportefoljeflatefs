@@ -248,8 +248,8 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Siste registrering fra bruker i inneværende oppfølgingsperiode. Det finnes ikke svar for alle,
-                                f.eks. sykmeldte.
+                                Siste registrering fra bruker i inneværende oppfølgingsperiode. Det finnes ikke svar for
+                                alle, f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
                                 filterformOgValgListe={[
@@ -270,8 +270,8 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Siste registrering fra bruker i inneværende oppfølgingsperiode. Det finnes ikke svar for alle,
-                                f.eks. sykmeldte.
+                                Siste registrering fra bruker i inneværende oppfølgingsperiode. Det finnes ikke svar for
+                                alle, f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
                                 filterformOgValgListe={[
@@ -292,8 +292,8 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Siste registrering fra bruker i inneværende oppfølgingsperiode. Det finnes ikke svar for alle,
-                                f.eks. sykmeldte.
+                                Siste registrering fra bruker i inneværende oppfølgingsperiode. Det finnes ikke svar for
+                                alle, f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
                                 filterformOgValgListe={[
@@ -378,22 +378,24 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         />
                     )}
                 />
-                <Dropdown
-                    name="Formidlingsgruppe"
-                    id="formidlingsgruppe"
-                    render={() => (
-                        <CheckboxFilterform
-                            filterformOgValgListe={[
-                                {
-                                    form: Filtervalg.formidlingsgruppe,
-                                    checkboxValg: formidlingsgruppe
-                                }
-                            ]}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                        />
-                    )}
-                />
+                {!visFilterForAktivPeriodeIArbeidssoekerregisteret && (
+                    <Dropdown
+                        name="Formidlingsgruppe"
+                        id="formidlingsgruppe"
+                        render={() => (
+                            <CheckboxFilterform
+                                filterformOgValgListe={[
+                                    {
+                                        form: Filtervalg.formidlingsgruppe,
+                                        checkboxValg: formidlingsgruppe
+                                    }
+                                ]}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        )}
+                    />
+                )}
                 <Dropdown
                     name="Manuell oppfølging"
                     id="manuell-oppfolging"
