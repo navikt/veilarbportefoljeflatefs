@@ -96,11 +96,7 @@ export function useAlternativerConfig(oversiktType: OversiktType) {
             tekstlabel: kandidatForUtmelding ? 'Årsak til avslutning' : 'Hendelse (lenke)'
         });
         alternativerConfig.set(Kolonne.FILTERHENDELSE_DATO_OPPRETTET, {
-            tekstlabel: kandidatForUtmelding
-                ? 'Dato for årsak'
-                : cvKanDelesStillingFraNav
-                  ? 'Bruker svart ja til deling av CV'
-                  : 'Dato for hendelse'
+            tekstlabel: lagFilterhendelseDatoOpprettetLabel(kandidatForUtmelding, cvKanDelesStillingFraNav)
         });
         alternativerConfig.set(Kolonne.FILTERHENDELSE_DATO_FRIST, {
             tekstlabel: cvKanDelesStillingFraNav ? 'Frist deling av CV' : 'Automatisk avslutning'
@@ -136,3 +132,13 @@ export function useAlternativerConfig(oversiktType: OversiktType) {
         return alternativerConfig;
     }, [kandidatForUtmelding, cvKanDelesStillingFraNav]);
 }
+
+const lagFilterhendelseDatoOpprettetLabel = (kandidatForUtmelding: boolean, cvKanDelesStillingFraNav: boolean) => {
+    if (kandidatForUtmelding) {
+        return 'Dato for årsak';
+    }
+    if (cvKanDelesStillingFraNav) {
+        return 'Bruker svart ja til deling av CV';
+    }
+    return 'Dato for hendelse';
+};

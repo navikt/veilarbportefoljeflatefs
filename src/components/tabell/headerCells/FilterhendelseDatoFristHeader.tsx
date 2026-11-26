@@ -12,27 +12,31 @@ export const FilterhendelseDatoFristHeader = ({
     onClick,
     filtervalg
 }: HeaderCellMedSorteringBasertPaFiltervalgProps) => {
-    const kandidatForUtmelding = filtervalg[Filtervalg.ferdigfilterListe].includes(KANDIDAT_FOR_UTMELDING);
-    const cvKanDelesStillingFraNav = filtervalg[Filtervalg.ferdigfilterListe].includes(CV_KAN_DELES_STILLING_FRA_NAV);
-
-    const tekst = cvKanDelesStillingFraNav ? 'Frist deling av CV' : 'Automatisk avslutning';
-    const tooltipTekst = cvKanDelesStillingFraNav
-        ? 'Frist deling av CV'
-        : 'Dato når arbeidsrettet oppfølging avsluttes automatisk';
+    const tekster = lagTekster(filtervalg[Filtervalg.ferdigfilterListe]);
 
     return (
         <SorteringHeader
-            skalVises={
-                valgteKolonner.includes(Kolonne.FILTERHENDELSE_DATO_FRIST) &&
-                (kandidatForUtmelding || cvKanDelesStillingFraNav)
-            }
+            skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_DATO_FRIST) && tekster !== null}
             sortering={Sorteringsfelt.FILTERHENDELSE_DATO_FRIST}
             erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.FILTERHENDELSE_DATO_FRIST}
             rekkefolge={rekkefolge}
             onClick={onClick}
-            tekst={tekst}
-            title={tooltipTekst}
+            tekst={tekster?.tekst ?? ''}
+            title={tekster?.tooltipTekst ?? ''}
             className="col col-xs-2"
         />
     );
+};
+
+const lagTekster = (ferdigfilterListe: string[]) => {
+    if (ferdigfilterListe.includes(CV_KAN_DELES_STILLING_FRA_NAV)) {
+        return {tekst: 'Frist deling av CV', tooltipTekst: 'Frist deling av CV'};
+    }
+    if (ferdigfilterListe.includes(KANDIDAT_FOR_UTMELDING)) {
+        return {
+            tekst: 'Automatisk avslutning',
+            tooltipTekst: 'Dato når arbeidsrettet oppfølging avsluttes automatisk'
+        };
+    }
+    return null;
 };
