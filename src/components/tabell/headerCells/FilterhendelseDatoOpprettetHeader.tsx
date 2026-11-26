@@ -3,7 +3,7 @@ import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 import {Filtervalg} from '../../../typer/filtervalg-modell';
-import {KANDIDAT_FOR_UTMELDING} from '../../../filtrering/filter-konstanter';
+import {CV_KAN_DELES_STILLING_FRA_NAV, KANDIDAT_FOR_UTMELDING} from '../../../filtrering/filter-konstanter';
 
 export const FilterhendelseDatoOpprettetHeader = ({
     gjeldendeSorteringsfelt,
@@ -13,7 +13,12 @@ export const FilterhendelseDatoOpprettetHeader = ({
     filtervalg
 }: HeaderCellMedSorteringBasertPaFiltervalgProps) => {
     const kandidatForUtmelding = filtervalg[Filtervalg.ferdigfilterListe].includes(KANDIDAT_FOR_UTMELDING);
-    const tekst = kandidatForUtmelding ? 'Dato for årsak' : 'Dato for hendelse';
+    const cvKanDelesStillingFraNav = filtervalg[Filtervalg.ferdigfilterListe].includes(CV_KAN_DELES_STILLING_FRA_NAV);
+    const tekst = kandidatForUtmelding
+        ? 'Dato for årsak'
+        : cvKanDelesStillingFraNav
+          ? 'Bruker svart ja til deling av CV'
+          : 'Dato for hendelse';
     const tooltipTekst = kandidatForUtmelding ? 'Dato da årsaken oppsto' : 'Dato da hendelsen ble opprettet';
 
     return (

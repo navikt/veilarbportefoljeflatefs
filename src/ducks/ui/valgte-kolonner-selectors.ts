@@ -5,6 +5,7 @@ import {
     AktiviteterFilternokler,
     AktiviteterValg,
     ArbeidssokerregisteretFilter,
+    CV_KAN_DELES_STILLING_FRA_NAV,
     HAR_14A_VEDTAK,
     I_AVTALT_AKTIVITET,
     KANDIDAT_FOR_UTMELDING,
@@ -172,10 +173,15 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaTiltakshendelse = filtervalg.ferdigfilterListe.includes(TILTAKSHENDELSER);
 
-    const filtrertPaHendelse = [UTGATTE_VARSEL, UDELT_SAMTALEREFERAT, KANDIDAT_FOR_UTMELDING].some(f =>
+    const filtrertPaHendelse = [
+        UTGATTE_VARSEL,
+        UDELT_SAMTALEREFERAT,
+        KANDIDAT_FOR_UTMELDING,
+        CV_KAN_DELES_STILLING_FRA_NAV
+    ].some(f => filtervalg.ferdigfilterListe.includes(f));
+    const filtrertPaHendelseMedFrist = [KANDIDAT_FOR_UTMELDING, CV_KAN_DELES_STILLING_FRA_NAV].some(f =>
         filtervalg.ferdigfilterListe.includes(f)
     );
-    const filtrertPaKandidatForUtmelding = filtervalg.ferdigfilterListe.includes(KANDIDAT_FOR_UTMELDING);
 
     const filtrertPaGjeldendeVedtak14a = filtervalg.gjeldendeVedtak14a.includes(HAR_14A_VEDTAK);
     const filtrertPaInnsatsgruppeGjeldendeVedtak14a = filtervalg.innsatsgruppeGjeldendeVedtak14a.length > 0;
@@ -209,7 +215,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET, filtrertPaTiltakshendelse))
         .concat(addHvis(Kolonne.FILTERHENDELSE_LENKE, filtrertPaHendelse))
         .concat(addHvis(Kolonne.FILTERHENDELSE_DATO_OPPRETTET, filtrertPaHendelse))
-        .concat(addHvis(Kolonne.FILTERHENDELSE_DATO_FRIST, filtrertPaKandidatForUtmelding))
+        .concat(addHvis(Kolonne.FILTERHENDELSE_DATO_FRIST, filtrertPaHendelseMedFrist))
         .concat(addHvis(Kolonne.VEDTAKSTATUS, filtrertPaUnderVurdering))
         .concat(addHvis(Kolonne.VEDTAKSTATUS_ENDRET, filtrertPaUnderVurdering))
         .concat(addHvis(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK, filtrertPaUnderVurdering))

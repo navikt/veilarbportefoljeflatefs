@@ -9,6 +9,7 @@ export interface StatustallInnhold {
     utgatteVarsel: number;
     udelteSamtalereferat: number;
     kandidatForUtmelding: number;
+    cvKanDelesStillingFraNav: number;
     utlopteAktiviteter: number;
     ikkeIavtaltAktivitet: number;
     iavtaltAktivitet: number;

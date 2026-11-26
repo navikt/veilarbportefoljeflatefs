@@ -5,6 +5,7 @@ import {CHECKBOX_FILTER, fjernFerdigfilter, leggTilFerdigFilter} from './filter-
 import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
 import {pagineringSetup} from '../../ducks/paginering';
 import {
+    CV_KAN_DELES_STILLING_FRA_NAV,
     ferdigfilterListeLabelTekst,
     I_AVTALT_AKTIVITET,
     IKKE_I_AVTALT_AKTIVITET,
@@ -181,6 +182,12 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         handleChange={handleRadioButtonChange}
                         labelTekst={ferdigfilterListeLabelTekst[UDELT_SAMTALEREFERAT]}
                         statustall={statustallMedBrukerinnsyn.udelteSamtalereferat}
+                    />
+                    <BarInputRadio
+                        filterVerdi={CV_KAN_DELES_STILLING_FRA_NAV}
+                        handleChange={handleRadioButtonChange}
+                        labelTekst={ferdigfilterListeLabelTekst[CV_KAN_DELES_STILLING_FRA_NAV]}
+                        statustall={statustallMedBrukerinnsyn.cvKanDelesStillingFraNav}
                     />
                     <BarInputRadio
                         labelTekst={ferdigfilterListeLabelTekst[UTLOPTE_AKTIVITETER]}
