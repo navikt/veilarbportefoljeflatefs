@@ -55,7 +55,6 @@ describe('Mine filter utils', () => {
                 ferdigfilterListe: [],
                 foedeland: [],
                 fodselsdagIMnd: [],
-                formidlingsgruppe: [],
                 geografiskBosted: [],
                 gjeldendeVedtak14a: [],
                 hovedmalGjeldendeVedtak14a: [],
