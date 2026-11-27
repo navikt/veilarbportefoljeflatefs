@@ -28,7 +28,6 @@ export enum Filtervalg {
     landgruppe = 'landgruppe',
     foedeland = 'foedeland',
     fodselsdagIMnd = 'fodselsdagIMnd',
-    formidlingsgruppe = 'formidlingsgruppe',
     veiledere = 'veiledere',
     aktiviteter = 'aktiviteter',
     aktiviteterForenklet = 'aktiviteterForenklet',
@@ -86,7 +85,6 @@ export interface FiltervalgModell {
     [Filtervalg.landgruppe]: string[];
     [Filtervalg.foedeland]: string[];
     [Filtervalg.fodselsdagIMnd]?: string[];
-    [Filtervalg.formidlingsgruppe]?: string[];
     [Filtervalg.veiledere]: string[];
     [Filtervalg.aktiviteter]: AktiviteterFilternokler;
     [Filtervalg.aktiviteterForenklet]: string[];

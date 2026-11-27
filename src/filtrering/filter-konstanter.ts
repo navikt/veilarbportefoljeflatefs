@@ -121,11 +121,6 @@ export const barnUnder18Aar = {
     HAR_BARN_UNDER_18_AAR: 'Har foreldreansvar for barn under 18 år'
 };
 
-export const formidlingsgruppe = {
-    ARBS: {label: 'Arbeidssøker'},
-    IARBS: {label: 'Ikke arbeidssøker'}
-};
-
 export const manuellBrukerStatus = {
     MANUELL: {label: 'Manuell oppfølging'},
     KRR: {label: 'Reservert i KRR'}
@@ -457,7 +452,6 @@ export const filterKonstanter = {
     fodselsdagIMnd,
     kjonn,
     landgruppe,
-    formidlingsgruppe,
     aktiviteter,
     manuellBrukerStatus,
     registreringstype,
