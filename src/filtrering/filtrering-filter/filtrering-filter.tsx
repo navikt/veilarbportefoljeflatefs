@@ -11,7 +11,6 @@ import {
     dagpengerFilter,
     ensligeForsorgere,
     fodselsdagIMnd,
-    formidlingsgruppe,
     gjeldendeVedtak14a,
     hovedmalGjeldendeVedtak14a,
     ingenYtelserFilter,
@@ -390,24 +389,6 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         />
                     )}
                 />
-                {!visFilterForAktivPeriodeIArbeidssoekerregisteret && (
-                    <Dropdown
-                        name="Formidlingsgruppe"
-                        id="formidlingsgruppe"
-                        render={() => (
-                            <CheckboxFilterform
-                                filterformOgValgListe={[
-                                    {
-                                        form: Filtervalg.formidlingsgruppe,
-                                        checkboxValg: formidlingsgruppe
-                                    }
-                                ]}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                            />
-                        )}
-                    />
-                )}
                 <Dropdown
                     name="Manuell oppfølging"
                     id="manuell-oppfolging"
