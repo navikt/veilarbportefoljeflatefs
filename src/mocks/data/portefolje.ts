@@ -490,7 +490,6 @@ function lagBruker(): BrukerModell {
         aktiviteterAvtaltMedNav: lagAktiviteterAvtaltMedNav(),
         moteMedNavIDag: lagMoteMedNav(),
         sisteEndringAvBruker: lagSisteEndringAvBruker(),
-        utdanningOgSituasjonSistEndret: randomDate({past: false}),
         nesteSvarfristCvStillingFraNav: '2023-06-12',
         ytelser: lagYtelser(),
         vedtak14a: lagVedtak14a(),
