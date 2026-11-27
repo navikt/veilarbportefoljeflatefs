@@ -30,7 +30,6 @@ export const mineFilter = (): LagretFilterDto[] => {
             filterValg: {
                 ...initialState,
                 innsatsgruppeGjeldendeVedtak14a: [InnsatsgruppeGjeldendeVedtak14a.SPESIELT_TILPASSET_INNSATS],
-                formidlingsgruppe: ['ARBS'],
                 tiltakstyper: ['TULLETOES', 'UTDYRK']
             },
             sortOrder: 0,
@@ -39,7 +38,7 @@ export const mineFilter = (): LagretFilterDto[] => {
         {
             filterNavn: 'Denne brukes til test la stå',
             filterId: 3,
-            filterValg: {...initialState, kjonn: 'K', formidlingsgruppe: ['ARBS']},
+            filterValg: {...initialState, kjonn: 'K'},
             sortOrder: 0,
             infoOmSlettetFiltervalg: null
         },
@@ -48,7 +47,7 @@ export const mineFilter = (): LagretFilterDto[] => {
             filterId: 6,
             filterValg: {...initialState, kjonn: 'K'},
             sortOrder: 0,
-            infoOmSlettetFiltervalg: ['AAP (Arena)', 'Verdien ISERV i filter for Formidlingsgruppe']
+            infoOmSlettetFiltervalg: ['AAP (Arena)', 'Verdien XXX i filter for YYY']
         },
         {
             filterNavn: 'Nye brukere',

@@ -29,7 +29,6 @@ export const initialState: FiltervalgModell = {
     landgruppe: [],
     foedeland: [],
     fodselsdagIMnd: [],
-    formidlingsgruppe: [],
     veiledere: [],
     aktiviteter: initialStateAktiviteterFiltervalg,
     aktiviteterForenklet: [],
