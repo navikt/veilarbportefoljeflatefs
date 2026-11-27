@@ -3,7 +3,7 @@ import {Kolonne} from '../../../ducks/ui/valgte-kolonner';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 import {Filtervalg} from '../../../typer/filtervalg-modell';
-import {KANDIDAT_FOR_UTMELDING} from '../../../filtrering/filter-konstanter';
+import {CV_KAN_DELES_STILLING_FRA_NAV, KANDIDAT_FOR_UTMELDING} from '../../../filtrering/filter-konstanter';
 
 export const FilterhendelseDatoOpprettetHeader = ({
     gjeldendeSorteringsfelt,
@@ -12,9 +12,7 @@ export const FilterhendelseDatoOpprettetHeader = ({
     onClick,
     filtervalg
 }: HeaderCellMedSorteringBasertPaFiltervalgProps) => {
-    const kandidatForUtmelding = filtervalg[Filtervalg.ferdigfilterListe].includes(KANDIDAT_FOR_UTMELDING);
-    const tekst = kandidatForUtmelding ? 'Dato for årsak' : 'Dato for hendelse';
-    const tooltipTekst = kandidatForUtmelding ? 'Dato da årsaken oppsto' : 'Dato da hendelsen ble opprettet';
+    const {tekst, tooltipTekst} = lagTekster(filtervalg[Filtervalg.ferdigfilterListe]);
 
     return (
         <SorteringHeader
@@ -28,4 +26,14 @@ export const FilterhendelseDatoOpprettetHeader = ({
             className="col col-xs-2"
         />
     );
+};
+
+const lagTekster = (ferdigfilterListe: string[]) => {
+    if (ferdigfilterListe.includes(KANDIDAT_FOR_UTMELDING)) {
+        return {tekst: 'Dato for årsak', tooltipTekst: 'Dato da årsaken oppsto'};
+    }
+    if (ferdigfilterListe.includes(CV_KAN_DELES_STILLING_FRA_NAV)) {
+        return {tekst: 'Bruker svart ja til deling av CV', tooltipTekst: 'Dato da bruker svarte ja til deling av CV'};
+    }
+    return {tekst: 'Dato for hendelse', tooltipTekst: 'Dato da hendelsen ble opprettet'};
 };

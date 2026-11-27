@@ -66,6 +66,7 @@ CLEARFIX (Tror dette er noen gamle hacks man gjorde før da man brukte float og 
 main {
     display: block;
 }
+
 /* Grouping content
    ========================================================================== */
 /**
@@ -625,11 +626,15 @@ GRID
     grid-column-end: 3;
 }
 
-.veilarbportefoljeflatefs .registrering-alert {
+.veilarbportefoljeflatefs .infocard_wrapper {
     margin: 4px 8px 4px 12px;
 }
 
 .veilarbportefoljeflatefs .aksel-alert__wrapper {
+    font-size: 0.875rem;
+}
+
+.veilarbportefoljeflatefs .aksel-base-alert__message .aksel-body-long {
     font-size: 0.875rem;
 }
 

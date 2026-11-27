@@ -4,7 +4,7 @@ import {Kolonne, OversiktType} from '../../../ducks/ui/valgte-kolonner';
 import {getFiltreringState} from '../../../ducks/ui/valgte-kolonner-selectors';
 import {AppState} from '../../../reducer';
 import {Filtervalg} from '../../../typer/filtervalg-modell';
-import {KANDIDAT_FOR_UTMELDING} from '../../../filtrering/filter-konstanter';
+import {CV_KAN_DELES_STILLING_FRA_NAV, KANDIDAT_FOR_UTMELDING} from '../../../filtrering/filter-konstanter';
 
 interface Alternativ {
     tekstlabel: string;
@@ -13,6 +13,7 @@ interface Alternativ {
 export function useAlternativerConfig(oversiktType: OversiktType) {
     const filtervalg = useSelector((s: AppState) => getFiltreringState(s, oversiktType));
     const kandidatForUtmelding = filtervalg[Filtervalg.ferdigfilterListe].includes(KANDIDAT_FOR_UTMELDING);
+    const cvKanDelesStillingFraNav = filtervalg[Filtervalg.ferdigfilterListe].includes(CV_KAN_DELES_STILLING_FRA_NAV);
 
     return useMemo(() => {
         const alternativerConfig = new Map<Kolonne, Alternativ>();
@@ -95,9 +96,11 @@ export function useAlternativerConfig(oversiktType: OversiktType) {
             tekstlabel: kandidatForUtmelding ? 'Årsak til avslutning' : 'Hendelse (lenke)'
         });
         alternativerConfig.set(Kolonne.FILTERHENDELSE_DATO_OPPRETTET, {
-            tekstlabel: kandidatForUtmelding ? 'Dato for årsak' : 'Dato for hendelse'
+            tekstlabel: lagFilterhendelseDatoOpprettetLabel(kandidatForUtmelding, cvKanDelesStillingFraNav)
         });
-        alternativerConfig.set(Kolonne.FILTERHENDELSE_DATO_FRIST, {tekstlabel: 'Automatisk avslutning'});
+        alternativerConfig.set(Kolonne.FILTERHENDELSE_DATO_FRIST, {
+            tekstlabel: cvKanDelesStillingFraNav ? 'Frist deling av CV' : 'Automatisk avslutning'
+        });
         alternativerConfig.set(Kolonne.AAP_KELVIN_TOM_VEDTAKSDATO, {tekstlabel: 'Vedtak AAP til og med-dato (Kelvin)'});
         alternativerConfig.set(Kolonne.AAP_KELVIN_MAKSDATO, {tekstlabel: 'Maksdato AAP (Kelvin)'});
         alternativerConfig.set(Kolonne.AAP_KELVIN_RETTIGHET, {tekstlabel: 'Rettighet AAP (Kelvin)'});
@@ -127,5 +130,15 @@ export function useAlternativerConfig(oversiktType: OversiktType) {
         });
 
         return alternativerConfig;
-    }, [kandidatForUtmelding]);
+    }, [kandidatForUtmelding, cvKanDelesStillingFraNav]);
 }
+
+const lagFilterhendelseDatoOpprettetLabel = (kandidatForUtmelding: boolean, cvKanDelesStillingFraNav: boolean) => {
+    if (kandidatForUtmelding) {
+        return 'Dato for årsak';
+    }
+    if (cvKanDelesStillingFraNav) {
+        return 'Bruker svart ja til deling av CV';
+    }
+    return 'Dato for hendelse';
+};

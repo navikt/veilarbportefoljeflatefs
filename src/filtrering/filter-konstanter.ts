@@ -23,6 +23,7 @@ export const UTLOPTE_AKTIVITETER = 'UTLOPTE_AKTIVITETER';
 export const UTGATTE_VARSEL = 'UTGATTE_VARSEL';
 export const UDELT_SAMTALEREFERAT = 'UDELT_SAMTALEREFERAT';
 export const KANDIDAT_FOR_UTMELDING = 'KANDIDAT_FOR_UTMELDING';
+export const CV_KAN_DELES_STILLING_FRA_NAV = 'CV_KAN_DELES_STILLING_FRA_NAV';
 export const IKKE_I_AVTALT_AKTIVITET = 'IKKE_I_AVTALT_AKTIVITET';
 export const I_AVTALT_AKTIVITET = 'I_AVTALT_AKTIVITET';
 export const UNDER_VURDERING = 'UNDER_VURDERING';
@@ -80,6 +81,7 @@ export const ferdigfilterListeLabelTekst = {
     [TILTAKSHENDELSER]: 'Hendelser på tiltak',
     [UTGATTE_VARSEL]: 'Utgåtte varsel',
     [UDELT_SAMTALEREFERAT]: 'Udelte samtalereferat',
+    [CV_KAN_DELES_STILLING_FRA_NAV]: 'CV kan deles (stilling fra Nav)',
     [KANDIDAT_FOR_UTMELDING]: 'Kandidater for avslutning',
     [UTLOPTE_AKTIVITETER]: 'Utløpte aktiviteter',
     [IKKE_I_AVTALT_AKTIVITET]: 'Ikke i avtalt aktivitet',

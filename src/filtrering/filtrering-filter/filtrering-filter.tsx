@@ -1,5 +1,5 @@
 import {ReactNode} from 'react';
-import {Alert, Label, Link} from '@navikt/ds-react';
+import {InfoCard, Label, Link} from '@navikt/ds-react';
 import {
     aapIArenaFilter,
     aapIKelvinFilter,
@@ -42,7 +42,7 @@ import {CheckboxFilterform} from './filterform/checkbox-filterform';
 import '../../components/sidebar/sidebar.css';
 import './filterform/filterform.css';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
-import {ExternalLinkIcon} from '@navikt/aksel-icons';
+import {ExternalLinkIcon, InformationSquareIcon} from '@navikt/aksel-icons';
 import {trackLenkeKlikketEvent} from '../../umami/umami-events';
 import {AktivitetFilterformController} from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {EnhettiltakState} from '../../ducks/enhettiltak';
@@ -109,10 +109,12 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="barnUnder18"
                     render={lukkDropdown => (
                         <>
-                            <Alert variant="info" size="small" className="registrering-alert">
-                                Filteret viser brukere registrert med foreldreansvar for barn under 18 år. Avvik kan
-                                være fordi foreldreansvaret ikke er registrert i Folkeregisteret.
-                            </Alert>
+                            <InfoCard data-color="info" size="small" className="infocard_wrapper">
+                                <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
+                                    Filteret viser brukere registrert med foreldreansvar for barn under 18 år. Avvik kan
+                                    være fordi foreldreansvaret ikke er registrert i Folkeregisteret.
+                                </InfoCard.Message>
+                            </InfoCard>
                             <BarnUnder18FilterForm
                                 valg={barnUnder18Aar}
                                 filtervalg={filtervalg}
@@ -139,22 +141,24 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="tolkebehov"
                     render={() => (
                         <>
-                            <Alert variant="info" size="small" className="registrering-alert">
-                                <Link
-                                    target="_blank"
-                                    href={
-                                        'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-oppflging-spesifikke-mlgrupper/SitePages/Språktolk.aspx'
-                                    }
-                                    onClick={() =>
-                                        trackLenkeKlikketEvent({
-                                            lenketekst: 'Bruk av språktolk i Nav'
-                                        })
-                                    }
-                                >
-                                    Bruk av språktolk i Nav.
-                                    <ExternalLinkIcon title="Åpner lenke i ny fane" fontSize="1.2em" />
-                                </Link>
-                            </Alert>
+                            <InfoCard data-color="info" size="small" className="infocard_wrapper">
+                                <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
+                                    <Link
+                                        target="_blank"
+                                        href={
+                                            'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-oppflging-spesifikke-mlgrupper/SitePages/Språktolk.aspx'
+                                        }
+                                        onClick={() =>
+                                            trackLenkeKlikketEvent({
+                                                lenketekst: 'Bruk av språktolk i Nav'
+                                            })
+                                        }
+                                    >
+                                        Bruk av språktolk i Nav.
+                                        <ExternalLinkIcon title="Åpner lenke i ny fane" fontSize="1.2em" />
+                                    </Link>
+                                </InfoCard.Message>
+                            </InfoCard>
                             <TolkebehovFilterform filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
                         </>
                     )}
@@ -223,10 +227,12 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="situasjon"
                     render={() => (
                         <>
-                            <Alert variant="info" size="small" className="registrering-alert">
-                                Siste registrering fra bruker i inneværende oppfølgingsperiode. Det finnes ikke svar for
-                                alle, f.eks. sykmeldte.
-                            </Alert>
+                            <InfoCard data-color="info" size="small" className="infocard_wrapper">
+                                <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
+                                    Siste registrering fra bruker i inneværende oppfølgingsperiode. Det finnes ikke svar
+                                    for alle, f.eks. sykmeldte.
+                                </InfoCard.Message>
+                            </InfoCard>
                             <CheckboxFilterform
                                 filterformOgValgListe={[
                                     {
@@ -246,10 +252,12 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="hoyeste-fullforte-utdanning"
                     render={() => (
                         <>
-                            <Alert variant="info" size="small" className="registrering-alert">
-                                Siste registrering fra bruker i inneværende oppfølgingsperiode. Det finnes ikke svar for
-                                alle, f.eks. sykmeldte.
-                            </Alert>
+                            <InfoCard data-color="info" size="small" className="infocard_wrapper">
+                                <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
+                                    Siste registrering fra bruker i inneværende oppfølgingsperiode. Det finnes ikke svar
+                                    for alle, f.eks. sykmeldte.
+                                </InfoCard.Message>
+                            </InfoCard>
                             <CheckboxFilterform
                                 filterformOgValgListe={[
                                     {
@@ -268,10 +276,12 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="er-utdanningen-godkjent"
                     render={() => (
                         <>
-                            <Alert variant="info" size="small" className="registrering-alert">
-                                Siste registrering fra bruker i inneværende oppfølgingsperiode. Det finnes ikke svar for
-                                alle, f.eks. sykmeldte.
-                            </Alert>
+                            <InfoCard data-color="info" size="small" className="infocard_wrapper">
+                                <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
+                                    Siste registrering fra bruker i inneværende oppfølgingsperiode. Det finnes ikke svar
+                                    for alle, f.eks. sykmeldte.
+                                </InfoCard.Message>
+                            </InfoCard>
                             <CheckboxFilterform
                                 filterformOgValgListe={[
                                     {
@@ -290,10 +300,12 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="er-utdanningen-bestatt"
                     render={() => (
                         <>
-                            <Alert variant="info" size="small" className="registrering-alert">
-                                Siste registrering fra bruker i inneværende oppfølgingsperiode. Det finnes ikke svar for
-                                alle, f.eks. sykmeldte.
-                            </Alert>
+                            <InfoCard data-color="info" size="small" className="infocard_wrapper">
+                                <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
+                                    Siste registrering fra bruker i inneværende oppfølgingsperiode. Det finnes ikke svar
+                                    for alle, f.eks. sykmeldte.
+                                </InfoCard.Message>
+                            </InfoCard>
                             <CheckboxFilterform
                                 filterformOgValgListe={[
                                     {
@@ -511,10 +523,12 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="ingen-livsoppholdsytelser"
                     render={() => (
                         <>
-                            <Alert variant="info" size="small" className="registrering-alert">
-                                Filteret viser personer som ikke har noen av livsoppholdsytelsene: AAP, dagpenger,
-                                tiltakspenger, overgangsstønad, ungdomsprogramytelse eller uføretrygd.
-                            </Alert>
+                            <InfoCard data-color="info" size="small" className="infocard_wrapper">
+                                <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
+                                    Filteret viser personer som ikke har noen av livsoppholdsytelsene: AAP, dagpenger,
+                                    tiltakspenger, overgangsstønad, ungdomsprogramytelse eller uføretrygd.
+                                </InfoCard.Message>
+                            </InfoCard>
                             <CheckboxFilterform
                                 filterformOgValgListe={[
                                     {
@@ -557,16 +571,24 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     name="Stilling fra Nav (dele CV med arbeidsgiver)"
                     id="stillingFraNav"
                     render={() => (
-                        <CheckboxFilterform
-                            filterformOgValgListe={[
-                                {
-                                    form: Filtervalg.stillingFraNavFilter,
-                                    checkboxValg: stillingFraNavFilter
-                                }
-                            ]}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                        />
+                        <>
+                            <InfoCard data-color="info" size="small" className="infocard_wrapper">
+                                <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
+                                    Fra 30. nov. 2026 vil det ikke lenger komme nye data om personer som har svart JA
+                                    til å dele CV med arbeidsgiver i dette filteret. Det jobbes med ny løsning.
+                                </InfoCard.Message>
+                            </InfoCard>
+                            <CheckboxFilterform
+                                filterformOgValgListe={[
+                                    {
+                                        form: Filtervalg.stillingFraNavFilter,
+                                        checkboxValg: stillingFraNavFilter
+                                    }
+                                ]}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        </>
                     )}
                 />
             </div>

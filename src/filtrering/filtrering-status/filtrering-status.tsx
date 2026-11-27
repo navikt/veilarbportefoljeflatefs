@@ -5,6 +5,7 @@ import {CHECKBOX_FILTER, fjernFerdigfilter, leggTilFerdigFilter} from './filter-
 import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
 import {pagineringSetup} from '../../ducks/paginering';
 import {
+    CV_KAN_DELES_STILLING_FRA_NAV,
     ferdigfilterListeLabelTekst,
     I_AVTALT_AKTIVITET,
     IKKE_I_AVTALT_AKTIVITET,
@@ -27,7 +28,10 @@ import {BarInputCheckbox} from '../../components/barinput/barinput-checkbox';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
+import {
+    VIS_FILTER_FOR_CV_KAN_DELES,
+    VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING
+} from '../../konstanter';
 import {FilterStatusMineFargekategorier} from './fargekategori';
 import {StatustallInnhold} from '../../ducks/statustall/statustall-typer';
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
@@ -57,6 +61,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         (statustallUtenBrukerinnsyn.ufordelteBrukere > 0 || statustallUtenBrukerinnsyn.venterPaSvarFraNAV > 0);
 
     const dispatch = useAppDispatch();
+    const visFilterForCvKanDeles = useFeatureSelector()(VIS_FILTER_FOR_CV_KAN_DELES);
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
         dispatch(pagineringSetup({side: 1}));
@@ -182,6 +187,14 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         labelTekst={ferdigfilterListeLabelTekst[UDELT_SAMTALEREFERAT]}
                         statustall={statustallMedBrukerinnsyn.udelteSamtalereferat}
                     />
+                    {visFilterForCvKanDeles && (
+                        <BarInputRadio
+                            filterVerdi={CV_KAN_DELES_STILLING_FRA_NAV}
+                            handleChange={handleRadioButtonChange}
+                            labelTekst={ferdigfilterListeLabelTekst[CV_KAN_DELES_STILLING_FRA_NAV]}
+                            statustall={statustallMedBrukerinnsyn.cvKanDelesStillingFraNav}
+                        />
+                    )}
                     <BarInputRadio
                         labelTekst={ferdigfilterListeLabelTekst[UTLOPTE_AKTIVITETER]}
                         handleChange={handleRadioButtonChange}
