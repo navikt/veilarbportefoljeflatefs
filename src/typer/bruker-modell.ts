@@ -25,7 +25,6 @@ export interface BrukerModell {
 
     arbeidssoekerregisteret: ArbeidssoekerregisteretData | null;
     sisteEndringAvBruker: SisteEndringAvBruker | null;
-    utdanningOgSituasjonSistEndret: string | null; // dato
     nesteSvarfristCvStillingFraNav: string | null;
     ytelser: Ytelser;
     vedtak14a: Vedtak14a;
@@ -106,10 +105,7 @@ export enum Profileringsresultat {
 
 /** Innsatsgruppe frå Arena */
 export enum Innsatsgruppe {
-    IKVAL = 'IKVAL',
-    BFORM = 'BFORM',
-    BATT = 'BATT',
-    VARIG = 'VARIG'
+    BATT = 'BATT'
 }
 
 export interface TiltakshendelseModell {

@@ -1,12 +1,6 @@
 import {AppState} from '../reducer';
 import {hentFeatures} from '../middleware/api';
-import {
-    BRUK_V3_AV_ARBEIDSSOEKERREGISTERET,
-    DARKMODE,
-    LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG,
-    PORTEFOLJE_FEATURES,
-    VIS_FILTER_FOR_AKTIV_PERIODE_I_ARBEIDSSOEKERREGISTERET
-} from '../konstanter';
+import {DARKMODE, LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG, PORTEFOLJE_FEATURES} from '../konstanter';
 import {erRedigeringAktiv} from '../utils/redigering-registry';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -17,9 +11,7 @@ export interface FeaturesState {
 
 const initalState: FeaturesState = {
     [DARKMODE]: false,
-    [LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG]: false,
-    [VIS_FILTER_FOR_AKTIV_PERIODE_I_ARBEIDSSOEKERREGISTERET]: false,
-    [BRUK_V3_AV_ARBEIDSSOEKERREGISTERET]: false
+    [LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG]: false
 };
 
 // Reducer
