@@ -189,23 +189,21 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <>
-                    <Label size="small" as="h4" spacing>
-                        Arbeidssøkerregisteret
-                    </Label>
-                    <Dropdown
-                        name="Aktiv arbeidssøkerperiode"
-                        id="arbeidssøkerperiode"
-                        render={() => (
-                            <RadioFilterform
-                                valg={arbeidssoekerregisteretFilter}
-                                endreFiltervalg={endreFiltervalg}
-                                filtervalg={filtervalg}
-                                form={Filtervalg.arbeidssoekerregisteret}
-                            />
-                        )}
-                    />
-                </>
+                <Label size="small" as="h4" spacing>
+                    Arbeidssøkerregisteret
+                </Label>
+                <Dropdown
+                    name="Aktiv arbeidssøkerperiode"
+                    id="arbeidssøkerperiode"
+                    render={() => (
+                        <RadioFilterform
+                            valg={arbeidssoekerregisteretFilter}
+                            endreFiltervalg={endreFiltervalg}
+                            filtervalg={filtervalg}
+                            form={Filtervalg.arbeidssoekerregisteret}
+                        />
+                    )}
+                />
                 <Dropdown
                     name="Situasjon"
                     id="situasjon"
